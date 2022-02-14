@@ -1,4 +1,4 @@
-package comp335.group6.promise;
+package comp3350.group6.promise;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -20,6 +20,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("comp335.group6.promise", appContext.getPackageName());
+        assertEquals("comp3350.group6.promise", appContext.getPackageName());
     }
 }
