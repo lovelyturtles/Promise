@@ -21,10 +21,10 @@ public class UserService {
             state.execute("INSERT INTO ACCOUNT VALUES('115@gmail.com','123',456)");
             ResultSet rs = state.executeQuery("SELECT email,password,userId FROM account");
 
-            while (rs.next()) { //每进行一次next()，就将遍历一行属性的值
-                String email = rs.getString("email"); //获取第二列（bookName）的数据
+            while (rs.next()) {
+                String email = rs.getString("email");
                 String pass = rs.getString("password");
-                int id = rs.getInt("userId"); //获取第一列（id)的数据
+                int id = rs.getInt("userId");
                 System.out.println("email：" + email + " pss：" + pass
                         + "  userid：" + id);
                 System.out.println("=============================");
