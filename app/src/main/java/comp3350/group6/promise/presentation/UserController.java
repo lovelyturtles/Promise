@@ -7,10 +7,4 @@ import lombok.Data;
 @Data
 public class UserController {
 
-
-    private UserService userService;
-
-    public void say(){
-        userService.sayHello();
-    }
 }

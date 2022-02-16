@@ -1,45 +1,48 @@
 package comp3350.group6.promise.util;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.*;
 
 
 public class DBConnectorUtil {
 
-    public static void test(){
-
-        String url = "jdbc:hsqldb:hsql://localhost/";
-
-        String user = "SA";
-
-        String password = "";
-
+    static {
+        File app_db = new File("src/main/java/comp3350/group6/promise/app_db");
         try {
             Class.forName("org.hsqldb.jdbcDriver");
-
-            Connection conn = DriverManager.getConnection(url, user, password);
-
-            Statement state = conn.createStatement();
-
-            ResultSet rs = state.executeQuery("SELECT email,password,userId FROM account");
-//
-//            while (rs.next()) {
-//                System.out.print(rs.getString("email") + " ");
-//
-//                System.out.print(rs.getString("password") + " ");
-//
-//                System.out.println("");
-//
-//            }
-
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
         }
-
+        if (!app_db.exists()) {
+            try {
+                Connection conn = getConnection();
+                assert conn != null;
+                Statement state = conn.createStatement();
+                BufferedReader bf = new BufferedReader(new FileReader("src/main/assets/db/db.script"));
+                String line = null;
+                while ((line = bf.readLine()) != null) {
+                    state.execute(line);
+                }
+                bf.close();
+                state.close();
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
+
+    public static Connection getConnection() {
+        try {
+            return DriverManager.getConnection("jdbc:hsqldb:file:" + "src/main/java/comp3350/group6/promise/app_db/PromiseDB" + ";shutdown=true", "SA", "");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
 
 

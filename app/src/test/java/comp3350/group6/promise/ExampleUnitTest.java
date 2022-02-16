@@ -11,13 +11,11 @@ import comp3350.group6.promise.util.DBConnectorUtil;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
-
     private UserService userService;
 
     @Test
     public void addition_isCorrect() {
-
-        DBConnectorUtil.test();
+        UserService.test();
     }
 
 }
