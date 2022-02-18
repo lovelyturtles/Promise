@@ -22,8 +22,7 @@ public class UserImp implements UserDao {
             preparedStatement.executeUpdate();
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             return generatedKeys.getInt(1);
-        }
-        finally {
+        }finally {
             cnn.close();
         }
     }
@@ -32,7 +31,6 @@ public class UserImp implements UserDao {
     public void updateUserByUserId(int userId, String name, String introduction) throws SQLException {
         Connection cnn = DBConnectorUtil.getConnection();
         try {
-            assert cnn != null;
             PreparedStatement preparedStatement = cnn.prepareStatement("update User set name = ? introduction = ? where userId = ?");
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, introduction);
@@ -48,7 +46,6 @@ public class UserImp implements UserDao {
 
         Connection cnn = DBConnectorUtil.getConnection();
         try {
-            assert cnn != null;
             PreparedStatement preparedStatement = cnn.prepareStatement("select userId, name, introduction where userId = ?");
             preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -62,43 +59,5 @@ public class UserImp implements UserDao {
             cnn.close();
         }
         return new User(userId,null,null);
-    }
-
-    @Override
-    public User getUserByUserName( String userName ) throws Exception{
-
-        //Variables
-        Connection cnn = DBConnectorUtil.getConnection();
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        User getUser;    //if try block doesn't work??, return null
-        int id;
-        String name;
-        String introduction;
-
-        try{
-            assert cnn != null;
-            preparedStatement = cnn.prepareStatement( "SELECT userId, name, introduction WHERE name = ?" );
-            preparedStatement.setString( 1, userName );
-            resultSet = preparedStatement.executeQuery();
-
-            //position the ResultSet cursor
-            resultSet.next();
-
-            //get the attributes from the table
-            id = resultSet.getInt( "userId" );
-            name = resultSet.getString( "name" );
-            introduction = resultSet.getString( "introduction" );
-
-            getUser = new User( id, name, introduction );
-        }
-
-        finally {
-            try{ resultSet.close(); }         catch( Exception e ){/**/}
-            try{ preparedStatement.close(); } catch( Exception e ){/**/}
-            try{ cnn.close(); }               catch( Exception e ){/**/}
-        }
-
-        return getUser;
     }
 }

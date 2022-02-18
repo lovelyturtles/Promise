@@ -9,6 +9,4 @@ public interface UserDao {
     void updateUserByUserId(int userId, String name, String introduction) throws Exception;
 
     User getUserByUserId(int userId) throws Exception;
-
-    User getUserByUserName( String userName ) throws Exception;
 }

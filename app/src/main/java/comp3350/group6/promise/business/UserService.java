@@ -12,7 +12,7 @@ public class UserService {
     private static final UserDao userDao = new UserImp();
 
     public int addUser(String name, String introduction) throws Exception{
-        assert name!= null;
+        assert ( name!= null );
         return userDao.addUser(name, introduction);
     }
 
@@ -24,31 +24,4 @@ public class UserService {
         return userDao.getUserByUserId(userId);
     }
 
-    public User getUserByUserName( String userName ) throws Exception{
-        return userDao.getUserByUserName( userName );
-    }
-
-//    public static void test() {
-//        try {
-//            Connection conn = DBConnectorUtil.getConnection();
-//            Statement state = conn.createStatement();
-//
-//            state.execute("INSERT INTO ACCOUNT VALUES('115@gmail.com','123',456)");
-//            ResultSet rs = state.executeQuery("SELECT email,password,userId FROM account");
-//
-//            while (rs.next()) {
-//                String email = rs.getString("email");
-//                String pass = rs.getString("password");
-//                int id = rs.getInt("userId");
-//                System.out.println("email：" + email + " pss：" + pass
-//                        + "  userid：" + id);
-//                System.out.println("=============================");
-//            }
-//
-//            state.close();
-//            conn.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
