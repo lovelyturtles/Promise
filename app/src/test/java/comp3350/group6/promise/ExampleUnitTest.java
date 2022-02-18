@@ -15,7 +15,7 @@ public class ExampleUnitTest {
 
     @Test
     public void addition_isCorrect() {
-        UserService.test();
+
     }
 
 }
