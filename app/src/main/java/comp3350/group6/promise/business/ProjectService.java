@@ -1,20 +1,11 @@
 package comp3350.group6.promise.business;
 
-
-import org.apache.commons.codec.binary.Base64;
-
 import java.util.Collections;
 import java.util.List;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
+import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.persistence.ProjectDao;
 import comp3350.group6.promise.persistence.hsqldb.ProjectImp;
-import comp3350.group6.promise.util.DBConnectorUtil;
 
 public class ProjectService {
 

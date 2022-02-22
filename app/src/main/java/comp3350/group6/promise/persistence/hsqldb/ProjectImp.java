@@ -1,15 +1,15 @@
 package comp3350.group6.promise.persistence.hsqldb;
 
-import org.apache.commons.codec.binary.Base64;
-
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.sql.SQLException;
 
-import javax.xml.transform.Result;
+import java.util.List;
+import java.util.ArrayList;
 
+import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.persistence.ProjectDao;
 import comp3350.group6.promise.util.DBConnectorUtil;
 
@@ -18,7 +18,7 @@ public class ProjectImp implements ProjectDao{
     /*
      * Used to create a Project object from a SQL ResultSet 
      */
-    private Project createProjectObject(ResultSet rs){
+    private Project createProjectObject(ResultSet rs) throws SQLException{
         int projectID = rs.getInt("projectId");
         String projectName = rs.getString("projectName");
         String statement = rs.getString("statement");
@@ -30,8 +30,8 @@ public class ProjectImp implements ProjectDao{
     }
 
     @Override
-    List<Project> getProjectList() {
-        final List<Project> projects = new ArrayList<>();
+    public List<Project> getProjectList() {
+        final List<Project> projects = new ArrayList<Project>();
 
         try(Connection con = DBConnectorUtil.getConnection();
             PreparedStatement pstmt = con.prepareStatement("select * from project");
@@ -42,7 +42,7 @@ public class ProjectImp implements ProjectDao{
                 projects.add(p);
             }
 
-        } catch (SQLExceoption e) {
+        } catch (SQLException e) {
             throw new PersistenceException(e);
         }
 
@@ -50,20 +50,20 @@ public class ProjectImp implements ProjectDao{
     }
 
     @Override
-    Project insertProject(Project project){
+    public Project insertProject(Project project){
         try(Connection con = DBConnectorUtil.getConnection();
             PreparedStatement pstmt = con.prepareStatement("insert into project values (?,?,?,?,?,?)")){ 
             
             pstmt.setInt(1, project.getProjectID());
             pstmt.setString(2, project.getProjectName());
             pstmt.setString(3, project.getStatement());
-            pstmt.setString(4, project.getStatusNum());
+            pstmt.setInt(4, project.getStatusNum());
             pstmt.setTimestamp(5, project.getCreatedTime());
             pstmt.setTimestamp(6, project.getEstimatedEndTime());
             
             pstmt.executeUpdate();
 
-        } catch (SQLExceoption e) {
+        } catch (SQLException e) {
             throw new PersistenceException(e);
         }
 
@@ -71,7 +71,7 @@ public class ProjectImp implements ProjectDao{
     }
 
     @Override
-    Project updateProject(Project project){
+    public Project updateProject(Project project){
         try(Connection con = DBConnectorUtil.getConnection();
             PreparedStatement pstmt = con.prepareStatement("update project set projectName = ?, statement = ?, statusNum = ?, estimatedEndTime = ? where projectId = ?")){ 
             
@@ -83,7 +83,7 @@ public class ProjectImp implements ProjectDao{
             
             pstmt.executeUpdate();
 
-        } catch (SQLExceoption e) {
+        } catch (SQLException e) {
             throw new PersistenceException(e);
         }
 
@@ -91,15 +91,15 @@ public class ProjectImp implements ProjectDao{
     }
 
     @Override
-    void deleteProject(Project project){
+    public void deleteProject(Project project){
         try(Connection con = DBConnectorUtil.getConnection();
             PreparedStatement pstmt = con.prepareStatement("delete from project where projectId = ?")){ 
             
-            pstmt.setString(1, project.getProjectID());
+            pstmt.setInt(1, project.getProjectID());
             
             pstmt.executeUpdate();
 
-        } catch (SQLExceoption e) {
+        } catch (SQLException e) {
             throw new PersistenceException(e);
         }
 
