@@ -4,34 +4,28 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import comp3350.group6.promise.R;
 
-public class MainActivity extends AppCompatActivity {
-
-    public static void run(){
-        System.out.println("hello");
-    }
+public class ProjectPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_project_page);
 
-        ImageButton projectsPageButton = findViewById( R.id.projects );
-        projectsPageButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton sentButton = findViewById( R.id.inviteButton );
+        sentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToProjects();
+                goToInviteSent();
             }
         });
     }
 
-    private void goToProjects(){
-        Intent intent = new Intent( this, ProjectPage.class );
+    private void goToInviteSent(){
+        Intent intent = new Intent( this, InviteSent.class );
         startActivity( intent );
     }
-
 }

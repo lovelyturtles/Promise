@@ -35,6 +35,7 @@ dependencies {
     implementation files('libs\\hsqldb.jar')
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
     testImplementation 'junit:junit:4.13.2'
     // https://mvnrepository.com/artifact/com.android.support/appcompat-v7
     implementation 'com.android.support:appcompat-v7:28.0.0'

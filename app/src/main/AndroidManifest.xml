@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Promise">
         <activity
+            android:name=".presentation.SendToUser"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.InviteSent"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ProjectPage"
+            android:exported="false" />
+        <activity
             android:name=".presentation.MainActivity"
             android:exported="true">
             <intent-filter>

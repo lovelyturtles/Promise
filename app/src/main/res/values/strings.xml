@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Promise</string>
+    <string name="mainActivity">Main Activity</string>
+    <string name="projectPage">Project Page</string>
+    <string name="inviteSent">Invite Sent</string>
+    <string name="requestSent">Request Sent</string>
+    <string name="notifList">Notifications</string>
+    <string name="inviteButton">Invite</string>
 </resources>
