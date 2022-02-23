@@ -1,7 +1,5 @@
 package comp3350.group6.promise.objects;
 
-
-
 import java.sql.Timestamp;
 
 import lombok.Data;
@@ -17,17 +15,21 @@ public class Project {
     private Timestamp createdTime;
     private Timestamp estimatedEndTime;
 
-    public Project(String projectName, String statement, Timestamp estimatedEndTime){
+
+    //public Project(String projectName, String statement, Timestamp estimatedEndTime)
+    public Project(String projectName, String statement){
         this.projectID = count++;
         this.projectName = projectName;
         
-        if (statement == null){
+        if (statement.equals("")){
             this.statement = "project statement";
         }
-
+        this.statement = statement;
         this.statusNum = 0; //TODO: set to default status
-        createdTime = new Timestamp(System.currentTimeMillis());
-        this.estimatedEndTime = estimatedEndTime;
+        
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        this.createdTime = time;
+        this.estimatedEndTime = time;
     }
 
     public Project(int projectID, String projectName, String statement, int statusNum, Timestamp createdTime, Timestamp estimatedEndTime) {
