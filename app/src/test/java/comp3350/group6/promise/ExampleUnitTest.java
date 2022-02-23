@@ -13,9 +13,9 @@ import comp3350.group6.promise.util.DBConnectorUtil;
 public class ExampleUnitTest {
     private UserService userService;
 
-    @Test
-    public void addition_isCorrect() {
-        UserService.test();
-    }
+//    @Test
+//    public void addition_isCorrect() {
+//        UserService.test();
+//    }
 
 }
