@@ -10,6 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Promise">
         <activity
+            android:name=".presentation.RecipientInfoActivity"
+            android:parentActivityName=".presentation.ProjectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ProjectActivity"
+            android:parentActivityName=".presentation.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.MainActivity"
             android:exported="true">
             <intent-filter>

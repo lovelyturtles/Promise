@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Promise</string>
+    <string name="goToProject">Project</string>
+
+    <!--Project-->
+    <string name="projectName">Project Name</string>
+    <string name="inviteButton">Invite</string>
+    <string name="viewNotifsButton">Notifications</string>
+
+    <!--Recipient Info-->
+    <string name="recipientUserName">User you want to invite</string>
+    <string name="sendInviteButton">Send Invite</string>
+
+
 </resources>
