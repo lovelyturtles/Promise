@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/layout/activity_project.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_recipient_info.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_respond_notif.xml" value="0.11398176291793313" />
+        <entry key="app/src/main/res/layout/activity_sent_invite.xml" value="0.2" />
       </map>
     </option>
   </component>

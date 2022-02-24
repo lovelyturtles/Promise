@@ -1,14 +1,19 @@
 package comp3350.group6.promise.presentation;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import comp3350.group6.promise.R;
 
 public class RecipientInfoActivity extends AppCompatActivity {
     private Button sendInvite;
+    EditText textName;
+    String recipientName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +29,28 @@ public class RecipientInfoActivity extends AppCompatActivity {
         sendInvite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Get the username that was submitted and check it against our user database
+                //Get the userName that was submitted
+                textName = findViewById( R.id.recipientNameHint );
+                recipientName = textName.getText().toString();
+
+                /*
+                 * Check if the username is in our user database (in RecipientService)
+                 *  if it isn't, open the error message dialog
+                 *  if it is, call RecipientService and then goToSentPage()
+                 *
+                 */
                 openDialog();
+                //goToSentPage();
+
+
             }
         });
+    }
+
+    public void goToSentPage(){
+        Intent intent = new Intent( this, SentInviteActivity.class );
+        intent.putExtra( "userInput", recipientName );
+        startActivity( intent );
     }
 
     public void openDialog(){

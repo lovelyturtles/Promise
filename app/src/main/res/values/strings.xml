@@ -11,6 +11,9 @@
     <string name="recipientUserName">User you want to invite</string>
     <string name="sendInviteButton">Send Invite</string>
     <string name="recipientUserHint">Enter user name here</string>
+
+
+    <!--Invite Sent-->
     <string name="sentMessage">Your invite was sent to userName</string>
 
 
