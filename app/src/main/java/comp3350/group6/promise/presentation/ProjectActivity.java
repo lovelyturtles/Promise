@@ -8,28 +8,25 @@ import android.widget.Button;
 
 import comp3350.group6.promise.R;
 
-public class MainActivity extends AppCompatActivity {
-    //What does this do? Do we need it?
-    public static void run(){
-        System.out.println("hello");
-    }
+public class ProjectActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView( R.layout.activity_project );
 
-        Button projectButton = findViewById( R.id.goToProject );
-        projectButton.setOnClickListener(new View.OnClickListener() {
+        Button invite = findViewById( R.id.inviteButton );
+        invite.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToProject();
+                goToRecipientDetails();
             }
         });
+
     }
 
-    private void goToProject(){
-        Intent intent = new Intent( this, ProjectActivity.class );
+    private void goToRecipientDetails(){
+        Intent intent = new Intent( this, RecipientInfoActivity.class );
         startActivity( intent );
     }
 }
