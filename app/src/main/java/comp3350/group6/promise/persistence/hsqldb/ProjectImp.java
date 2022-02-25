@@ -3,6 +3,7 @@ package comp3350.group6.promise.persistence.hsqldb;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.sql.SQLException;
 
@@ -51,17 +52,21 @@ public class ProjectImp implements ProjectDao{
 
     @Override
     public Project insertProject(Project project){
+        String query = "insert into project('projectName','statement','statusNum','createdTime','estimatedEndTime') values (?,?,?,?,?)";
         try(Connection con = DBConnectorUtil.getConnection();
-            PreparedStatement pstmt = con.prepareStatement("insert into project values (?,?,?,?,?,?)")){ 
-            
-            pstmt.setInt(1, project.getProjectID());
-            pstmt.setString(2, project.getProjectName());
-            pstmt.setString(3, project.getStatement());
-            pstmt.setInt(4, project.getStatusNum());
-            pstmt.setTimestamp(5, project.getCreatedTime());
-            pstmt.setTimestamp(6, project.getEstimatedEndTime());
+            PreparedStatement pstmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)){
+
+            pstmt.setString(1, project.getProjectName());
+            pstmt.setString(2, project.getStatement());
+            pstmt.setInt(3, project.getStatusNum());
+            pstmt.setTimestamp(4, project.getCreatedTime());
+            pstmt.setTimestamp(5, project.getEstimatedEndTime());
             
             pstmt.executeUpdate();
+
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            int pid = generatedKeys.getInt(1);
+            project.setProjectID(pid);
 
         } catch (SQLException e) {
             throw new PersistenceException(e);

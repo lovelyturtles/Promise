@@ -3,6 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable-anydpi/ic_add.xml" value="0.265" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable-anydpi/ic_back.xml" value="0.265" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable-anydpi/ic_more_horiz.xml" value="0.265" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable-anydpi/ic_more_vert.xml" value="0.265" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable/rounded_corner.xml" value="0.1665" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable/rounded_corner_blue.xml" value="0.265" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable/rounded_corner_gray.xml" value="0.265" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/activity_add_project.xml" value="0.25" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/activity_invite_sent.xml" value="0.2125" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/activity_main.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/activity_project_page.xml" value="0.33" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/activity_send_to_user.xml" value="0.2125" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/card_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_invite_sent.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_project_page.xml" value="0.25" />

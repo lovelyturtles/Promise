@@ -9,8 +9,6 @@ import static org.junit.Assert.*;
 
 public class ProjectTest
 {
-
-	//TODO: Fix status numbers
 	@Test
 	public void testProjectConstruct1()
 	{
