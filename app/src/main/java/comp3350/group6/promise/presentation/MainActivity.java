@@ -20,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DBConnectorUtil db = new DBConnectorUtil();
-
         ImageButton projectsPageButton = findViewById( R.id.projects );
         projectsPageButton.setOnClickListener(new View.OnClickListener() {
             @Override

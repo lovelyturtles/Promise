@@ -52,7 +52,7 @@ public class ProjectImp implements ProjectDao{
 
     @Override
     public Project insertProject(Project project){
-        String query = "insert into project('projectName','statement','statusNum','createdTime','estimatedEndTime') values (?,?,?,?,?)";
+        String query = "insert into project (projectName,statement,statusNum,createdTime,estimatedEndTime) values (?,?,?,?,?)";
         try(Connection con = DBConnectorUtil.getConnection();
             PreparedStatement pstmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)){
 
@@ -69,6 +69,8 @@ public class ProjectImp implements ProjectDao{
             generatedKeys.next();
 
             project.setProjectID(generatedKeys.getInt(1));
+
+            con.close();
 
         } catch (SQLException e) {
             throw new PersistenceException(e);

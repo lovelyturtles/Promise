@@ -38,7 +38,18 @@ public class Project {
         this.createdTime = createdTime;
         this.estimatedEndTime = estimatedEndTime;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "projectID=" + projectID +
+                ", projectName='" + projectName + '\'' +
+                ", statement='" + statement + '\'' +
+                ", statusNum=" + statusNum +
+                ", createdTime=" + createdTime +
+                ", estimatedEndTime=" + estimatedEndTime +
+                '}';
+    }
 
     public int getProjectID(){
         return this.projectID;
