@@ -65,8 +65,10 @@ public class ProjectImp implements ProjectDao{
             pstmt.executeUpdate();
 
             ResultSet generatedKeys = pstmt.getGeneratedKeys();
-            int pid = generatedKeys.getInt(1);
-            project.setProjectID(pid);
+
+            generatedKeys.next();
+
+            project.setProjectID(generatedKeys.getInt(1));
 
         } catch (SQLException e) {
             throw new PersistenceException(e);

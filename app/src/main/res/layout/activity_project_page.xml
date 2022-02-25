@@ -1,50 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".presentation.ProjectPage">
+    android:orientation="vertical"
+    tools:context=".presentation.ProjectList">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/projectRecyclerView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/myProjects" />
-
-    <ImageButton
-        android:id="@+id/inviteButton"
-        android:layout_width="123dp"
-        android:layout_height="110dp"
-        android:adjustViewBounds="true"
-        android:maxWidth="100dp"
-        android:maxHeight="100dp"
-        android:scaleType="fitXY"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.956"
-        app:srcCompat="@drawable/invite" />
-
-    <ImageButton
-        android:id="@+id/moreButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_height="200dp"
         android:background="#FFFFFF"
-        android:padding="20dp"
-        app:srcCompat="@drawable/ic_more_vert" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:elevation="20dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="fitXY"
+
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <ImageButton
+            android:id="@+id/create_project_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="25dp"
+            app:srcCompat="@drawable/ic_back_white" />
+
+        <TextView
+            android:id="@+id/create_project_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="20dp"
+            android:text="Create Project"
+            android:textColor="#FFFFFF"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/create_project_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:padding="25dp"
+            app:srcCompat="@drawable/ic_more_vert_white" />
+
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/myProjects"
-        android:layout_width="wrap_content"
+        android:id="@+id/project_page_desc"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="My Projects"
-        android:textColor="#000000"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        android:text="TextView" />
 
-</RelativeLayout>
+
+</LinearLayout>

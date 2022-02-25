@@ -16,11 +16,12 @@ public class UserImp implements UserDao {
     public int addUser(String name, String introduction) throws Exception{
         Connection cnn = DBConnectorUtil.getConnection();
         try {
-            PreparedStatement preparedStatement = cnn.prepareStatement("insert into User('name','introduction') values (?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = cnn.prepareStatement("insert into User (name,introduction) values (?,?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, introduction);
             preparedStatement.executeUpdate();
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            generatedKeys.next();
             return generatedKeys.getInt(1);
         }finally {
             cnn.close();

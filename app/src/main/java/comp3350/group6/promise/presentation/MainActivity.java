@@ -4,10 +4,10 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.util.DBConnectorUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        DBConnectorUtil db = new DBConnectorUtil();
+
         ImageButton projectsPageButton = findViewById( R.id.projects );
         projectsPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goToProjects(){
-        Intent intent = new Intent( this, ProjectPage.class );
+        Intent intent = new Intent( this, ProjectList.class );
         startActivity( intent );
     }
 

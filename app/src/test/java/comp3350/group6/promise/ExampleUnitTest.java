@@ -11,11 +11,11 @@ import comp3350.group6.promise.util.DBConnectorUtil;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
-    private UserService userService;
+    private UserService userService = new UserService();
 
     @Test
-    public void addition_isCorrect() {
-
+    public void addition_isCorrect() throws Exception {
+        userService.addUser("dani","hi");
     }
 
 }

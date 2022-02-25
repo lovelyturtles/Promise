@@ -2,7 +2,6 @@ package comp3350.group6.promise.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.style.TtsSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -48,7 +47,7 @@ public class AddProjectActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void back(){
-        Intent intent = new Intent( this, ProjectPage.class );
+        Intent intent = new Intent( this, ProjectList.class );
         startActivity( intent );
     }
 
@@ -56,7 +55,7 @@ public class AddProjectActivity extends AppCompatActivity implements View.OnClic
         String projectName = name.getText().toString();
         String projectDesc = description.getText().toString();
 
-        Intent intent = new Intent(v.getContext(), ProjectPage.class );
+        Intent intent = new Intent(v.getContext(), ProjectList.class );
         intent.putExtra("name", projectName);
         intent.putExtra("desc", projectDesc);
         startActivity( intent );
