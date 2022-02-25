@@ -1,7 +1,7 @@
 package comp3350.group6.promise.presentation;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -41,7 +41,6 @@ public class RecipientInfoActivity extends AppCompatActivity {
                  */
                 openDialog();
                 //goToSentPage();
-
 
             }
         });
