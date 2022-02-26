@@ -1,3 +1,35 @@
 <resources>
+    
     <string name="app_name">Promise</string>
+    <string name="mainActivity">Main Activity</string>
+    <string name="projectPage">Project Page</string>
+    <string name="inviteSent">Invite Sent</string>
+    <string name="requestSent">Request Sent</string>
+    <string name="notifList">Notifications</string>
+    <string name="inviteButton">Invite</string>
+    <string name="title_activity_add_project">AddProject</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="goToProject">Project</string>
+
+    <!--Project-->
+    <string name="projectName">Project Name</string>
+    <string name="inviteButton">Invite</string>
+    <string name="viewNotifsButton">Notifications</string>
+
+    <!--Recipient Info-->
+    <string name="recipientUserName">User you want to invite</string>
+    <string name="sendInviteButton">Send Invite</string>
+    <string name="recipientUserHint">Enter user name here</string>
+
+
+    <!--Invite Sent-->
+    <string name="sentMessage">Your invite was sent to userName</string>
+
 </resources>

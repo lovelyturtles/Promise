@@ -23,12 +23,12 @@ public class AccountService {
         if (userId < 0) {
             throw new Exception("Adding user fails");
         }
-        try {
-            userId = accountDao.createAccount(email,password,userId);
-        }catch (Exception e){
-            throw new Exception("Your email has been registered");
-        }
-        return userId;
+       try {
+           userId = accountDao.createAccount(email,password,userId);
+       }catch (Exception e){
+           throw new Exception("Your email has been registered");
+       }
+       return userId;
     }
 
     public boolean changePassword(int userId, String oldPassword, String newPassword) throws Exception {
