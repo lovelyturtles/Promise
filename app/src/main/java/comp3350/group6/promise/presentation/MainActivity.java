@@ -4,13 +4,13 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.Button;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.util.DBConnectorUtil;
 
 public class MainActivity extends AppCompatActivity {
-
+    //What does this do? Do we need it?
     public static void run(){
         System.out.println("hello");
     }
@@ -20,11 +20,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageButton projectsPageButton = findViewById( R.id.projects );
-        projectsPageButton.setOnClickListener(new View.OnClickListener() {
+        Button projectButton = findViewById( R.id.goToProject );
+        projectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToProjects();
+                goToProject();
             }
         });
     }
