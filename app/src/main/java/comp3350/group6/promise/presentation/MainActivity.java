@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.util.DBConnectorUtil;
 
 public class MainActivity extends AppCompatActivity {
     //What does this do? Do we need it?
@@ -28,8 +29,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void goToProject(){
-        Intent intent = new Intent( this, ProjectActivity.class );
+    private void goToProjects(){
+        Intent intent = new Intent( this, ProjectList.class );
         startActivity( intent );
     }
+
 }
