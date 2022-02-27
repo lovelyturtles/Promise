@@ -8,6 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.objects.FakeDB;
 
 public class MainActivity extends AppCompatActivity {
     //What does this do? Do we need it?
@@ -16,9 +17,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //populate our fake database
+        try {
+            populateFakeDatabase();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
         Button createButton = findViewById( R.id.goToCreate );
         Button loginButton  = findViewById( R.id.goToLogin );
@@ -44,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
 //                goToProjects();
 //            }
 //        });
+    }
+
+    private void populateFakeDatabase() throws Exception {
+
+        FakeDB fakes = new FakeDB();
+        fakes.initialize();
+
     }
 
     private void goToCreate(){

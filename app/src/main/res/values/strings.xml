@@ -16,10 +16,15 @@
     <!--Create Page-->
     <string name="createMessage">Create Account</string>
     <string name="registerButton">Create My Account</string>
+    <string name="nameLabel">Your Name</string>
+    <string name="firstNameInput">First Name</string>
+    <string name="intro">Introduce yourself!</string>
+    <string name="introInput">Say anything</string>
 
     <!--Login Page-->
     <string name="loginMessage">Sign In</string>
     <string name="signInButton">Sign In</string>
+
 
     <!--User's Home Page-->
     <string name="userHomeMessage">Promise</string>
@@ -41,18 +46,19 @@
     <string name="login_failed">"Login failed"</string>
 
 
-    <!--Project-->
+    <!--Single Project Page-->
     <string name="projectName">Project Name</string>
     <string name="inviteButton">Invite</string>
     <string name="viewNotifsButton">Notifications</string>
 
     <!--Recipient Info-->
-    <string name="recipientUserName">User you want to invite</string>
+    <string name="recipientEmailLabel">Email of the user you want to invite</string>
     <string name="sendInviteButton">Send Invite</string>
-    <string name="recipientUserHint">Enter user name here</string>
-
+    <string name="recipientEmailHint">Enter their email here</string>
 
     <!--Invite Sent-->
-    <string name="sentMessage">Your invite was sent to userName</string>
+    <string name="sentMessage">Your invite was sent to userEmail</string>
+    <string name="someoneElse">Invite More</string>
+    <string name="goBackProject">Back to project</string>
 
 </resources>
