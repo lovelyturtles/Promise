@@ -1,13 +1,13 @@
 package comp3350.group6.promise.presentation;
 
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -40,17 +40,18 @@ public class ProjectList extends AppCompatActivity implements View.OnClickListen
         sendButton = findViewById(R.id.inviteButton);
         moreButton = findViewById(R.id.moreButton);
 
-        projectService = new ProjectService();
-        projects = (ArrayList<Project>) projectService.getProjects();
+        //projectService = new ProjectService();
+//        projects = (ArrayList<Project>) projectService.getProjects();
+        projects = new ArrayList<Project>();
 
         // Testing
-//        projects.add(new Project("Project A","This is a sample description for this very cool project."));
-//        projects.add(new Project("Project B", "This is a sample description for this very cool project."));
-//        projects.add(new Project("Project C", "This is a sample description for this very cool project."));
-//        projects.add(new Project("Project D", "This is a sample description for this very cool project."));
-//        projects.add(new Project("Project E", "This is a sample description for this very cool project."));
-//        projects.add(new Project("Project F", "This is a sample description for this very cool project."));
-//        projects.add(new Project("Project G", "This is a sample description for this very cool project."));
+        projects.add(new Project("Project A","This is a sample description for this very cool project."));
+        projects.add(new Project("Project B", "This is a sample description for this very cool project."));
+        projects.add(new Project("Project C", "This is a sample description for this very cool project."));
+        projects.add(new Project("Project D", "This is a sample description for this very cool project."));
+        projects.add(new Project("Project E", "This is a sample description for this very cool project."));
+        projects.add(new Project("Project F", "This is a sample description for this very cool project."));
+        projects.add(new Project("Project G", "This is a sample description for this very cool project."));
 
         projectAdapter = new ProjectAdapter(this, projects);
 
@@ -70,7 +71,7 @@ public class ProjectList extends AppCompatActivity implements View.OnClickListen
         if (getIntent() != null && getIntent().getExtras() != null) { // returned from create project activity
             newProjectName = getIntent().getStringExtra("name");
             newProjectDesc = getIntent().getStringExtra("desc");
-            projectService.insertProject(new Project(newProjectName, newProjectDesc));
+            //projectService.insertProject(new Project(newProjectName, newProjectDesc));
         }
 
         projectAdapter.notifyDataSetChanged();
@@ -91,7 +92,7 @@ public class ProjectList extends AppCompatActivity implements View.OnClickListen
     }
 
     private void goToInviteSent(){
-        Intent intent = new Intent( this, InviteSent.class );
+        Intent intent = new Intent( this, RecipientInfoActivity.class );
         startActivity( intent );
     }
 
