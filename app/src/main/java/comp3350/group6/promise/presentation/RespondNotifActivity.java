@@ -16,7 +16,7 @@ public class RespondNotifActivity extends AppCompatDialogFragment {
                 .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //Add this userName to the Participate database
+                        //Add this userName to the Access database
                     }
                 })
                 .setNegativeButton("Reject", new DialogInterface.OnClickListener() {

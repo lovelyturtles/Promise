@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class Participate {
+public class Access {
 
     private int defaultId;
     private int projectId;
