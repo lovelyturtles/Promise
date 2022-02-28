@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".presentation.UserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.LandingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.CreateActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.AddProjectActivity"
             android:exported="false" />
         <activity
