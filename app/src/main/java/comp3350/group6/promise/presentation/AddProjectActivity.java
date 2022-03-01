@@ -6,48 +6,46 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import comp3350.group6.promise.R;
 
-public class AddProjectActivity extends AppCompatActivity implements View.OnClickListener{
+public class AddProjectActivity extends AppCompatActivity{
 
-    EditText name;
-    EditText description;
-    ImageButton back;
-    Button createProject;
+    private EditText name;
+    private EditText description;
+    private ImageButton back;
+    private Button createProject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_add_project );
 
-        name = findViewById(R.id.projectName);
-        description = findViewById(R.id.projectDesc);
-        back = findViewById(R.id.create_project_back);
+        name = findViewById(R.id.project_name);
+        description = findViewById(R.id.project_desc);
+        back = findViewById(R.id.back_button);
         createProject = findViewById(R.id.create_project_button);
 
-        back.setOnClickListener(this); // calling onClick() method
-        createProject.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.create_project_back:
+        back.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick( View view ) {
                 back();
-                break;
-            case R.id.create_project_button:
-                createProject(v);
-                break;
-            default:
-                break;
-        }
+            }
+        });
+
+        createProject.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick( View view ) {
+                createProject(view);
+            }
+        });
     }
 
     private void back(){
-        Intent intent = new Intent( this, ProjectList.class );
+        Intent intent = new Intent( this, DashboardActivity.class );
         startActivity( intent );
     }
 
@@ -55,9 +53,13 @@ public class AddProjectActivity extends AppCompatActivity implements View.OnClic
         String projectName = name.getText().toString();
         String projectDesc = description.getText().toString();
 
-        Intent intent = new Intent(v.getContext(), ProjectList.class );
-        intent.putExtra("name", projectName);
-        intent.putExtra("desc", projectDesc);
-        startActivity( intent );
+        if(projectName.equals("")){
+            Toast.makeText(this, "You need a name for your project.", Toast.LENGTH_LONG).show();
+        } else {
+            Intent intent = new Intent(v.getContext(), DashboardActivity.class );
+            intent.putExtra("name", projectName);
+            intent.putExtra("desc", projectDesc);
+            startActivity( intent );
+        }
     }
 }

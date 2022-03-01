@@ -51,6 +51,12 @@ public class ProjectImp implements ProjectDao{
     }
 
     @Override
+    public Project getProjectByID(int projectID) {
+        //TODO: implement
+        return null;
+    }
+
+    @Override
     public Project insertProject(Project project){
         String query = "insert into project (projectName,statement,statusNum,createdTime,estimatedEndTime) values (?,?,?,?,?)";
         try(Connection con = DBConnectorUtil.getConnection();

@@ -31,7 +31,10 @@
             android:name=".presentation.InviteSent"
             android:exported="false" />
         <activity
-            android:name=".presentation.ProjectList"
+            android:name=".presentation.DashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ProjectDetailActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.NotificationsActivity"

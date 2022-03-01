@@ -9,27 +9,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.objects.Project;
 
 // Reference for Class: https://www.geeksforgeeks.org/cardview-using-recyclerview-in-android-with-example/
-public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewholder>{
+public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewholder> {
 
     private Context context;
-    private ArrayList<Project> projectsList;
+    private List<Project> projectsList;
+    private Viewholder.OnCardListener onCardListener;
 
-    public ProjectAdapter(Context context, ArrayList<Project> projectsList){
+    public ProjectAdapter(Context context, List<Project> projectsList, Viewholder.OnCardListener onCardListener){
         this.context = context;
         this.projectsList = projectsList;
+        this.onCardListener = onCardListener;
     }
 
     @NonNull
     @Override
     public ProjectAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
-        return new Viewholder(view);
+        return new Viewholder(view, onCardListener);
     }
 
     @Override
@@ -48,19 +50,32 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewhold
         return projectsList.size();
     }
 
-
-    public class Viewholder extends RecyclerView.ViewHolder {
+    public static class Viewholder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView projectNameTV;
         private TextView projectDescTV;
         private TextView membersTV;
         private TextView boxTV;
+        private ImageView projectImg;
+        private OnCardListener listener;
 
-        public Viewholder(@NonNull View itemView){
+        public Viewholder(@NonNull View itemView, OnCardListener listener){
             super(itemView);
-            projectNameTV = itemView.findViewById(R.id.projectName);
+            projectNameTV = itemView.findViewById(R.id.project_name);
             projectDescTV = itemView.findViewById(R.id.projectDescription);
             membersTV = itemView.findViewById(R.id.memberNumber);
             boxTV = itemView.findViewById(R.id.boxNumber);
+            this.listener = listener;
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            listener.onCardClick(getAbsoluteAdapterPosition());
+        }
+
+        public interface OnCardListener{
+            void onCardClick(int position);
         }
     }
 }
