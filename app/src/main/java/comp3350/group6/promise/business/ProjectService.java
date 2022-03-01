@@ -6,6 +6,7 @@ import java.util.List;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.persistence.ProjectDao;
 import comp3350.group6.promise.persistence.hsqldb.ProjectImp;
+import comp3350.group6.promise.persistence.hsqldb.ProjectImpNoDB;
 
 public class ProjectService {
 
@@ -13,13 +14,17 @@ public class ProjectService {
     private List<Project> projects;
 
     public ProjectService(){
-        projectDao = new ProjectImp();
+        projectDao = new ProjectImpNoDB();
         projects = null;
     }
 
     public ProjectService(ProjectDao projectDao){
         this();
         this.projectDao = projectDao;
+    }
+
+    public Project getProjectByID(int id){
+        return projectDao.getProjectByID(id);
     }
 
     //returns a read-only list of Projects

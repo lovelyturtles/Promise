@@ -20,6 +20,7 @@ public class FakeDB {
         tasks    = new ArrayList<Task>();
 
         fillAccounts();
+        fillProjects();
 
     }
 
@@ -34,14 +35,14 @@ public class FakeDB {
 
     }
 
-//    private static void fillProjects(){
-//
-//        CurrentSession.projects.insertProject( new Project( "Cereals and Things", "Let's talk about cereal", new Timestamp( new Date().getTime() ) ) );
-//        CurrentSession.projects.insertProject( new Project( "Astrophysics Calendar", "This is probably for school", new Timestamp( new Date().getTime() ) ) );
-//        CurrentSession.projects.insertProject( new Project( "New Theater Plan", "We're opening a movie theater", new Timestamp( new Date().getTime() ) ) );
-//        CurrentSession.projects.insertProject( new Project( "How to open a door", "This is very difficult for me", new Timestamp( new Date().getTime() ) ) );
-//
-//    }
+    private static void fillProjects(){
+
+        CurrentSession.projects.insertProject( new Project("Cereals and Things", "Let's talk about cereal"));
+        CurrentSession.projects.insertProject( new Project("Astrophysics Calendar", "This is probably for school"));
+        CurrentSession.projects.insertProject( new Project("New Theater Plan", "We're opening a movie theater"));
+        CurrentSession.projects.insertProject( new Project("How to open a door", "This is very difficult for me"));
+
+    }
 //
 //    private static void fillAccessDB(){
 //

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".presentation.ProjectList">
+    tools:context=".presentation.DashboardActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,10 +22,10 @@
             android:layout_height="fill_parent"
             android:scaleType="fitXY"
 
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            tools:src="@tools:sample/backgrounds/scenic" />
 
         <ImageButton
-            android:id="@+id/create_project_back"
+            android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -33,18 +33,18 @@
             app:srcCompat="@drawable/ic_back_white" />
 
         <TextView
-            android:id="@+id/create_project_title"
+            android:id="@+id/project_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:padding="20dp"
-            android:text="Create Project"
-            android:textColor="#FFFFFF"
+            android:text="Sample Title"
+            android:textColor="#000000"
             android:textSize="25dp"
             android:textStyle="bold" />
 
         <ImageButton
-            android:id="@+id/create_project_more"
+            android:id="@+id/project_page_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="TextView" />
+        android:text="This is a sample description of this very cool project." />
 
 
 </LinearLayout>

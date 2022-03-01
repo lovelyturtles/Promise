@@ -51,6 +51,10 @@
     <string name="inviteButton">Invite</string>
     <string name="viewNotifsButton">Notifications</string>
 
+    <!--Add Project Page-->
+    <string name="projectNameHint">Project Name</string>
+    <string name="projectDescHint">Project Description</string>
+
     <!--Recipient Info-->
     <string name="recipientEmailLabel">Email of the user you want to invite</string>
     <string name="sendInviteButton">Send Invite</string>

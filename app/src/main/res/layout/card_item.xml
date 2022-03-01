@@ -29,7 +29,7 @@
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
-            android:id="@+id/projectName"
+            android:id="@+id/project_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/projectImage"
@@ -43,7 +43,7 @@
             android:id="@+id/projectDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/projectName"
+            android:layout_below="@id/project_name"
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"

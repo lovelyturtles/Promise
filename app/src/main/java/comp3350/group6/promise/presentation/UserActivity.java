@@ -34,7 +34,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void goToProjects(){
-        Intent intent = new Intent( this, ProjectList.class );
+        Intent intent = new Intent( this, DashboardActivity.class );
         startActivity( intent );
     }
 
