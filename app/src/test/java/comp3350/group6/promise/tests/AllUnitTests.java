@@ -17,4 +17,4 @@ import comp3350.group6.promise.tests.objects.ProjectTest;
 
 })
 
-public class AllTests {}
+public class AllUnitTests {}
