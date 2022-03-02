@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-
+import comp3350.group6.promise.objects.Account;
 import comp3350.group6.promise.persistence.AccountDao;
 import comp3350.group6.promise.util.DBConnectorUtil;
 
@@ -51,5 +51,21 @@ public class AccountImp implements AccountDao {
             cnn.close();
         }
         return res;
+    }
+
+
+    @Override
+    public boolean accountExists( String email ){
+        return false; //this method not implemented for database yet
+    }
+
+    @Override
+    public Account getAccountByEmail(String email ){
+        return null;
+    }
+
+    @Override
+    public boolean passwordsMatch( String email, String password ){
+        return false; //this method not implemented for database yet
     }
 }

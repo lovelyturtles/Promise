@@ -6,27 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".presentation.ProjectList">
+    tools:context=".presentation.DashboardActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/projectRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/myProjects" />
-
-    <ImageButton
-        android:id="@+id/inviteButton"
-        android:layout_width="123dp"
-        android:layout_height="110dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:adjustViewBounds="true"
-        android:maxWidth="100dp"
-        android:maxHeight="100dp"
-        android:scaleType="fitXY"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.956"
-        app:srcCompat="@drawable/invite" />
 
     <ImageButton
         android:id="@+id/moreButton"

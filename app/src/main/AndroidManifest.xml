@@ -10,8 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".presentation.TaskActivity"
-            android:exported="true" />
+            android:name=".presentation.UserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.LandingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.CreateActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.AddProjectActivity"
             android:exported="false" />
@@ -22,7 +31,10 @@
             android:name=".presentation.InviteSent"
             android:exported="false" />
         <activity
-            android:name=".presentation.ProjectList"
+            android:name=".presentation.DashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ProjectDetailActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.NotificationsActivity"
@@ -47,7 +59,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".presentation.TaskActivity"
+            android:exported="true" />
+            
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

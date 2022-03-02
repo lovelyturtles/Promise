@@ -1,6 +1,7 @@
 package comp3350.group6.promise.objects;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 import java.util.UUID;
 
 import lombok.Data;
@@ -19,20 +20,21 @@ public class Task {
     private Timestamp deadline;
 
 
-    public Task() {
+    public Task(int taskId) {
+        this.taskId = taskId;
+        this.title = null;
+        this.description = null;
+        this.priority = -1;
+        this.statusNum = -1;
+        this.projectId = -1;
+        this.createdTime = new Timestamp(System.currentTimeMillis());
+        this.estimatedEndTime = null;
+        this.deadline = null;
     }
 
-    public Task(String title, String description, int priority, int statusNum, int projectId, Timestamp estimatedEndTime, Timestamp deadline) {
-        this.taskId = count++;
-        this.title = title;
-        this.description = description;
-        this.priority = priority;
-        this.statusNum = statusNum;
-        this.projectId = projectId;
-        this.createdTime = new Timestamp(System.currentTimeMillis());
-        this.estimatedEndTime = estimatedEndTime;
-        this.deadline = deadline;
-    }
+    /*
+     *      - used by DB that generate from database
+     */
 
     public Task(int taskId, String title, String description, int priority, int statusNum, int projectId, Timestamp createdTime, Timestamp estimatedEndTime, Timestamp deadline) {
         this.taskId = taskId;
@@ -44,7 +46,24 @@ public class Task {
         this.createdTime = createdTime;
         this.estimatedEndTime = estimatedEndTime;
         this.deadline = deadline;
-    } // for DB calling
+    }
+
+    /*
+     *   - used by app when creating a task, doesn't have id
+     *
+     */
+
+    public Task(String title, String description, int priority, int statusNum, int projectId, Timestamp estimatedEndTime, Timestamp deadline) {
+        this.title = title;
+        this.description = description;
+        this.priority = priority;
+        this.statusNum = statusNum;
+        this.projectId = projectId;
+        this.createdTime = new Timestamp(System.currentTimeMillis());
+        this.estimatedEndTime = estimatedEndTime;
+        this.deadline = deadline;
+    }
+
 
     public int getTaskId() {
         return taskId;
@@ -116,5 +135,28 @@ public class Task {
 
     public void setEstimatedEndTime(Timestamp estimatedEndTime) {
         this.estimatedEndTime = estimatedEndTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "taskId=" + taskId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", priority=" + priority +
+                ", statusNum=" + statusNum +
+                ", projectId=" + projectId +
+                ", createdTime=" + createdTime +
+                ", estimatedEndTime=" + estimatedEndTime +
+                ", deadline=" + deadline +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task)) return false;
+        Task task = (Task) o;
+        return getTaskId() == task.getTaskId();
     }
 }

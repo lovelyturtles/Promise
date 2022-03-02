@@ -1,7 +1,36 @@
 <resources>
 
+    <!--Landing Page-->
     <string name="app_name">Promise</string>
-    <string name="mainActivity">Main Activity</string>
+    <string name="subHeading">Welcome to Promise, your favorite task management app.\n
+        Please log in or create an account.</string>
+    <string name="goToCreate">Create an Account</string>
+    <string name="goToLogin">Log In</string>
+
+    <!--Login Fields-->
+    <string name="emailLabel">Email Address</string>
+    <string name="emailHint">yourName@domain.com</string>
+    <string name="passwordLabel">Password</string>
+    <string name="passwordHint">Enter your password here</string>
+
+    <!--Create Page-->
+    <string name="createMessage">Create Account</string>
+    <string name="registerButton">Create My Account</string>
+    <string name="nameLabel">Your Name</string>
+    <string name="firstNameInput">First Name</string>
+    <string name="intro">Introduce yourself!</string>
+    <string name="introInput">Say anything</string>
+
+    <!--Login Page-->
+    <string name="loginMessage">Sign In</string>
+    <string name="signInButton">Sign In</string>
+
+
+    <!--User's Home Page-->
+    <string name="userHomeMessage">Promise</string>
+    <string name="goToNotifs">Notifications</string>
+    <string name="goToProjects">Projects</string>
+
     <string name="projectPage">Project Page</string>
     <string name="inviteSent">Invite Sent</string>
     <string name="requestSent">Request Sent</string>
@@ -15,21 +44,25 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="goToProjects">Projects</string>
-    <string name="goToNotifs">Notifications</string>
 
-    <!--Project-->
+
+    <!--Single Project Page-->
     <string name="projectName">Project Name</string>
     <string name="inviteButton">Invite</string>
     <string name="viewNotifsButton">Notifications</string>
 
-    <!--Recipient Info-->
-    <string name="recipientUserName">User you want to invite</string>
-    <string name="sendInviteButton">Send Invite</string>
-    <string name="recipientUserHint">Enter user name here</string>
+    <!--Add Project Page-->
+    <string name="projectNameHint">Project Name</string>
+    <string name="projectDescHint">Project Description</string>
 
+    <!--Recipient Info-->
+    <string name="recipientEmailLabel">Email of the user you want to invite</string>
+    <string name="sendInviteButton">Send Invite</string>
+    <string name="recipientEmailHint">Enter their email here</string>
 
     <!--Invite Sent-->
-    <string name="sentMessage">Your invite was sent to userName</string>
+    <string name="sentMessage">Your invite was sent to userEmail</string>
+    <string name="someoneElse">Invite More</string>
+    <string name="goBackProject">Back to project</string>
 
 </resources>
