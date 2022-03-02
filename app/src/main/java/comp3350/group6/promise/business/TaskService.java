@@ -3,6 +3,7 @@ package comp3350.group6.promise.business;
 
 import java.util.List;
 
+import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.persistence.TaskDao;
 import comp3350.group6.promise.persistence.hsqldb.TaskImp;
@@ -11,8 +12,14 @@ public class TaskService {
     private List<Task> allTask;
     private TaskDao taskDao;
 
+
     public TaskService() {
-        taskDao = new TaskImp();
+        allTask = null;
+        taskDao = null;
+    }
+
+    public TaskService(boolean forProduction) {
+        taskDao = Service.getTaskImp(forProduction);
         allTask = null;
     }
 
@@ -33,6 +40,9 @@ public class TaskService {
         taskDao.deleteTask(task);
     }
 
+    public void updateTask(Task task) {
+        taskDao.updateTask(task);
+    }
 
     public List<Task> getAllTask() {
         allTask = taskDao.getTaskList();
