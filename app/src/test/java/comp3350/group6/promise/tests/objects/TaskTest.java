@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import java.sql.Timestamp;
 
 import comp3350.group6.promise.objects.Task;
@@ -50,7 +51,7 @@ public class TaskTest {
         String oTitle = task.getTitle();
         task.setTitle("newTitle");
 
-        assertNotEquals(oTitle,task.getTitle());
+        assertNotEquals(oTitle, task.getTitle());
         assertEquals(nTitle, task.getTitle());
 
         System.out.println("Finished testSetTitle");
@@ -63,7 +64,7 @@ public class TaskTest {
         String oDes = task.getDescription();
         task.setDescription("newDes");
 
-        assertNotEquals(oDes,task.getDescription());
+        assertNotEquals(oDes, task.getDescription());
         assertEquals(nDes, task.getDescription());
 
         System.out.println("Finished testSetDescription");
@@ -76,7 +77,7 @@ public class TaskTest {
         int nP = 3;
         task.setPriority(3);
 
-        assertNotEquals(oP,task.getPriority());
+        assertNotEquals(oP, task.getPriority());
         assertEquals(nP, task.getPriority());
 
         System.out.println("Finished testSetPriority");
@@ -89,7 +90,7 @@ public class TaskTest {
         int nS = 3;
         task.setStatusNum(3);
 
-        assertNotEquals(oS,task.getStatusNum());
+        assertNotEquals(oS, task.getStatusNum());
         assertEquals(nS, task.getStatusNum());
 
         System.out.println("Finished testSetStatusNum");

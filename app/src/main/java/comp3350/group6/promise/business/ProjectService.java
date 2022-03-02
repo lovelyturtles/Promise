@@ -5,7 +5,6 @@ import java.util.List;
 
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.persistence.ProjectDao;
-import comp3350.group6.promise.persistence.hsqldb.ProjectImp;
 import comp3350.group6.promise.persistence.hsqldb.ProjectImpNoDB;
 
 public class ProjectService {
