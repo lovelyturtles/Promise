@@ -10,28 +10,28 @@ public class Notification {
     private int recipientID;    //userID of the user that's receiving the notification
     private NotifType type;     //A notification is either a request or an invite
 
-    public Notification( int userID, int projectID, int recipientID, NotifType type ){
+    public Notification(int userID, int projectID, int recipientID, NotifType type) {
 
-        this.userID      = userID;
-        this.projectID   = projectID;
+        this.userID = userID;
+        this.projectID = projectID;
         this.recipientID = recipientID;
-        this.type        = type;
+        this.type = type;
 
     }
 
-    int getUserID(){
+    public int getUserID() {
         return userID;
     }
 
-    int getProjectID(){
+    public int getProjectID() {
         return projectID;
     }
 
-    int getRecipientID(){
+    public int getRecipientID() {
         return recipientID;
     }
 
-    NotifType getType(){
+    public NotifType getType() {
         return type;
     }
 
