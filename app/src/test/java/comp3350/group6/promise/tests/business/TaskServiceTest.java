@@ -26,7 +26,7 @@ public class TaskServiceTest {
     public void testGetTaskList() {
         System.out.println("\nStarting testGetTaskList");
         List<Task> taskList = taskService.getAllTask();
-        int size = 3;
+        int size = 4;
 
         assertEquals(size, taskList.size());
 
@@ -38,7 +38,7 @@ public class TaskServiceTest {
         System.out.println("\nStarting testGetTaskById");
         List<Task> taskList = taskService.getAllTask();
 
-        assertEquals(3, taskList.size());
+        assertEquals(4, taskList.size());
 
         Task expected = new Task(1);
         Task actual = taskService.getTask(1);
