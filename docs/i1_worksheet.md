@@ -5,8 +5,13 @@ Adding a feature: Manage Project
 -----------------
 
 Since all of the tasks in our project will be related to a *Project* a user belongs to, the 'Manage Project' feature was assigned a high priority from the begining. 
+
 Users can create a project and send invitiations, or send join requests to other projects to join them.
-Our team's initial plan was to implement all user stories related to this feature, but we have decided to push user stories for Project invites/join requests to the next iteration, and only implement the developer tasks for 'Create Project'. Our team made this choice as we wanted to ensure that our project and user classes had a solid basis before introducing features that would integrate both.
+
+Our team's initial plan was to implement all user stories related to this feature, but we have decided to push user stories for Project invites/join requests to the next iteration, and only implement the developer tasks for 'Create Project'. 
+
+Our team made this choice as we wanted to ensure that our project and user classes had a solid basis before introducing features that would integrate both.
+
 Links to user stories, merge requests, merge commits and tests can be found bellow.
 
 [Manage Project Feature](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/issues/5)
@@ -42,6 +47,7 @@ SOLID
 -----
 
 On *March 02 3:30 PM*, Group 7 has not made any significant updates on their program, and only had `MainActivity.java`.
+
 Hence, our team was not able to find any SOLID validations, and did not create any issues.
 
 
