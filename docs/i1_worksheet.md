@@ -24,15 +24,16 @@ Links to user stories, merge requests, merge commits and tests can be found bell
     * [Project Feature](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/merge_requests/6)
     * [Updated projects](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/merge_requests/11)
 * Tests for Projects
-    * []()
+    * [All tests including tests for Projects](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/tree/iteration1/app/src/test/java/comp3350/group6/promise/tests)
 
 
 Exceptional code
 ----------------
+[Test for exceptional code](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/blob/iteration1/app/src/test/java/comp3350/group6/promise/tests/business/ProjectServiceTempDBTest.java) 
 
-Provide a link to a test of exceptional code. In a few sentences,
-provide an explanation of why the exception is handled or thrown
-in the code you are testing.
+If a project that has an empty name (""), then trying to insert that project in the database through the [ProjectService(business)](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/blob/iteration1/app/src/main/java/comp3350/group6/promise/business/ProjectService.java) class will throw an exception to the caller.
+This can be seen in the [AddProjectActivity.java](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/blob/iteration1/app/src/main/java/comp3350/group6/promise/presentation/AddProjectActivity.java) file, that is trying to handle this exception by showing an error message to the user.
+This exception was created since we want to prevent users from having empty fields.
 
 Branching
 ----------

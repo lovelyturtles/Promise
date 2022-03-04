@@ -5,7 +5,7 @@ import java.util.List;
 
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.persistence.ProjectDao;
-import comp3350.group6.promise.persistence.hsqldb.ProjectImpNoDB;
+import comp3350.group6.promise.persistence.stub.ProjectImpNoDB;
 
 public class ProjectService {
 
@@ -22,6 +22,7 @@ public class ProjectService {
         this.projectDao = projectDao;
     }
 
+    // returns a project by its given id
     public Project getProjectByID(int id){
         return projectDao.getProjectByID(id);
     }
@@ -32,6 +33,11 @@ public class ProjectService {
         return Collections.unmodifiableList(projects);
     }
 
+    /*
+        Accept only projects with valid inputs to be inserted to database.
+        If projects with empty project names are being inserted,
+        the insertProject will throw an EmptyInputException.
+     */
     public Project insertProject(Project project) throws EmptyInputException{
         if (project.getProjectName().isEmpty()){
             throw new EmptyInputException("project name");
@@ -39,10 +45,12 @@ public class ProjectService {
 		return projectDao.insertProject(project);
     }
 
+    // replace an existing project in the list with the given project
     public Project updateProject(Project project){
 		return projectDao.updateProject(project);
     }
 
+    // delete an existing project in the list
     public void deleteProject(Project project){
 		projectDao.deleteProject(project);
     }

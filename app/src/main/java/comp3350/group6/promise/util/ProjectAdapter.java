@@ -14,7 +14,12 @@ import java.util.List;
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.objects.Project;
 
-// Reference for Class: https://www.geeksforgeeks.org/cardview-using-recyclerview-in-android-with-example/
+/*
+    This class is a custom adapter for the dashboard page.
+    I allows creating a customized cardView based on the list of projects.
+    Reference for Class: https://www.geeksforgeeks.org/cardview-using-recyclerview-in-android-with-example/
+ */
+
 public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewholder> {
 
     private Context context;
@@ -40,7 +45,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewhold
         holder.projectNameTV.setText(project.getProjectName());
         holder.projectDescTV.setText(project.getStatement());
 
-        //TODO: change to proper number + add project image
+        // [iteration 2] change to proper number + add project image
         holder.membersTV.setText("3");
         holder.boxTV.setText("5");
     }
@@ -55,7 +60,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewhold
         private TextView projectDescTV;
         private TextView membersTV;
         private TextView boxTV;
-        private ImageView projectImg;
+        private ImageView projectImg; // will be added on iteration 2
         private OnCardListener listener;
 
         public Viewholder(@NonNull View itemView, OnCardListener listener){

@@ -56,7 +56,7 @@ public class DashboardActivity extends AppCompatActivity implements ProjectAdapt
     @Override
     protected void onResume() {
         super.onResume();
-
+        // refresh list of projects
         projectAdapter.notifyDataSetChanged();
     }
 
@@ -65,6 +65,7 @@ public class DashboardActivity extends AppCompatActivity implements ProjectAdapt
         startActivity( intent );
     }
 
+    // open the project details page
     @Override
     public void onCardClick(int position) {
         Project clickedProject = projects.get(position);

@@ -17,7 +17,7 @@ public class ProjectDetailActivity extends AppCompatActivity {
 
     private static final ProjectService projectService = new ProjectService();
 
-    private Project currentProject;
+    private Project currentProject; // project that we are viewing
     private TextView projectTitle;
     private TextView projectDesc;
     private ImageView projectImg;
@@ -29,6 +29,7 @@ public class ProjectDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_detail);
 
+        // Create the project detail page based on the intent passed to it.
         if (getIntent() != null && getIntent().getExtras() != null) {
             int id = getIntent().getIntExtra("projectID", -1);
             if (id != -1){
@@ -53,6 +54,7 @@ public class ProjectDetailActivity extends AppCompatActivity {
         });
     }
 
+    // go to the previous page
     private void back() {
         Intent intent = new Intent( this, DashboardActivity.class );
         startActivity( intent );
