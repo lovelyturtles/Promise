@@ -27,11 +27,13 @@ public class ProjectDetailActivity extends AppCompatActivity implements TaskAdap
     private static final TaskService taskService = new TaskService();
 
     private Project currentProject; // project that we are viewing
-    private TextView projectTitle;
-    private TextView projectDesc;
-    private ImageView projectImg;
+    private TextView projectTitleView;
+    private TextView projectDescView;
+    private ImageView projectImgView;
     private ImageButton moreButton;
     private ImageButton backButton;
+    private RecyclerView taskRecyclerView;
+    private  List<Task> projectTasks;
 
 
     @Override
