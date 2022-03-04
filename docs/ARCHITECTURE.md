@@ -47,4 +47,4 @@ We divide our application into 3-tier architecture. There are 6 main java packag
 - TaskImp
 
 
-![Architecture diagram](https://code.cs.umanitoba.ca/3350-winter-2021-a03/youtilities-comp3350-a03-group3/-/blob/master/docs/Architecture.md)
+![Architecture diagram](https://app.diagrams.net/#G1O1YgvnImUHyDjcPfwReyGTl-Sjkchb_3)
