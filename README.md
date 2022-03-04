@@ -17,3 +17,7 @@ The system will also serve as a communication platform. Users can share their sc
 
 ### Success criteria
 The project will be considered successful on the following criteria: First, users of existing project management apps prefer our system over the system they have been using. Second, new users find it pleasing and intuitive and choose to use our system after a trial. Third, it reduces the time and space needed for actual project management.
+
+# Links to Documents
+* [Iteration 1 Worksheet](./docs/i1_worksheet.md)
+* [Project Architecture](./docs/ARCHITECTURE.md)

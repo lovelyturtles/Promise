@@ -14,6 +14,12 @@ import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.persistence.ProjectDao;
 import comp3350.group6.promise.util.DBConnectorUtil;
 
+/*
+    This class is an actual implementation of our projectDao class that uses a real database.
+    We are using a fakeDB for this iteration, and this class is not in use yet.
+    Check ProjectImpNoDB.java for the persistence implementation for iteration 1.
+ */
+
 public class ProjectImp implements ProjectDao{
 
     /*

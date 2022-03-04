@@ -32,7 +32,10 @@ public class ProjectService {
         return Collections.unmodifiableList(projects);
     }
 
-    public Project insertProject(Project project){
+    public Project insertProject(Project project) throws EmptyInputException{
+        if (project.getProjectName().isEmpty()){
+            throw new EmptyInputException("project name");
+        }
 		return projectDao.insertProject(project);
     }
 
