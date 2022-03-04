@@ -52,7 +52,33 @@ Hence, our team was not able to find any SOLID validations, and did not create a
 Agile Planning
 --------------
 
-Write a paragraph about any plans that were changed. Did you
-'push' any features to iteration 2? Did you change the description
-of any Features or User Stories? Have links to any changed or pushed Features
-or User Stories.
+Changes were made to the user stories that had to do with sending requests to join projects,
+sending invites to other users, and responding to these requests. Major changes were also seen with our database.
+
+
+Most of the time spent on the user stories dealing with requests and invites went into the  presentation layer. When it came time to have the code actually functional behind the scenes,
+I had a hard time wrapping my head around the logic of how it would work without having
+accounts and projects to work with.
+Soon after reading week, we realized that not every feature in iteration 1 needed to have the presentation layer fully working with the logic layer.
+A lot of time was wasted trying to think about the presentation and logic layers
+together when I could have been testing the logic layer independently. This really highlighted how important low coupling in your code is.
+
+
+Although none of the back end work for the user stories mentioned here are fully functional,
+the presentation layer for the user story "[Send Project Invites](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/issues/20)" is basically finished, so
+in future, I think it might make sense to separate user stories for the presentation layer
+and the logic layers somehow.
+
+Finally, you can also see that a lot of time was spent on building the database, only for us to switch to implementing fake databases using ArrayLists later on.
+
+### Links
+
+[Iteration 2 page](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/issues?milestone_title=Iteration+2)
+
+[Respond to Project Invite](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/issues/28)
+
+[Respond To Join Request](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/issues/27)
+
+[Send Project Invites](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/issues/20)
+
+[Respond to Project Request](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/issues/13)
