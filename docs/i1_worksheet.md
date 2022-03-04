@@ -45,6 +45,7 @@ SOLID
 -----
 
 On *March 02 3:30 PM*, Group 7 has not made any significant updates on their program, and only had `MainActivity.java`.
+
 Hence, our team was not able to find any SOLID validations, and did not create any issues.
 
 
