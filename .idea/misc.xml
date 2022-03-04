@@ -1,4 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/drawable/list_item_background.xml" value="0.251" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/drawable/rounded_corner_button.xml" value="0.251" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/drawable/rounded_corner_gray.xml" value="0.251" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_project.xml" value="0.2453125" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_project_detail.xml" value="0.2453125" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_sent_invite.xml" value="0.28125" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_task.xml" value="0.28125" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/card_item.xml" value="0.2453125" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/task_item.xml" value="0.2453125" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable-anydpi/ic_add.xml" value="0.265" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable-anydpi/ic_back.xml" value="0.265" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable-anydpi/ic_more_horiz.xml" value="0.265" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable-anydpi/ic_more_vert.xml" value="0.265" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable/rounded_corner.xml" value="0.1665" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable/rounded_corner_blue.xml" value="0.265" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable/rounded_corner_gray.xml" value="0.265" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/font/inter_font.xml" value="0.26875" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/activity_add_project.xml" value="0.25" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/activity_dashboard_page.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/activity_invite_sent.xml" value="0.2125" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/activity_main.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/activity_project_page.xml" value="0.33" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/activity_send_to_user.xml" value="0.2125" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/card_item.xml" value="0.33" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/mipmap-anydpi-v26/ic_more_vert_round.xml" value="0.1815" />
+        <entry key="app/src/main/res/layout/activity_create.xml" value="0.24010416666666667" />
+        <entry key="app/src/main/res/layout/activity_dashboard_page.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_invite_sent.xml" value="0.18802083333333333" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_notifications.xml" value="0.12082066869300911" />
+        <entry key="app/src/main/res/layout/activity_project.xml" value="0.21195652173913043" />
+        <entry key="app/src/main/res/layout/activity_project_page.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_recipient_info.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_respond_notif.xml" value="0.11398176291793313" />
+        <entry key="app/src/main/res/layout/activity_sent_invite.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_user_page.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/card_item.xml" value="0.10833333333333334" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

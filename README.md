@@ -20,3 +20,7 @@ The project will be considered successful on the following criteria: First, user
 
 ## Branching Strategy
 Our group will follow a simplified version of the git-flow strategy. We will have the main branch, release branches for each iteration, and feature branches where each member will develop their user stories individually. Before merging into the main branch, each member will merge their feature branches to the corresponding release branch for testing and conflict resolution. Finally, when the release branch is functional with all release plans satisfied, we merge it into the main branch. Direct commits to the main branch will only be hotfixes. This branching strategy will allow members to easily merge into one branch with less conflicts and keep the main branch with fully functional at all times.
+
+# Links to Documents
+* [Iteration 1 Worksheet](./docs/i1_worksheet.md)
+* [Project Architecture](./docs/ARCHITECTURE.md)
