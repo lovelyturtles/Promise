@@ -18,6 +18,9 @@ The system will also serve as a communication platform. Users can share their sc
 ### Success criteria
 The project will be considered successful on the following criteria: First, users of existing project management apps prefer our system over the system they have been using. Second, new users find it pleasing and intuitive and choose to use our system after a trial. Third, it reduces the time and space needed for actual project management.
 
+## Branching Strategy
+Our group will follow a simplified version of the git-flow strategy. We will have the main branch, release branches for each iteration, and feature branches where each member will develop their user stories individually. Before merging into the main branch, each member will merge their feature branches to the corresponding release branch for testing and conflict resolution. Finally, when the release branch is functional with all release plans satisfied, we merge it into the main branch. Direct commits to the main branch will only be hotfixes. This branching strategy will allow members to easily merge into one branch with less conflicts and keep the main branch with fully functional at all times.
+
 # Links to Documents
 * [Iteration 1 Worksheet](./docs/i1_worksheet.md)
 * [Project Architecture](./docs/ARCHITECTURE.md)

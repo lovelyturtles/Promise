@@ -1,4 +1,4 @@
-package comp3350.group6.promise.persistence.hsqldb;
+package comp3350.group6.promise.persistence.stub;
 
 import java.util.List;
 
@@ -24,17 +24,27 @@ public class ProjectImpNoDB implements ProjectDao {
         return project;
     }
 
+
+    // Try and replace a project with the given project object if it exists in the project list.
     @Override
     public Project updateProject(Project project){
         int index = getIndexByID(project.getProjectID());
-        FakeDB.projects.set(index, project);
+
+        if (index != -1){ // project exists in our list
+            FakeDB.projects.set(index, project);
+        }
+
         return project;
     }
 
+    // Try and delete a project if it exists in the project list.
     @Override
     public void deleteProject(Project project){
         int index = getIndexByID(project.getProjectID());
-        FakeDB.projects.remove(index);
+
+        if (index != -1){
+            FakeDB.projects.remove(index);
+        }
     }
 
     private int getIndexByID(int id){

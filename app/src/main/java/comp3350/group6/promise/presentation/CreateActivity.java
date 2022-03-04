@@ -60,9 +60,16 @@ public class CreateActivity extends AppCompatActivity {
                     try {
                         //create the account
                         CurrentSession.accounts.createAccount( userEmail, userPassword, userName, userIntro );
-                        //set this as the current account and go to their home page
-                        assert( CurrentSession.accounts.setCurrentAccount( userEmail, userPassword ) );
-                        goToUserHome();
+                        //check that the email is in our database
+                        if( CurrentSession.accounts.accountExists( userEmail ) ) {
+                            //make sure the password was set correctly
+                            if ( CurrentSession.accounts.passwordsMatch( userEmail, userPassword ) ) {
+                                //set this as the current user and go to their home page
+                                assert (CurrentSession.accounts.setCurrentAccount(userEmail, userPassword));
+                                goToUserHome();
+                            }
+
+                        }
                     }
                     catch (Exception e) {
                         e.printStackTrace();

@@ -26,12 +26,10 @@ public class ProjectDetailActivity extends AppCompatActivity implements TaskAdap
     private static final ProjectService projectService = new ProjectService();
     private static final TaskService taskService = new TaskService();
 
-    private Project currentProject;
-    private List<Task> projectTasks;
-    private TextView projectTitleView;
-    private TextView projectDescView;
-    private ImageView projectImgView;
-    private RecyclerView taskRecyclerView;
+    private Project currentProject; // project that we are viewing
+    private TextView projectTitle;
+    private TextView projectDesc;
+    private ImageView projectImg;
     private ImageButton moreButton;
     private ImageButton backButton;
 
@@ -41,6 +39,7 @@ public class ProjectDetailActivity extends AppCompatActivity implements TaskAdap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_detail);
 
+        // Create the project detail page based on the intent passed to it.
         if (getIntent() != null && getIntent().getExtras() != null) {
             int id = getIntent().getIntExtra("projectID", -1);
             if (id != -1){
@@ -73,6 +72,7 @@ public class ProjectDetailActivity extends AppCompatActivity implements TaskAdap
         });
     }
 
+    // go to the previous page
     private void back() {
         Intent intent = new Intent( this, DashboardActivity.class );
         startActivity( intent );

@@ -49,6 +49,7 @@ public class AddProjectActivity extends AppCompatActivity{
         });
     }
 
+    // go back to dashboard
     private void back(){
         Intent intent = new Intent( this, DashboardActivity.class );
         startActivity( intent );
@@ -58,6 +59,7 @@ public class AddProjectActivity extends AppCompatActivity{
         String projectName = name.getText().toString();
         String projectDesc = description.getText().toString();
 
+        // Users cannot add projects with no name
         try {
             projectService.insertProject(new Project(projectName, projectDesc));
             Intent intent = new Intent(this, DashboardActivity.class );

@@ -52,16 +52,6 @@ public class LoginActivity extends AppCompatActivity {
                 else
                     openEmailDialog();
 
-
-                //Check if the password matches the account
-
-                /*
-                 * Check if the email is in our "database",
-                 *   if it isn't, open the EmailErrorActivity dialog
-                 *   if it is, process their password
-                 */
-                //openEmailDialog();
-                //goToUserHome();
             }
         });
     }
