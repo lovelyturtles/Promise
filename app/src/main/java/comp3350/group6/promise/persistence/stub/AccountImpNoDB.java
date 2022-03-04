@@ -1,4 +1,4 @@
-package comp3350.group6.promise.persistence.hsqldb;
+package comp3350.group6.promise.persistence.stub;
 
 import comp3350.group6.promise.objects.Account;
 import comp3350.group6.promise.objects.FakeDB;
@@ -44,12 +44,7 @@ public class AccountImpNoDB implements AccountDao {
 
     @Override
     public boolean accountExists( String email ){
-        boolean exists = true;
-
-        if( getIndexByEmail( email ) == -1 )
-            exists = false;
-
-        return exists;
+        return getIndexByEmail( email ) != -1;
     }
 
     @Override
@@ -68,14 +63,18 @@ public class AccountImpNoDB implements AccountDao {
     @Override
     public boolean passwordsMatch( String email, String password ){
 
+        boolean match;
         int index = getIndexByEmail( email );
-        return FakeDB.accounts.get( index ).getPassword().equals( password );
-
+        if( index == -1 )
+            match = false;
+        else
+            match = FakeDB.accounts.get( index ).getPassword().equals( password );
+        return match;
     }
 
     private int getIndexByEmail(String email ){
 
-        int index = -1; //default if the account doesn't exists
+        int index = -1; //default if the account doesn't exist
         boolean exists = false;
 
         for( int i = 0; i < FakeDB.accounts.size() && !exists; i++ ) {

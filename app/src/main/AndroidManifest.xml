@@ -13,9 +13,6 @@
             android:name=".presentation.UserActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.LandingActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.LoginActivity"
             android:exported="false" />
         <activity
@@ -23,12 +20,6 @@
             android:exported="false" />
         <activity
             android:name=".presentation.AddProjectActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.SendToUser"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.InviteSent"
             android:exported="false" />
         <activity
             android:name=".presentation.DashboardActivity"
