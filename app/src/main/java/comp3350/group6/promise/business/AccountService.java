@@ -3,7 +3,7 @@ package comp3350.group6.promise.business;
 
 import comp3350.group6.promise.objects.CurrentSession;
 import comp3350.group6.promise.persistence.AccountDao;
-import comp3350.group6.promise.persistence.hsqldb.AccountImpNoDB;
+import comp3350.group6.promise.persistence.stub.AccountImpNoDB;
 
 public class AccountService {
 
@@ -41,9 +41,6 @@ public class AccountService {
     public boolean setCurrentAccount( String email, String password ){
 
         boolean success = false;
-
-        assert( accountExists( email ) );
-        assert( passwordsMatch( email, password ) );
 
         if( CurrentSession.emailCheck && CurrentSession.passwordCheck ){
 
