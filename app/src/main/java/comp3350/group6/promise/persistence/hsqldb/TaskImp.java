@@ -48,6 +48,12 @@ public class TaskImp implements TaskDao {
         }
     }
 
+    // TODO
+    @Override
+    public List<Task> getTasksByProjectId(int projectId) {
+        return null;
+    }
+
     @Override
     public Task getTask(int taskId) {
         Task result = null;

@@ -8,21 +8,33 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.business.ProjectService;
+import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.objects.Project;
+import comp3350.group6.promise.objects.Task;
+import comp3350.group6.promise.util.TaskAdapter;
 
-public class ProjectDetailActivity extends AppCompatActivity {
+public class ProjectDetailActivity extends AppCompatActivity implements TaskAdapter.ViewHolder.OnTaskClickListener {
 
     private static final ProjectService projectService = new ProjectService();
+    private static final TaskService taskService = new TaskService();
 
     private Project currentProject;
-    private TextView projectTitle;
-    private TextView projectDesc;
-    private ImageView projectImg;
+    private List<Task> projectTasks;
+    private TextView projectTitleView;
+    private TextView projectDescView;
+    private ImageView projectImgView;
+    private RecyclerView taskRecyclerView;
     private ImageButton moreButton;
     private ImageButton backButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +48,22 @@ public class ProjectDetailActivity extends AppCompatActivity {
             }
         }
 
-        projectTitle = findViewById(R.id.project_page_title);
-        projectDesc = findViewById(R.id.project_page_desc);
-        projectImg = findViewById(R.id.imageView);
+        projectTitleView = findViewById(R.id.project_page_title);
+        projectDescView = findViewById(R.id.project_page_desc);
+        projectImgView = findViewById(R.id.project_page_image);
         moreButton = findViewById(R.id.project_page_more);
         backButton = findViewById(R.id.back_button);
+        taskRecyclerView = (RecyclerView) findViewById(R.id.subtasks_recycler);
 
-        projectTitle.setText(currentProject.getProjectName());
-        projectDesc.setText(currentProject.getStatement());
+        projectTitleView.setText(currentProject.getProjectName());
+        projectDescView.setText(currentProject.getStatement());
+
+        projectTasks = taskService.getTasksByProjectId(currentProject.getProjectID());
+
+        TaskAdapter taskListAdapter = new TaskAdapter(this, projectTasks, this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        taskRecyclerView.setLayoutManager(linearLayoutManager);
+        taskRecyclerView.setAdapter(taskListAdapter);
 
         backButton.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -56,5 +76,13 @@ public class ProjectDetailActivity extends AppCompatActivity {
     private void back() {
         Intent intent = new Intent( this, DashboardActivity.class );
         startActivity( intent );
+    }
+
+    @Override
+    public void onTaskClick(int position) {
+        Task clickedTask = projectTasks.get(position);
+        Intent intent = new Intent(this, TaskActivity.class);
+        intent.putExtra("taskID", clickedTask.getTaskId());
+        startActivity(intent);
     }
 }

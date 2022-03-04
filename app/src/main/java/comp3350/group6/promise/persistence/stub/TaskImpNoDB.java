@@ -22,13 +22,9 @@ public class TaskImpNoDB implements TaskDao {
     }
 
     private void initDB() {
-        cTime = new Timestamp(System.currentTimeMillis());
-        eTime = new Timestamp(System.currentTimeMillis());
-        dTime = new Timestamp(System.currentTimeMillis());
-
-        task1 = new Task(1, "myTask", "default", 0, 0, 0, cTime, eTime, dTime);
-        task2 = new Task(2, "myTask", "default", 0, 0, 0, cTime, eTime, dTime);
-        task3 = new Task(3, "myTask", "default", 0, 0, 0, cTime, eTime, dTime);
+        task1 = generateTask("Task A");
+        task2 = generateTask("Task B");
+        task3 = generateTask("Task C");
 
         taskList = new ArrayList<>();
         taskList.add(task1);
@@ -46,6 +42,17 @@ public class TaskImpNoDB implements TaskDao {
         if (getIndex(taskId) >= 0)
             return taskList.get(getIndex(taskId));
         return null;
+    }
+
+    @Override
+    public List<Task> getTasksByProjectId(int projectId) {
+        List<Task> projectTasks = new ArrayList<Task>();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            if (task.getProjectId() == projectId)
+                projectTasks.add(task);
+        }
+        return projectTasks;
     }
 
     @Override
@@ -79,5 +86,17 @@ public class TaskImpNoDB implements TaskDao {
                 return i;
         }
         return -1;
+    }
+
+    public static Task generateTask(String name) {
+        return new Task(
+                name,
+                String.format("This is the description for \"%s\". It has enough words in it for two lines of text.", name),
+                1,
+                1,
+                0,
+                new Timestamp(System.currentTimeMillis()),
+                new Timestamp(System.currentTimeMillis())
+        );
     }
 }
