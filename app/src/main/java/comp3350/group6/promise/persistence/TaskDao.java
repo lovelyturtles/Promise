@@ -11,6 +11,8 @@ public interface TaskDao {
 
     Task getTask(int taskId) ;
 
+    List<Task> getTasksByProjectId(int projectId) ;
+
     Task insertTask(Task t) ; // or pass ID? need project ID?
 
     Task updateTask(Task t) ;

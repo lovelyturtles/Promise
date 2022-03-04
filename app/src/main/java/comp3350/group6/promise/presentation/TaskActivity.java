@@ -1,53 +1,87 @@
 package comp3350.group6.promise.presentation;
 
+import static comp3350.group6.promise.persistence.stub.TaskImpNoDB.generateTask;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.business.ProjectService;
+import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.util.TaskAdapter;
 
 public class TaskActivity extends AppCompatActivity {
+
+    private static final TaskService taskService = new TaskService();
+    private TextView titleView;
+    private TextView descriptionView;
+    private TextView priorityView;
+    private TextView deadlineView;
+    private RecyclerView subtaskRecyclerView;
+    private Task currentTask;
+    private ImageButton moreButton;
+    private ImageButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
 
-        // Temporary test data
+        currentTask = generateTask("Task A");
 
-        Task task = this.generateTask("Test Task");
-        ArrayList<Task> subtasks = generateSubtasks(4);
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            int id = getIntent().getIntExtra("taskID", -1);
+            if (id != -1){
+                currentTask = taskService.getTask(id);
+            }
+        }
 
-        // Obtain views
+        if(currentTask != null) {
 
-        TextView titleView = (TextView) findViewById(R.id.task_page_title);
-        TextView descriptionView = (TextView) findViewById(R.id.task_page_description);
-        TextView priorityView = (TextView) findViewById(R.id.task_page_priority);
-        TextView deadlineView = (TextView) findViewById(R.id.task_page_deadline);
-        RecyclerView subtaskRecyclerView = (RecyclerView) findViewById(R.id.subtasks_recycler);
+            // Obtain views
 
-        // Set content of views
+            titleView = (TextView) findViewById(R.id.task_page_title);
+            descriptionView = (TextView) findViewById(R.id.task_page_description);
+            priorityView = (TextView) findViewById(R.id.task_page_priority);
+            deadlineView = (TextView) findViewById(R.id.task_page_deadline);
+            subtaskRecyclerView = (RecyclerView) findViewById(R.id.subtasks_recycler);
 
-        titleView.setText(task.getTitle());
-        descriptionView.setText(task.getDescription());
-        priorityView.setText("Priority: " + task.getPriority());
-        deadlineView.setText("Deadline: " + task.getDeadline().toLocaleString());
+            moreButton = findViewById(R.id.task_page_more);
+            backButton = findViewById(R.id.back_button);
 
-        // Setup subtask list
+            // Set content of views
 
-        TaskAdapter subtaskListAdapter = new TaskAdapter(this, subtasks);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        subtaskRecyclerView.setLayoutManager(linearLayoutManager);
-        subtaskRecyclerView.setAdapter(subtaskListAdapter);
+            titleView.setText(currentTask.getTitle());
+            descriptionView.setText(currentTask.getDescription());
+            priorityView.setText("Priority: " + currentTask.getPriority());
+            deadlineView.setText("Deadline: " + currentTask.getDeadline().toLocaleString());
+
+//            Temporary test subtasks
+//            ArrayList<Task> subtasks = generateSubtasks(4);
+//            TaskAdapter subtaskListAdapter = new TaskAdapter(this, subtasks);
+//            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+//            subtaskRecyclerView.setLayoutManager(linearLayoutManager);
+//            subtaskRecyclerView.setAdapter(subtaskListAdapter);
+
+            backButton.setOnClickListener( new View.OnClickListener() {
+                @Override
+                public void onClick( View view ) {
+                    finish();
+                }
+            });
+
+        }
     }
 
     // Temporary task generation functions
@@ -57,22 +91,12 @@ public class TaskActivity extends AppCompatActivity {
 
         for(int i = 0; i < count; i++) {
             char letter = (char) ('A' + i);
-            subtasks.add(this.generateTask("Subtask " + letter));
+            subtasks.add(generateTask("Subtask " + letter));
         }
 
         return subtasks;
     }
 
-    private Task generateTask(String name) {
-        return new Task(
-                name,
-                String.format("This is the description for \"%s\". It has enough characters for at least two lines of text.", name),
-                1,
-                1,
-                0,
-                new Timestamp(System.currentTimeMillis()),
-                new Timestamp(System.currentTimeMillis())
-        );
-    }
+
 
 }

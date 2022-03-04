@@ -7,6 +7,7 @@ import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.persistence.TaskDao;
 import comp3350.group6.promise.persistence.hsqldb.TaskImp;
+import comp3350.group6.promise.persistence.stub.TaskImpNoDB;
 
 public class TaskService {
     private List<Task> allTask;
@@ -15,7 +16,7 @@ public class TaskService {
 
     public TaskService() {
         allTask = null;
-        taskDao = null;
+        taskDao = new TaskImpNoDB();
     }
 
     public TaskService(boolean forProduction) {
@@ -31,6 +32,8 @@ public class TaskService {
     public Task getTask(int taskId) {
         return taskDao.getTask(taskId);
     }
+
+    public List<Task> getTasksByProjectId(int projectId) { return taskDao.getTasksByProjectId(projectId); }
 
     public Task insertTask(Task newTask) {
         return taskDao.insertTask(newTask);

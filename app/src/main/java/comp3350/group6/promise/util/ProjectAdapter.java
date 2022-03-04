@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -56,6 +57,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewhold
     }
 
     public static class Viewholder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        private CardView projectCard;
         private TextView projectNameTV;
         private TextView projectDescTV;
         private TextView membersTV;
@@ -65,13 +67,15 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewhold
 
         public Viewholder(@NonNull View itemView, OnCardListener listener){
             super(itemView);
+
+            projectCard =  itemView.findViewById(R.id.card_view);
             projectNameTV = itemView.findViewById(R.id.project_name);
             projectDescTV = itemView.findViewById(R.id.projectDescription);
             membersTV = itemView.findViewById(R.id.memberNumber);
             boxTV = itemView.findViewById(R.id.boxNumber);
             this.listener = listener;
 
-            itemView.setOnClickListener(this);
+            projectCard.setOnClickListener(this);
         }
 
         @Override
