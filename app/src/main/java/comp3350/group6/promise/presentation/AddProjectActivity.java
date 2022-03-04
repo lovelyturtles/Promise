@@ -11,8 +11,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.business.EmptyInputException;
+import comp3350.group6.promise.business.ProjectService;
+import comp3350.group6.promise.objects.Project;
 
 public class AddProjectActivity extends AppCompatActivity{
+
+    private static final ProjectService projectService = new ProjectService();
 
     private EditText name;
     private EditText description;
@@ -53,13 +58,12 @@ public class AddProjectActivity extends AppCompatActivity{
         String projectName = name.getText().toString();
         String projectDesc = description.getText().toString();
 
-        if(projectName.equals("")){
-            Toast.makeText(this, "You need a name for your project.", Toast.LENGTH_LONG).show();
-        } else {
-            Intent intent = new Intent(v.getContext(), DashboardActivity.class );
-            intent.putExtra("name", projectName);
-            intent.putExtra("desc", projectDesc);
+        try {
+            projectService.insertProject(new Project(projectName, projectDesc));
+            Intent intent = new Intent(this, DashboardActivity.class );
             startActivity( intent );
+        } catch (EmptyInputException e) {
+            Toast.makeText(this, "You need a name for your project.", Toast.LENGTH_LONG).show();
         }
     }
 }

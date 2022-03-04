@@ -2,6 +2,8 @@ package comp3350.group6.promise.objects;
 
 import java.util.ArrayList;
 
+import comp3350.group6.promise.business.EmptyInputException;
+
 public class FakeDB {
     public static int    generatedUserIDCount;
     public static ArrayList<User>       users;
@@ -37,11 +39,14 @@ public class FakeDB {
 
     private static void fillProjects(){
 
-        CurrentSession.projects.insertProject( new Project("Cereals and Things", "Let's talk about cereal"));
-        CurrentSession.projects.insertProject( new Project("Astrophysics Calendar", "This is probably for school"));
-        CurrentSession.projects.insertProject( new Project("New Theater Plan", "We're opening a movie theater"));
-        CurrentSession.projects.insertProject( new Project("How to open a door", "This is very difficult for me"));
-
+        try {
+            CurrentSession.projects.insertProject(new Project("Cereals and Things", "Let's talk about cereal"));
+            CurrentSession.projects.insertProject(new Project("Astrophysics Calendar", "This is probably for school"));
+            CurrentSession.projects.insertProject(new Project("New Theater Plan", "We're opening a movie theater"));
+            CurrentSession.projects.insertProject(new Project("How to open a door", "This is very difficult for me"));
+        } catch (EmptyInputException e){
+            System.out.println(e);
+        }
     }
 //
 //    private static void fillAccessDB(){

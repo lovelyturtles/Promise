@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import comp3350.group6.promise.business.EmptyInputException;
 import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.objects.FakeDB;
 import comp3350.group6.promise.objects.Project;
@@ -31,7 +32,7 @@ public class ProjectServiceTest {
 
 
     @Test
-    public void testInsertProject() {
+    public void testInsertProject() throws EmptyInputException {
 
         System.out.println("Testing insertProject method from ProjectService Class");
 

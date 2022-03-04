@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.business.EmptyInputException;
 import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.util.ProjectAdapter;
@@ -55,14 +56,6 @@ public class DashboardActivity extends AppCompatActivity implements ProjectAdapt
     @Override
     protected void onResume() {
         super.onResume();
-
-        if (getIntent() != null && getIntent().getExtras() != null) { // returned from create project activity
-            projectService.insertProject(new Project(getIntent().getStringExtra("name"), getIntent().getStringExtra("desc")));
-
-            //remove intents after use
-            getIntent().removeExtra("name");
-            getIntent().removeExtra("desc");
-        }
 
         projectAdapter.notifyDataSetChanged();
     }

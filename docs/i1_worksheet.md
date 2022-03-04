@@ -4,9 +4,12 @@ Iteration 1 Worksheet
 Adding a feature: Manage Project
 -----------------
 
-Since all of the tasks in our project will be related to a *Project* a user belongs to, the 'Manage Project' feature was assigned a high priority from the begining. 
-Users can create a project and send invitiations, or send join requests to other projects to join them.
+As all of the tasks in our application will be tied to a *Project* that a user is a part of, the 'Manage Project' functionality has been given a high priority from the beginning. Users can build a project and invite others to join it, or they can send join requests to other projects.
+
 Our team's initial plan was to implement all user stories related to this feature, but we have decided to push user stories for Project invites/join requests to the next iteration, and only implement the developer tasks for 'Create Project'. Our team made this choice as we wanted to ensure that our project and user classes had a solid basis before introducing features that would integrate both.
+
+The 'Create Project' user story was broken into many tasks, as creating a project involves viewing all created projects and details of one particular project.
+
 Links to user stories, merge requests, merge commits and tests can be found bellow.
 
 [Manage Project Feature](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/issues/5)
