@@ -38,7 +38,6 @@ public class NotifImp {
         finally{
 
             try{ preparedStatement.close(); } catch( Exception e ){/**/}
-            try{ cnn.close(); }               catch( Exception e ){/**/}
 
         }
     }
@@ -60,7 +59,6 @@ public class NotifImp {
         finally{
 
             try{ preparedStatement.close(); } catch( Exception e ){/**/}
-            try{ cnn.close(); }               catch( Exception e ){/**/}
 
         }
 
@@ -109,7 +107,6 @@ public class NotifImp {
 
             try{ resultSet.close(); }         catch( Exception e ){/**/}
             try{ preparedStatement.close(); } catch( Exception e ){/**/}
-            try{ cnn.close(); }               catch( Exception e ){/**/}
 
         }
 

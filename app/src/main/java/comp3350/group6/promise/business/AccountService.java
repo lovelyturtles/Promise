@@ -3,12 +3,13 @@ package comp3350.group6.promise.business;
 
 import comp3350.group6.promise.objects.CurrentSession;
 import comp3350.group6.promise.persistence.AccountDao;
-import comp3350.group6.promise.persistence.stub.AccountImpNoDB;
+import comp3350.group6.promise.persistence.hsqldb.AccountImp;
+//import comp3350.group6.promise.persistence.stub.AccountImpNoDB;
 
 public class AccountService {
 
     private static final UserService userService = new UserService();
-    private static final AccountDao accountDao = new AccountImpNoDB();
+    private static final AccountDao accountDao = new AccountImp();
 
     public int createAccount( String email, String password, String name, String introduction ) throws Exception {
 

@@ -32,8 +32,6 @@ public class AccountImp implements AccountDao {
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             throw e;
-        } finally {
-            cnn.close();
         }
         return userId;
     }
@@ -53,8 +51,6 @@ public class AccountImp implements AccountDao {
             res = preparedStatement.executeUpdate();
         } catch (Exception e) {
             throw e;
-        } finally {
-            cnn.close();
         }
         return res;
     }

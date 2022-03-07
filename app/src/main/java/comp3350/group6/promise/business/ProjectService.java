@@ -5,7 +5,8 @@ import java.util.List;
 
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.persistence.ProjectDao;
-import comp3350.group6.promise.persistence.stub.ProjectImpNoDB;
+import comp3350.group6.promise.persistence.hsqldb.ProjectImp;
+//import comp3350.group6.promise.persistence.stub.ProjectImpNoDB;
 
 public class ProjectService {
 
@@ -13,7 +14,7 @@ public class ProjectService {
     private List<Project> projects;
 
     public ProjectService(){
-        projectDao = new ProjectImpNoDB();
+        projectDao = new ProjectImp();
         projects = null;
     }
 

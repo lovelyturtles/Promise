@@ -3,7 +3,8 @@ package comp3350.group6.promise.business;
 
 import comp3350.group6.promise.objects.User;
 import comp3350.group6.promise.persistence.UserDao;
-import comp3350.group6.promise.persistence.hsqldb.UserImpNoDB;
+import comp3350.group6.promise.persistence.hsqldb.UserImp;
+//import comp3350.group6.promise.persistence.hsqldb.UserImpNoDB;
 
 public class UserService {
 
@@ -11,7 +12,7 @@ public class UserService {
     private static final UserDao userDao = new UserImp();
      */
 
-    private static final UserDao userDao = new UserImpNoDB();
+    private static final UserDao userDao = new UserImp();
 
     public int addUser( String name, String introduction ) throws Exception{
         assert ( name!= null );

@@ -2,7 +2,7 @@ package comp3350.group6.promise.application;
 
 import comp3350.group6.promise.persistence.TaskDao;
 import comp3350.group6.promise.persistence.hsqldb.TaskImp;
-import comp3350.group6.promise.persistence.stub.TaskImpNoDB;
+//import comp3350.group6.promise.persistence.stub.TaskImpNoDB;
 
 public class Service {
 
@@ -14,7 +14,7 @@ public class Service {
             if (forProduction)
                 taskImp = new TaskImp();
             else
-                taskImp = new TaskImpNoDB();
+                taskImp = new TaskImp();
         }
         return taskImp;
     }
