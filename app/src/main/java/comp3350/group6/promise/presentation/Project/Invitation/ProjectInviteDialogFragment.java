@@ -1,4 +1,4 @@
-package comp3350.group6.promise.presentation;
+package comp3350.group6.promise.presentation.Project.Invitation;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-public class RespondNotifActivity extends AppCompatDialogFragment {
+public class ProjectInviteDialogFragment extends AppCompatDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState ) {

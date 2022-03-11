@@ -1,4 +1,4 @@
-package comp3350.group6.promise.presentation;
+package comp3350.group6.promise.presentation.Project;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.group6.promise.R;
@@ -19,9 +18,11 @@ import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.objects.Task;
+import comp3350.group6.promise.presentation.User.DashboardActivity;
+import comp3350.group6.promise.presentation.Task.TaskActivity;
 import comp3350.group6.promise.util.TaskAdapter;
 
-public class ProjectDetailActivity extends AppCompatActivity implements TaskAdapter.ViewHolder.OnTaskClickListener {
+public class ProjectActivity extends AppCompatActivity implements TaskAdapter.ViewHolder.OnTaskClickListener {
 
     private static final ProjectService projectService = new ProjectService();
     private static final TaskService taskService = new TaskService();
@@ -35,11 +36,10 @@ public class ProjectDetailActivity extends AppCompatActivity implements TaskAdap
     private RecyclerView taskRecyclerView;
     private  List<Task> projectTasks;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project_detail);
+        setContentView(R.layout.activity_project);
 
         // Create the project detail page based on the intent passed to it.
         if (getIntent() != null && getIntent().getExtras() != null) {

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="40dp"
-    tools:context=".presentation.CreateActivity">
+    tools:context=".presentation.User.RegisterActivity">
 
     <TextView
         android:id="@+id/createMessage"

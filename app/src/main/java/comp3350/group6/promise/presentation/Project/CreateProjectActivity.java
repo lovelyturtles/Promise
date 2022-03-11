@@ -1,4 +1,4 @@
-package comp3350.group6.promise.presentation;
+package comp3350.group6.promise.presentation.Project;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +14,9 @@ import comp3350.group6.promise.R;
 import comp3350.group6.promise.business.EmptyInputException;
 import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.objects.Project;
+import comp3350.group6.promise.presentation.User.DashboardActivity;
 
-public class AddProjectActivity extends AppCompatActivity{
+public class CreateProjectActivity extends AppCompatActivity{
 
     private static final ProjectService projectService = new ProjectService();
 
@@ -27,7 +28,7 @@ public class AddProjectActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView( R.layout.activity_add_project );
+        setContentView( R.layout.activity_create_project);
 
         name = findViewById(R.id.project_name);
         description = findViewById(R.id.project_desc);

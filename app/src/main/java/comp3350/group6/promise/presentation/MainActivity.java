@@ -6,7 +6,6 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,22 +17,15 @@ import java.io.InputStreamReader;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.Main;
-import comp3350.group6.promise.objects.FakeDB;
-import comp3350.group6.promise.util.DBConnectorUtil;
+import comp3350.group6.promise.presentation.User.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
-    //What does this do? Do we need it?
-    public static void run() {
-        System.out.println("hello");
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        //populate our fake database
         try {
             copyDatabaseToDevice();
         } catch (Exception e) {
@@ -51,16 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void populateFakeDatabase() throws Exception {
-
-        FakeDB fakes = new FakeDB();
-        fakes.initialize();
-
-    }
-
     private void goToCreate() {
 
-        Intent intent = new Intent(this, CreateActivity.class);
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
 
     }

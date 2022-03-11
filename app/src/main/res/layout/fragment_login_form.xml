@@ -5,7 +5,7 @@
     style="@style/Theme.Promise.LinearFormLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.fragments.LoginFormFragment">
+    tools:context=".presentation.User.LoginFormFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

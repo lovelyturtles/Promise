@@ -1,4 +1,4 @@
-package comp3350.group6.promise.presentation;
+package comp3350.group6.promise.presentation.Project.Invitation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.presentation.Project.Invitation.RecipientInfoActivity;
 
 public class SentInviteActivity extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class SentInviteActivity extends AppCompatActivity {
         goBack.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick( View view ) {
-                backToProjects();
+                finish();
             }
         });
 
@@ -40,13 +41,6 @@ public class SentInviteActivity extends AppCompatActivity {
                 goToRecipientDetails();
             }
         });
-
-    }
-
-    private void backToProjects(){
-
-        Intent intent = new Intent( this, ProjectActivity.class );
-        startActivity( intent );
 
     }
 
