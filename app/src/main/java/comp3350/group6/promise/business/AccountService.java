@@ -43,14 +43,14 @@ public class AccountService {
 
         boolean success = false;
 
-        if( CurrentSession.emailCheck && CurrentSession.passwordCheck ){
+//        if( CurrentSession.emailCheck && CurrentSession.passwordCheck ){
 
             CurrentSession.currentUser = accountDao.getAccountByEmail( email );
 
             if( CurrentSession.currentUser != null )
                 success = true;
 
-        }
+//        }
 
         return success;
 

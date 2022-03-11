@@ -31,15 +31,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //populate our fake database
         try {
-            copyDatabaseToDevice();
+            populateFakeDatabase();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         Button createButton = findViewById(R.id.goToCreate);
-        Button loginButton = findViewById(R.id.goToLogin);
 
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,20 +48,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToLogin();
-            }
-        });
-
-//        Button projectButton = findViewById( R.id.goToProjects);
-//        projectButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                goToProjects();
-//            }
-//        });
     }
 
     private void populateFakeDatabase() throws Exception {
@@ -77,18 +63,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
-
-    private void goToLogin() {
-
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-
-    }
-
-//    private void goToProjects(){
-//        Intent intent = new Intent( this, ProjectList.class );
-//        startActivity( intent );
-//    }
 
     private void copyDatabaseToDevice() {
         final String DB_PATH = "db";

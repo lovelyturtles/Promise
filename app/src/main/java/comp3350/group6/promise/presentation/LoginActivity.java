@@ -24,36 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_login );
 
-        signIn = findViewById( R.id.signInButton );
-        signIn.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick( View view ) {
 
-                //Get the email that was submitted
-                textEmail = findViewById( R.id.loginEmailInput );
-                userEmail = textEmail.getText().toString();
-
-                //Check if the email is in our "database"
-                if( CurrentSession.accounts.accountExists( userEmail ) ) {
-                    //If the email is in our database, get the password that was submitted
-                    textPass = findViewById( R.id.loginPasswordInput );
-                    userPassword = textPass.getText().toString();
-                    //check if this is the right password
-                    if ( CurrentSession.accounts.passwordsMatch( userEmail, userPassword ) ) {
-                        //if the passwords match, set this as the current user and go to their home page
-                        assert( CurrentSession.accounts.setCurrentAccount( userEmail, userPassword ) );
-                        goToUserHome();
-                    }
-                    else
-                        openPassDialog(); //if the passwords don't match, open the password dialog
-
-                }
-
-                else
-                    openEmailDialog();
-
-            }
-        });
     }
 
     private void goToUserHome(){
