@@ -18,6 +18,7 @@
 
     <style name="Theme.Promise.Button" parent="Widget.Material3.Button">
         <item name="cornerRadius">@dimen/corner_radius</item>
+        <item name="android:padding">16dp</item>
     </style>
 
     <style name="Theme.Promise.EditText" parent="Widget.AppCompat.EditText">

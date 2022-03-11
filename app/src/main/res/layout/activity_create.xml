@@ -86,7 +86,8 @@
     <LinearLayout
         android:id="@+id/bioInputGroup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
@@ -99,9 +100,12 @@
         <EditText
             android:id="@+id/introInput"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="start|top"
             android:hint="@string/introInput"
-            android:inputType="textPersonName" />
+            android:inputType="textMultiLine"
+            android:imeOptions="actionDone"/>
+
     </LinearLayout>
 
     <Button

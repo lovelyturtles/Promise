@@ -2,7 +2,9 @@ package comp3350.group6.promise.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -29,7 +31,13 @@ public class CreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_create );
 
+        // Keep "next" keyboard action while allowing multiline text
+        textIntro = findViewById( R.id.introInput );
+        textIntro.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        textIntro.setRawInputType(InputType.TYPE_CLASS_TEXT);
+
         registerButton = findViewById( R.id.registerButton );
+
         registerButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +62,6 @@ public class CreateActivity extends AppCompatActivity {
                     userPassword = textPass.getText().toString();
 
                     //get the introduction they submitted
-                    textIntro = findViewById( R.id.introInput );
                     userIntro = textIntro.getText().toString();
 
                     try {
