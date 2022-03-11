@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,14 +35,14 @@ public class MainActivity extends AppCompatActivity {
 
         //populate our fake database
         try {
-            populateFakeDatabase();
+            copyDatabaseToDevice();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Button createButton = findViewById(R.id.goToCreate);
+        TextView registerMessageView = findViewById(R.id.registerLink);
 
-        createButton.setOnClickListener(new View.OnClickListener() {
+        registerMessageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToCreate();

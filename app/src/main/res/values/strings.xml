@@ -15,8 +15,8 @@
     <!--Create Page-->
     <string name="createMessage">Create Account</string>
     <string name="registerButton">Create My Account</string>
-    <string name="nameLabel">Your Name</string>
-    <string name="firstNameInput">First Name</string>
+    <string name="nameLabel">Name</string>
+    <string name="firstNameInput">Enter your name</string>
     <string name="intro">Introduce yourself!</string>
     <string name="introInput">Say anything</string>
 

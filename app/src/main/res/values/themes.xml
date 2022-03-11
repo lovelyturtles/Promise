@@ -14,6 +14,8 @@
 
     </style>
 
+    <!--    Form Styles-->
+
     <style name="Theme.Promise.Button" parent="Widget.Material3.Button">
         <item name="cornerRadius">@dimen/corner_radius</item>
     </style>
@@ -22,6 +24,16 @@
         <item name="cornerRadius">@dimen/corner_radius</item>
         <item name="android:padding">16dp</item>
         <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="Theme.Promise.InputLabel" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_marginBottom">@dimen/input_label_gap</item>
+    </style>
+
+    <style name="Theme.Promise.LinearFormLayout">
+        <item name="android:divider">@drawable/spacer_md</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:orientation">vertical</item>
     </style>
 
 </resources>
