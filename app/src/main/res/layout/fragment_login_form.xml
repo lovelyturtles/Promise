@@ -2,35 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Theme.Promise.LinearFormLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:divider="@drawable/spacer_md"
-    android:orientation="vertical"
-    android:padding="40dp"
-    android:showDividers="middle"
-    tools:context=".presentation.LoginActivity">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@drawable/spacer_sm"
-        android:orientation="vertical"
-        android:showDividers="middle">
-
-        <TextView
-            android:id="@+id/loginPasswordLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/passwordLabel" />
-
-        <EditText
-            android:id="@+id/loginPasswordInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/passwordHint"
-            android:inputType="textPassword" />
-
-    </LinearLayout>
+    tools:context=".presentation.User.LoginFormFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,6 +26,28 @@
             android:layout_height="wrap_content"
             android:hint="@string/emailHint"
             android:inputType="textEmailAddress" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/spacer_sm"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <TextView
+            android:id="@+id/loginPasswordLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/passwordLabel" />
+
+        <EditText
+            android:id="@+id/loginPasswordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/passwordHint"
+            android:inputType="textPassword" />
 
     </LinearLayout>
 

@@ -1,10 +1,40 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.Promise" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryDark">@color/purple_700</item>
-        <item name="colorAccent">@color/teal_200</item>
-        <!-- Customize your theme here. -->
+
+    <style name="Theme.Promise" parent="Theme.Material3.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary</item>
+        <item name="colorAccent">@color/primary</item>
+        <item name="cornerRadius">@dimen/corner_radius</item>
+
+        <item name="materialButtonStyle">@style/Theme.Promise.Button</item>
+        <item name="editTextStyle">@style/Theme.Promise.EditText</item>
+        <item name="android:editTextBackground">@drawable/rounded_corner_gray</item>
+
+
     </style>
+
+    <!--    Form Styles-->
+
+    <style name="Theme.Promise.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">@dimen/corner_radius</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="Theme.Promise.EditText" parent="Widget.AppCompat.EditText">
+        <item name="cornerRadius">@dimen/corner_radius</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="Theme.Promise.InputLabel" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_marginBottom">@dimen/input_label_gap</item>
+    </style>
+
+    <style name="Theme.Promise.LinearFormLayout">
+        <item name="android:divider">@drawable/spacer_md</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
 </resources>

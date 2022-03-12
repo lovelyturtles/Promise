@@ -1,12 +1,16 @@
-package comp3350.group6.promise.presentation;
+package comp3350.group6.promise.presentation.Project.Invitation;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialogFragment;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.objects.CurrentSession;
@@ -27,6 +31,7 @@ public class RecipientInfoActivity extends AppCompatActivity {
         * If it does, add it to the Notifications database,
         * if it doesn't, give them an error message.
         */
+
         sendInvite = findViewById( R.id.sendInviteButton );
         sendInvite.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -41,10 +46,12 @@ public class RecipientInfoActivity extends AppCompatActivity {
                  *  if it is, call RecipientService and then goToSentPage()
                  *
                  */
-                if(CurrentSession.accounts.accountExists( recipientEmail ) )
+                if(CurrentSession.accounts.accountExists( recipientEmail ) ) {
                     goToSentPage();
-                else
-                    openDialog();
+                }
+                else {
+                    openUserDoesNotExistDialog();
+                }
 
             }
         });
@@ -56,10 +63,33 @@ public class RecipientInfoActivity extends AppCompatActivity {
         startActivity( intent );
     }
 
-    public void openDialog(){
-
-        NameErrorActivity errorDialog = new NameErrorActivity();
+    public void openUserDoesNotExistDialog(){
+        UserDoesNotExistDialogFragment errorDialog = new UserDoesNotExistDialogFragment();
         errorDialog.show( getSupportFragmentManager(), "error message" );
+    }
+
+    public static class UserDoesNotExistDialogFragment extends AppCompatDialogFragment {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState ) {
+            AlertDialog.Builder builder = new AlertDialog.Builder( getActivity() );
+            builder.setMessage("This email is not associated with a registered user.")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //do nothing. Let them edit the username and try again
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick( DialogInterface dialogInterface, int i ) {
+                            getActivity().finish();
+                        }
+                    });
+
+            return builder.create();
+        }
 
     }
+
 }

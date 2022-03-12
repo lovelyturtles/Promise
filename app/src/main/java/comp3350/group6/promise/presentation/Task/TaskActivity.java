@@ -1,4 +1,4 @@
-package comp3350.group6.promise.presentation;
+package comp3350.group6.promise.presentation.Task;
 
 import static comp3350.group6.promise.persistence.stub.TaskImpNoDB.generateTask;
 
@@ -67,13 +67,6 @@ public class TaskActivity extends AppCompatActivity {
             priorityView.setText("Priority: " + currentTask.getPriority());
             deadlineView.setText("Deadline: " + currentTask.getDeadline().toLocaleString());
 
-//            Temporary test subtasks
-//            ArrayList<Task> subtasks = generateSubtasks(4);
-//            TaskAdapter subtaskListAdapter = new TaskAdapter(this, subtasks);
-//            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//            subtaskRecyclerView.setLayoutManager(linearLayoutManager);
-//            subtaskRecyclerView.setAdapter(subtaskListAdapter);
-
             backButton.setOnClickListener( new View.OnClickListener() {
                 @Override
                 public void onClick( View view ) {
@@ -83,20 +76,5 @@ public class TaskActivity extends AppCompatActivity {
 
         }
     }
-
-    // Temporary task generation functions
-
-    private ArrayList<Task> generateSubtasks(int count) {
-        ArrayList<Task> subtasks = new ArrayList<Task>();
-
-        for(int i = 0; i < count; i++) {
-            char letter = (char) ('A' + i);
-            subtasks.add(generateTask("Subtask " + letter));
-        }
-
-        return subtasks;
-    }
-
-
 
 }

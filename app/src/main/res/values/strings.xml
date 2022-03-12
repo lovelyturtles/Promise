@@ -2,22 +2,21 @@
 
     <!--Landing Page-->
     <string name="app_name">Promise</string>
-    <string name="subHeading">Welcome to Promise, your favorite task management app.\n
-        Please log in or create an account.</string>
+    <string name="subHeading">Welcome to Promise, your favorite task management app.</string>
     <string name="goToCreate">Create an Account</string>
     <string name="goToLogin">Log In</string>
 
     <!--Login Fields-->
-    <string name="emailLabel">Email Address</string>
-    <string name="emailHint">yourName@domain.com</string>
+    <string name="emailLabel">Email</string>
+    <string name="emailHint">Enter your email</string>
     <string name="passwordLabel">Password</string>
-    <string name="passwordHint">Enter your password here</string>
+    <string name="passwordHint">Enter your password</string>
 
     <!--Create Page-->
     <string name="createMessage">Create Account</string>
     <string name="registerButton">Create My Account</string>
-    <string name="nameLabel">Your Name</string>
-    <string name="firstNameInput">First Name</string>
+    <string name="nameLabel">Name</string>
+    <string name="firstNameInput">Enter your name</string>
     <string name="intro">Introduce yourself!</string>
     <string name="introInput">Say anything</string>
 
@@ -64,5 +63,7 @@
     <string name="sentMessage">Your invite was sent to userEmail</string>
     <string name="someoneElse">Invite More</string>
     <string name="goBackProject">Back to project</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

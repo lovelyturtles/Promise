@@ -1,4 +1,4 @@
-package comp3350.group6.promise.presentation;
+package comp3350.group6.promise.presentation.Notification;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
