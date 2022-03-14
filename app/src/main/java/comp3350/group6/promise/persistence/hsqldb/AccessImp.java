@@ -19,13 +19,12 @@ public class AccessImp implements AccessDao {
      * Used to create a Project object from a SQL ResultSet
      */
     private Access createAccessObject(ResultSet rs) throws SQLException{
-        int defaultId = rs.getInt("defaultId"); // what's the default id?
         int projectId = rs.getInt("projectId");
         int userId = rs.getInt("userId");
         String role = rs.getString("role");
         Timestamp startTime = rs.getTimestamp("startTime");
 
-        return new Access(defaultId, projectId, userId, role, startTime);
+        return new Access(projectId, userId, role, startTime);
     }
 
 

@@ -4,30 +4,24 @@ import java.sql.Timestamp;
 
 import lombok.Data;
 
+/**
+ * @author Dani
+ */
 @Data
 public class Access {
 
-    private int defaultId; // id of this access?
     private int projectId;
     private int userId;
     private String role;
     private Timestamp startTime;
 
-    public Access(int defaultId, int projectId, int userId, String role, Timestamp startTime) {
-        this.defaultId = defaultId;
+    public Access( int projectId, int userId, String role, Timestamp startTime) {
         this.projectId = projectId;
         this.userId = userId;
         this.role = role;
         this.startTime = startTime;
     }
 
-    public int getDefaultId() {
-        return defaultId;
-    }
-
-    public void setDefaultId(int defaultId) {
-        this.defaultId = defaultId;
-    }
 
     public int getProjectId() {
         return projectId;
