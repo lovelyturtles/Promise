@@ -64,8 +64,19 @@ public class ProjectImp implements ProjectDao{
 
     @Override
     public Project getProjectByID(int projectID) {
-        //[iteration 2] implement
-        return null;
+        final Project p;
+
+        try(Connection con = DBConnectorUtil.getConnection();
+            PreparedStatement pstmt = con.prepareStatement("select * from project where projectId = ?");
+            ResultSet rs = pstmt.executeQuery()){
+
+            p = createProjectObject(rs);
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+        return p;
     }
 
     @Override
@@ -87,8 +98,6 @@ public class ProjectImp implements ProjectDao{
             generatedKeys.next();
 
             project.setProjectID(generatedKeys.getInt(1));
-
-            con.close();
 
         } catch (SQLException e) {
             throw new PersistenceException(e);
