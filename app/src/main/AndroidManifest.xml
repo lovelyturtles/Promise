@@ -20,7 +20,8 @@
             android:exported="false" />
         <activity
             android:name=".presentation.Project.ProjectActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".presentation.User.DashboardActivity"/>
         <activity
             android:name=".presentation.Notification.NotificationsActivity"
             android:exported="false" />

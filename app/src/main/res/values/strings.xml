@@ -65,5 +65,10 @@
     <string name="goBackProject">Back to project</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="more">more</string>
+    <string name="content_description_more">See additional page options</string>
+    <string name="edit_project_action_title">Edit Project</string>
+    <string name="edit_project_action_description">Edit Project</string>
+    <string name="invite_to_project_action_title">Invite Users</string>
 
 </resources>

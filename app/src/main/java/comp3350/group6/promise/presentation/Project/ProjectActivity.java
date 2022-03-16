@@ -2,14 +2,20 @@ package comp3350.group6.promise.presentation.Project;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.List;
 
@@ -27,12 +33,11 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.Vi
     private static final ProjectService projectService = new ProjectService();
     private static final TaskService taskService = new TaskService();
 
-    private Project currentProject; // project that we are viewing
-    private TextView projectTitleView;
-    private TextView projectDescView;
-    private ImageView projectImgView;
-    private ImageButton moreButton;
-    private ImageButton backButton;
+    private Project project;
+    private CollapsingToolbarLayout appBarLayoutView;
+    private Toolbar toolbarView;
+    private TextView projectDescriptionView;
+    private ImageView projectImageView;
     private RecyclerView taskRecyclerView;
     private  List<Task> projectTasks;
 
@@ -45,33 +50,26 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.Vi
         if (getIntent() != null && getIntent().getExtras() != null) {
             int id = getIntent().getIntExtra("projectID", -1);
             if (id != -1){
-                currentProject = projectService.getProjectByID(id);
+                project = projectService.getProjectByID(id);
             }
         }
 
-        projectTitleView = findViewById(R.id.project_page_title);
-        projectDescView = findViewById(R.id.project_page_desc);
-        projectImgView = findViewById(R.id.project_page_image);
-        moreButton = findViewById(R.id.project_page_more);
-        backButton = findViewById(R.id.back_button);
-        taskRecyclerView = (RecyclerView) findViewById(R.id.subtasks_recycler);
+        appBarLayoutView = findViewById(R.id.toolbar_layout);
+        toolbarView = findViewById(R.id.toolbar);
+        projectImageView = findViewById(R.id.toolbar_image);
+        projectDescriptionView = findViewById(R.id.project_page_desc);
+        taskRecyclerView = findViewById(R.id.task_recycler);
 
-        projectTitleView.setText(currentProject.getProjectName());
-        projectDescView.setText(currentProject.getStatement());
+        setSupportActionBar(toolbarView);
+        getSupportActionBar().setTitle(project.getProjectName());
+        projectDescriptionView.setText(project.getStatement());
 
-        projectTasks = taskService.getTasksByProjectId(currentProject.getProjectID());
+        projectTasks = taskService.getTasksByProjectId(project.getProjectID());
 
-        TaskAdapter taskListAdapter = new TaskAdapter(this, projectTasks, this);
+        TaskAdapter taskAdapter = new TaskAdapter(this, projectTasks, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         taskRecyclerView.setLayoutManager(linearLayoutManager);
-        taskRecyclerView.setAdapter(taskListAdapter);
-
-        backButton.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick( View view ) {
-                back();
-            }
-        });
+        taskRecyclerView.setAdapter(taskAdapter);
     }
 
     // go to the previous page
@@ -86,5 +84,29 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.Vi
         Intent intent = new Intent(this, TaskActivity.class);
         intent.putExtra("taskID", clickedTask.getTaskId());
         startActivity(intent);
+    }
+
+    // Toolbar Method Overrides
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.project_toolbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_edit:
+                // TODO: Implement edit project action handler
+                Toast.makeText(this, "Pressed Edit Project", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_invite:
+                // TODO: Implement invite user to project action handler
+                Toast.makeText(this, "Pressed Invite to Project", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
