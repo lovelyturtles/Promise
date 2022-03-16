@@ -6,15 +6,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import java.util.List;
 
 import comp3350.group6.promise.R;
@@ -32,12 +39,11 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
     private static final TaskService taskService = new TaskService();
     private static final String TAG = "tag" ;
 
-    private Project currentProject; // project that we are viewing
-    private TextView projectTitleView;
-    private TextView projectDescView;
-    private ImageView projectImgView;
-    private ImageButton moreButton;
-    private ImageButton backButton;
+    private Project project;
+    private CollapsingToolbarLayout appBarLayoutView;
+    private Toolbar toolbarView;
+    private TextView projectDescriptionView;
+    private ImageView projectImageView;
     private RecyclerView taskRecyclerView;
     private List<Task> listOfTasks;
     private Button createTaskButton;
@@ -100,26 +106,19 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
             }
         }
 
-        projectTitleView = findViewById(R.id.project_page_title);
-        projectDescView = findViewById(R.id.project_page_desc);
-        projectImgView = findViewById(R.id.project_page_image);
-        moreButton = findViewById(R.id.project_page_more);
-        backButton = findViewById(R.id.back_button);
-        taskRecyclerView = (RecyclerView) findViewById(R.id.subtasks_recycler);
+        appBarLayoutView = findViewById(R.id.toolbar_layout);
+        toolbarView = findViewById(R.id.toolbar);
+        projectImageView = findViewById(R.id.toolbar_image);
+        projectDescriptionView = findViewById(R.id.project_page_desc);
+        taskRecyclerView = findViewById(R.id.task_recycler);
         createTaskButton = (Button) findViewById(R.id.button_create_task);
 
-        projectTitleView.setText(currentProject.getProjectName());
-        projectDescView.setText(currentProject.getStatement());
+        setSupportActionBar(toolbarView);
+        getSupportActionBar().setTitle(project.getProjectName());
+        projectDescriptionView.setText(project.getStatement());
 
         listOfTasks = taskService.getTasksByProjectId(currentProject.getProjectID());
-
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                back();
-            }
-        });
+        
 
         createTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +132,6 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
         taskRecyclerView.setAdapter(taskListAdapter);
 
     }
-
 
     // go to the previous page
     private void back() {
@@ -158,5 +156,29 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
 
     private void addItem(View view){
 
+    }
+
+    // Toolbar Method Overrides
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.project_toolbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_edit:
+                // TODO: Implement edit project action handler
+                Toast.makeText(this, "Pressed Edit Project", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_invite:
+                // TODO: Implement invite user to project action handler
+                Toast.makeText(this, "Pressed Invite to Project", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

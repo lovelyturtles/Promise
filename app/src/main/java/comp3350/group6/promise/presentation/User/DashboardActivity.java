@@ -21,14 +21,14 @@ import comp3350.group6.promise.presentation.Project.ProjectActivity;
 import comp3350.group6.promise.util.ProjectAdapter;
 
 // Reference for Class: https://www.geeksforgeeks.org/cardview-using-recyclerview-in-android-with-example/
-public class DashboardActivity extends AppCompatActivity implements ProjectAdapter.Viewholder.OnCardListener{
+public class DashboardActivity extends AppCompatActivity implements ProjectAdapter.ViewHolder.OnProjectClickListener {
 
     private static final AccessService accessService = new AccessService();
 
     private List<Access> accessList;
     private List<Project> projects;
 
-    private RecyclerView projectRV;
+    private RecyclerView projectRecyclerView;
     private ProjectAdapter projectAdapter;
     private LinearLayoutManager linearLayoutManager;
     private ImageButton addButton;
@@ -38,17 +38,16 @@ public class DashboardActivity extends AppCompatActivity implements ProjectAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        projectRV = findViewById(R.id.projectRecyclerView);
+        projectRecyclerView = findViewById(R.id.projectRecyclerView);
         addButton = findViewById(R.id.dashboard_add);
 
         accessList = accessService.getUserAccess(CurrentSession.currentUser.getUserID());
         projects = accessService.getProjects(CurrentSession.currentUser.getUserID());
 
-        projectAdapter = new ProjectAdapter(this, projects, this::onCardClick);
-        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
-        projectRV.setLayoutManager(linearLayoutManager);
-        projectRV.setAdapter(projectAdapter);
+        projectAdapter = new ProjectAdapter(this, projects, this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        projectRecyclerView.setLayoutManager(linearLayoutManager);
+        projectRecyclerView.setAdapter(projectAdapter);
 
         addButton.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -72,9 +71,8 @@ public class DashboardActivity extends AppCompatActivity implements ProjectAdapt
 
     // open the project details page
     @Override
-    public void onCardClick(int position) {
+    public void onProjectClick(int position) {
         Project clickedProject = projects.get(position);
-
         Intent intent = new Intent(this, ProjectActivity.class);
         intent.putExtra("projectID", clickedProject.getProjectID());
         startActivity(intent);

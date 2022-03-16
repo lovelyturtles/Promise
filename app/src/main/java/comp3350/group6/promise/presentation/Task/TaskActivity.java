@@ -3,23 +3,16 @@ package comp3350.group6.promise.presentation.Task;
 import static comp3350.group6.promise.persistence.stub.TaskImpNoDB.generateTask;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-
 import comp3350.group6.promise.R;
-import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.objects.Task;
-import comp3350.group6.promise.util.TaskAdapter;
 
 public class TaskActivity extends AppCompatActivity {
 
@@ -55,7 +48,7 @@ public class TaskActivity extends AppCompatActivity {
             descriptionView = (TextView) findViewById(R.id.task_page_description);
             priorityView = (TextView) findViewById(R.id.task_page_priority);
             deadlineView = (TextView) findViewById(R.id.task_page_deadline);
-            subtaskRecyclerView = (RecyclerView) findViewById(R.id.subtasks_recycler);
+            subtaskRecyclerView = (RecyclerView) findViewById(R.id.task_recycler);
 
             moreButton = findViewById(R.id.task_page_more);
             backButton = findViewById(R.id.back_button);
