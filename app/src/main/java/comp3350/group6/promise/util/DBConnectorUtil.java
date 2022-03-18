@@ -2,9 +2,6 @@ package comp3350.group6.promise.util;
 
 import android.util.Log;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.sql.*;
 
 import comp3350.group6.promise.application.Main;

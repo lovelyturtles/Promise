@@ -45,7 +45,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
     implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-//    implementation files('libs/hsqldb.jar')
+    implementation files('libs/hsqldb.jar')
+    implementation files('libs/lombok.jar')
+//    implementation files('libs/javax.mail-1.6.2.jar')
     testImplementation 'junit:junit:4.13.2'
     // https://mvnrepository.com/artifact/com.android.support/appcompat-v7
     implementation 'androidx.appcompat:appcompat:1.4.1'
