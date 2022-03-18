@@ -13,6 +13,8 @@ public class UserService {
      */
 
     private static final UserDao userDao = new UserImp();
+    private static UserService instance;
+
 
     public int addUser( String name, String introduction ) throws Exception{
         assert ( name!= null );
@@ -27,6 +29,12 @@ public class UserService {
         return userDao.getUserByUserId(userId);
     }
 
+    public static UserService getInstance() {
+        if(UserService.instance == null) {
+            UserService.instance = new UserService();
+        }
+        return UserService.instance;
+    }
 
 }
 

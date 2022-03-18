@@ -31,9 +31,6 @@ import comp3350.group6.promise.util.TaskAdapter;
 
 public class ProjectActivity extends AppCompatActivity implements TaskAdapter.ViewHolder.OnTaskClickListener {
 
-    private static final ProjectService projectService = new ProjectService();
-    private static final TaskService taskService = new TaskService();
-
     private Project project;
     private CollapsingToolbarLayout appBarLayoutView;
     private Toolbar toolbarView;
@@ -51,7 +48,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.Vi
         if (getIntent() != null && getIntent().getExtras() != null) {
             int id = getIntent().getIntExtra("projectID", -1);
             if (id != -1){
-                project = projectService.getProjectByID(id);
+                project = ProjectService.getInstance().getProjectByID(id);
             }
         }
 
@@ -63,7 +60,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.Vi
 
             projectDescriptionView.setText(project.getStatement());
 
-            projectTasks = taskService.getTasksByProjectId(project.getProjectID());
+            projectTasks = TaskService.getInstance().getTasksByProjectId(project.getProjectID());
             TaskAdapter taskAdapter = new TaskAdapter(this, projectTasks, this);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
             taskRecyclerView.setLayoutManager(linearLayoutManager);

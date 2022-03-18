@@ -24,7 +24,7 @@ public class AccountServiceTest {
     public void setup() throws Exception {
         System.out.println("Starting test for AccountServiceTest");
         FakeDB.initialize();
-        accountService = new AccountService(); // false init a fake DB
+        accountService = AccountService.getInstance(); // false init a fake DB
     }
 
     @Test

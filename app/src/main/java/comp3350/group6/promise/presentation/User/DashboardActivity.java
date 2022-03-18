@@ -22,8 +22,6 @@ import comp3350.group6.promise.util.ProjectAdapter;
 // Reference for Class: https://www.geeksforgeeks.org/cardview-using-recyclerview-in-android-with-example/
 public class DashboardActivity extends AppCompatActivity implements ProjectAdapter.ViewHolder.OnProjectClickListener {
 
-    private static final ProjectService projectService = new ProjectService();
-
     private List<Project> projects;
 
     private RecyclerView projectRecyclerView;
@@ -38,7 +36,7 @@ public class DashboardActivity extends AppCompatActivity implements ProjectAdapt
         projectRecyclerView = findViewById(R.id.projectRecyclerView);
         moreButton = findViewById(R.id.moreButton);
 
-        projects = projectService.getProjects();
+        projects = ProjectService.getInstance().getProjects();
 
         projectAdapter = new ProjectAdapter(this, projects, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

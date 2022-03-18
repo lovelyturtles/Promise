@@ -18,8 +18,6 @@ import comp3350.group6.promise.presentation.User.DashboardActivity;
 
 public class CreateProjectActivity extends AppCompatActivity{
 
-    private static final ProjectService projectService = new ProjectService();
-
     private Toolbar toolbarView;
     private EditText nameInputView;
     private EditText descriptionInputView;
@@ -58,7 +56,7 @@ public class CreateProjectActivity extends AppCompatActivity{
 
         // Users cannot add projects with no name
         try {
-            projectService.insertProject(new Project(projectName, projectDesc));
+            ProjectService.getInstance().insertProject(new Project(projectName, projectDesc));
             Intent intent = new Intent(this, DashboardActivity.class );
             startActivity( intent );
         } catch (EmptyInputException e) {

@@ -20,8 +20,6 @@ import comp3350.group6.promise.objects.Task;
 
 public class TaskActivity extends AppCompatActivity {
 
-    private static final TaskService taskService = new TaskService();
-
     private Task task;
     private CollapsingToolbarLayout toolbarLayoutView;
     private Toolbar toolbarView;
@@ -39,7 +37,7 @@ public class TaskActivity extends AppCompatActivity {
         if (getIntent() != null && getIntent().getExtras() != null) {
             int id = getIntent().getIntExtra("taskID", -1);
             if (id != -1){
-                task = taskService.getTask(id);
+                task = TaskService.getInstance().getTask(id);
             }
         }
 

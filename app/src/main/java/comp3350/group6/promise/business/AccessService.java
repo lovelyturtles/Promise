@@ -13,15 +13,11 @@ import comp3350.group6.promise.persistence.hsqldb.AccessImp;
  */
 public class AccessService {
 
-    AccessDao accessDao;
+    private AccessDao accessDao;
+    private static AccessService instance;
 
-    public AccessService(){
+    private AccessService(){
         accessDao = new AccessImp();
-    }
-
-    public AccessService(AccessDao accessDao){
-        this();
-        this.accessDao = accessDao;
     }
 
     // returns a list of access a project has
@@ -34,5 +30,12 @@ public class AccessService {
     List<Access> getUserAccess(int userId){
         List<Access> accessList = accessDao.getAccessByUser(userId);
         return Collections.unmodifiableList(accessList);
+    }
+
+    public static AccessService getInstance() {
+        if(AccessService.instance == null) {
+            AccessService.instance = new AccessService();
+        }
+        return AccessService.instance;
     }
 }
