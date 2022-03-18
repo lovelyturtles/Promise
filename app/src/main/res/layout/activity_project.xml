@@ -74,11 +74,36 @@
             app:lineHeight="20sp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/subtasks_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:id="@+id/subtasks_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="312dp">
 
         </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="171dp">
+
+            <Button
+                    android:text="Create task"
+                    android:layout_width="169dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button_create_task"
+                    android:onClick="onClickCreateTask"
+                    tools:layout_editor_absoluteX="188dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="2dp" />
+
+            <EditText
+                    android:layout_width="189dp"
+                    android:layout_height="53dp"
+                    android:inputType="textPersonName"
+                    android:text="Name"
+                    android:ems="10"
+                    android:id="@+id/editTextTextPersonName"
+                    tools:layout_editor_absoluteY="3dp"
+                    tools:layout_editor_absoluteX="-2dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 
