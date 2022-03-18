@@ -17,56 +17,51 @@ import comp3350.group6.promise.util.DBConnectorUtil;
 
 public class NotifImp {
 
-    void addNotif(int userID, int projectID, int recipientID, int type ) throws Exception{
+    void addNotif(int userID, int projectID, int recipientID, int type) throws Exception {
 
-        Connection cnn = DBConnectorUtil.getConnection();
         PreparedStatement preparedStatement = null;
-        try {
-
+        try (final Connection cnn = DBConnectorUtil.getConnection()) {
             assert cnn != null;
-            preparedStatement = cnn.prepareStatement("INSERT INTO Notification VALUES(?,?,?,?)" );
+            preparedStatement = cnn.prepareStatement("INSERT INTO Notification VALUES(?,?,?,?)");
 
-            preparedStatement.setInt( 1, userID );
-            preparedStatement.setInt( 2, projectID );
-            preparedStatement.setInt( 3, recipientID );
-            preparedStatement.setInt( 4, type );
+            preparedStatement.setInt(1, userID);
+            preparedStatement.setInt(2, projectID);
+            preparedStatement.setInt(3, recipientID);
+            preparedStatement.setInt(4, type);
 
             preparedStatement.executeUpdate();
 
-        }
-
-        finally{
-
-            try{ preparedStatement.close(); } catch( Exception e ){/**/}
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (Exception e) {/**/}
 
         }
     }
 
-    void removeNotif( int userID, int projectID, int recipientID ) throws Exception{
+    void removeNotif(int userID, int projectID, int recipientID) throws Exception {
 
-        Connection cnn = DBConnectorUtil.getConnection();
         PreparedStatement preparedStatement = null;
 
-        try{
+        try (final Connection cnn = DBConnectorUtil.getConnection()) {
             assert cnn != null;
-            preparedStatement = cnn.prepareStatement("DELETE FROM Notification WHERE userID = ? AND projectID = ? AND recipientID = ?" );
-            preparedStatement.setInt( 1, userID );
-            preparedStatement.setInt( 2, projectID );
-            preparedStatement.setInt( 3, recipientID );
+            preparedStatement = cnn.prepareStatement("DELETE FROM Notification WHERE userID = ? AND projectID = ? AND recipientID = ?");
+            preparedStatement.setInt(1, userID);
+            preparedStatement.setInt(2, projectID);
+            preparedStatement.setInt(3, recipientID);
             preparedStatement.executeUpdate();
-        }
+        } finally {
 
-        finally{
-
-            try{ preparedStatement.close(); } catch( Exception e ){/**/}
+            try {
+                preparedStatement.close();
+            } catch (Exception e) {/**/}
 
         }
 
     }
 
-    ArrayList<Notification> getNotifs( int recipientID ) throws Exception{
+    ArrayList<Notification> getNotifs(int recipientID) throws Exception {
 
-        Connection cnn = DBConnectorUtil.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ArrayList<Notification> notifs;
@@ -77,36 +72,38 @@ public class NotifImp {
         int checkType;
         NotifType type;
 
-        try{
+        try (final Connection cnn = DBConnectorUtil.getConnection()) {
 
             assert cnn != null;
-            preparedStatement = cnn.prepareStatement( "SELECT * FROM Notification WHERE recipientID = ?" );
-            preparedStatement.setInt( 1, recipientID );
+            preparedStatement = cnn.prepareStatement("SELECT * FROM Notification WHERE recipientID = ?");
+            preparedStatement.setInt(1, recipientID);
             resultSet = preparedStatement.executeQuery();
             notifs = new ArrayList<Notification>();
 
-            while( resultSet.next() ){
+            while (resultSet.next()) {
 
-                sender = resultSet.getInt( "userID" );
-                projectID = resultSet.getInt( "projectID" );
-                reciever = resultSet.getInt( "recipientID" );
-                checkType = resultSet.getInt( "type" );
+                sender = resultSet.getInt("userID");
+                projectID = resultSet.getInt("projectID");
+                reciever = resultSet.getInt("recipientID");
+                checkType = resultSet.getInt("type");
 
-                if( checkType == 0 )
+                if (checkType == 0)
                     type = NotifType.INVITE;
                 else
                     type = NotifType.REQUEST;
 
-                notifs.add( new Notification( sender, projectID, reciever, type ) );
+                notifs.add(new Notification(sender, projectID, reciever, type));
 
             }
 
-        }
+        } finally {
 
-        finally{
-
-            try{ resultSet.close(); }         catch( Exception e ){/**/}
-            try{ preparedStatement.close(); } catch( Exception e ){/**/}
+            try {
+                resultSet.close();
+            } catch (Exception e) {/**/}
+            try {
+                preparedStatement.close();
+            } catch (Exception e) {/**/}
 
         }
 

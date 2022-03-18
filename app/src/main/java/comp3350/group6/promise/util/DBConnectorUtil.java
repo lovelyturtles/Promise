@@ -12,7 +12,6 @@ public class DBConnectorUtil {
 
     public static Connection getConnection() {
         try {
-            Log.i("ssw", "copyDatabaseToDevice: " + Main.getDBPath());
             return DriverManager.getConnection("jdbc:hsqldb:file:" + Main.getDBPath() + ";shutdown=true", "SA", "");
         }catch (Exception e){
             e.printStackTrace();

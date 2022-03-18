@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.DriverManager;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.Main;
@@ -69,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
             Main.setDBPath(dataDirectory.toString() + "/" + Main.getDBPath());
 
-            Log.i("ssw", "copyDatabaseToDevice: " + Main.getDBPath());
-        } catch (final IOException ioe) {
+        } catch (final Exception ioe) {
+            ioe.printStackTrace();
 //            Messages.warning(this, "Unable to access application data: " + ioe.getMessage());
         }
     }
