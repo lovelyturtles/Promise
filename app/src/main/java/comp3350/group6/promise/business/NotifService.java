@@ -8,5 +8,8 @@ public class NotifService {
     // EditText userText = findViewById( R.id.loginNameInput );
     // String userName   = userText.getText().toString();
 
+    private NotifService() {}
+
+    public static NotifService getInstance() { return null; }
 
 }

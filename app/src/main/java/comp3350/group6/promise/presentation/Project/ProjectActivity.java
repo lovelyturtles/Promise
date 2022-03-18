@@ -107,7 +107,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
             }
         }
 
-        
+
         appBarLayoutView = findViewById(R.id.toolbar_layout);
         projectImageView = findViewById(R.id.toolbar_image);
 
@@ -140,14 +140,8 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
             }
         });
 
-
-
     }
 
-    // go to the previous page
-    private void back() {
-        Intent intent = new Intent(this, DashboardActivity.class);
-        startActivity(intent);
     }
 
     @Override

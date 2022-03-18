@@ -30,7 +30,6 @@ public class DashboardActivity extends AppCompatActivity implements ProjectAdapt
 
     private RecyclerView projectRecyclerView;
     private ProjectAdapter projectAdapter;
-    private LinearLayoutManager linearLayoutManager;
     private ImageButton addButton;
 
     @Override

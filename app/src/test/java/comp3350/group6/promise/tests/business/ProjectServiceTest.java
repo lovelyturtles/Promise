@@ -18,7 +18,7 @@ public class ProjectServiceTest {
     public void setup() throws Exception {
         System.out.println("Starting test for ProjectServiceTest");
         FakeDB.initialize();
-        projectService = new ProjectService(); // false init a fake DB
+        projectService = ProjectService.getInstance(); // false init a fake DB
     }
     @Test
     public void testGetProjectByID(){

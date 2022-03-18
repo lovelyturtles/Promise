@@ -16,11 +16,12 @@ import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.objects.User;
 
 public class TestDataGenerator {
-    private AccountService accountService = new AccountService();
-    private UserService userService = new UserService();
-    private ProjectService projectService = new ProjectService();
-    private TaskService taskService = new TaskService();
-    private NotifService notificationService = new NotifService();
+
+    private AccountService accountService = AccountService.getInstance();
+    private UserService userService = UserService.getInstance();
+    private ProjectService projectService = ProjectService.getInstance();
+    private TaskService taskService = TaskService.getInstance();
+    private NotifService notificationService = NotifService.getInstance();
 
     private int numProjects;
     private int numTasksPerProject;
