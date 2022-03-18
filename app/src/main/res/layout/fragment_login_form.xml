@@ -2,60 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Theme.Promise.LinearFormLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".presentation.User.LoginFormFragment">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/loginEmailLabel"
+        style="@style/Theme.Promise.InputLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/emailLabel" />
+
+    <EditText
+        android:id="@+id/loginEmailInput"
+        style="@style/Theme.Promise.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@drawable/spacer_sm"
-        android:orientation="vertical"
-        android:showDividers="middle">
+        android:hint="@string/emailHint"
+        android:inputType="textEmailAddress" />
 
-        <TextView
-            android:id="@+id/loginEmailLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/emailLabel" />
+    <TextView
+        android:id="@+id/loginPasswordLabel"
+        style="@style/Theme.Promise.InputLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/passwordLabel" />
 
-        <EditText
-            android:id="@+id/loginEmailInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/emailHint"
-            android:inputType="textEmailAddress" />
-
-    </LinearLayout>
-
-    <LinearLayout
+    <EditText
+        android:id="@+id/loginPasswordInput"
+        style="@style/Theme.Promise.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@drawable/spacer_sm"
-        android:orientation="vertical"
-        android:showDividers="middle">
-
-        <TextView
-            android:id="@+id/loginPasswordLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/passwordLabel" />
-
-        <EditText
-            android:id="@+id/loginPasswordInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/passwordHint"
-            android:inputType="textPassword" />
-
-    </LinearLayout>
+        android:hint="@string/passwordHint"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/signInButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="@string/signInButton" />
 
 

@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,10 +55,27 @@ public class TaskImp implements TaskDao {
         }
     }
 
-    // TODO
+    // TODO - Refactor duplicate code by creating a general-purpose query function for tasks (F: queryString --> taskList)
     @Override
     public List<Task> getTasksByProjectId(int projectId) {
-        return null;
+        List<Task> taskList = new ArrayList<>();
+
+        try (final Connection con = DBConnectorUtil.getConnection()) {
+            final PreparedStatement pre = con.prepareStatement("SELECT * FROM task WHERE projectId = ?");
+            pre.setString(1, String.valueOf(projectId));
+
+            final ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                Task task = fromResultSet(rs);
+                taskList.add(task);
+            }
+            rs.close();
+            pre.close();
+            return taskList;
+        } catch (final SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
     }
 
     @Override
@@ -82,7 +100,8 @@ public class TaskImp implements TaskDao {
     @Override
     public Task insertTask(Task t) {
         try (final Connection con = DBConnectorUtil.getConnection()) {
-            final PreparedStatement pre = con.prepareStatement("INSERT INTO task VALUES(?,?,?,?,?,?,?,?,?)");
+            String query = "INSERT INTO task(taskId, title, description, priority, statusNum, projectId, createdTime, estimatedEndTime, deadline) VALUES(?,?,?,?,?,?,?,?,?)";
+            final PreparedStatement pre = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pre.setInt(1, t.getTaskId());
             pre.setString(2, t.getTitle());
             pre.setString(3, t.getDescription());
@@ -93,6 +112,11 @@ public class TaskImp implements TaskDao {
             pre.setTimestamp(8, t.getEstimatedEndTime());
             pre.setTimestamp(9, t.getDeadline());
             pre.executeUpdate();
+
+            ResultSet generatedKeys = pre.getGeneratedKeys();
+            generatedKeys.next();
+            t.setTaskId(generatedKeys.getInt(1));
+
             pre.close();
             return t;
         } catch (final SQLException e) {

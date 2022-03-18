@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,28 +55,35 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.Vi
             }
         }
 
-        appBarLayoutView = findViewById(R.id.toolbar_layout);
-        toolbarView = findViewById(R.id.toolbar);
-        projectImageView = findViewById(R.id.toolbar_image);
-        projectDescriptionView = findViewById(R.id.project_page_desc);
-        taskRecyclerView = findViewById(R.id.task_recycler);
+        if(project != null) {
+            appBarLayoutView = findViewById(R.id.toolbar_layout);
+            projectImageView = findViewById(R.id.toolbar_image);
+            projectDescriptionView = findViewById(R.id.project_page_desc);
+            taskRecyclerView = findViewById(R.id.task_recycler);
 
-        setSupportActionBar(toolbarView);
-        getSupportActionBar().setTitle(project.getProjectName());
-        projectDescriptionView.setText(project.getStatement());
+            projectDescriptionView.setText(project.getStatement());
 
-        projectTasks = taskService.getTasksByProjectId(project.getProjectID());
+            projectTasks = taskService.getTasksByProjectId(project.getProjectID());
+            TaskAdapter taskAdapter = new TaskAdapter(this, projectTasks, this);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+            taskRecyclerView.setLayoutManager(linearLayoutManager);
+            taskRecyclerView.setAdapter(taskAdapter);
 
-        TaskAdapter taskAdapter = new TaskAdapter(this, projectTasks, this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        taskRecyclerView.setLayoutManager(linearLayoutManager);
-        taskRecyclerView.setAdapter(taskAdapter);
-    }
+            toolbarView = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbarView);
+            getSupportActionBar().setTitle(project.getProjectName());
 
-    // go to the previous page
-    private void back() {
-        Intent intent = new Intent( this, DashboardActivity.class );
-        startActivity( intent );
+            toolbarView.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
+        else {
+            finish();
+        }
+
     }
 
     @Override
@@ -98,11 +106,11 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.Vi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit:
-                // TODO: Implement edit project action handler
+                // TODO: Implement action handler for project editing
                 Toast.makeText(this, "Pressed Edit Project", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_invite:
-                // TODO: Implement invite user to project action handler
+                // TODO: Implement action handler for project invites
                 Toast.makeText(this, "Pressed Invite to Project", Toast.LENGTH_SHORT).show();
                 return true;
             default:

@@ -5,13 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/gap_lg"
-    android:background="@drawable/list_item_background"
+    android:background="@drawable/rounded_corner_outline_gray"
     android:orientation="vertical"
-    android:padding="20dp"
-    app:cardCornerRadius="6sp"
-    app:cardElevation="0sp"
-    app:cardUseCompatPadding="true"
-    app:contentPadding="20sp">
+    android:padding="@dimen/gap_lg">
 
         <TextView
             android:id="@+id/task_title"

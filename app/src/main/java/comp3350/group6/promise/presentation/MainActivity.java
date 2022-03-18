@@ -18,6 +18,7 @@ import java.io.InputStreamReader;
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.Main;
 import comp3350.group6.promise.presentation.User.RegisterActivity;
+import comp3350.group6.promise.util.TestDataGenerator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             copyDatabaseToDevice();
+            generateTestData();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
 
+    }
+
+    private void generateTestData() {
+        TestDataGenerator generator = new TestDataGenerator(4, 6);
+        generator.generate();
     }
 
     private void copyDatabaseToDevice() {

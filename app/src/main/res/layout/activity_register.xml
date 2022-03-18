@@ -1,118 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Theme.Promise.LinearFormLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="40dp"
-    tools:context=".presentation.User.RegisterActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/createMessage"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@string/createMessage"
-        android:textAlignment="center"
-        android:textSize="34sp" />
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/emailInputGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/emailLabel"
-            style="@style/Theme.Promise.InputLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/emailLabel" />
-
-        <EditText
-            android:id="@+id/emailInput"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/emailHint"
-            android:inputType="textWebEmailAddress" />
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:title="Create Account"
+            app:titleCentered="true"></com.google.android.material.appbar.MaterialToolbar>
 
-    </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
-        android:id="@+id/nameInputGroup"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
 
-        <TextView
-            android:id="@+id/nameLabel"
-            style="@style/Theme.Promise.InputLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/nameLabel" />
 
-        <EditText
-            android:id="@+id/firstNameInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/firstNameInput"
-            android:inputType="textPersonName" />
+        android:fillViewport="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/passwordInputGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/passwordLabel"
-            style="@style/Theme.Promise.InputLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/passwordLabel" />
-
-        <EditText
-            android:id="@+id/passwordInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/passwordHint"
-            android:inputType="textPassword" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/bioInputGroup"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/introLabel"
-            style="@style/Theme.Promise.InputLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/intro" />
-
-        <EditText
-            android:id="@+id/introInput"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="start|top"
-            android:hint="@string/introInput"
-            android:inputType="textMultiLine"
-            android:imeOptions="actionDone"/>
+            android:orientation="vertical"
+            android:padding="@dimen/gap_lg"
+            tools:context=".presentation.User.RegisterActivity">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/emailLabel"
+                style="@style/Theme.Promise.InputLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/emailLabel" />
 
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/registerButton" />
+            <EditText
+                android:id="@+id/email_input"
+                style="@style/Theme.Promise.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/emailHint"
+                android:inputType="textWebEmailAddress" />
+
+            <TextView
+                android:id="@+id/name_input_label"
+                style="@style/Theme.Promise.InputLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nameLabel" />
+
+            <EditText
+                android:id="@+id/name_input"
+                style="@style/Theme.Promise.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/firstNameInput"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/password_input_label"
+                style="@style/Theme.Promise.InputLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/passwordLabel" />
+
+            <EditText
+                android:id="@+id/password_input"
+                style="@style/Theme.Promise.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/passwordHint"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/introLabel"
+                style="@style/Theme.Promise.InputLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/intro" />
+
+            <EditText
+                android:id="@+id/introInput"
+                style="@style/Theme.Promise.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="start|top"
+                android:hint="@string/introInput"
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine" />
+
+            <Button
+                android:id="@+id/registerButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/registerButton" />
 
 
-</LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
