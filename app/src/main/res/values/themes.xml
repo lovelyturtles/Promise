@@ -25,16 +25,16 @@
         <item name="cornerRadius">@dimen/corner_radius</item>
         <item name="android:padding">16dp</item>
         <item name="android:textSize">14dp</item>
+        <item name="android:layout_marginBottom">@dimen/gap_lg</item>
     </style>
 
     <style name="Theme.Promise.InputLabel" parent="Widget.AppCompat.TextView">
         <item name="android:layout_marginBottom">@dimen/input_label_gap</item>
     </style>
 
-    <style name="Theme.Promise.LinearFormLayout">
-        <item name="android:divider">@drawable/spacer_md</item>
-        <item name="android:showDividers">middle</item>
-        <item name="android:orientation">vertical</item>
+    <style name="Theme.Promise.CollapsingToolbarLayout" parent="Widget.Design.CollapsingToolbar">
+        <item name="expandedTitleMarginStart">@dimen/gap_lg</item>
+        <item name="expandedTitleMarginBottom">@dimen/gap_lg</item>
     </style>
 
 </resources>

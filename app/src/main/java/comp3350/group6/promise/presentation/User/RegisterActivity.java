@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 //Get the email that was submitted
-                textEmail = findViewById( R.id.emailInput );
+                textEmail = findViewById( R.id.email_input);
                 userEmail = textEmail.getText().toString();
 
                 //Check if the email is already registered
@@ -59,11 +59,11 @@ public class RegisterActivity extends AppCompatActivity {
 
                     //let them create an account
                     //get the name they submitted
-                    textName  = findViewById( R.id.firstNameInput );
+                    textName  = findViewById( R.id.name_input);
                     userName  = textName.getText().toString();
 
                     //get the password they want to use
-                    textPass = findViewById( R.id.passwordInput );
+                    textPass = findViewById( R.id.password_input);
                     userPassword = textPass.getText().toString();
 
                     //get the introduction they submitted

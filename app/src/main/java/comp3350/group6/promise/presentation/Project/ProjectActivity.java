@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -106,19 +107,31 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
             }
         }
 
+        
         appBarLayoutView = findViewById(R.id.toolbar_layout);
-        toolbarView = findViewById(R.id.toolbar);
         projectImageView = findViewById(R.id.toolbar_image);
-        projectDescriptionView = findViewById(R.id.project_page_desc);
-        taskRecyclerView = findViewById(R.id.task_recycler);
-        createTaskButton = (Button) findViewById(R.id.button_create_task);
 
-        setSupportActionBar(toolbarView);
-        getSupportActionBar().setTitle(project.getProjectName());
+        projectDescriptionView = findViewById(R.id.project_page_desc);
         projectDescriptionView.setText(project.getStatement());
 
         listOfTasks = taskService.getTasksByProjectId(currentProject.getProjectID());
-        
+        taskListAdapter = new TaskAdapter(this,listOfTasks,this,this);
+        taskRecyclerView = findViewById(R.id.task_recycler);
+        taskRecyclerView.setLayoutManager( new LinearLayoutManager(ProjectActivity.this, LinearLayoutManager.VERTICAL,false));
+        taskRecyclerView.setAdapter(taskListAdapter);
+
+        toolbarView = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarView);
+        getSupportActionBar().setTitle(project.getProjectName());
+
+        toolbarView.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        createTaskButton = (Button) findViewById(R.id.button_create_task);
 
         createTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,9 +140,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
             }
         });
 
-        taskListAdapter = new TaskAdapter(this,listOfTasks,this,this);
-        taskRecyclerView.setLayoutManager( new LinearLayoutManager(ProjectActivity.this, LinearLayoutManager.VERTICAL,false));
-        taskRecyclerView.setAdapter(taskListAdapter);
+
 
     }
 
@@ -170,11 +181,11 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit:
-                // TODO: Implement edit project action handler
+                // TODO: Implement action handler for project editing
                 Toast.makeText(this, "Pressed Edit Project", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_invite:
-                // TODO: Implement invite user to project action handler
+                // TODO: Implement action handler for project invites
                 Toast.makeText(this, "Pressed Invite to Project", Toast.LENGTH_SHORT).show();
                 return true;
             default:
