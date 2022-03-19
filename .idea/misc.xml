@@ -48,6 +48,7 @@
         <entry key="app/src/main/res/layout/activity_user_page.xml" value="0.25" />
         <entry key="app/src/main/res/layout/card_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_login_form.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/layout_taskitem.xml" value="0.40520833333333334" />
         <entry key="app/src/main/res/layout/task_item.xml" value="0.23489583333333333" />
       </map>
     </option>

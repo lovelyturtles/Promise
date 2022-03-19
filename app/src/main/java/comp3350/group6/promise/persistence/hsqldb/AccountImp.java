@@ -22,14 +22,13 @@ public class AccountImp implements AccountDao {
 
     @Override
     public int createAccount(String email, String password, int userId) throws Exception {
-        password = new String(Base64.encodeBase64URLSafe(password.getBytes(StandardCharsets.UTF_8)), Charset.defaultCharset());
-        Connection cnn = DBConnectorUtil.getConnection();
-        assert cnn != null;
-        PreparedStatement preparedStatement = cnn.prepareStatement("insert into Account values (?,?,?)");
-        preparedStatement.setString(1, email);
-        preparedStatement.setString(2, password);
-        preparedStatement.setInt(3, userId);
-        try {
+        try (final Connection cnn = DBConnectorUtil.getConnection()) {
+            assert cnn != null;
+            password = new String(Base64.encodeBase64URLSafe(password.getBytes(StandardCharsets.UTF_8)), Charset.defaultCharset());
+            PreparedStatement preparedStatement = cnn.prepareStatement("insert into Account values (?,?,?)");
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            preparedStatement.setInt(3, userId);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -39,22 +38,26 @@ public class AccountImp implements AccountDao {
 
     @Override
     public int changePassword(int userId, String oldPassword, String newPassword) throws Exception {
-        oldPassword = new String(Base64.encodeBase64URLSafe(oldPassword.getBytes(StandardCharsets.UTF_8)), Charset.defaultCharset());
-        newPassword = new String(Base64.encodeBase64URLSafe(newPassword.getBytes(StandardCharsets.UTF_8)), Charset.defaultCharset());
-        Connection cnn = DBConnectorUtil.getConnection();
-        assert cnn != null;
-        PreparedStatement preparedStatement = cnn.prepareStatement("update Account set password = ? where userId = ? and password = ?");
-        preparedStatement.setString(1, newPassword);
-        preparedStatement.setInt(2, userId);
-        preparedStatement.setString(3, oldPassword);
-        return  preparedStatement.executeUpdate();
+        try (final Connection cnn = DBConnectorUtil.getConnection()) {
+            assert cnn != null;
+            oldPassword = new String(Base64.encodeBase64URLSafe(oldPassword.getBytes(StandardCharsets.UTF_8)), Charset.defaultCharset());
+            newPassword = new String(Base64.encodeBase64URLSafe(newPassword.getBytes(StandardCharsets.UTF_8)), Charset.defaultCharset());
+            PreparedStatement preparedStatement = cnn.prepareStatement("update Account set password = ? where userId = ? and password = ?");
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setInt(2, userId);
+            preparedStatement.setString(3, oldPassword);
+            return preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 
 
     @Override
     public boolean accountExists(String email) {
-        Connection cnn = DBConnectorUtil.getConnection();
-        try {
+
+        try (final Connection cnn = DBConnectorUtil.getConnection()) {
             assert cnn != null;
             PreparedStatement preparedStatement = cnn.prepareStatement("select * from account where email = ?");
             preparedStatement.setString(1, email);
@@ -68,8 +71,7 @@ public class AccountImp implements AccountDao {
 
     @Override
     public Account getAccountByEmail(String email) {
-        Connection cnn = DBConnectorUtil.getConnection();
-        try {
+        try (final Connection cnn = DBConnectorUtil.getConnection()) {
             assert cnn != null;
             PreparedStatement preparedStatement = cnn.prepareStatement("select * from account where email = ?");
             preparedStatement.setString(1, email);
@@ -84,9 +86,8 @@ public class AccountImp implements AccountDao {
 
     @Override
     public boolean passwordsMatch(String email, String password) {
-        password = new String(Base64.encodeBase64URLSafe(password.getBytes(StandardCharsets.UTF_8)), Charset.defaultCharset());
-        Connection cnn = DBConnectorUtil.getConnection();
-        try {
+        try (final Connection cnn = DBConnectorUtil.getConnection()) {
+            password = new String(Base64.encodeBase64URLSafe(password.getBytes(StandardCharsets.UTF_8)), Charset.defaultCharset());
             assert cnn != null;
             PreparedStatement preparedStatement = cnn.prepareStatement("select * from account where email = ? and password = ?");
             preparedStatement.setString(1, email);
