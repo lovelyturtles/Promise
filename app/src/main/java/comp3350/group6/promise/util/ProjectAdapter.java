@@ -47,6 +47,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewhold
         holder.projectDescTV.setText(project.getStatement());
 
         // [iteration 2] change to proper number + add project image
+        holder.projectImg.setImageResource(R.drawable.astro);
         holder.membersTV.setText("3");
         holder.boxTV.setText("5");
     }
@@ -62,7 +63,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewhold
         private TextView projectDescTV;
         private TextView membersTV;
         private TextView boxTV;
-        private ImageView projectImg; // will be added on iteration 2
+        private ImageView projectImg;
         private OnCardListener listener;
 
         public Viewholder(@NonNull View itemView, OnCardListener listener){
@@ -72,6 +73,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewhold
             projectNameTV = itemView.findViewById(R.id.project_name);
             projectDescTV = itemView.findViewById(R.id.projectDescription);
             membersTV = itemView.findViewById(R.id.memberNumber);
+            projectImg = itemView.findViewById(R.id.project_image);
             boxTV = itemView.findViewById(R.id.boxNumber);
             this.listener = listener;
 
