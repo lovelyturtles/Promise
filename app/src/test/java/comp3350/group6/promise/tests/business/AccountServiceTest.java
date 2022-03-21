@@ -15,7 +15,6 @@ import comp3350.group6.promise.objects.CurrentSession;
 import comp3350.group6.promise.objects.FakeDB;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.persistence.ProjectDao;
-import comp3350.group6.promise.persistence.hsqldb.ProjectImpNoDB;
 
 public class AccountServiceTest {
     private AccountService accountService;
