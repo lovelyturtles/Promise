@@ -9,6 +9,7 @@ package comp3350.group6.promise.persistence.hsqldb;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import comp3350.group6.promise.objects.User;
@@ -16,6 +17,13 @@ import comp3350.group6.promise.persistence.UserDao;
 import comp3350.group6.promise.util.DBConnectorUtil;
 
 public class UserImp implements UserDao {
+
+    private User createUserObject(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt("userId");
+        String name = resultSet.getString("name");
+        String introduction = resultSet.getString("introduction");
+        return new User(id, name, introduction);
+    }
 
     @Override
     public int addUser(String name, String introduction) {
@@ -28,7 +36,7 @@ public class UserImp implements UserDao {
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             generatedKeys.next();
             return generatedKeys.getInt(1);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return -1;
@@ -43,7 +51,7 @@ public class UserImp implements UserDao {
             preparedStatement.setString(2, introduction);
             preparedStatement.setInt(3, userId);
             return preparedStatement.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return -1;
@@ -58,12 +66,9 @@ public class UserImp implements UserDao {
             preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                int id = resultSet.getInt("userId");
-                String name = resultSet.getString("name");
-                String introduction = resultSet.getString("introduction");
-                return new User(id, name, introduction);
+                return createUserObject(resultSet);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return new User(userId, null, null);
