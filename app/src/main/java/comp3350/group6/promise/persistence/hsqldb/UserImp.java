@@ -42,8 +42,7 @@ public class UserImp implements UserDao {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, introduction);
             preparedStatement.setInt(3, userId);
-            preparedStatement.executeUpdate();
-            return 1;
+            return preparedStatement.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();
         }
