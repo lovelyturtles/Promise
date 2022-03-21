@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import comp3350.group6.promise.R;
-import comp3350.group6.promise.business.ProjectService;
+import comp3350.group6.promise.business.AccessService;
+import comp3350.group6.promise.objects.Access;
+import comp3350.group6.promise.objects.CurrentSession;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.presentation.Project.CreateProjectActivity;
 import comp3350.group6.promise.presentation.Project.ProjectActivity;
@@ -21,14 +23,15 @@ import comp3350.group6.promise.util.ProjectAdapter;
 // Reference for Class: https://www.geeksforgeeks.org/cardview-using-recyclerview-in-android-with-example/
 public class DashboardActivity extends AppCompatActivity implements ProjectAdapter.Viewholder.OnCardListener{
 
-    private static final ProjectService projectService = new ProjectService();
+    private static final AccessService accessService = new AccessService();
 
+    private List<Access> accessList;
     private List<Project> projects;
 
     private RecyclerView projectRV;
     private ProjectAdapter projectAdapter;
     private LinearLayoutManager linearLayoutManager;
-    private ImageButton moreButton;
+    private ImageButton addButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +39,10 @@ public class DashboardActivity extends AppCompatActivity implements ProjectAdapt
         setContentView(R.layout.activity_dashboard);
 
         projectRV = findViewById(R.id.projectRecyclerView);
-        moreButton = findViewById(R.id.moreButton);
+        addButton = findViewById(R.id.dashboard_add);
 
-        projects = projectService.getProjects();
+        accessList = accessService.getUserAccess(CurrentSession.currentUser.getUserID());
+        projects = accessService.getProjects(CurrentSession.currentUser.getUserID());
 
         projectAdapter = new ProjectAdapter(this, projects, this::onCardClick);
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -46,7 +50,7 @@ public class DashboardActivity extends AppCompatActivity implements ProjectAdapt
         projectRV.setLayoutManager(linearLayoutManager);
         projectRV.setAdapter(projectAdapter);
 
-        moreButton.setOnClickListener( new View.OnClickListener() {
+        addButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick( View view ) {
                 goToAddProject();
