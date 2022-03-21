@@ -46,11 +46,11 @@ public class ProjectImp implements ProjectDao {
     public List<Project> getProjectList() {
         final List<Project> projects = new ArrayList<Project>();
 
-        try (Connection con = DBConnectorUtil.getConnection();
-             PreparedStatement pstmt = con.prepareStatement("select * from project");
-             ResultSet rs = pstmt.executeQuery()) {
-
-            while (rs.next()) {
+        try(final Connection con = DBConnectorUtil.getConnection();
+            PreparedStatement pstmt = con.prepareStatement("select * from project");
+            ResultSet rs = pstmt.executeQuery()){
+            
+            while(rs.next()){
                 Project p = createProjectObject(rs);
                 projects.add(p);
             }
@@ -83,8 +83,8 @@ public class ProjectImp implements ProjectDao {
     @Override
     public Project insertProject(Project project) {
         String query = "insert into project (projectName,statement,statusNum,createdTime,estimatedEndTime) values (?,?,?,?,?)";
-        try (Connection con = DBConnectorUtil.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+        try(final Connection con = DBConnectorUtil.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)){
 
             pstmt.setString(1, project.getProjectName());
             pstmt.setString(2, project.getStatement());
@@ -108,10 +108,10 @@ public class ProjectImp implements ProjectDao {
     }
 
     @Override
-    public Project updateProject(Project project) {
-        try (Connection con = DBConnectorUtil.getConnection();
-             PreparedStatement pstmt = con.prepareStatement("update project set projectName = ?, statement = ?, statusNum = ?, estimatedEndTime = ? where projectId = ?")) {
-
+    public Project updateProject(Project project){
+        try(final Connection con = DBConnectorUtil.getConnection();
+            PreparedStatement pstmt = con.prepareStatement("update project set projectName = ?, statement = ?, statusNum = ?, estimatedEndTime = ? where projectId = ?")){ 
+            
             pstmt.setString(1, project.getProjectName());
             pstmt.setString(2, project.getStatement());
             pstmt.setInt(3, project.getStatusNum());
@@ -128,10 +128,10 @@ public class ProjectImp implements ProjectDao {
     }
 
     @Override
-    public void deleteProject(Project project) {
-        try (Connection con = DBConnectorUtil.getConnection();
-             PreparedStatement pstmt = con.prepareStatement("delete from project where projectId = ?")) {
-
+    public void deleteProject(Project project){
+        try(final Connection con = DBConnectorUtil.getConnection();
+            PreparedStatement pstmt = con.prepareStatement("delete from project where projectId = ?")){ 
+            
             pstmt.setInt(1, project.getProjectID());
 
             pstmt.executeUpdate();
