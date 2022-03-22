@@ -13,4 +13,7 @@ public interface AccessDao {
 
     List<Access> getAccessByUser(int userId);
 
+    Access insertAccess(Access access);
+
+    Access updateAccess(Access access);
 }

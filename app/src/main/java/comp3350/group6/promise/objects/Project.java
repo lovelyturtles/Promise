@@ -23,9 +23,9 @@ public class Project {
             this.statement = "project statement";
         }
         this.statement = statement;
-        this.statusNum = 0; // [iteration 2] set to default status
+        this.statusNum = 0; //TODO: set to default status
         
-        Timestamp time = new Timestamp(System.currentTimeMillis());
+        Timestamp time = new Timestamp(System.currentTimeMillis()); //TODO: check estimated time
         this.createdTime = time;
         this.estimatedEndTime = time;
 

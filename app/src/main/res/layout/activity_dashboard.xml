@@ -5,35 +5,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context=".presentation.User.DashboardActivity">
+
+    <FrameLayout
+        android:id="@+id/dashboard_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/moreButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@null"
+            android:padding="20dp"
+            app:srcCompat="@drawable/ic_more_vert" />
+
+        <TextView
+            android:id="@+id/myProjects"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="MY PROJECTS"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/projectRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/myProjects" />
+        android:layout_below="@id/dashboard_header" />
 
     <ImageButton
-        android:id="@+id/moreButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/dashboard_add"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentRight="true"
-        android:background="#FFFFFF"
-        android:padding="20dp"
-        app:srcCompat="@drawable/ic_more_vert" />
-
-    <TextView
-        android:id="@+id/myProjects"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="MY PROJECTS"
-        android:textColor="#000000"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        android:layout_alignParentBottom="true"
+        android:background="@null"
+        android:elevation="25dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/ic_add" />
 
 </RelativeLayout>

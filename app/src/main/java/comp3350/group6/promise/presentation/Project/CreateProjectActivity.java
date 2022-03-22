@@ -11,14 +11,18 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.business.AccessService;
 import comp3350.group6.promise.business.EmptyInputException;
 import comp3350.group6.promise.business.ProjectService;
+import comp3350.group6.promise.objects.Access;
+import comp3350.group6.promise.objects.CurrentSession;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.presentation.User.DashboardActivity;
 
 public class CreateProjectActivity extends AppCompatActivity{
 
     private static final ProjectService projectService = new ProjectService();
+    private static final AccessService accessService = new AccessService();
 
     private EditText name;
     private EditText description;
@@ -60,12 +64,17 @@ public class CreateProjectActivity extends AppCompatActivity{
         String projectName = name.getText().toString();
         String projectDesc = description.getText().toString();
 
-        // Users cannot add projects with no name
         try {
-            projectService.insertProject(new Project(projectName, projectDesc));
+            Project newProject = projectService.insertProject(new Project(projectName, projectDesc));
+            Access newAccess = new Access(newProject.getProjectID(), CurrentSession.currentUser.getUserID()); //TODO: Maybe change current session
+            accessService.insertAccess(newAccess);
+
+            // go back to dashboard
             Intent intent = new Intent(this, DashboardActivity.class );
             startActivity( intent );
+
         } catch (EmptyInputException e) {
+            // Users cannot add projects with no name
             Toast.makeText(this, "You need a name for your project.", Toast.LENGTH_LONG).show();
         }
     }
