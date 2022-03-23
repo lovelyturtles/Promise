@@ -26,12 +26,12 @@ import comp3350.group6.promise.util.DBConnectorUtil;
     Check ProjectImpNoDB.java for the persistence implementation for iteration 1.
  */
 
-public class ProjectImp implements ProjectDao {
+public class ProjectImp implements ProjectDao{
 
     /*
-     * Used to create a Project object from a SQL ResultSet
+     * Used to create a Project object from a SQL ResultSet 
      */
-    private Project createProjectObject(ResultSet rs) throws SQLException {
+    private Project createProjectObject(ResultSet rs) throws SQLException{
         int projectID = rs.getInt("projectId");
         String projectName = rs.getString("projectName");
         String statement = rs.getString("statement");
@@ -64,24 +64,13 @@ public class ProjectImp implements ProjectDao {
 
     @Override
     public Project getProjectByID(int projectID) {
-        final Project p;
+        //[iteration 2] implement
 
-        try (Connection con = DBConnectorUtil.getConnection();) {
-            PreparedStatement pstmt = con.prepareStatement("select * from project where projectId = ?");
-            pstmt.setInt(1, projectID);
-            ResultSet rs = pstmt.executeQuery();
-            rs.next();
-            p = createProjectObject(rs);
-
-        } catch (SQLException e) {
-            throw new PersistenceException(e);
-        }
-
-        return p;
+        return null;
     }
 
     @Override
-    public Project insertProject(Project project) {
+    public Project insertProject(Project project){
         String query = "insert into project (projectName,statement,statusNum,createdTime,estimatedEndTime) values (?,?,?,?,?)";
         try(final Connection con = DBConnectorUtil.getConnection();
             PreparedStatement pstmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)){
@@ -91,7 +80,7 @@ public class ProjectImp implements ProjectDao {
             pstmt.setInt(3, project.getStatusNum());
             pstmt.setTimestamp(4, project.getCreatedTime());
             pstmt.setTimestamp(5, project.getEstimatedEndTime());
-
+            
             pstmt.executeUpdate();
 
             ResultSet generatedKeys = pstmt.getGeneratedKeys();
@@ -99,6 +88,8 @@ public class ProjectImp implements ProjectDao {
             generatedKeys.next();
 
             project.setProjectID(generatedKeys.getInt(1));
+
+            con.close();
 
         } catch (SQLException e) {
             throw new PersistenceException(e);
@@ -117,7 +108,7 @@ public class ProjectImp implements ProjectDao {
             pstmt.setInt(3, project.getStatusNum());
             pstmt.setTimestamp(4, project.getEstimatedEndTime());
             pstmt.setInt(5, project.getProjectID());
-
+            
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -133,7 +124,7 @@ public class ProjectImp implements ProjectDao {
             PreparedStatement pstmt = con.prepareStatement("delete from project where projectId = ?")){ 
             
             pstmt.setInt(1, project.getProjectID());
-
+            
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -141,5 +132,5 @@ public class ProjectImp implements ProjectDao {
         }
 
     }
-
+    
 }

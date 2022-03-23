@@ -10,18 +10,20 @@ import comp3350.group6.promise.business.EmptyInputException;
 import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.objects.FakeDB;
 import comp3350.group6.promise.objects.Project;
-import comp3350.group6.promise.persistence.hsqldb.ProjectImp;
-
+//import comp3350.group6.promise.persistence.stub.ProjectImpNoDB;
 /*
     This class is testing the ProjectService class with a FakeDB implementation of the ProjectDao class (persistence).
  */
 public class ProjectServiceTempDBTest {
+//    private FakeDB db;
     private ProjectService projectService;
 
     @Before
     public void setUp() throws Exception{
         // setup the fake database and projectService class
-        projectService = new ProjectService(new ProjectImp());
+//        db = new FakeDB();
+        projectService = new ProjectService();
+//        db.initialize();
     }
 
     /*

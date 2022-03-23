@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="comp3350.group6.promise">
+        package="comp3350.group6.promise">
+
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.Promise">
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/Theme.Promise">
         <activity
-            android:name=".presentation.User.RegisterActivity"
-            android:exported="false" />
+                android:name=".presentation.User.RegisterActivity"
+                android:exported="false" />
         <activity
-            android:name=".presentation.Project.CreateProjectActivity"
-            android:exported="false" />
+                android:name=".presentation.Project.CreateProjectActivity"
+                android:exported="false" />
         <activity
-            android:name=".presentation.User.DashboardActivity"
-            android:exported="false" />
+                android:name=".presentation.User.DashboardActivity"
+                android:exported="false" />
         <activity
-            android:name=".presentation.Project.ProjectActivity"
-            android:exported="false" />
+                android:name=".presentation.Project.ProjectActivity"
+                android:exported="false" />
         <activity
-            android:name=".presentation.Notification.NotificationsActivity"
-            android:exported="false" />
+                android:name=".presentation.Notification.NotificationsActivity"
+                android:exported="false" />
         <activity
-            android:name=".presentation.Project.Invitation.SentInviteActivity"
-            android:exported="false" />
+                android:name=".presentation.Project.Invitation.SentInviteActivity"
+                android:exported="false" />
         <activity
-            android:name=".presentation.MainActivity"
-            android:exported="true">
+                android:name=".presentation.MainActivity"
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,12 +40,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.Task.TaskActivity"
-            android:exported="true" />
-            
+                android:name=".presentation.Task.TaskActivity"
+                android:exported="true" />
+
         <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+                android:name="preloaded_fonts"
+                android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -38,7 +38,7 @@ public class TaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
 
-        currentTask = generateTask("Task A");
+//        currentTask = generateTask("Task A");
 
         if (getIntent() != null && getIntent().getExtras() != null) {
             int id = getIntent().getIntExtra("taskID", -1);
