@@ -4,14 +4,14 @@ import comp3350.group6.promise.objects.Account;
 
 public interface AccountDao {
 
-    int createAccount(String email, String password, int userId) throws Exception;
+    int createAccount(String email, String password, int userId);
 
-    int changePassword(int userId, String oldPassword, String newPassword) throws Exception;
+    int changePassword(int userId, String oldPassword, String newPassword);
 
-    boolean accountExists( String email );
+    boolean accountExists(String email);
 
-    Account getAccountByEmail(String email );
+    Account getAccountByEmail(String email);
 
-    boolean passwordsMatch( String email, String password );
+    boolean passwordsMatch(String email, String password);
 
 }

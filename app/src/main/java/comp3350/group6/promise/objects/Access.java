@@ -1,5 +1,6 @@
 package comp3350.group6.promise.objects;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 
 import lombok.Data;
@@ -15,13 +16,19 @@ public class Access {
     private String role;
     private Timestamp startTime;
 
-    public Access( int projectId, int userId, String role, Timestamp startTime) {
+    public Access(int projectId, int userId) {
+        this.projectId = projectId;
+        this.userId = userId;
+        this.role = "Member";
+        this.startTime = new Timestamp(System.currentTimeMillis());
+    }
+
+    public Access(int projectId, int userId, String role, Timestamp startTime) {
         this.projectId = projectId;
         this.userId = userId;
         this.role = role;
         this.startTime = startTime;
     }
-
 
     public int getProjectId() {
         return projectId;
@@ -50,5 +57,7 @@ public class Access {
     public Timestamp getStartTime() {
         return startTime;
     }
+
+    public void setStartTime(Timestamp time) { this.startTime = time; }
 
 }

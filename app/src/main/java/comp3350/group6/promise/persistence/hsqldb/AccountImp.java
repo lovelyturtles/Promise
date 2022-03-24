@@ -21,7 +21,7 @@ import comp3350.group6.promise.util.DBConnectorUtil;
 public class AccountImp implements AccountDao {
 
     @Override
-    public int createAccount(String email, String password, int userId) throws Exception {
+    public int createAccount(String email, String password, int userId) {
         try (final Connection cnn = DBConnectorUtil.getConnection()) {
             assert cnn != null;
             password = new String(Base64.encodeBase64URLSafe(password.getBytes(StandardCharsets.UTF_8)), Charset.defaultCharset());
@@ -37,7 +37,7 @@ public class AccountImp implements AccountDao {
     }
 
     @Override
-    public int changePassword(int userId, String oldPassword, String newPassword) throws Exception {
+    public int changePassword(int userId, String oldPassword, String newPassword){
         try (final Connection cnn = DBConnectorUtil.getConnection()) {
             assert cnn != null;
             oldPassword = new String(Base64.encodeBase64URLSafe(oldPassword.getBytes(StandardCharsets.UTF_8)), Charset.defaultCharset());
