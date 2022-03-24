@@ -147,5 +147,5 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> { 
 
     public interface OnTaskLongClickListener {
         void onLongTaskClick(int position);
-    }
+    }// test
 }
