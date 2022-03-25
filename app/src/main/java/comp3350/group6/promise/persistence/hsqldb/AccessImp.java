@@ -34,7 +34,7 @@ public class AccessImp implements AccessDao {
 
         try(Connection con = DBConnectorUtil.getConnection()){
 
-            PreparedStatement pstmt = con.prepareStatement("select * from user, participate where user.userId = participate.userId and projectId = ?");
+            PreparedStatement pstmt = con.prepareStatement("select * from user, access where user.userId = access.userId and projectId = ?");
             pstmt.setInt(1, projectId);
             ResultSet rs = pstmt.executeQuery();
 
@@ -59,7 +59,7 @@ public class AccessImp implements AccessDao {
 
         try(Connection con = DBConnectorUtil.getConnection()){
 
-            PreparedStatement pstmt = con.prepareStatement("select * from project, participate where project.projectId = participate.projectId and userId = ?");
+            PreparedStatement pstmt = con.prepareStatement("select * from project, access where project.projectId = access.projectId and userId = ?");
             pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();
 
@@ -83,7 +83,7 @@ public class AccessImp implements AccessDao {
 
         try(Connection con = DBConnectorUtil.getConnection()){
 
-            PreparedStatement pstmt = con.prepareStatement("insert into participate (projectId, userId, role) values (?, ?, ?)");
+            PreparedStatement pstmt = con.prepareStatement("insert into access (projectId, userId, role) values (?, ?, ?)");
             pstmt.setInt(1, access.getProjectId());
             pstmt.setInt(2, access.getUserId());
             pstmt.setString(3, access.getRole());
@@ -103,7 +103,7 @@ public class AccessImp implements AccessDao {
 
         try(Connection con = DBConnectorUtil.getConnection()){
 
-            PreparedStatement pstmt = con.prepareStatement("update participate role = ? where userId = ? and projectId = ?");
+            PreparedStatement pstmt = con.prepareStatement("update access role = ? where userId = ? and projectId = ?");
             pstmt.setString(1, access.getRole());
             pstmt.setInt(2, access.getUserId());
             pstmt.setInt(3, access.getProjectId());
