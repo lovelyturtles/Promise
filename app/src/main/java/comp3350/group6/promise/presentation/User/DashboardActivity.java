@@ -15,7 +15,7 @@ import java.util.List;
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.business.AccessService;
 import comp3350.group6.promise.objects.Access;
-import comp3350.group6.promise.objects.CurrentSession;
+import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.presentation.Project.CreateProjectActivity;
 import comp3350.group6.promise.presentation.Project.ProjectActivity;

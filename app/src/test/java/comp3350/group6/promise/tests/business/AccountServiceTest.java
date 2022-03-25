@@ -7,12 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Collections;
-import java.util.List;
-
 import comp3350.group6.promise.business.AccountService;
-import comp3350.group6.promise.business.ProjectService;
-import comp3350.group6.promise.objects.CurrentSession;
 import comp3350.group6.promise.objects.FakeDB;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.persistence.ProjectDao;

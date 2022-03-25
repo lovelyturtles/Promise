@@ -1,7 +1,7 @@
 package comp3350.group6.promise.business;
 
 
-import comp3350.group6.promise.objects.CurrentSession;
+import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.persistence.AccountDao;
 import comp3350.group6.promise.persistence.hsqldb.AccountImp;
 //import comp3350.group6.promise.persistence.stub.AccountImpNoDB;
