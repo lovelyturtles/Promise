@@ -38,7 +38,7 @@ public class DashboardActivity extends AppCompatActivity implements ProjectAdapt
         setContentView(R.layout.activity_dashboard);
 
         projectRecyclerView = findViewById(R.id.projectRecyclerView);
-        addButton = findViewById(R.id.dashboard_add);
+//        addButton = findViewById(R.id.dashboard_add);
 
         accessList = accessService.getUserAccess(CurrentSession.currentUser.getUserID());
         projects = accessService.getProjects(CurrentSession.currentUser.getUserID());

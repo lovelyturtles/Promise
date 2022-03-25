@@ -21,7 +21,6 @@ import comp3350.group6.promise.presentation.User.DashboardActivity;
 
 public class CreateProjectActivity extends AppCompatActivity{
 
-    private static final ProjectService projectService = new ProjectService();
     private static final AccessService accessService = new AccessService();
 
     private Toolbar toolbarView;
@@ -61,7 +60,7 @@ public class CreateProjectActivity extends AppCompatActivity{
         String projectDesc = descriptionInputView.getText().toString();
 
         try {
-            Project newProject = projectService.insertProject(new Project(projectName, projectDesc));
+            Project newProject = ProjectService.getInstance().insertProject(new Project(projectName, projectDesc));
             Access newAccess = new Access(newProject.getProjectID(), CurrentSession.currentUser.getUserID()); //TODO: Maybe change current session
             accessService.insertAccess(newAccess);
 

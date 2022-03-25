@@ -34,44 +34,46 @@ public class TaskActivity extends AppCompatActivity {
 
         if (getIntent() != null && getIntent().getExtras() != null) {
             int id = getIntent().getIntExtra("taskID", -1);
-            if (id != -1){
+            if (id != -1) {
                 task = TaskService.getInstance().getTask(id);
             }
         }
 
-        if(task != null) {
-            // Obtain views
-            toolbarLayoutView = findViewById(R.id.toolbar_layout);
-            toolbarView = findViewById(R.id.toolbar);
+        // Obtain views
 
-            descriptionView = findViewById(R.id.task_page_description);
-            priorityView = findViewById(R.id.task_page_priority);
-            deadlineView = findViewById(R.id.task_page_deadline);
+        toolbarLayoutView = findViewById(R.id.toolbar_layout);
+        toolbarView = findViewById(R.id.toolbar);
 
-            // Set content of views
+        descriptionView = findViewById(R.id.task_page_description);
+        priorityView = findViewById(R.id.task_page_priority);
+        deadlineView = findViewById(R.id.task_page_deadline);
 
-            toolbarLayoutView.setTitle(task.getTitle());
-            descriptionView.setText(task.getDescription());
-            priorityView.setText("Priority: " + task.getPriority());
-            deadlineView.setText("Deadline: " + task.getDeadline().toLocaleString());
+        // Set content of views
 
-            toolbarView.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
+        toolbarLayoutView.setTitle(task.getTitle());
+        descriptionView.setText(task.getDescription());
+        priorityView.setText("Priority: " + task.getPriority());
+        deadlineView.setText("Deadline: " + task.getDeadline().toLocaleString());
 
-    // Toolbar Method Overrides
+        toolbarView.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+    }
+
+    // Toolbar Methods
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu (Menu menu){
         getMenuInflater().inflate(R.menu.project_toolbar_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected (MenuItem item){
         switch (item.getItemId()) {
             case R.id.action_edit:
                 // TODO: Implement action handler for task editing

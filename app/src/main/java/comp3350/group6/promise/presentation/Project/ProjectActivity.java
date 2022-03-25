@@ -36,8 +36,6 @@ import comp3350.group6.promise.util.TaskAdapter;
 
 public class ProjectActivity extends AppCompatActivity implements TaskAdapter.OnTaskClickListener, TaskAdapter.OnTaskLongClickListener {
 
-    private static final ProjectService projectService = new ProjectService();
-    private static final TaskService taskService = new TaskService();
     private static final String TAG = "tag" ;
 
     private Project project;
@@ -88,7 +86,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
     }
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview.");
-        RecyclerView recyclerView = findViewById(R.id.subtasks_recycler);
+        RecyclerView recyclerView = findViewById(R.id.tasks_recycler);
         TaskAdapter adapter = new TaskAdapter(this, mNames, mImageUrls);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -103,7 +101,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
         if (getIntent() != null && getIntent().getExtras() != null) {
             int id = getIntent().getIntExtra("projectID", -1);
             if (id != -1) {
-                currentProject = projectService.getProjectByID(id);
+                project = ProjectService.getInstance().getProjectByID(id);
             }
         }
 
@@ -114,7 +112,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
         projectDescriptionView = findViewById(R.id.project_page_desc);
         projectDescriptionView.setText(project.getStatement());
 
-        listOfTasks = taskService.getTasksByProjectId(currentProject.getProjectID());
+        listOfTasks = TaskService.getInstance().getTasksByProjectId(project.getProjectID());
         taskListAdapter = new TaskAdapter(this,listOfTasks,this,this);
         taskRecyclerView = findViewById(R.id.task_recycler);
         taskRecyclerView.setLayoutManager( new LinearLayoutManager(ProjectActivity.this, LinearLayoutManager.VERTICAL,false));
@@ -131,18 +129,18 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
             }
         });
 
-        createTaskButton = (Button) findViewById(R.id.button_create_task);
-
-        createTaskButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addItem(view);
-            }
-        });
-
-    }
+//        createTaskButton = (Button) findViewById(R.id.button_create_task);
+//
+//        createTaskButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                addItem(view);
+//            }
+//        });
 
     }
+
+    // Task List Methods
 
     @Override
     public void onTaskClick(int position) {
@@ -152,7 +150,6 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
         startActivity(intent);
     } // Go to Task Activity
 
-    // TASK RELATED METHODS
     @Override
     public void onLongTaskClick(int position) {
         Task longClickedTask = listOfTasks.get(position);
@@ -163,7 +160,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
 
     }
 
-    // Toolbar Method Overrides
+    // Toolbar Methods
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

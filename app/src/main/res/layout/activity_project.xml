@@ -44,8 +44,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,39 +59,40 @@
                 android:text="Project Description"
                 app:lineHeight="20sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tasks_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tasks_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="171dp">
+                android:layout_height="wrap_content">
 
-                <Button
-                    android:text="Create task"
-                    android:layout_width="169dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button_create_task"
-                    android:onClick="onTaskClick"
-                    tools:layout_editor_absoluteX="188dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="2dp" />
+            </androidx.recyclerview.widget.RecyclerView>
 
-                <EditText
-                    android:layout_width="189dp"
-                    android:layout_height="53dp"
-                    android:inputType="textPersonName"
-                    android:text="Name"
-                    android:ems="10"
-                    android:id="@+id/editTextTextPersonName"
-                    tools:layout_editor_absoluteY="3dp"
-                    tools:layout_editor_absoluteX="-2dp" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="171dp">-->
 
-    </LinearLayout>
+<!--                            <Button-->
+<!--                                android:text="Create task"-->
+<!--                                android:layout_width="169dp"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:id="@+id/button_create_task"-->
+<!--                                android:onClick="onTaskClick"-->
+<!--                                tools:layout_editor_absoluteX="188dp"-->
+<!--                                app:layout_constraintTop_toTopOf="parent"-->
+<!--                                android:layout_marginTop="2dp" />-->
+
+<!--                            <EditText-->
+<!--                                android:layout_width="189dp"-->
+<!--                                android:layout_height="53dp"-->
+<!--                                android:inputType="textPersonName"-->
+<!--                                android:text="Name"-->
+<!--                                android:ems="10"-->
+<!--                                android:id="@+id/editTextTextPersonName"-->
+<!--                                tools:layout_editor_absoluteY="3dp"-->
+<!--                                tools:layout_editor_absoluteX="-2dp" />-->
+<!--                        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

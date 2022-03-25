@@ -54,10 +54,9 @@ public class AccessService {
     public List<Project> getProjects(int userId) {
         List<Access> accessList = getUserAccess(userId);
         List<Project> projectList = new ArrayList<>();
-        ProjectService projectService = new ProjectService();
 
         for (Access access: accessList) {
-            projectList.add(projectService.getProjectByID(access.getUserId()));
+            projectList.add(ProjectService.getInstance().getProjectByID(access.getUserId()));
         }
 
         return Collections.unmodifiableList(projectList);
