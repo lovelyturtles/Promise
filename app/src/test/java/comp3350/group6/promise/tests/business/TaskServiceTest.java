@@ -19,7 +19,7 @@ public class TaskServiceTest {
     @Before
     public void setup() {
         System.out.println("Starting test for TaskService");
-        taskService = new TaskService(false); // false init a fake DB
+        taskService = new TaskService(true); // false init a fake DB
     }
 
     @Test

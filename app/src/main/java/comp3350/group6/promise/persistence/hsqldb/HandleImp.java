@@ -14,8 +14,6 @@ import comp3350.group6.promise.util.DBConnectorUtil;
 
 public class HandleImp implements HandleDao {
 
-
-
     private Handle fromResultSet(final ResultSet rs) throws SQLException{
         final int defaultId = rs.getInt("defaultId");
         final int taskId = rs.getInt("taskId");
@@ -57,5 +55,15 @@ public class HandleImp implements HandleDao {
             throw new PersistenceException(e);
         }
         return listOfTaskUser;
+    }
+
+    @Override
+    public void insertHandle(Handle handle) {
+
+    }
+
+    @Override
+    public void updateHandle(Handle handle) {
+
     }
 }
