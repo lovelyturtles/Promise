@@ -8,22 +8,18 @@ import java.util.List;
 
 import comp3350.group6.promise.business.EmptyInputException;
 import comp3350.group6.promise.business.ProjectService;
-import comp3350.group6.promise.objects.FakeDB;
 import comp3350.group6.promise.objects.Project;
-//import comp3350.group6.promise.persistence.stub.ProjectImpNoDB;
 /*
     This class is testing the ProjectService class with a FakeDB implementation of the ProjectDao class (persistence).
  */
 public class ProjectServiceTempDBTest {
-//    private FakeDB db;
+
     private ProjectService projectService;
 
     @Before
-    public void setUp() throws Exception{
+    public void setUp() {
         // setup the fake database and projectService class
-//        db = new FakeDB();
         projectService = new ProjectService();
-//        db.initialize();
     }
 
     /*
@@ -130,5 +126,30 @@ public class ProjectServiceTempDBTest {
 
 
         System.out.println("Passed deleteProject method from ProjectService Class.");
+    }
+
+    @Test
+    public void testGetProjectById() throws EmptyInputException{
+
+        System.out.println("Testing getProjectId from ProjectService Class.");
+
+        List<Project> projects;
+
+        Project p1 = new Project("Test Project1", "This is a test 1.");
+        Project p2 = new Project("Test Project2", "This is a test 2.");
+
+        Project target; // expected project
+        Project result; // returned project
+
+        projectService.insertProject(p1);
+        projectService.insertProject(p2);
+
+        projects = projectService.getProjects();
+        target = projects.get(0);
+        result = projectService.getProjectByID(target.getProjectID());
+
+        assertEquals(target, result);
+
+        System.out.println("Passed getProjectId from ProjectService Class.");
     }
 }
