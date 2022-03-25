@@ -43,13 +43,15 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewhold
     @Override
     public void onBindViewHolder(@NonNull ProjectAdapter.Viewholder holder, int position){
         Project project = projectsList.get(position);
-        holder.projectNameTV.setText(project.getProjectName());
-        holder.projectDescTV.setText(project.getStatement());
+        if(project != null){
+            holder.projectNameTV.setText(project.getProjectName());
+            holder.projectDescTV.setText(project.getStatement());
 
-        // [iteration 2] change to proper number + add project image
-        holder.projectImg.setImageResource(R.drawable.astro);
-        holder.membersTV.setText("3");
-        holder.boxTV.setText("5");
+            // [iteration 2] change to proper number + add project image
+            holder.projectImg.setImageResource(R.drawable.astro);
+            holder.membersTV.setText("3");
+            holder.boxTV.setText("5");
+        }
     }
 
     @Override

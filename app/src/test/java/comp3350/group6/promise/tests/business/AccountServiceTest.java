@@ -3,11 +3,15 @@ package comp3350.group6.promise.tests.business;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import comp3350.group6.promise.business.AccountService;
 import comp3350.group6.promise.objects.FakeDB;
+import comp3350.group6.promise.objects.Project;
+import comp3350.group6.promise.persistence.ProjectDao;
+import comp3350.group6.promise.util.DBConnectorUtil;
 
 public class AccountServiceTest {
     private AccountService accountService;
@@ -15,9 +19,15 @@ public class AccountServiceTest {
     /* Each time the fake DB get reinitialized */
     @Before
     public void setup() throws Exception {
+        DBConnectorUtil.initialLocalDB();
         System.out.println("Starting test for AccountServiceTest");
         FakeDB.initialize();
         accountService = new AccountService(); // false init a fake DB
+    }
+
+    @After
+    public void clean(){
+        DBConnectorUtil.cleanLocalDB();
     }
 
     @Test
