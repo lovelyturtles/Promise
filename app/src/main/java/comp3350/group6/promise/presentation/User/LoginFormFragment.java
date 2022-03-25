@@ -16,9 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import comp3350.group6.promise.R;
-import comp3350.group6.promise.objects.CurrentSession;
-import comp3350.group6.promise.presentation.User.RegisterActivity;
-import comp3350.group6.promise.presentation.User.DashboardActivity;
+import comp3350.group6.promise.application.CurrentSession;
+import comp3350.group6.promise.application.Service;
 
 
 public class LoginFormFragment extends Fragment {
@@ -53,9 +52,9 @@ public class LoginFormFragment extends Fragment {
         String password = emailInputView.getText().toString();
 
         // Check if email and password belong to existing user
-        if( CurrentSession.accounts.accountExists( email ) && CurrentSession.accounts.passwordsMatch( email, password )) {
+        if( Service.accounts.accountExists( email ) && Service.accounts.passwordsMatch( email, password )) {
             // Set the session user and go to their dashboard
-            assert (CurrentSession.accounts.setCurrentAccount(email, password));
+            assert (Service.accounts.setCurrentAccount(email, password));
             goToDashboard();
         }
         else {

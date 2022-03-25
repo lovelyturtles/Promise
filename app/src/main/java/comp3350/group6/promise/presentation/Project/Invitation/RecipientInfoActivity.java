@@ -13,7 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import comp3350.group6.promise.R;
-import comp3350.group6.promise.objects.CurrentSession;
+import comp3350.group6.promise.application.CurrentSession;
+import comp3350.group6.promise.application.Service;
 
 public class RecipientInfoActivity extends AppCompatActivity {
     private Button sendInvite;
@@ -46,7 +47,7 @@ public class RecipientInfoActivity extends AppCompatActivity {
                  *  if it is, call RecipientService and then goToSentPage()
                  *
                  */
-                if(CurrentSession.accounts.accountExists( recipientEmail ) ) {
+                if(Service.accounts.accountExists( recipientEmail ) ) {
                     goToSentPage();
                 }
                 else {

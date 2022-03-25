@@ -15,7 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import comp3350.group6.promise.R;
-import comp3350.group6.promise.objects.CurrentSession;
+import comp3350.group6.promise.application.CurrentSession;
+import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.presentation.MainActivity;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -52,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
                 userEmail = textEmail.getText().toString();
 
                 //Check if the email is already registered
-                if( CurrentSession.accounts.accountExists( userEmail ) )
+                if( Service.accounts.accountExists( userEmail ) )
                     openDuplicateDialog();  //dialog message that this email is already in use
 
                 else {
@@ -71,13 +72,13 @@ public class RegisterActivity extends AppCompatActivity {
 
                     try {
                         //create the account
-                        CurrentSession.accounts.createAccount( userEmail, userPassword, userName, userIntro );
+                        Service.accounts.createAccount( userEmail, userPassword, userName, userIntro );
                         //check that the email is in our database
-                        if( CurrentSession.accounts.accountExists( userEmail ) ) {
+                        if( Service.accounts.accountExists( userEmail ) ) {
                             //make sure the password was set correctly
-                            if ( CurrentSession.accounts.passwordsMatch( userEmail, userPassword ) ) {
+                            if ( Service.accounts.passwordsMatch( userEmail, userPassword ) ) {
                                 //set this as the current user and go to their home page
-                                assert (CurrentSession.accounts.setCurrentAccount(userEmail, userPassword));
+                                assert (Service.accounts.setCurrentAccount(userEmail, userPassword));
                                 goToUserHome();
                             }
 
