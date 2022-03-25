@@ -73,7 +73,7 @@ public class ProjectImp implements ProjectDao{
             ResultSet rs = pstmt.executeQuery();
 
             if(rs.next()){
-                createProjectObject(rs);
+                project = createProjectObject(rs);
             }
 
             rs.close();

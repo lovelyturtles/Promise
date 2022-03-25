@@ -9,6 +9,8 @@ import java.util.List;
 import comp3350.group6.promise.business.EmptyInputException;
 import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.objects.Project;
+import comp3350.group6.promise.util.DBConnectorUtil;
+
 /*
     This class is testing the ProjectService class with a FakeDB implementation of the ProjectDao class (persistence).
  */
@@ -18,7 +20,7 @@ public class ProjectServiceTempDBTest {
 
     @Before
     public void setUp() {
-        // setup the fake database and projectService class
+        DBConnectorUtil.initialLocalDB();
         projectService = new ProjectService();
     }
 
@@ -31,15 +33,13 @@ public class ProjectServiceTempDBTest {
     public void testInsertProject() throws EmptyInputException {
 
         System.out.println("Testing insertProject method from ProjectService Class.");
-
         List<Project> projects = projectService.getProjects();
         Project p = new Project("Test Project", "This is a test.");
-        int id = p.getProjectID();
         int originalSize = projects.size();
 
         projectService.insertProject(p);
 
-        assertTrue("Inserted object should be equal to project in List.", projectService.getProjectByID(id).equals(p));
+        assertTrue("Inserted object should be equal to project in List.", (projectService.getProjects()).get(0).equals(p));
         assertEquals("List size should be different after insertion.", originalSize+1, projectService.getProjects().size());
 
         System.out.println("Passed insertProject method from ProjectService Class.");
