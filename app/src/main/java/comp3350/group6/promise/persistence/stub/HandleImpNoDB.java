@@ -15,4 +15,9 @@ public class HandleImpNoDB implements HandleDao {
     public List<Handle> getTaskUser(int userId) {
         return null;
     }
+
+    @Override
+    public void insertHandle(Handle handle) {
+
+    }
 }

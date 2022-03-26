@@ -8,5 +8,4 @@ public interface HandleDao {
     List<Handle> getUserTask(int taskId);
     List<Handle> getTaskUser(int userId);
     void insertHandle(Handle handle);
-    void updateHandle(Handle handle);
 }

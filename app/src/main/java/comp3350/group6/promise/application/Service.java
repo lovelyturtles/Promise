@@ -1,5 +1,10 @@
 package comp3350.group6.promise.application;
 
+import comp3350.group6.promise.business.AccessService;
+import comp3350.group6.promise.business.AccountService;
+import comp3350.group6.promise.business.ProjectService;
+import comp3350.group6.promise.business.TaskService;
+import comp3350.group6.promise.business.UserService;
 import comp3350.group6.promise.persistence.HandleDao;
 import comp3350.group6.promise.persistence.TaskDao;
 import comp3350.group6.promise.persistence.hsqldb.HandleImp;
@@ -12,6 +17,12 @@ public class Service {
 
     private static TaskDao taskImp = null;
     private static HandleDao handleImp = null;
+
+    public static UserService users = new UserService();
+    public static AccountService accounts = new AccountService();
+    public static ProjectService projects = new ProjectService();
+    public static AccessService accesses = new AccessService();
+
 
     public static synchronized TaskDao getTaskImp(boolean forProduction) {
         if (taskImp == null) {
