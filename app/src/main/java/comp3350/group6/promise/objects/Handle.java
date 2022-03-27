@@ -12,20 +12,12 @@ public class Handle {
     private int userId;
     private Timestamp since;
 
-    public Handle(int defaultId, int taskId, int userId, Timestamp since) {
-        this.defaultId = defaultId;
+    public Handle( int taskId, int userId, Timestamp since) {
         this.taskId = taskId;
         this.userId = userId;
         this.since = since;
     }
 
-    public int getDefaultId() {
-        return defaultId;
-    }
-
-    public void setDefaultId(int defaultId) {
-        this.defaultId = defaultId;
-    }
 
     public int getTaskId() {
         return taskId;

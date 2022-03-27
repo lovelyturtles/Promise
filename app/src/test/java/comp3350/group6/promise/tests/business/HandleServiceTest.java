@@ -61,7 +61,7 @@ public class HandleServiceTest {
         List<Handle> listOfTaskUser1 = handleService.getListOfTaskUser(1);
         assertEquals(4, listOfTaskUser1.size());
 
-        Handle handle = new Handle(7, 5, 1, new Timestamp(System.currentTimeMillis()));
+        Handle handle = new Handle(5, 1, new Timestamp(System.currentTimeMillis()));
         handleService.insertHandle(handle);
 
         listOfTaskUser1 = handleService.getListOfTaskUser(1);

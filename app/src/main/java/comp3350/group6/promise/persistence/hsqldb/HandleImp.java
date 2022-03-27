@@ -16,11 +16,10 @@ import comp3350.group6.promise.util.DBConnectorUtil;
 public class HandleImp implements HandleDao {
 
     private Handle fromResultSet(final ResultSet rs) throws SQLException {
-        final int defaultId = rs.getInt("defaultId");
         final int taskId = rs.getInt("taskId");
         final int userId = rs.getInt("userId");
         final Timestamp since = rs.getTimestamp("since");
-        return new Handle(defaultId, taskId, userId, since);
+        return new Handle( taskId, userId, since);
     }
 
 
@@ -31,6 +30,7 @@ public class HandleImp implements HandleDao {
         try (final Connection con = DBConnectorUtil.getConnection()) {
             assert (con != null);
             final PreparedStatement ps = con.prepareStatement("SELECT * FROM USER, HANDLE WHERE USER.userId = HANDLE.userId and taskId = ?");
+            ps.setInt(1,taskId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Handle handle = fromResultSet(rs);
@@ -49,6 +49,7 @@ public class HandleImp implements HandleDao {
         try (final Connection con = DBConnectorUtil.getConnection()) {
             assert (con != null);
             final PreparedStatement ps = con.prepareStatement("SELECT * FROM TASK, HANDLE WHERE TASK.taskId = HANDLE.taskId and HANDLE.userId = ?");
+            ps.setInt(1,userId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Handle handle = fromResultSet(rs);
