@@ -18,7 +18,7 @@ public class AccessImp implements AccessDao {
     /*
      * Used to create a Access object from a SQL ResultSet
      */
-    private Access createAccessObject(ResultSet rs) throws SQLException{
+    private Access createAccessObject(ResultSet rs) throws SQLException {
         int projectId = rs.getInt("projectId");
         int userId = rs.getInt("userId");
         String role = rs.getString("role");
@@ -79,14 +79,39 @@ public class AccessImp implements AccessDao {
     }
 
     @Override
+    public Access getAccessByIDs(int userId, int projectId){
+        Access acc;
+
+        try(Connection con = DBConnectorUtil.getConnection()){
+
+            PreparedStatement pstmt = con.prepareStatement("select * from access where userId = ? and projectId = ?");
+            pstmt.setInt(1, userId);
+            pstmt.setInt(2, projectId);
+            ResultSet rs = pstmt.executeQuery();
+
+            rs.next();
+            acc = createAccessObject(rs);
+
+            pstmt.close();
+            rs.close();
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+        return acc;
+    }
+
+    @Override
     public Access insertAccess(Access access) {
 
         try(Connection con = DBConnectorUtil.getConnection()){
 
-            PreparedStatement pstmt = con.prepareStatement("insert into access (projectId, userId, role) values (?, ?, ?)");
+            PreparedStatement pstmt = con.prepareStatement("insert into access (projectId, userId, role, starttime) values (?, ?, ?, ?)");
             pstmt.setInt(1, access.getProjectId());
             pstmt.setInt(2, access.getUserId());
             pstmt.setString(3, access.getRole());
+            pstmt.setTimestamp(4, access.getStartTime());
             pstmt.executeUpdate();
 
             pstmt.close();
@@ -103,7 +128,7 @@ public class AccessImp implements AccessDao {
 
         try(Connection con = DBConnectorUtil.getConnection()){
 
-            PreparedStatement pstmt = con.prepareStatement("update access role = ? where userId = ? and projectId = ?");
+            PreparedStatement pstmt = con.prepareStatement("update access set role = ? where userId = ? and projectId = ?");
             pstmt.setString(1, access.getRole());
             pstmt.setInt(2, access.getUserId());
             pstmt.setInt(3, access.getProjectId());

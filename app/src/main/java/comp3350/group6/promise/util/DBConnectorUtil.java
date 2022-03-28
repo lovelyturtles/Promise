@@ -31,6 +31,7 @@ public class DBConnectorUtil {
                 BufferedReader bf = new BufferedReader(new FileReader("src/main/assets/localDB/PROMISE.script"));
                 String line;
                 while ((line = bf.readLine()) != null) {
+                    System.out.println(line);
                     state.execute(line);
                 }
                 bf.close();

@@ -51,36 +51,31 @@ public class TaskImp implements TaskDao {
             pre.close();
             return taskList;
         } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PersistenceException(e);
         }
     }
 
-    // TODO - Refactor duplicate code by creating a general-purpose query function for tasks (F: queryString --> taskList)
     @Override
     public List<Task> getTasksByProjectId(int projectId) {
         List<Task> taskList = new ArrayList<>();
-
         try (final Connection con = DBConnectorUtil.getConnection()) {
-            final PreparedStatement pre = con.prepareStatement("SELECT * FROM task WHERE projectId = ?");
-            pre.setString(1, String.valueOf(projectId));
-
-            final ResultSet rs = pre.executeQuery();
+            assert con != null;
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM TASK, PROJECT WHERE TASK.taskId = PROJECT.taskId and projectId = ?");
+            ps.setInt(1, projectId);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Task task = fromResultSet(rs);
                 taskList.add(task);
             }
-            rs.close();
-            pre.close();
             return taskList;
-        } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
         }
-
     }
 
     @Override
     public Task getTask(int taskId) {
-        Task result = null;
+        Task result;
         try (final Connection con = DBConnectorUtil.getConnection()) {
             final PreparedStatement pre = con.prepareStatement("SELECT * FROM task WHERE taskId = ?");
             pre.setString(1, String.valueOf(taskId));
@@ -93,7 +88,7 @@ public class TaskImp implements TaskDao {
 
             return result;
         } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PersistenceException(e);
         }
     }
 
@@ -120,14 +115,14 @@ public class TaskImp implements TaskDao {
             pre.close();
             return t;
         } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PersistenceException(e);
         }
-    } // TODO handling NULL values
+    }
 
     @Override
     public Task updateTask(Task t) {
         try (final Connection con = DBConnectorUtil.getConnection()) {
-            final PreparedStatement pre = con.prepareStatement("UPDATE task SET title = ?, description = ?, priority = ?, statusNum = ?, estimatedEndTime = ? deadline = ? WHERE taskId = ?");
+            final PreparedStatement pre = con.prepareStatement("UPDATE task SET title = ?, description = ?, priority = ?, statusNum = ?, estimatedEndTime = ?, deadline = ? WHERE taskId = ?");
             pre.setString(1, t.getTitle());
             pre.setString(2, t.getDescription());
             pre.setInt(3, t.getPriority());
@@ -139,7 +134,7 @@ public class TaskImp implements TaskDao {
             pre.close();
             return t;
         } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PersistenceException(e);
         }
     }
 
@@ -151,7 +146,7 @@ public class TaskImp implements TaskDao {
             pre.executeUpdate();
             pre.close();
         } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PersistenceException(e);
         }
     }
 }

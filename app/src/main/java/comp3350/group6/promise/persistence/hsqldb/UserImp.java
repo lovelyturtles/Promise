@@ -62,7 +62,7 @@ public class UserImp implements UserDao {
 
         try (final Connection cnn = DBConnectorUtil.getConnection()) {
             assert cnn != null;
-            PreparedStatement preparedStatement = cnn.prepareStatement("select userId, name, introduction where userId = ?");
+            PreparedStatement preparedStatement = cnn.prepareStatement("select userId, name, introduction from User where userId = ?");
             preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {

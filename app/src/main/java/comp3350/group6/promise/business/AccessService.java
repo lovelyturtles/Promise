@@ -62,6 +62,10 @@ public class AccessService {
         return Collections.unmodifiableList(projectList);
     }
 
+    public Access getAccessByIDs(int userId, int projectId){
+        return accessDao.getAccessByIDs(userId, projectId);
+    }
+
     // insert a new access to the DB
     public Access insertAccess(Access access){ return accessDao.insertAccess(access); }
 
