@@ -50,19 +50,31 @@ public class TaskImp implements TaskDao {
             pre.close();
             return taskList;
         } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PersistenceException(e);
         }
     }
 
-    // TODO
     @Override
     public List<Task> getTasksByProjectId(int projectId) {
-        return null;
+        List<Task> taskList = new ArrayList<>();
+        try (final Connection con = DBConnectorUtil.getConnection()) {
+            assert con != null;
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM TASK, PROJECT WHERE TASK.taskId = PROJECT.taskId and projectId = ?");
+            ps.setInt(1, projectId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Task task = fromResultSet(rs);
+                taskList.add(task);
+            }
+            return taskList;
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
     }
 
     @Override
     public Task getTask(int taskId) {
-        Task result = null;
+        Task result;
         try (final Connection con = DBConnectorUtil.getConnection()) {
             final PreparedStatement pre = con.prepareStatement("SELECT * FROM task WHERE taskId = ?");
             pre.setString(1, String.valueOf(taskId));
@@ -75,7 +87,7 @@ public class TaskImp implements TaskDao {
 
             return result;
         } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PersistenceException(e);
         }
     }
 
@@ -96,9 +108,9 @@ public class TaskImp implements TaskDao {
             pre.close();
             return t;
         } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PersistenceException(e);
         }
-    } // TODO handling NULL values
+    }
 
     @Override
     public Task updateTask(Task t) {
@@ -115,7 +127,7 @@ public class TaskImp implements TaskDao {
             pre.close();
             return t;
         } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PersistenceException(e);
         }
     }
 
@@ -127,7 +139,7 @@ public class TaskImp implements TaskDao {
             pre.executeUpdate();
             pre.close();
         } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PersistenceException(e);
         }
     }
 }

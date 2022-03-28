@@ -79,6 +79,5 @@ public class HandleServiceTest {
         System.out.println("Reset database");
         Service.clean(); // clean Service implementation
         DBConnectorUtil.cleanLocalDB(); // clean local db
-
     }
 }

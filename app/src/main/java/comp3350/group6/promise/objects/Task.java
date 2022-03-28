@@ -21,11 +21,11 @@ public class Task {
 
     public Task(int taskId) {
         this.taskId = taskId;
-        this.title = null;
-        this.description = null;
-        this.priority = -1;
-        this.statusNum = -1;
-        this.projectId = -1;
+        this.title = "";
+        this.description = "";
+        this.priority = 1;
+        this.statusNum = 1;
+        this.projectId = 100;
         this.createdTime = new Timestamp(System.currentTimeMillis());
         this.estimatedEndTime = null;
         this.deadline = null;
