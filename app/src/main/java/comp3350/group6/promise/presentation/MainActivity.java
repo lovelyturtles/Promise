@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             copyDatabaseToDevice();
+            generateTestData();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
 
+    }
+
+    private void generateTestData() {
+        TestDataGenerator generator = new TestDataGenerator(4, 6);
+        generator.generate();
     }
 
     private void copyDatabaseToDevice() {
