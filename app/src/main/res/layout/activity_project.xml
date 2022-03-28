@@ -53,14 +53,14 @@
 
             <TextView
                 android:id="@+id/project_page_desc"
+                style="@style/Theme.Promise.TextAppearance.Body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/gap_lg"
-                android:text="Project Description"
-                app:lineHeight="20sp" />
+                android:text="Project Description" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tasks_recycler"
+                android:id="@+id/task_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -93,6 +93,15 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        style="@style/Theme.Promise.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:contentDescription="@string/dashboard_add_action_description"
+        android:src="@drawable/ic_baseline_add_24" />"
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

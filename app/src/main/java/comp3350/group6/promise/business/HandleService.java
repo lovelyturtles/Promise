@@ -14,8 +14,9 @@ public class HandleService {
     private HandleDao handleDao;
     private List<Handle> listOfUserTask;
     private List<Handle> listOfTaskUser;
+    private static HandleService instance;
 
-    public HandleService() {
+    private HandleService() {
         handleDao = new HandleImp();
         listOfUserTask = new ArrayList<Handle>();
         listOfTaskUser = new ArrayList<Handle>();
@@ -35,4 +36,11 @@ public class HandleService {
         listOfTaskUser = handleDao.getTaskUser(userId);
         return listOfTaskUser;
     } // either return empty list or list of tasks associated with this user
+
+    public HandleService getInstance() {
+        if(HandleService.instance == null) {
+            HandleService.instance = new HandleService();
+        }
+        return HandleService.instance;
+    }
 }

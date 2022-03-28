@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -30,7 +29,6 @@ import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.objects.Task;
-import comp3350.group6.promise.presentation.User.DashboardActivity;
 import comp3350.group6.promise.presentation.Task.TaskActivity;
 import comp3350.group6.promise.util.TaskAdapter;
 
@@ -45,11 +43,13 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
     private ImageView projectImageView;
     private RecyclerView taskRecyclerView;
     private List<Task> listOfTasks;
-    private Button createTaskButton;
+//    private Button createTaskButton;
     private TaskAdapter taskListAdapter;
+    private FloatingActionButton fab;
 
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
+
     private void initImageBitmaps(){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
@@ -84,9 +84,10 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
 
         initRecyclerView();
     }
+
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview.");
-        RecyclerView recyclerView = findViewById(R.id.tasks_recycler);
+        RecyclerView recyclerView = findViewById(R.id.task_recycler);
         TaskAdapter adapter = new TaskAdapter(this, mNames, mImageUrls);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -105,9 +106,12 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
             }
         }
 
-
         appBarLayoutView = findViewById(R.id.toolbar_layout);
         projectImageView = findViewById(R.id.toolbar_image);
+
+        toolbarView = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarView);
+        getSupportActionBar().setTitle(project.getProjectName());
 
         projectDescriptionView = findViewById(R.id.project_page_desc);
         projectDescriptionView.setText(project.getStatement());
@@ -118,14 +122,19 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
         taskRecyclerView.setLayoutManager( new LinearLayoutManager(ProjectActivity.this, LinearLayoutManager.VERTICAL,false));
         taskRecyclerView.setAdapter(taskListAdapter);
 
-        toolbarView = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbarView);
-        getSupportActionBar().setTitle(project.getProjectName());
-
         toolbarView.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        fab = findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFloatingButtonClick();
             }
         });
 
@@ -138,6 +147,11 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
 //            }
 //        });
 
+    }
+
+    public void onFloatingButtonClick() {
+        // TODO: Implement handler for adding tasks
+        Toast.makeText(getBaseContext(), "Pressed Add Button", Toast.LENGTH_SHORT).show();
     }
 
     // Task List Methods
@@ -173,11 +187,11 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
         switch (item.getItemId()) {
             case R.id.action_edit:
                 // TODO: Implement action handler for project editing
-                Toast.makeText(this, "Pressed Edit Project", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Pressed Edit Project", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_invite:
                 // TODO: Implement action handler for project invites
-                Toast.makeText(this, "Pressed Invite to Project", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Pressed Invite to Project", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

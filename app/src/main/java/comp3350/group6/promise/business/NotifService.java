@@ -7,9 +7,15 @@ public class NotifService {
     //use the unique userName to fetch the user
     // EditText userText = findViewById( R.id.loginNameInput );
     // String userName   = userText.getText().toString();
+    private static NotifService instance;
 
     private NotifService() {}
 
-    public static NotifService getInstance() { return null; }
+    public static NotifService getInstance() {
+        if(NotifService.instance == null) {
+            NotifService.instance = new NotifService();
+        }
+        return NotifService.instance;
+    }
 
 }

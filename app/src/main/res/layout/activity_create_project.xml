@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_corner_gray"
                 android:hint="@string/projectNameHint"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"/>
 
             <TextView
                 android:id="@+id/project_description_input_label"
@@ -64,7 +64,8 @@
                 android:layout_height="150dp"
                 android:gravity="start|top"
                 android:hint="@string/projectDescHint"
-                android:inputType="textMultiLine" />
+                android:imeOptions="actionNext|actionDone|flagNoEnterAction"
+                android:inputType="textShortMessage"/>
 
             <Button
                 android:id="@+id/create_project_button"

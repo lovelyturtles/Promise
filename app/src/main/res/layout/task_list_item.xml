@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12sp"
             android:text="Task Title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/Theme.Promise.TextAppearance.ListItemTitle"
             android:textFontWeight="700"
             android:textSize="16sp" />
 
@@ -24,5 +24,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Task Description"
+            android:textAppearance="@style/Theme.Promise.TextAppearance.Body"
             app:lineHeight="20sp" />
 </LinearLayout>

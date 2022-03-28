@@ -12,12 +12,11 @@ import comp3350.group6.promise.persistence.hsqldb.TaskImp;
 public class Service {
 
     private static TaskDao taskImp = null;
-    public static UserService users = new UserService();
-    public static AccountService accounts = new AccountService();
-    public static ProjectService projects = new ProjectService();
-    public static TaskService tasks = new TaskService();
-    public static AccessService accesses = new AccessService();
-
+    public static UserService users = UserService.getInstance();
+    public static AccountService accounts = AccountService.getInstance();
+    public static ProjectService projects = ProjectService.getInstance();
+    public static TaskService tasks = TaskService.getInstance();
+    public static AccessService accesses = AccessService.getInstance();
 
     public static synchronized TaskDao getTaskImp(boolean forProduction) {
         if (taskImp == null) {
@@ -28,7 +27,6 @@ public class Service {
         }
         return taskImp;
     }
-
 
     public static synchronized void clean(){
         taskImp = null;

@@ -16,8 +16,9 @@ import comp3350.group6.promise.persistence.hsqldb.AccessImp;
 public class AccessService {
 
     AccessDao accessDao;
+    private static AccessService instance;
 
-    public AccessService(){
+    private AccessService(){
         accessDao = new AccessImp();
     }
 
@@ -66,4 +67,11 @@ public class AccessService {
 
     // update the role of the access
     public Access updateAccess(Access access){ return accessDao.updateAccess(access); }
+
+    public static AccessService getInstance() {
+        if(AccessService.instance == null) {
+            AccessService.instance = new AccessService();
+        }
+        return AccessService.instance;
+    }
 }

@@ -51,6 +51,7 @@
 
             <TextView
                 android:id="@+id/task_page_description"
+                style="@style/Theme.Promise.TextAppearance.Body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -59,6 +60,7 @@
 
             <TextView
                 android:id="@+id/task_page_priority"
+                style="@style/Theme.Promise.TextAppearance.Body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -66,6 +68,7 @@
 
             <TextView
                 android:id="@+id/task_page_deadline"
+                style="@style/Theme.Promise.TextAppearance.Body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"

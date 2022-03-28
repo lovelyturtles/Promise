@@ -18,7 +18,7 @@ public class AccessServiceTest {
     public void setup(){
         DBConnectorUtil.initialLocalDB();
         System.out.println("Starting test for AccessService");
-        accessService = new AccessService();
+        accessService = AccessService.getInstance();
     }
 
     @After

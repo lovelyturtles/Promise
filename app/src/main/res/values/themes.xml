@@ -11,7 +11,6 @@
         <item name="editTextStyle">@style/Theme.Promise.EditText</item>
         <item name="android:editTextBackground">@drawable/rounded_corner_gray</item>
 
-
     </style>
 
     <!--    Form Styles-->
@@ -37,8 +36,29 @@
         <item name="expandedTitleMarginBottom">@dimen/gap_lg</item>
     </style>
 
-    <style name="Theme.Promise.FloatingActionBar" parent="Widget.MaterialComponents.FloatingActionButton">
+    <style name="Theme.Promise.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="android:backgroundTint">@color/primary</item>
+        <item name="android:layout_margin">@dimen/gap_lg</item>
+    </style>
 
+    <!-- Typographic Styles -->
+
+    <style name="Theme.Promise.TextAppearance.Body" parent="@style/TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/text_body</item>
+        <item name="android:lineSpacingMultiplier">1.15</item>
+    </style>
+
+    <style name="Theme.Promise.TextAppearance.CardTitle" parent="@style/TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textFontWeight" tools:targetApi="p">400</item>
+        <item name="android:textColor">@color/text_heading</item>
+    </style>
+
+    <style name="Theme.Promise.TextAppearance.ListItemTitle" parent="@style/TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textFontWeight" tools:targetApi="p">500</item>
+        <item name="android:textColor">@color/text_heading</item>
     </style>
 
 </resources>

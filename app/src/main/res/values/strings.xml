@@ -70,5 +70,6 @@
     <string name="edit_project_action_title">Edit Project</string>
     <string name="edit_project_action_description">Edit Project</string>
     <string name="invite_to_project_action_title">Invite Users</string>
+    <string name="dashboard_add_action_description">Dashboard Add Action</string>
 
 </resources>
