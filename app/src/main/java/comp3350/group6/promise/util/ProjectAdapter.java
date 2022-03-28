@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -39,15 +40,17 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position){
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position){
         Project project = projectsList.get(position);
-        holder.nameView.setText(project.getProjectName());
-        holder.descriptionView.setText(project.getStatement());
+        if(project != null) {
+            holder.nameView.setText(project.getProjectName());
+            holder.descriptionView.setText(project.getStatement());
 
-        // [iteration 2] change to proper number + add project image
-        holder.imageView.setImageResource(R.drawable.astro);
-        holder.memberCountView.setText("3");
-        holder.taskCountView.setText("5");
+            // [iteration 2] change to proper number + add project image
+            holder.imageView.setImageResource(R.drawable.astro);
+            holder.memberCountView.setText("3");
+            holder.taskCountView.setText("5");
+        }
     }
 
     @Override

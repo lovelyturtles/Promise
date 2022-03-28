@@ -32,7 +32,6 @@ public class AccessService {
         return Collections.unmodifiableList(accessList);
     }
 
-    //TODO: handle exceptions -> maybe change user exceptions to persistenceException
     public List<User> getUsers(int projectId) throws Exception {
         List<Access> accessList = getProjectAccess(projectId);
         List<User> userList = new ArrayList<>();
@@ -56,7 +55,7 @@ public class AccessService {
         List<Project> projectList = new ArrayList<>();
 
         for (Access access: accessList) {
-            projectList.add(ProjectService.getInstance().getProjectByID(access.getUserId()));
+            projectList.add(ProjectService.getInstance().getProjectByID(access.getProjectId()));
         }
 
         return Collections.unmodifiableList(projectList);
