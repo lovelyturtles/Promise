@@ -115,7 +115,7 @@ public class TaskImp implements TaskDao {
     @Override
     public Task updateTask(Task t) {
         try (final Connection con = DBConnectorUtil.getConnection()) {
-            final PreparedStatement pre = con.prepareStatement("UPDATE task SET title = ?, description = ?, priority = ?, statusNum = ?, estimatedEndTime = ? deadline = ? WHERE taskId = ?");
+            final PreparedStatement pre = con.prepareStatement("UPDATE task SET title = ?, description = ?, priority = ?, statusNum = ?, estimatedEndTime = ?, deadline = ? WHERE taskId = ?");
             pre.setString(1, t.getTitle());
             pre.setString(2, t.getDescription());
             pre.setInt(3, t.getPriority());

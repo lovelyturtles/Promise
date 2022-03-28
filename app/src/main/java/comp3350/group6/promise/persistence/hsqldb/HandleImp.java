@@ -69,17 +69,11 @@ public class HandleImp implements HandleDao {
             final PreparedStatement ps = con.prepareStatement("INSERT INTO HANDLE (taskId, userId, since) VALUES (?,?,?)");
             ps.setInt(1, handle.getTaskId());
             ps.setInt(2, handle.getUserId());
-            ps.setTimestamp(3, getTime());
+            ps.setTimestamp(3, handle.getSince());
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             throw new PersistenceException(e);
         }
     }
-
-    private Timestamp getTime(){
-        Date date = new Date();
-        return new Timestamp(date.getTime());
-    }
-
 }

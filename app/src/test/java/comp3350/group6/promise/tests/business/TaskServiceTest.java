@@ -67,13 +67,11 @@ public class TaskServiceTest {
         Task toInsert = new Task(100);
 
         taskService.insertTask(toInsert);
-
         assertEquals(newSize, taskService.getAllTask().size());
 
         Exception e = assertThrows(PersistenceException.class, () -> {
             taskService.insertTask(new Task(100));
         });
-
         assertEquals(newSize, taskService.getAllTask().size());
 
         System.out.println("Finished testInsertTask");
@@ -85,12 +83,10 @@ public class TaskServiceTest {
         System.out.println("\nStarting testUpdateTask");
 
         Task toUpdate = new Task(1, "updatedTask", "default", 0, 0, 0, null, null, null);
-
         taskService.updateTask(toUpdate); // TODO check this
 
         String newTitle = "updatedTask";
         Task actual = taskService.getTask(1);
-
         assertEquals(newTitle, actual.getTitle());
 
         System.out.println("Finished testUpdateTask");
@@ -106,11 +102,9 @@ public class TaskServiceTest {
         Task toDelete = new Task(1);
 
         taskService.deleteTask(toDelete);
-
         assertEquals(newSize, taskService.getAllTask().size());
 
-        taskService.deleteTask(new Task(10));
-
+        taskService.deleteTask(new Task(1)); // invalid delete
         assertEquals(newSize, taskService.getAllTask().size());
 
         System.out.println("Finished testDeleteTask");
