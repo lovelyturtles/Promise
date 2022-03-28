@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import comp3350.group6.promise.objects.Handle;
@@ -44,8 +45,8 @@ public class HandleImp implements HandleDao {
 
     @Override
     public List<Handle> getTaskUser(int userId) {
-
         List<Handle> listOfTaskUser = new ArrayList<>();
+
         try (final Connection con = DBConnectorUtil.getConnection()) {
             assert (con != null);
             final PreparedStatement ps = con.prepareStatement("SELECT * FROM TASK, HANDLE WHERE TASK.taskId = HANDLE.taskId and HANDLE.userId = ?");
@@ -68,12 +69,17 @@ public class HandleImp implements HandleDao {
             final PreparedStatement ps = con.prepareStatement("INSERT INTO HANDLE (taskId, userId, since) VALUES (?,?,?)");
             ps.setInt(1, handle.getTaskId());
             ps.setInt(2, handle.getUserId());
-            ps.setTimestamp(1, handle.getSince());
+            ps.setTimestamp(3, getTime());
             ps.executeUpdate();
             ps.close();
-
         } catch (SQLException e) {
             throw new PersistenceException(e);
         }
     }
+
+    private Timestamp getTime(){
+        Date date = new Date();
+        return new Timestamp(date.getTime());
+    }
+
 }
