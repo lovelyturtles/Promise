@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.business.AccessService;
 import comp3350.group6.promise.objects.Project;
 
 /*
@@ -25,6 +26,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewhold
 
     private Context context;
     private List<Project> projectsList;
+    private static AccessService accessService = new AccessService();
     private Viewholder.OnCardListener onCardListener;
 
     public ProjectAdapter(Context context, List<Project> projectsList, Viewholder.OnCardListener onCardListener){
@@ -41,16 +43,22 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewhold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProjectAdapter.Viewholder holder, int position){
+    public void onBindViewHolder(@NonNull ProjectAdapter.Viewholder holder, int position) {
         Project project = projectsList.get(position);
         if(project != null){
+            int numUsers = 0;
+
+            try {
+                numUsers = accessService.getUsers(project.getProjectID()).size(); // get the number of users in project
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             holder.projectNameTV.setText(project.getProjectName());
             holder.projectDescTV.setText(project.getStatement());
-
-            // [iteration 2] change to proper number + add project image
             holder.projectImg.setImageResource(R.drawable.astro);
-            holder.membersTV.setText("3");
-            holder.boxTV.setText("5");
+            holder.membersTV.setText(Integer.toString(numUsers));
+            holder.boxTV.setText("5"); //TODO: set to # of tasks
         }
     }
 
