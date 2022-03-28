@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import comp3350.group6.promise.R;
-import comp3350.group6.promise.business.AccessService;
+import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Project;
 
 /*

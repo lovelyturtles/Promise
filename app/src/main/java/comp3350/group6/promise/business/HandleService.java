@@ -17,8 +17,6 @@ public class HandleService {
     private final HandleDao handleDao;
     private static HandleService instance;
 
-    private HandleService() {}
-
     public HandleService(boolean forProduction) {
         handleDao = Service.getHandleImp(forProduction);
     }
@@ -35,9 +33,9 @@ public class HandleService {
         handleDao.insertHandle(handle);
     }
 
-    public HandleService getInstance() {
+    public HandleService getInstance(boolean forProduction) {
         if(HandleService.instance == null) {
-            HandleService.instance = new HandleService();
+            HandleService.instance = new HandleService(forProduction);
         }
         return HandleService.instance;
     }
