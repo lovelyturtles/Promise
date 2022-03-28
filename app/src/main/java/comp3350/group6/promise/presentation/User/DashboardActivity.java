@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 import comp3350.group6.promise.R;
@@ -30,7 +32,7 @@ public class DashboardActivity extends AppCompatActivity implements ProjectAdapt
 
     private RecyclerView projectRecyclerView;
     private ProjectAdapter projectAdapter;
-    private ImageButton addButton;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class DashboardActivity extends AppCompatActivity implements ProjectAdapt
         setContentView(R.layout.activity_dashboard);
 
         projectRecyclerView = findViewById(R.id.projectRecyclerView);
-//        addButton = findViewById(R.id.dashboard_add);
+        fab = findViewById(R.id.fab);
 
         accessList = accessService.getUserAccess(CurrentSession.currentUser.getUserID());
         projects = accessService.getProjects(CurrentSession.currentUser.getUserID());
@@ -48,7 +50,7 @@ public class DashboardActivity extends AppCompatActivity implements ProjectAdapt
         projectRecyclerView.setLayoutManager(linearLayoutManager);
         projectRecyclerView.setAdapter(projectAdapter);
 
-        addButton.setOnClickListener( new View.OnClickListener() {
+        fab.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick( View view ) {
                 goToAddProject();

@@ -37,4 +37,8 @@
         <item name="expandedTitleMarginBottom">@dimen/gap_lg</item>
     </style>
 
+    <style name="Theme.Promise.FloatingActionBar" parent="Widget.MaterialComponents.FloatingActionButton">
+
+    </style>
+
 </resources>
