@@ -60,7 +60,7 @@ public class TaskImp implements TaskDao {
         List<Task> taskList = new ArrayList<>();
         try (final Connection con = DBConnectorUtil.getConnection()) {
             assert con != null;
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM TASK, PROJECT WHERE TASK.taskId = PROJECT.taskId and projectId = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM task WHERE projectId = ?");
             ps.setInt(1, projectId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
