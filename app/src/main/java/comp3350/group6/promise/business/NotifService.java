@@ -11,6 +11,7 @@ import comp3350.group6.promise.persistence.NotifDao;
 public class NotifService {
 
     private NotifDao notification;
+
     public void invite( String theirEmail ){
 
         //handle null case somehow

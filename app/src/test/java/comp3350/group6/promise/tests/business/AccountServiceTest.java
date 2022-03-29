@@ -22,7 +22,7 @@ public class AccountServiceTest {
         DBConnectorUtil.initialLocalDB();
         System.out.println("Starting test for AccountServiceTest");
         FakeDB.initialize();
-        accountService = AccountService.getInstance(); // false init a fake DB
+        accountService = new AccountService(); // false init a fake DB
     }
 
     @After

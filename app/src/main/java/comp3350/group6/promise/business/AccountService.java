@@ -16,9 +16,8 @@ import lombok.extern.java.Log;
 public class AccountService {
 
     private static final AccountDao accountDao = new AccountImp();
-    private static AccountService instance;
 
-    private AccountService() {}
+    public AccountService() {}
 
     //can I change this method to have a void return statement and just use Exception handling??
     public int createAccount( String email, String password, String name, String introduction ) throws Exception{
@@ -60,10 +59,6 @@ public class AccountService {
 
     public void setCurrentAccount( String email, String password ) throws LoginErrorException {
 
-//        System.out.println("email");
-//        System.out.println("passowrd");
-//        System.out.println("accountExists(email): " + accountExists(email));
-//        System.out.println("passwordsMatch(email,password): " + passwordsMatch(email, password));
         //for us to set the current user, the account has to exist and the password must match
         if( accountExists( email ) && passwordsMatch( email, password ) )
             CurrentSession.currentUser = accountDao.getAccountByEmail( email );

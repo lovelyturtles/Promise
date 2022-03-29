@@ -18,7 +18,7 @@ public class AccessService {
     AccessDao accessDao;
     private static AccessService instance;
 
-    private AccessService(){
+    public AccessService(){
         accessDao = new AccessImp();
     }
 

@@ -22,6 +22,8 @@ public class Service {
     public static AccessService accesses = new AccessService();
 
     private static TaskDao taskImp = null;
+    private static HandleDao handleImp = null;
+
     public static synchronized TaskDao getTaskImp(boolean forProduction) {
         if (taskImp == null) {
             if (forProduction)
