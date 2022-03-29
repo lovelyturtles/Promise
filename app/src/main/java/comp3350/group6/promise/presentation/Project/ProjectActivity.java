@@ -6,15 +6,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 import comp3350.group6.promise.R;
@@ -22,29 +29,27 @@ import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.objects.Task;
-import comp3350.group6.promise.presentation.User.DashboardActivity;
 import comp3350.group6.promise.presentation.Task.TaskActivity;
 import comp3350.group6.promise.util.TaskAdapter;
 
 public class ProjectActivity extends AppCompatActivity implements TaskAdapter.OnTaskClickListener, TaskAdapter.OnTaskLongClickListener {
 
-    private static final ProjectService projectService = new ProjectService();
-    private static final TaskService taskService = new TaskService();
     private static final String TAG = "tag" ;
 
-    private Project currentProject; // project that we are viewing
-    private TextView projectTitleView;
-    private TextView projectDescView;
-    private ImageView projectImgView;
-    private ImageButton moreButton;
-    private ImageButton backButton;
+    private Project project;
+    private CollapsingToolbarLayout appBarLayoutView;
+    private Toolbar toolbarView;
+    private TextView projectDescriptionView;
+    private ImageView projectImageView;
     private RecyclerView taskRecyclerView;
     private List<Task> listOfTasks;
-    private Button createTaskButton;
+//    private Button createTaskButton;
     private TaskAdapter taskListAdapter;
+    private FloatingActionButton fab;
 
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
+
     private void initImageBitmaps(){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
@@ -79,9 +84,10 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
 
         initRecyclerView();
     }
+
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview.");
-        RecyclerView recyclerView = findViewById(R.id.subtasks_recycler);
+        RecyclerView recyclerView = findViewById(R.id.task_recycler);
         TaskAdapter adapter = new TaskAdapter(this, mNames, mImageUrls);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -96,50 +102,59 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
         if (getIntent() != null && getIntent().getExtras() != null) {
             int id = getIntent().getIntExtra("projectID", -1);
             if (id != -1) {
-                currentProject = projectService.getProjectByID(id);
+                project = ProjectService.getInstance().getProjectByID(id);
             }
         }
 
-        projectTitleView = findViewById(R.id.project_page_title);
-        projectDescView = findViewById(R.id.project_page_desc);
-        projectImgView = findViewById(R.id.project_page_image);
-        moreButton = findViewById(R.id.project_page_more);
-        backButton = findViewById(R.id.back_button);
-        taskRecyclerView = (RecyclerView) findViewById(R.id.subtasks_recycler);
-        createTaskButton = (Button) findViewById(R.id.button_create_task);
+        appBarLayoutView = findViewById(R.id.toolbar_layout);
+        projectImageView = findViewById(R.id.toolbar_image);
 
-        projectTitleView.setText(currentProject.getProjectName());
-        projectDescView.setText(currentProject.getStatement());
+        toolbarView = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarView);
+        getSupportActionBar().setTitle(project.getProjectName());
 
-        listOfTasks = taskService.getTasksByProjectId(currentProject.getProjectID());
+        projectDescriptionView = findViewById(R.id.project_page_desc);
+        projectDescriptionView.setText(project.getStatement());
 
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                back();
-            }
-        });
-
-        createTaskButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addItem(view);
-            }
-        });
-
+        listOfTasks = TaskService.getInstance().getTasksByProjectId(project.getProjectID());
         taskListAdapter = new TaskAdapter(this,listOfTasks,this,this);
+        taskRecyclerView = findViewById(R.id.task_recycler);
         taskRecyclerView.setLayoutManager( new LinearLayoutManager(ProjectActivity.this, LinearLayoutManager.VERTICAL,false));
         taskRecyclerView.setAdapter(taskListAdapter);
 
+        toolbarView.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        fab = findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFloatingButtonClick();
+            }
+        });
+
+//        createTaskButton = (Button) findViewById(R.id.button_create_task);
+//
+//        createTaskButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                addItem(view);
+//            }
+//        });
+
     }
 
-
-    // go to the previous page
-    private void back() {
-        Intent intent = new Intent(this, DashboardActivity.class);
-        startActivity(intent);
+    public void onFloatingButtonClick() {
+        // TODO: Implement handler for adding tasks
+        Toast.makeText(getBaseContext(), "Pressed Add Button", Toast.LENGTH_SHORT).show();
     }
+
+    // Task List Methods
 
     @Override
     public void onTaskClick(int position) {
@@ -149,7 +164,6 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
         startActivity(intent);
     } // Go to Task Activity
 
-    // TASK RELATED METHODS
     @Override
     public void onLongTaskClick(int position) {
         Task longClickedTask = listOfTasks.get(position);
@@ -158,5 +172,29 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
 
     private void addItem(View view){
 
+    }
+
+    // Toolbar Methods
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.project_toolbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_edit:
+                // TODO: Implement action handler for project editing
+                Toast.makeText(getBaseContext(), "Pressed Edit Project", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_invite:
+                // TODO: Implement action handler for project invites
+                Toast.makeText(getBaseContext(), "Pressed Invite to Project", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

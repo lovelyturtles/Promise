@@ -5,8 +5,12 @@ import comp3350.group6.promise.business.AccountService;
 import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.business.UserService;
+import comp3350.group6.promise.persistence.HandleDao;
 import comp3350.group6.promise.persistence.TaskDao;
+import comp3350.group6.promise.persistence.hsqldb.HandleImp;
 import comp3350.group6.promise.persistence.hsqldb.TaskImp;
+import comp3350.group6.promise.persistence.stub.HandleImpNoDB;
+import comp3350.group6.promise.persistence.stub.TaskImpNoDB;
 //import comp3350.group6.promise.persistence.stub.TaskImpNoDB;
 
 public class Service {
@@ -23,14 +27,24 @@ public class Service {
             if (forProduction)
                 taskImp = new TaskImp();
             else
-                taskImp = new TaskImp();
+                taskImp = new TaskImpNoDB();
         }
         return taskImp;
     }
 
+    public static synchronized HandleDao getHandleImp(boolean forProduction){
+        if(handleImp == null){
+            if(forProduction)
+                handleImp = new HandleImp();
+            else
+                handleImp = new HandleImpNoDB();
+        }
+        return handleImp;
+    }
 
     public static synchronized void clean(){
         taskImp = null;
+        handleImp = null;
     }
-
+    
 }

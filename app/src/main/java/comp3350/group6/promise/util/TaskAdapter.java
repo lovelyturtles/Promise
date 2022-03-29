@@ -52,8 +52,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> { 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_taskitem, parent, false);
-        return new TaskAdapter.ViewHolder(view, onTaskClickListener, onTaskLongClickListener);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_list_item, parent, false);
+        return new ViewHolder(view, this.onTaskClickListener, this.onTaskLongClickListener);
     }
 
     @Override
@@ -116,13 +116,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> { 
             this.clickListener = onTaskClickListener;
             this.longClickListener = onTaskLongClickListener;
 
-            this.titleOfTaskToCreate = itemView.findViewById(R.id.button_create_task);
-            this.buttonCreateTask = itemView.findViewById(R.id.button_create_task);
+//            this.titleOfTaskToCreate = itemView.findViewById(R.id.button_create_task);
+//            this.buttonCreateTask = itemView.findViewById(R.id.button_create_task);
 
             //new
-            image = itemView.findViewById(R.id.image);
-            imageName = itemView.findViewById(R.id.image_name);
-            parentLayout = itemView.findViewById(R.id.parent_layout);
+//            image = itemView.findViewById(R.id.image);
+//            imageName = itemView.findViewById(R.id.image_name);
+//            parentLayout = itemView.findViewById(R.id.parent_layout);
 
         }
 

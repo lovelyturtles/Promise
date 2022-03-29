@@ -91,7 +91,7 @@ public class TaskImpNoDB implements TaskDao {
     public static Task generateTask(String name) {
         return new Task(
                 name,
-                String.format("This is the description for \"%s\". It has enough words in it for two lines of text.", name),
+               "default des",
                 1,
                 1,
                 0,

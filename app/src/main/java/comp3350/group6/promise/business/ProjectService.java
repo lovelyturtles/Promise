@@ -11,8 +11,9 @@ public class ProjectService {
 
     private ProjectDao projectDao;
     private List<Project> projects;
+    private static ProjectService instance;
 
-    public ProjectService(){
+    private ProjectService(){
         projectDao = new ProjectImp();
         projects = null;
     }
@@ -53,5 +54,12 @@ public class ProjectService {
     // delete an existing project in the list
     public void deleteProject(Project project){
 		projectDao.deleteProject(project);
+    }
+
+    public static ProjectService getInstance() {
+        if(ProjectService.instance == null) {
+            ProjectService.instance = new ProjectService();
+        }
+        return ProjectService.instance;
     }
 }

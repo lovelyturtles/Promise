@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,19 +51,31 @@ public class TaskImp implements TaskDao {
             pre.close();
             return taskList;
         } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PersistenceException(e);
         }
     }
 
-    // TODO
     @Override
     public List<Task> getTasksByProjectId(int projectId) {
-        return null;
+        List<Task> taskList = new ArrayList<>();
+        try (final Connection con = DBConnectorUtil.getConnection()) {
+            assert con != null;
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM task WHERE projectId = ?");
+            ps.setInt(1, projectId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Task task = fromResultSet(rs);
+                taskList.add(task);
+            }
+            return taskList;
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
     }
 
     @Override
     public Task getTask(int taskId) {
-        Task result = null;
+        Task result;
         try (final Connection con = DBConnectorUtil.getConnection()) {
             final PreparedStatement pre = con.prepareStatement("SELECT * FROM task WHERE taskId = ?");
             pre.setString(1, String.valueOf(taskId));
@@ -75,14 +88,15 @@ public class TaskImp implements TaskDao {
 
             return result;
         } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PersistenceException(e);
         }
     }
 
     @Override
     public Task insertTask(Task t) {
         try (final Connection con = DBConnectorUtil.getConnection()) {
-            final PreparedStatement pre = con.prepareStatement("INSERT INTO task VALUES(?,?,?,?,?,?,?,?,?)");
+            String query = "INSERT INTO task(taskId, title, description, priority, statusNum, projectId, createdTime, estimatedEndTime, deadline) VALUES(?,?,?,?,?,?,?,?,?)";
+            final PreparedStatement pre = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pre.setInt(1, t.getTaskId());
             pre.setString(2, t.getTitle());
             pre.setString(3, t.getDescription());
@@ -93,17 +107,22 @@ public class TaskImp implements TaskDao {
             pre.setTimestamp(8, t.getEstimatedEndTime());
             pre.setTimestamp(9, t.getDeadline());
             pre.executeUpdate();
+
+            ResultSet generatedKeys = pre.getGeneratedKeys();
+            generatedKeys.next();
+            t.setTaskId(generatedKeys.getInt(1));
+
             pre.close();
             return t;
         } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PersistenceException(e);
         }
-    } // TODO handling NULL values
+    }
 
     @Override
     public Task updateTask(Task t) {
         try (final Connection con = DBConnectorUtil.getConnection()) {
-            final PreparedStatement pre = con.prepareStatement("UPDATE task SET title = ?, description = ?, priority = ?, statusNum = ?, estimatedEndTime = ? deadline = ? WHERE taskId = ?");
+            final PreparedStatement pre = con.prepareStatement("UPDATE task SET title = ?, description = ?, priority = ?, statusNum = ?, estimatedEndTime = ?, deadline = ? WHERE taskId = ?");
             pre.setString(1, t.getTitle());
             pre.setString(2, t.getDescription());
             pre.setInt(3, t.getPriority());
@@ -115,7 +134,7 @@ public class TaskImp implements TaskDao {
             pre.close();
             return t;
         } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PersistenceException(e);
         }
     }
 
@@ -127,7 +146,7 @@ public class TaskImp implements TaskDao {
             pre.executeUpdate();
             pre.close();
         } catch (final SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new PersistenceException(e);
         }
     }
 }

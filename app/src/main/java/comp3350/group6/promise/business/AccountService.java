@@ -16,6 +16,9 @@ import lombok.extern.java.Log;
 public class AccountService {
 
     private static final AccountDao accountDao = new AccountImp();
+    private static AccountService instance;
+
+    private AccountService() {}
 
     //can I change this method to have a void return statement and just use Exception handling??
     public int createAccount( String email, String password, String name, String introduction ) throws Exception{

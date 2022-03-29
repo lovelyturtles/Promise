@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Keep "next" keyboard action while allowing multiline text
         textIntro = findViewById( R.id.introInput );
-        textIntro.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        textIntro.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         textIntro.setRawInputType(InputType.TYPE_CLASS_TEXT);
 
         registerButton = findViewById( R.id.registerButton );

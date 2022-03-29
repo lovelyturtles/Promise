@@ -7,24 +7,14 @@ import lombok.Data;
 
 @Data
 public class Handle {
-    private int defaultId;
     private int taskId;
     private int userId;
     private Timestamp since;
 
-    public Handle(int defaultId, int taskId, int userId, Timestamp since) {
-        this.defaultId = defaultId;
+    public Handle(int taskId, int userId, Timestamp since) {
         this.taskId = taskId;
         this.userId = userId;
         this.since = since;
-    }
-
-    public int getDefaultId() {
-        return defaultId;
-    }
-
-    public void setDefaultId(int defaultId) {
-        this.defaultId = defaultId;
     }
 
     public int getTaskId() {
@@ -56,12 +46,12 @@ public class Handle {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Handle handle = (Handle) o;
-        return defaultId == handle.defaultId && taskId == handle.taskId && userId == handle.userId && Objects.equals(since, handle.since);
+        return  taskId == handle.taskId && userId == handle.userId && Objects.equals(since, handle.since);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(defaultId, taskId, userId, since);
+        return Objects.hash(taskId, userId, since);
     }
 }
 
