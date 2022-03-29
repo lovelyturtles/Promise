@@ -2,20 +2,28 @@ package comp3350.group6.promise.business;
 
 import android.widget.EditText;
 
+import comp3350.group6.promise.application.CurrentSession;
+import comp3350.group6.promise.application.Service;
+import comp3350.group6.promise.objects.Account;
+import comp3350.group6.promise.persistence.AccountDao;
+import comp3350.group6.promise.persistence.NotifDao;
+
 public class NotifService {
 
-    //use the unique userName to fetch the user
-    // EditText userText = findViewById( R.id.loginNameInput );
-    // String userName   = userText.getText().toString();
-    private static NotifService instance;
+    private NotifDao notification;
+    public void invite( String theirEmail ){
 
-    private NotifService() {}
+        //handle null case somehow
 
-    public static NotifService getInstance() {
-        if(NotifService.instance == null) {
-            NotifService.instance = new NotifService();
+        //check if the account exists
+        if( Service.accounts.accountExists( theirEmail ) ){
+
+            Account thisAccount = CurrentSession.currentUser;
+            //Account theirAccount = Service.accounts.getAccountByEmail( theirEmail );
+
         }
-        return NotifService.instance;
+
+
     }
 
 }

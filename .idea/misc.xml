@@ -52,6 +52,8 @@
         <entry key="app/src/main/res/layout/activity_recipient_info.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_respond_notif.xml" value="0.11398176291793313" />
         <entry key="app/src/main/res/layout/activity_sent_invite.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_task.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/activity_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_user_page.xml" value="0.25" />
         <entry key="app/src/main/res/layout/card_item.xml" value="0.10833333333333334" />
       </map>

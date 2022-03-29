@@ -15,15 +15,13 @@ import comp3350.group6.promise.persistence.stub.TaskImpNoDB;
 
 public class Service {
 
+    public static UserService users = new UserService();
+    public static AccountService accounts = new AccountService();
+    public static ProjectService projects = new ProjectService();
+    public static TaskService tasks = new TaskService();
+    public static AccessService accesses = new AccessService();
+
     private static TaskDao taskImp = null;
-    private static HandleDao handleImp = null;
-
-    public static UserService users = UserService.getInstance();
-    public static AccountService accounts = AccountService.getInstance();
-    public static ProjectService projects = ProjectService.getInstance();
-    public static TaskService tasks = TaskService.getInstance();
-    public static AccessService accesses = AccessService.getInstance();
-
     public static synchronized TaskDao getTaskImp(boolean forProduction) {
         if (taskImp == null) {
             if (forProduction)
