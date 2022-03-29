@@ -11,9 +11,11 @@ import comp3350.group6.promise.persistence.hsqldb.HandleImp;
 /*
     This class is used to handle the relationship between User and Task
 */
-public class HandleService {
-    private final HandleDao handleDao;
 
+public class HandleService {
+
+    private final HandleDao handleDao;
+    private static HandleService instance;
 
     public HandleService(boolean forProduction) {
         handleDao = Service.getHandleImp(forProduction);
@@ -30,4 +32,12 @@ public class HandleService {
     public void insertHandle(Handle handle) {
         handleDao.insertHandle(handle);
     }
+
+    public HandleService getInstance(boolean forProduction) {
+        if(HandleService.instance == null) {
+            HandleService.instance = new HandleService(forProduction);
+        }
+        return HandleService.instance;
+    }
+
 }

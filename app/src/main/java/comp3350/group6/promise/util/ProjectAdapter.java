@@ -5,15 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import comp3350.group6.promise.R;
-import comp3350.group6.promise.business.AccessService;
+import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Project;
 
 /*
@@ -22,43 +22,41 @@ import comp3350.group6.promise.objects.Project;
     Reference for Class: https://www.geeksforgeeks.org/cardview-using-recyclerview-in-android-with-example/
  */
 
-public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewholder> {
+public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
 
     private Context context;
     private List<Project> projectsList;
-    private static AccessService accessService = new AccessService();
-    private Viewholder.OnCardListener onCardListener;
+    private ViewHolder.OnProjectClickListener onProjectClickListener;
 
-    public ProjectAdapter(Context context, List<Project> projectsList, Viewholder.OnCardListener onCardListener){
+    public ProjectAdapter(Context context, List<Project> projectsList, ViewHolder.OnProjectClickListener onProjectClickListener){
         this.context = context;
         this.projectsList = projectsList;
-        this.onCardListener = onCardListener;
-    }
-
-    @NonNull
-    @Override
-    public ProjectAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
-        return new Viewholder(view, onCardListener);
+        this.onProjectClickListener = onProjectClickListener;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProjectAdapter.Viewholder holder, int position) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.project_list_item, parent, false);
+        return new ViewHolder(view, onProjectClickListener);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position){
         Project project = projectsList.get(position);
         if(project != null){
             int numUsers = 0;
 
             try {
-                numUsers = accessService.getUsers(project.getProjectID()).size(); // get the number of users in project
+                numUsers = Service.accesses.getUsers(project.getProjectID()).size(); // get the number of users in project
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            holder.projectNameTV.setText(project.getProjectName());
-            holder.projectDescTV.setText(project.getStatement());
-            holder.projectImg.setImageResource(R.drawable.astro);
-            holder.membersTV.setText(Integer.toString(numUsers));
-            holder.boxTV.setText("5"); //TODO: set to # of tasks
+            holder.nameView.setText(project.getProjectName());
+            holder.descriptionView.setText(project.getStatement());
+            holder.imageView.setImageResource(R.drawable.astro);
+            holder.memberCountView.setText(Integer.toString(numUsers));
+            holder.taskCountView.setText("5"); //TODO: set to # of tasks
         }
     }
 
@@ -67,36 +65,37 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.Viewhold
         return projectsList.size();
     }
 
-    public static class Viewholder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private CardView projectCard;
-        private TextView projectNameTV;
-        private TextView projectDescTV;
-        private TextView membersTV;
-        private TextView boxTV;
-        private ImageView projectImg;
-        private OnCardListener listener;
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public Viewholder(@NonNull View itemView, OnCardListener listener){
+        private LinearLayout containerView;
+        private TextView nameView;
+        private TextView descriptionView;
+        private TextView memberCountView;
+        private TextView taskCountView;
+        private ImageView imageView;
+        private OnProjectClickListener listener;
+
+        public ViewHolder(View itemView, OnProjectClickListener listener){
             super(itemView);
 
-            projectCard =  itemView.findViewById(R.id.card_view);
-            projectNameTV = itemView.findViewById(R.id.project_name);
-            projectDescTV = itemView.findViewById(R.id.projectDescription);
-            membersTV = itemView.findViewById(R.id.memberNumber);
-            projectImg = itemView.findViewById(R.id.project_image);
-            boxTV = itemView.findViewById(R.id.boxNumber);
-            this.listener = listener;
+            containerView = itemView.findViewById(R.id.project_list_item_container);
+            nameView = itemView.findViewById(R.id.project_name_input);
+            descriptionView = itemView.findViewById(R.id.projectDescription);
+            memberCountView = itemView.findViewById(R.id.memberCount);
+            taskCountView = itemView.findViewById(R.id.taskCount);
+            imageView = itemView.findViewById(R.id.project_image);
 
-            projectCard.setOnClickListener(this);
+            this.listener = listener;
+            containerView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            listener.onCardClick(getAbsoluteAdapterPosition());
+            listener.onProjectClick(getAbsoluteAdapterPosition());
         }
 
-        public interface OnCardListener{
-            void onCardClick(int position);
+        public interface OnProjectClickListener {
+            void onProjectClick(int position);
         }
     }
 }

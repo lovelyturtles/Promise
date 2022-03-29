@@ -6,6 +6,7 @@
 
     <dimen name="gap_sm">10dp</dimen>
     <dimen name="gap_md">16dp</dimen>
+    <dimen name="gap_lg">22dp</dimen>
 
     <dimen name="input_label_gap">16dp</dimen>
 

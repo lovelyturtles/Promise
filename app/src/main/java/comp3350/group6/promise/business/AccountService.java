@@ -8,8 +8,11 @@ import comp3350.group6.promise.persistence.hsqldb.AccountImp;
 
 public class AccountService {
 
-    private static final UserService userService = new UserService();
+    private static final UserService userService = UserService.getInstance();
     private static final AccountDao accountDao = new AccountImp();
+    private static AccountService instance;
+
+    private AccountService() {}
 
     public int createAccount(String email, String password, String name, String introduction) throws Exception {
 
@@ -54,6 +57,13 @@ public class AccountService {
 
         return success;
 
+    }
+
+    public static AccountService getInstance() {
+        if(AccountService.instance == null) {
+            AccountService.instance = new AccountService();
+        }
+        return AccountService.instance;
     }
 
 /*  Database Implementation

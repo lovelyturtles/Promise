@@ -29,9 +29,9 @@ public class AccessServiceTest {
     public void setup(){
         DBConnectorUtil.initialLocalDB();
 
-        accessService = new AccessService();
-        projectService = new ProjectService();
-        userService = new UserService();
+        accessService = AccessService.getInstance();
+        projectService = ProjectService.getInstance();
+        userService = UserService.getInstance();
 
         try {
             p1 = projectService.insertProject(new Project("Project 1", "This is a test."));

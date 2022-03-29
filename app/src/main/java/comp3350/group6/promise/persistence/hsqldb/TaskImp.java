@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,7 @@ public class TaskImp implements TaskDao {
         List<Task> taskList = new ArrayList<>();
         try (final Connection con = DBConnectorUtil.getConnection()) {
             assert con != null;
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM TASK, PROJECT WHERE TASK.taskId = PROJECT.taskId and projectId = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM task WHERE projectId = ?");
             ps.setInt(1, projectId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -94,7 +95,8 @@ public class TaskImp implements TaskDao {
     @Override
     public Task insertTask(Task t) {
         try (final Connection con = DBConnectorUtil.getConnection()) {
-            final PreparedStatement pre = con.prepareStatement("INSERT INTO task VALUES(?,?,?,?,?,?,?,?,?)");
+            String query = "INSERT INTO task(taskId, title, description, priority, statusNum, projectId, createdTime, estimatedEndTime, deadline) VALUES(?,?,?,?,?,?,?,?,?)";
+            final PreparedStatement pre = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pre.setInt(1, t.getTaskId());
             pre.setString(2, t.getTitle());
             pre.setString(3, t.getDescription());
@@ -105,6 +107,11 @@ public class TaskImp implements TaskDao {
             pre.setTimestamp(8, t.getEstimatedEndTime());
             pre.setTimestamp(9, t.getDeadline());
             pre.executeUpdate();
+
+            ResultSet generatedKeys = pre.getGeneratedKeys();
+            generatedKeys.next();
+            t.setTaskId(generatedKeys.getInt(1));
+
             pre.close();
             return t;
         } catch (final SQLException e) {
