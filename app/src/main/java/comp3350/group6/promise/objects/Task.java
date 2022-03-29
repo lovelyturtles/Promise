@@ -8,7 +8,6 @@ import lombok.Data;
 
 @Data
 public class Task {
-    private static int count;
     private int taskId;
     private String title;
     private String description;
@@ -22,11 +21,11 @@ public class Task {
 
     public Task(int taskId) {
         this.taskId = taskId;
-        this.title = null;
-        this.description = null;
-        this.priority = -1;
-        this.statusNum = -1;
-        this.projectId = -1;
+        this.title = "";
+        this.description = "";
+        this.priority = 1;
+        this.statusNum = 1;
+        this.projectId = 100;
         this.createdTime = new Timestamp(System.currentTimeMillis());
         this.estimatedEndTime = null;
         this.deadline = null;
@@ -35,7 +34,6 @@ public class Task {
     /*
      *      - used by DB that generate from database
      */
-
     public Task(int taskId, String title, String description, int priority, int statusNum, int projectId, Timestamp createdTime, Timestamp estimatedEndTime, Timestamp deadline) {
         this.taskId = taskId;
         this.title = title;
@@ -52,7 +50,6 @@ public class Task {
      *   - used by app when creating a task, doesn't have id
      *
      */
-
     public Task(String title, String description, int priority, int statusNum, int projectId, Timestamp estimatedEndTime, Timestamp deadline) {
         this.title = title;
         this.description = description;

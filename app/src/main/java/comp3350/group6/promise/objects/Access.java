@@ -2,6 +2,7 @@ package comp3350.group6.promise.objects;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 import lombok.Data;
 
@@ -59,5 +60,13 @@ public class Access {
     }
 
     public void setStartTime(Timestamp time) { this.startTime = time; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Access access = (Access) o;
+        return projectId == access.projectId && userId == access.userId && Objects.equals(role, access.role) && Objects.equals(startTime, access.startTime);
+    }
 
 }

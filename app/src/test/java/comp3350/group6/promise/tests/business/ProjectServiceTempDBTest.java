@@ -1,5 +1,6 @@
 package comp3350.group6.promise.tests.business;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -22,6 +23,11 @@ public class ProjectServiceTempDBTest {
     public void setUp() {
         DBConnectorUtil.initialLocalDB();
         projectService = new ProjectService();
+    }
+
+    @After
+    public void clean(){
+       DBConnectorUtil.cleanLocalDB();
     }
 
     /*

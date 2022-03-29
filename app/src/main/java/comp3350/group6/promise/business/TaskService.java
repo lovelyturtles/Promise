@@ -12,9 +12,10 @@ import comp3350.group6.promise.persistence.hsqldb.TaskImp;
 public class TaskService {
     private List<Task> allTask;
     private TaskDao taskDao;
+    private static TaskService instance;
 
 
-    public TaskService() {
+    private TaskService() {
         allTask = null;
         taskDao = new TaskImp();
     }
@@ -50,6 +51,13 @@ public class TaskService {
     public List<Task> getAllTask() {
         allTask = taskDao.getTaskList();
         return allTask;
+    }
+
+    public static TaskService getInstance() {
+        if(TaskService.instance == null) {
+            TaskService.instance = new TaskService();
+        }
+        return TaskService.instance;
     }
 
 }

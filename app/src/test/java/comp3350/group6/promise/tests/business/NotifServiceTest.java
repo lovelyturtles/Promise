@@ -13,7 +13,7 @@ public class NotifServiceTest {
     public void setup() throws Exception {
         System.out.println("Starting test for NotifServiceTest");
         FakeDB.initialize();
-        notifService = new NotifService(); // false init a fake DB
+        notifService = NotifService.getInstance(); // false init a fake DB
     }
 
     @Test
