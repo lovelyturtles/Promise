@@ -1,10 +1,8 @@
 package comp3350.group6.promise.business;
 
-
 import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.persistence.AccountDao;
 import comp3350.group6.promise.persistence.hsqldb.AccountImp;
-//import comp3350.group6.promise.persistence.stub.AccountImpNoDB;
 
 public class AccountService {
 
@@ -29,31 +27,22 @@ public class AccountService {
     }
 
     public boolean accountExists(String email) {
-
-        CurrentSession.emailCheck = accountDao.accountExists(email);
-        return CurrentSession.emailCheck;
-
+          return accountDao.accountExists(email);
     }
 
     public boolean passwordsMatch(String email, String password) {
-
-        CurrentSession.passwordCheck = accountDao.passwordsMatch(email, password);
-        return CurrentSession.passwordCheck;
-
+        return accountDao.passwordsMatch(email, password);
     }
 
     public boolean setCurrentAccount(String email, String password) {
 
         boolean success = false;
 
-//        if( CurrentSession.emailCheck && CurrentSession.passwordCheck ){
-
         CurrentSession.currentUser = accountDao.getAccountByEmail(email);
 
-        if (CurrentSession.currentUser != null)
+        if (CurrentSession.currentUser != null) {
             success = true;
-
-//        }
+        }
 
         return success;
 

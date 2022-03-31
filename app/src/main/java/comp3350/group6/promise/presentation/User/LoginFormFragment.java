@@ -5,18 +5,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.NavHostFragment;
 
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
 import comp3350.group6.promise.R;
-import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.application.Service;
 
 
@@ -26,62 +29,62 @@ public class LoginFormFragment extends Fragment {
     private EditText emailInputView;
     private EditText passwordInputView;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public LoginFormFragment() {
+        super(R.layout.fragment_login_form);
+    }
 
-        View view = inflater.inflate(R.layout.fragment_login_form, container, false);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        // Get views from layout
 
         emailInputView = (EditText) view.findViewById( R.id.loginEmailInput );
         passwordInputView = (EditText) view.findViewById( R.id.loginPasswordInput );
         submitButtonView = (Button) view.findViewById( R.id.signInButton );
 
+        // Update layout behaviours
+
         submitButtonView.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick( View view ) {
-                handleSubmitClick();
+                handleSubmit();
             }
         });
 
-        return view;
-
     }
 
-    private void handleSubmitClick() {
-
+    private void handleSubmit() {
         String email = emailInputView.getText().toString();
         String password = emailInputView.getText().toString();
 
         // Check if email and password belong to existing user
         if( Service.accounts.accountExists( email ) && Service.accounts.passwordsMatch( email, password )) {
             // Set the session user and go to their dashboard
-            assert (Service.accounts.setCurrentAccount(email, password));
-            goToDashboard();
+            if(Service.accounts.setCurrentAccount(email, password)) {
+                NavDirections action = LoginFragmentDirections.loginSuccess();
+                NavHostFragment.findNavController(this).navigate(action);
+            }
+            else {
+                // TODO: Handle case
+            }
         }
         else {
             openLoginErrorDialog();
         }
-
-    }
-
-    private void goToDashboard(){
-
-        Intent intent = new Intent( getActivity(), DashboardActivity.class );
-        startActivity( intent );
-
     }
 
     private void openLoginErrorDialog() {
-
         LoginErrorDialogueFragment errorDialogue = new LoginErrorDialogueFragment();
         errorDialogue.show(getActivity().getSupportFragmentManager(), "loginError");
-
     }
 
     public static class LoginErrorDialogueFragment extends DialogFragment {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
+
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            NavController navController = NavHostFragment.findNavController(this);
 
             builder.setMessage( "The email and password provided you provided does not match a registered user." )
                     .setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
@@ -93,7 +96,8 @@ public class LoginFormFragment extends Fragment {
                     .setNeutralButton("Create Account", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent intent = new Intent( getActivity(), RegisterActivity.class );
+                            // TODO: Refactor to use navigation controller
+                            Intent intent = new Intent( getActivity(), RegisterFragment.class );
                             startActivity( intent );
                         }
                     });

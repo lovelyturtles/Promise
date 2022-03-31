@@ -10,8 +10,10 @@ import comp3350.group6.promise.objects.Project;
 public class CurrentSession {
 
     public static Account currentUser    = null;
-    public static boolean emailCheck     = false;
-    public static boolean passwordCheck  = false;
-    public static Project currentProject = null;
+
+//    Do we need these?
+//    public static boolean emailCheck     = false;
+//    public static boolean passwordCheck  = false;
+//    public static Project currentProject = null;
 
 }

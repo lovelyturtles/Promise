@@ -13,6 +13,18 @@
 
     </style>
 
+    <style name="Theme.Promise.BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">#FAFAFA</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:padding">@dimen/gap_sm</item>
+        <item name="itemHorizontalTranslationEnabled">false</item>
+        <item name="itemTextColor">@color/text_body</item>
+        <item name="itemIconTint">@color/text_heading</item>
+        <item name="itemPadding">0dp</item>
+        <item name="itemIconSize">20dp</item>
+        <item name="checkedIconTint">@color/gray_600</item>
+    </style>
+
     <!--    Form Styles-->
 
     <style name="Theme.Promise.Button" parent="Widget.Material3.Button">
@@ -38,7 +50,7 @@
 
     <style name="Theme.Promise.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="android:backgroundTint">@color/primary</item>
-        <item name="android:layout_margin">@dimen/gap_lg</item>
+<!--        <item name="android:layout_margin">@dimen/gap_lg</item>-->
     </style>
 
     <!-- Typographic Styles -->
