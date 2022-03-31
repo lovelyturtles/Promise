@@ -13,15 +13,18 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 import comp3350.group6.promise.objects.Account;
+import comp3350.group6.promise.objects.AccountUser;
+import comp3350.group6.promise.objects.Exceptions.DuplicateEmailException;
 import comp3350.group6.promise.persistence.AccountDao;
 import comp3350.group6.promise.util.DBConnectorUtil;
 
 public class AccountImp implements AccountDao {
 
     @Override
-    public int createAccount(String email, String password, int userId) {
+    public void createAccount(String email, String password, int userId) throws DuplicateEmailException {
         try (final Connection cnn = DBConnectorUtil.getConnection()) {
             assert cnn != null;
             password = new String(Base64.encodeBase64URLSafe(password.getBytes(StandardCharsets.UTF_8)), Charset.defaultCharset());
@@ -30,10 +33,14 @@ public class AccountImp implements AccountDao {
             preparedStatement.setString(2, password);
             preparedStatement.setInt(3, userId);
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        }
+
+        catch( SQLIntegrityConstraintViolationException e ){
+            throw new DuplicateEmailException( e.getMessage() );
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
-        return userId;
     }
 
     @Override
@@ -55,7 +62,7 @@ public class AccountImp implements AccountDao {
 
 
     @Override
-    public boolean accountExists(String email) {
+    public boolean accountExists( String email ) {
 
         try (final Connection cnn = DBConnectorUtil.getConnection()) {
             assert cnn != null;
@@ -71,17 +78,45 @@ public class AccountImp implements AccountDao {
 
     @Override
     public Account getAccountByEmail(String email) {
+
+        Account account = null;
+
         try (final Connection cnn = DBConnectorUtil.getConnection()) {
             assert cnn != null;
             PreparedStatement preparedStatement = cnn.prepareStatement("select * from account where email = ?");
             preparedStatement.setString(1, email);
             ResultSet res = preparedStatement.executeQuery();
-            res.next();
-            return new Account(res.getString("email"), null, res.getInt("userId"));
-        } catch (Exception e) {
+            if( res.next() )
+                account = new Account(res.getString("email"), null, res.getInt("userId"));
+        }
+
+        catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+
+        return account;
+    }
+
+    @Override
+    public Account getAccountByID(int userID){
+
+        Account account = null;
+
+        try (final Connection cnn = DBConnectorUtil.getConnection()) {
+            assert cnn != null;
+            PreparedStatement preparedStatement = cnn.prepareStatement("select * from account where userID = ?");
+            preparedStatement.setInt( 1, userID );
+            ResultSet res = preparedStatement.executeQuery();
+            if( res.next() )
+                account = new Account(res.getString("email"), null, res.getInt("userId"));
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return account;
+
     }
 
     @Override

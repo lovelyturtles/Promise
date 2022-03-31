@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import comp3350.group6.promise.R;
-import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Exceptions.DuplicateEmailException;
 import comp3350.group6.promise.objects.Exceptions.EmptyEmailException;
@@ -53,17 +52,23 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick( View view ) {
 
                 try {
-                    //Get their email
-                    textEmail = findViewById(R.id.emailInput);
+                    //Get their email and turn it into a string
+                    textEmail = findViewById(R.id.email_input);
+                    userEmail = textEmail.getText().toString();
 
-                    //Get their name
-                    textName = findViewById(R.id.firstNameInput);
+                    //Get their name and turn it into a string
+                    textName = findViewById(R.id.name_input);
+                    userName = textName.getText().toString();
 
-                    //Get their password
-                    textPass = findViewById(R.id.passwordInput);
+                    //Get their password and turn it into a string
+                    textPass = findViewById(R.id.password_input);
+                    userPassword = textPass.getText().toString();
+
+                    //Turn their into into a string
+                    userIntro = textIntro.getText().toString();
 
                     //Send all this information to the business layer
-                    Service.accounts.register(textEmail, textName, textPass, textIntro);
+                    Service.accounts.register( userEmail, userName, userPassword, userIntro );
 
                     //If we don't get any Exceptions, we can go to the user's home page
                     goToUserHome();

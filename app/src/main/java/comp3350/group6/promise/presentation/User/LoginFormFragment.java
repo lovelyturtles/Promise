@@ -41,9 +41,13 @@ public class LoginFormFragment extends Fragment {
             @Override
             public void onClick( View view ) {
 
+                //convert email and password to strings
+                String email = emailInputView.getText().toString();
+                String password = passwordInputView.getText().toString();
+
                 //Send input to the business layer
                 try{
-                    Service.accounts.login( emailInputView, passwordInputView );
+                    Service.accounts.login( email, password );
                     //if no Exception was thrown, we'll go back to the user's home page
                     goToUserHome();
                 }
@@ -56,7 +60,7 @@ public class LoginFormFragment extends Fragment {
                 }
 
                 catch( EmptyPasswordException e ){
-                    System.out.println("Emtpy password");
+                    System.out.println("Empty password");
                 }
 
                 catch( Exception e ){

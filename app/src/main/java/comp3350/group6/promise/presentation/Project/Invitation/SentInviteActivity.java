@@ -31,7 +31,7 @@ public class SentInviteActivity extends AppCompatActivity {
         goBack.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick( View view ) {
-                finish();
+                finish(); //what is this?? Possibly remove? idk
             }
         });
 

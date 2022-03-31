@@ -19,17 +19,18 @@ public class AccountService {
 
     public AccountService() {}
 
-    //can I change this method to have a void return statement and just use Exception handling??
-    public int createAccount( String email, String password, String name, String introduction ) throws Exception{
+    //changed this method to have a void return statement and just use Exception handling - ask if OK
+    private void createAccount( String email, String password, String name, String introduction ) throws Exception {
 
         int userID = Service.users.addUser( name, introduction );
-        userID = accountDao.createAccount(email, password, userID);
 
-        if( userID == -1 )
-            throw new DuplicateEmailException( "An account with this email already exists" );
+        try {
+            accountDao.createAccount(email, password, userID);
+        }
+        catch( DuplicateEmailException e ) {
+            throw new DuplicateEmailException("An account with this email already exists");
+        }
 
-        //should probably remove the userID return statement and replace tests with exception
-        return userID;
 
     }
 
@@ -45,7 +46,7 @@ public class AccountService {
 
     }
 
-    public boolean passwordsMatch( String email, String password ) {
+    private boolean passwordsMatch( String email, String password ) {
 
         return accountDao.passwordsMatch( email, password );
 
@@ -57,7 +58,13 @@ public class AccountService {
 
     }
 
-    public void setCurrentAccount( String email, String password ) throws LoginErrorException {
+    public Account getAccountByID( int userID ){
+
+        return accountDao.getAccountByID( userID );
+
+    }
+
+    private void setCurrentAccount( String email, String password ) throws LoginErrorException {
 
         //for us to set the current user, the account has to exist and the password must match
         if( accountExists( email ) && passwordsMatch( email, password ) )
@@ -70,12 +77,7 @@ public class AccountService {
 
     }
 
-    public void register( EditText textEmail, EditText textName, EditText textPass, EditText textIntro ) throws Exception {
-
-        String email = textEmail.getText().toString();
-        String name = textName.getText().toString();
-        String password = textPass.getText().toString();
-        String intro = textIntro.getText().toString();
+    public void register( String email, String name, String password, String intro ) throws Exception {
 
         if( email.equals( "" ) )
             throw new EmptyEmailException( "Please enter an email address." );
@@ -99,14 +101,13 @@ public class AccountService {
             throw new LoginErrorException( "Wrong password/email combination" );
         }
 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
-    public void login( EditText emailText, EditText passwordText ) throws Exception {
-
-        String email = emailText.getText().toString();
-        System.out.println("email");
-        String password = passwordText.getText().toString();
-        System.out.println("password");
+    public void login( String email, String password ) throws Exception {
 
         if( email.equals( "" ) )
             throw new EmptyEmailException( "Please enter an email address" );

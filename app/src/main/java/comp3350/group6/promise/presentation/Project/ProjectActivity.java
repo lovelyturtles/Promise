@@ -29,6 +29,8 @@ import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.objects.Task;
+import comp3350.group6.promise.objects.enumClasses.NotifType;
+import comp3350.group6.promise.presentation.Project.Invitation.RecipientInfoActivity;
 import comp3350.group6.promise.presentation.Task.TaskActivity;
 import comp3350.group6.promise.util.TaskAdapter;
 
@@ -103,6 +105,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
             int id = getIntent().getIntExtra("projectID", -1);
             if (id != -1) {
                 project = ProjectService.getInstance().getProjectByID(id);
+                handleInvite(id);
             }
         }
 
@@ -147,6 +150,19 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
 //            }
 //        });
 
+    }
+
+    private void handleInvite(int projectID ){
+
+        Button inviteButton = findViewById( R.id.inviteButton);
+        NotifType type = NotifType.INVITE;
+
+
+    }
+
+    private void goToRecipientDetails(){
+        Intent intent = new Intent( this, RecipientInfoActivity.class );
+        startActivity( intent );
     }
 
     public void onFloatingButtonClick() {
