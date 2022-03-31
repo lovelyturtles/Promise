@@ -28,6 +28,9 @@ public class LoginFormFragment extends Fragment {
     private EditText emailInputView;
     private EditText passwordInputView;
 
+    String userEmail;
+    String userPass;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -42,12 +45,12 @@ public class LoginFormFragment extends Fragment {
             public void onClick( View view ) {
 
                 //convert email and password to strings
-                String email = emailInputView.getText().toString();
-                String password = passwordInputView.getText().toString();
+                userEmail = emailInputView.getText().toString();
+                userPass = passwordInputView.getText().toString();
 
                 //Send input to the business layer
                 try{
-                    Service.accounts.login( email, password );
+                    Service.accounts.login( userEmail, userPass );
                     //if no Exception was thrown, we'll go back to the user's home page
                     goToUserHome();
                 }
@@ -76,10 +79,10 @@ public class LoginFormFragment extends Fragment {
     }
 
     private void goToUserHome(){
-        //change this when I get the AccountUser database working
-        String message = "Welcome back, " + emailInputView.getText().toString();
+        //welcome message with user's name
+        String message = "Welcome back, " + Service.accountUser.getNameByEmail( userEmail );;
         Intent intent = new Intent( getActivity(), UserActivity.class );
-        intent.putExtra( "userInputEmail", message );
+        intent.putExtra( "welcomeName", message );
         startActivity( intent );
 
     }

@@ -32,12 +32,12 @@
             android:id="@+id/notifTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_toEndOf="@+id/notifImageView"
             android:text="@string/personIconName"
             android:textColor="@color/black"
-            android:textSize="15sp"
-            android:layout_toEndOf="@+id/notifImageView"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="30dp">
+            android:textSize="15sp">
 
         </TextView>
 

@@ -103,10 +103,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void goToUserHome(){
 
-        //change this when I get AccountUser working
-        String message = "Welcome, " + textEmail.getText().toString();
+        //welcome message with user's name
+        String message = "Welcome, " + userName;
         Intent intent = new Intent( this, UserActivity.class );
-        intent.putExtra( "userInputEmail", message );
+        intent.putExtra( "welcomeName", message );
         startActivity( intent );
 
     }

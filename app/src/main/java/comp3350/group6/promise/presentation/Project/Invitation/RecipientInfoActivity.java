@@ -15,16 +15,22 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.application.Service;
+import comp3350.group6.promise.objects.Exceptions.AccountDNException;
 
 public class RecipientInfoActivity extends AppCompatActivity {
     private Button sendInvite;
-    EditText textName;
+    EditText textEmail;
     String recipientEmail;
+    int projectID;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_recipient_info );
+
+        //Get the projectID that was passed in
+        Intent intent = getIntent();
+        projectID = intent.getIntExtra( "projectID", -1 );
 
         /*
         * When the user enters the username of the person they want to invite,
@@ -37,9 +43,20 @@ public class RecipientInfoActivity extends AppCompatActivity {
         sendInvite.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Get the userName that was submitted
-                textName = findViewById( R.id.recipientEmailHint );
-                recipientEmail = textName.getText().toString();
+                //Get the email address that was submitted
+                textEmail = findViewById( R.id.recipientEmailHint );
+                recipientEmail = textEmail.getText().toString();
+
+                /* Invite this user to our project */
+                try{
+                    Service.notifications.invite( recipientEmail , projectID );
+                    //If the invitation was successfully sent, go to the sent page
+                    goToSentPage();
+                }
+
+                catch( AccountDNException e ){
+                    openUserDoesNotExistDialog();
+                }
 
                 /*
                  * Check if the username is in our user database
@@ -47,12 +64,12 @@ public class RecipientInfoActivity extends AppCompatActivity {
                  *  if it is, call RecipientService and then goToSentPage()
                  *
                  */
-                if(Service.accounts.accountExists( recipientEmail ) ) {
-                    goToSentPage();
-                }
-                else {
-                    openUserDoesNotExistDialog();
-                }
+//                if(Service.accounts.accountExists( recipientEmail ) ) {
+//                    goToSentPage();
+//                }
+//                else {
+//                    openUserDoesNotExistDialog();
+//                }
 
             }
         });
@@ -60,7 +77,7 @@ public class RecipientInfoActivity extends AppCompatActivity {
 
     public void goToSentPage(){
         Intent intent = new Intent( this, SentInviteActivity.class );
-        intent.putExtra( "userInput", recipientEmail);
+        intent.putExtra( "emailInput", recipientEmail);
         startActivity( intent );
     }
 

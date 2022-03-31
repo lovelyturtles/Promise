@@ -25,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.objects.Project;
@@ -155,13 +156,19 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
     private void handleInvite(int projectID ){
 
         Button inviteButton = findViewById( R.id.inviteButton);
-        NotifType type = NotifType.INVITE;
+        inviteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToRecipientDetails( projectID );
+            }
+        });
 
 
     }
 
-    private void goToRecipientDetails(){
+    private void goToRecipientDetails( int projectID ){
         Intent intent = new Intent( this, RecipientInfoActivity.class );
+        intent.putExtra("projectID", projectID );
         startActivity( intent );
     }
 
@@ -208,6 +215,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
             case R.id.action_invite:
                 // TODO: Implement action handler for project invites
                 Toast.makeText(getBaseContext(), "Pressed Invite to Project", Toast.LENGTH_SHORT).show();
+//                handleInvite();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

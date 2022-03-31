@@ -9,10 +9,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.presentation.Project.Invitation.RecipientInfoActivity;
 
 public class SentInviteActivity extends AppCompatActivity {
 
+    String recipientEmail;
+    String recipientName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -21,7 +24,8 @@ public class SentInviteActivity extends AppCompatActivity {
 
         TextView textView = findViewById( R.id.successSentMessage );
         Intent intent = getIntent();
-        String recipientName = intent.getStringExtra( "userInput" );
+        recipientEmail = intent.getStringExtra( "emailInput" );
+        recipientName = Service.accountUser.getNameByEmail( recipientEmail );
         String message = "Your invite was sent to " + recipientName;
         textView.setText( message );
 

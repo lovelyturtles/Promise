@@ -24,13 +24,15 @@ public class NotifImp implements NotifDao {
     public void addNotif( int senderID, int projectID, int recipientID, NotifType type){
 
         String insertStatement = "INSERT INTO Notification VALUES(?,?,?,?)";
+        System.out.println("type.toString(): " + type.toString());
+        System.out.println("type.name():" + type.name());
         try (final Connection cnn = DBConnectorUtil.getConnection();
             PreparedStatement pStatement = cnn.prepareStatement(insertStatement)){
 
             pStatement.setInt(1, senderID);
             pStatement.setInt(2, projectID);
             pStatement.setInt(3, recipientID);
-            pStatement.setString(4, type.name());
+            pStatement.setString(4, type.toString());
             pStatement.executeUpdate();
 
         }

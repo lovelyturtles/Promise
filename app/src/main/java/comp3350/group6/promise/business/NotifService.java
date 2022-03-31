@@ -9,6 +9,7 @@ import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Access;
 import comp3350.group6.promise.objects.Account;
+import comp3350.group6.promise.objects.Exceptions.AccountDNException;
 import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.objects.Notification;
 import comp3350.group6.promise.objects.enumClasses.AccessRole;
@@ -21,7 +22,7 @@ public class NotifService {
 
     private final NotifDao notification = new NotifImp();
 
-    public void invite( String theirEmail, int projectID ){
+    public void invite( String theirEmail, int projectID ) throws AccountDNException {
 
         //check if their account exists
         if( Service.accounts.accountExists( theirEmail ) ){
@@ -35,6 +36,10 @@ public class NotifService {
             notification.addNotif(sender.getUserID(), projectID, recipient.getUserID(), NotifType.INVITE);
 
         }
+
+        //if it doesn't, throw a Account Does Not Exist Exception
+        else
+            throw new AccountDNException( "There is no account with this email" );
 
     }
 

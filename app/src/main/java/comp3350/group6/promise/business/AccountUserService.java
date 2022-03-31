@@ -33,6 +33,13 @@ public class AccountUserService {
 
     }
 
+    public String getNameByEmail( String email ){
+
+        AccountUser accountUser = getUserByEmail( email );
+        return accountUser.getUserName();
+
+    }
+
 
 
 }
