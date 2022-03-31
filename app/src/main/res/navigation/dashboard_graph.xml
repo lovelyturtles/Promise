@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboard_graph"
+    app:startDestination="@id/home">
+    <fragment
+        android:id="@+id/home"
+        android:name="comp3350.group6.promise.presentation.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <argument
+            android:name="showFloatingButton"
+            android:defaultValue="true" />
+        <action
+            android:id="@+id/createProject"
+            app:destination="@id/createProjectFragment" />
+        <action
+            android:id="@+id/selectProject"
+            app:destination="@id/projectFragment" />
+        <action
+            android:id="@+id/navigate_to_notifications"
+            app:destination="@id/notifications" />
+        <action
+            android:id="@+id/navigate_to_profile"
+            app:destination="@id/profile" />
+        <action
+            android:id="@+id/navigate_to_settings"
+            app:destination="@id/settings" />
+    </fragment>
+    <fragment
+        android:id="@+id/createProjectFragment"
+        android:name="comp3350.group6.promise.presentation.Project.CreateProjectFragment"
+        android:label="Create Project"
+        tools:layout="@layout/fragment_create_project">
+        <action
+            android:id="@+id/createProjectSuccess"
+            app:destination="@id/home" />
+    </fragment>
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="comp3350.group6.promise.presentation.Project.ProjectFragment"
+        android:label="ProjectFragment"
+        tools:layout="@layout/fragment_project">
+        <argument
+            android:name="showFloatingButton"
+            android:defaultValue="true" />
+        <argument
+            android:name="projectId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/selectTask"
+            app:destination="@id/taskActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskActivity"
+        android:name="comp3350.group6.promise.presentation.Task.TaskFragment"
+        android:label="TaskActivity"
+        tools:layout="@layout/fragment_task">
+        <argument
+            android:name="taskId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/notifications"
+        android:name="comp3350.group6.promise.presentation.Notification.NotificationsFragment"
+        android:label="Notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/profile"
+        android:name="comp3350.group6.promise.presentation.User.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/settings"
+        android:name="comp3350.group6.promise.presentation.SettingsFragment"
+        android:label="SettingsFragment" />
+</navigation>
