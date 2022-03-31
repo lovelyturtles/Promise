@@ -20,10 +20,6 @@ public class TaskService {
         taskDao = new TaskImp();
     }
 
-    public TaskService(boolean forProduction) {
-        taskDao = Service.getTaskImp(forProduction);
-        allTask = null;
-    }
 
     public TaskService(TaskDao db) {
         this();

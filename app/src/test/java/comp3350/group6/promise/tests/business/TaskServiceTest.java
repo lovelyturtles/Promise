@@ -20,12 +20,12 @@ public class TaskServiceTest {
 
     private TaskService taskService;
 
-    /* Each time the fake DB get reinitialized */
+    /* Each time get reinitialized */
     @Before
     public void setup() {
         System.out.println("Starting test for TaskService");
         DBConnectorUtil.initialLocalDB();
-        taskService = new TaskService(true); // false init a fake DB
+        taskService = TaskService.getInstance();
     }
 
     @Test
@@ -83,7 +83,7 @@ public class TaskServiceTest {
         System.out.println("\nStarting testUpdateTask");
 
         Task toUpdate = new Task(1, "updatedTask", "default", 0, 0, 0, null, null, null);
-        taskService.updateTask(toUpdate); // TODO check this
+        taskService.updateTask(toUpdate);
 
         String newTitle = "updatedTask";
         Task actual = taskService.getTask(1);
@@ -113,7 +113,6 @@ public class TaskServiceTest {
     @After
     public void tearDown() {
         System.out.println("Reset database");
-        Service.clean(); // clean Service implementation
         DBConnectorUtil.cleanLocalDB(); // clean local db
     }
 }

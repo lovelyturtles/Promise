@@ -13,7 +13,7 @@ public class ProjectService {
     private List<Project> projects;
     private static ProjectService instance;
 
-    private ProjectService(){
+    public ProjectService(){
         projectDao = new ProjectImp();
         projects = null;
     }

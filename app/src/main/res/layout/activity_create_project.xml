@@ -15,7 +15,7 @@
 
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/task_toolBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_back"
@@ -35,14 +35,14 @@
             android:padding="@dimen/gap_lg">
 
             <TextView
-                android:id="@+id/project_name_input_label"
+                android:id="@+id/task_name_input_label"
                 style="@style/Theme.Promise.InputLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Project Title" />
 
             <EditText
-                android:id="@+id/project_name_input"
+                android:id="@+id/task_name_input"
                 style="@style/Theme.Promise.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,14 +51,14 @@
                 android:inputType="textPersonName"/>
 
             <TextView
-                android:id="@+id/project_description_input_label"
+                android:id="@+id/task_description_input_label"
                 style="@style/Theme.Promise.InputLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Project Description" />
 
             <EditText
-                android:id="@+id/project_description_input"
+                android:id="@+id/task_description_input"
                 style="@style/Theme.Promise.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
@@ -68,7 +68,7 @@
                 android:inputType="textShortMessage"/>
 
             <Button
-                android:id="@+id/create_project_button"
+                android:id="@+id/submit_task_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Create Project"

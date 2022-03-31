@@ -117,7 +117,7 @@ public class TaskImp implements TaskDao {
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }
-    }
+    }// TODO check insert since new changes
 
     @Override
     public Task updateTask(Task t) {
