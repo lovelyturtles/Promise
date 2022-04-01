@@ -48,4 +48,24 @@ public class Notification {
 
     }
 
+    @Override
+    public boolean equals( Object other ){
+
+        if( this == other ){
+            return true;
+        }
+
+        if( other == null || getClass() != other.getClass() ){
+            return false;
+        }
+
+        Notification notification = (Notification) other;
+
+        return senderID == notification.projectID &&
+                projectID == notification.projectID &&
+                recipientID == notification.recipientID &&
+                type == notification.type;
+
+    }
+
 }
