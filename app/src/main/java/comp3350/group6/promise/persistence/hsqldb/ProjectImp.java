@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
 
+import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.persistence.ProjectDao;
 import comp3350.group6.promise.util.DBConnectorUtil;

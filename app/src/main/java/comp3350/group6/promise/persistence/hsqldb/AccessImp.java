@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 import comp3350.group6.promise.objects.Access;
+import comp3350.group6.promise.objects.Exceptions.PersistenceException;
+import comp3350.group6.promise.objects.enumClasses.AccessRole;
 import comp3350.group6.promise.persistence.AccessDao;
 import comp3350.group6.promise.util.DBConnectorUtil;
 
@@ -142,4 +144,65 @@ public class AccessImp implements AccessDao {
 
         return access;
     }
+
+    /* Returns the userID of the people that have this role */
+    @Override
+    public List<Integer> getRoleByProjectID( int projectID, AccessRole role ) {
+        //CREATE MEMORY TABLE PUBLIC.ACCESS(PROJECTID INTEGER NOT NULL,USERID INTEGER NOT NULL,
+        // ROLE VARCHAR(255) NOT NULL,STARTTIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
+        final List<Integer> userList = new ArrayList<Integer>();
+
+        try(Connection con = DBConnectorUtil.getConnection()){
+
+            PreparedStatement pstmt = con.prepareStatement("SELECT userID FROM Access WHERE projectID = ? AND role = ?");
+            pstmt.setInt(1, projectID);
+            pstmt.setString(2, role.name());
+            ResultSet rs = pstmt.executeQuery();
+
+            while(rs.next()){
+                int userID = rs.getInt("userID");
+                userList.add(userID);
+            }
+
+            pstmt.close();
+            rs.close();
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+        return userList;
+    }
+
+
+    /* check if this userID has access to this projectID */
+    @Override
+    public boolean hasAccess( int userID, int projectID ){
+
+        boolean access; //false by default
+
+        try(Connection con = DBConnectorUtil.getConnection()){
+
+            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Access where userID = ? and projectID = ?");
+            pstmt.setInt(1, userID);
+            pstmt.setInt(2, projectID);
+            ResultSet rs = pstmt.executeQuery();
+
+            //if there are any more rows, this will return true (the user has access),
+            //else, it'll return false (the user doesn't have access)
+            access = rs.next();
+
+            pstmt.close();
+            rs.close();
+
+        }
+
+        catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+        return access;
+
+    }
+
 }
