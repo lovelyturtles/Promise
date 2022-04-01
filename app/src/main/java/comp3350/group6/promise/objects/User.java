@@ -1,6 +1,8 @@
 package comp3350.group6.promise.objects;
 
 
+import java.util.Objects;
+
 import lombok.Data;
 
 @Data
@@ -33,6 +35,14 @@ public class User {
 
     public void setIntro( String introduction ){
         this.introduction = introduction;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return UserId == user.UserId && Objects.equals(name, user.name) && Objects.equals(introduction, user.introduction);
     }
 
 }
