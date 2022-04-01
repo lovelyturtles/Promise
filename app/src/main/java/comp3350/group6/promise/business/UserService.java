@@ -17,8 +17,8 @@ public class UserService {
         return userDao.addUser(name, introduction);
     }
 
-    public void updateUserByUserId( int userId, String name, String introduction ) {
-        userDao.updateUserByUserId(userId, name, introduction);
+    public int updateUserByUserId( int userId, String name, String introduction ) {
+        return userDao.updateUserByUserId(userId, name, introduction);
     }
 
     public User getUserByUserId( int userId ) {
