@@ -35,6 +35,7 @@ import comp3350.group6.promise.objects.enumClasses.NotifType;
 import comp3350.group6.promise.presentation.Project.Invitation.RecipientInfoActivity;
 import comp3350.group6.promise.presentation.Task.CreateTaskActivity;
 import comp3350.group6.promise.presentation.Task.TaskActivity;
+import comp3350.group6.promise.presentation.User.DashboardActivity;
 import comp3350.group6.promise.util.TaskAdapter;
 
 public class ProjectActivity extends AppCompatActivity implements TaskAdapter.OnTaskClickListener, TaskAdapter.OnTaskLongClickListener {
@@ -129,7 +130,9 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
         toolbarView.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(getBaseContext(), DashboardActivity.class);
+                intent.putExtra("projectID", project.getProjectID());
+                startActivity(intent);
             }
         });
 
