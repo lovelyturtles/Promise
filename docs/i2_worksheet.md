@@ -8,6 +8,17 @@ One case of technical debt occurred as we were developing our interface. We were
 
 * App Bar Refactoring Example ([Commit](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/commit/3e85274b2fac956d4dd209cc29d60ffc75d9c59b#6f5ced1d71e320e9004287a2aacbbc444612dfc5), [File](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/blob/3e85274b2fac956d4dd209cc29d60ffc75d9c59b/app/src/main/res/layout/activity_task.xml), Line 10)
 
+Another case of technical debt being payed off in this iteration can be seen with the LoginFormFragment, RegisterActivity, and AccountService classes. 
+As you can see in the links provided, most of the logic for registering an account or logging in were originally done in their respective presentation layers. 
+AccountService was basically only used to set the current account. 
+By moving all this code to AccountService, the code in the presentation layer is able to be abstracted. 
+Instead of numerous checks to see if an account exists and passwords match and so on, we just have simple calls to accountService.login or accountService.register without 
+worrying about how AccountService is accomplishing this task. 
+
+* Account Refactoring Example ([Commit](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/commit/88ad326b445f2a21926a182c4dc23665593504df) )
+* [Link to removal of logic code in RegisterActivity](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/commit/88ad326b445f2a21926a182c4dc23665593504df#b427ea31be914fcebd82e2f99c6c40256182573f_49_53)
+* [Link to addition of logic into AccountService](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/commit/88ad326b445f2a21926a182c4dc23665593504df#88c7a63d9e1180ee787a45f057572059d1c899e4_60_75)
+
 ## SOLID
 [//]: <Find a SOLID violation in the project of group with group number n-1 in the same section of the course as you (group 1 does group 16). Open an issue in their project with the violation, clearly explaining the SOLID violation - specifying the type, provide a link to that issue. Be sure your links in the issues are to specific commits (not to main, or develop as those will be changed).Provide a link to the issue you created here.>
 
