@@ -31,12 +31,9 @@ import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.objects.Task;
-<<<<<<< app/src/main/java/comp3350/group6/promise/presentation/Project/ProjectActivity.java
 import comp3350.group6.promise.objects.enumClasses.NotifType;
 import comp3350.group6.promise.presentation.Project.Invitation.RecipientInfoActivity;
-=======
 import comp3350.group6.promise.presentation.Task.CreateTaskActivity;
->>>>>>> app/src/main/java/comp3350/group6/promise/presentation/Project/ProjectActivity.java
 import comp3350.group6.promise.presentation.Task.TaskActivity;
 import comp3350.group6.promise.util.TaskAdapter;
 
@@ -147,15 +144,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
     }
 
 
-//        createTaskButton = (Button) findViewById(R.id.button_create_task);
-//
-//        createTaskButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                addItem(view);
-//            }
-//        });
-    }
+
 //    private void handleInvite(){
 //
 //        Button inviteButton = findViewById( R.id.inviteButton);
@@ -168,10 +157,11 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
 //
 //    }
 
-    private void goToRecipientDetails(){
-        Intent intent = new Intent( this, RecipientInfoActivity.class );
-        intent.putExtra("projectID", project.getProjectID() );
-        startActivity( intent );
+    private void goToRecipientDetails() {
+        Intent intent = new Intent(this, RecipientInfoActivity.class);
+        intent.putExtra("projectID", project.getProjectID());
+        startActivity(intent);
+    }
 
     @Override
     protected void onResume() {

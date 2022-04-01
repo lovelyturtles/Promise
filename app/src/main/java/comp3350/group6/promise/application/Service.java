@@ -2,6 +2,7 @@ package comp3350.group6.promise.application;
 
 import comp3350.group6.promise.business.AccessService;
 import comp3350.group6.promise.business.AccountService;
+import comp3350.group6.promise.business.AccountUserService;
 import comp3350.group6.promise.business.HandleService;
 import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.business.TaskService;
@@ -15,4 +16,8 @@ public class Service {
     public static TaskService tasks = TaskService.getInstance();
     public static AccessService accesses = AccessService.getInstance();
     public static HandleService handles = HandleService.getInstance();
+    public static AccountUserService accountUser = AccountUserService.getInstance();
+
+
+
 }
