@@ -1,4 +1,4 @@
-package comp3350.group6.promise.objects.Exceptions;
+package comp3350.group6.promise.persistence.hsqldb;
 
 /*
     Not used for iteration 1.

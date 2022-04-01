@@ -1,14 +1,15 @@
 package comp3350.group6.promise.persistence.hsqldb;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.objects.Handle;
 import comp3350.group6.promise.persistence.HandleDao;
 import comp3350.group6.promise.util.DBConnectorUtil;

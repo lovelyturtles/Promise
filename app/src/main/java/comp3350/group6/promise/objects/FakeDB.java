@@ -2,8 +2,9 @@ package comp3350.group6.promise.objects;
 
 import java.util.ArrayList;
 
+import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.application.Service;
-import comp3350.group6.promise.objects.Exceptions.EmptyInputException;
+import comp3350.group6.promise.business.EmptyInputException;
 
 public class FakeDB {
     public static int    generatedUserIDCount;
@@ -29,12 +30,12 @@ public class FakeDB {
 
     private static void fillAccounts() throws Exception {
 
-        Service.accounts.register( "wharfhorse@app.com", "Calvin", "password1", "What" );
-        Service.accounts.register( "lazerrazor@bob.com", "Louise", "password2", "No" );
-        Service.accounts.register( "bapple@app.com", "Ben", "password3", "No" );
-        Service.accounts.register( "wendall@app.com", "Wendall", "password4",  "Forts" );
-        Service.accounts.register( "lyjericacran@app.com", "Lyjerica", "password5", "Cranberries" );
-        Service.accounts.register( "pimmypr@app.com", "Tina", "password6", "No" );
+        Service.accounts.createAccount( "wharfhorse@app.com", "password1", "Calvin", "What" );
+        Service.accounts.createAccount( "lazerrazor@bob.com", "password2", "Louise", "No" );
+        Service.accounts.createAccount( "bapple@app.com", "password3", "Ben", "No" );
+        Service.accounts.createAccount( "wendall@app.com", "password4", "Wendall", "Forts" );
+        Service.accounts.createAccount( "lyjericacran@app.com", "password5", "Lyjerica", "Cranberries" );
+        Service.accounts.createAccount( "pimmypr@app.com", "password6", "Tina", "No" );
 
     }
 

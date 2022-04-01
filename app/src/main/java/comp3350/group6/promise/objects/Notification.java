@@ -1,28 +1,26 @@
 package comp3350.group6.promise.objects;
 
-import androidx.annotation.NonNull;
-
 import comp3350.group6.promise.objects.enumClasses.NotifType;
 import lombok.Data;
 
 @Data
 public class Notification {
-    private int senderID;         //userID of the user that sent the notification
+    private int userID;         //userID of the user that sent the notification
     private int projectID;      //ID of the project this notification refers to
     private int recipientID;    //userID of the user that's receiving the notification
     private NotifType type;     //A notification is either a request or an invite
 
-    public Notification(int senderID, int projectID, int recipientID, NotifType type) {
+    public Notification(int userID, int projectID, int recipientID, NotifType type) {
 
-        this.senderID = senderID;
+        this.userID = userID;
         this.projectID = projectID;
         this.recipientID = recipientID;
         this.type = type;
 
     }
 
-    public int getSenderID() {
-        return senderID;
+    public int getUserID() {
+        return userID;
     }
 
     public int getProjectID() {
@@ -35,17 +33,6 @@ public class Notification {
 
     public NotifType getType() {
         return type;
-    }
-
-    @NonNull
-    @Override
-    public String toString(){
-
-        return "senderID: " + senderID +
-                ", projectID: " + projectID +
-                ", recipientID: " + recipientID +
-                ", type: " + type.name();
-
     }
 
 }

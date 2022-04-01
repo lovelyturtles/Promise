@@ -15,7 +15,7 @@ public class TaskService {
     private static TaskService instance;
 
 
-    public TaskService() {
+    private TaskService() {
         allTask = null;
         taskDao = new TaskImp();
     }

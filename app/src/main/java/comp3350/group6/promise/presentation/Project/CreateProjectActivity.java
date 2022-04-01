@@ -14,11 +14,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.Service;
-import comp3350.group6.promise.objects.Exceptions.EmptyInputException;
+import comp3350.group6.promise.business.AccessService;
+import comp3350.group6.promise.business.EmptyInputException;
+import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.objects.Access;
 import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.objects.Project;
-import comp3350.group6.promise.objects.enumClasses.AccessRole;
 import comp3350.group6.promise.presentation.User.DashboardActivity;
 
 public class CreateProjectActivity extends AppCompatActivity{
@@ -65,8 +66,7 @@ public class CreateProjectActivity extends AppCompatActivity{
 
         try {
             Project newProject = Service.projects.insertProject(new Project(projectName, projectDesc));
-            Access newAccess = new Access(newProject.getProjectID(), CurrentSession.currentUser.getUserID());
-            newAccess.setRole(AccessRole.CREATOR.name());
+            Access newAccess = new Access(newProject.getProjectID(), CurrentSession.currentUser.getUserID()); //TODO: Maybe change current session
             Service.accesses.insertAccess(newAccess);
 
             // go back to dashboard

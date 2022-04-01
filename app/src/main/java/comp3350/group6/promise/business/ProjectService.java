@@ -3,7 +3,6 @@ package comp3350.group6.promise.business;
 import java.util.Collections;
 import java.util.List;
 
-import comp3350.group6.promise.objects.Exceptions.EmptyInputException;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.persistence.ProjectDao;
 import comp3350.group6.promise.persistence.hsqldb.ProjectImp;
@@ -14,7 +13,7 @@ public class ProjectService {
     private List<Project> projects;
     private static ProjectService instance;
 
-    public ProjectService(){
+    private ProjectService(){
         projectDao = new ProjectImp();
         projects = null;
     }
@@ -40,7 +39,7 @@ public class ProjectService {
         If projects with empty project names are being inserted,
         the insertProject will throw an EmptyInputException.
      */
-    public Project insertProject(Project project) throws EmptyInputException {
+    public Project insertProject(Project project) throws EmptyInputException{
         if (project.getProjectName().isEmpty()){
             throw new EmptyInputException("project name");
         }

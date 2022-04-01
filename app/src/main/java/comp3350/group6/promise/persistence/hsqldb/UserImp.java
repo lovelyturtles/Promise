@@ -1,3 +1,9 @@
+/*
+ * Please ignore this class. We started implementing before realizing
+ * we don't need a functioning database until iteration 2 so we switched
+ * to using the fake databases in the "stub" folder
+ */
+
 package comp3350.group6.promise.persistence.hsqldb;
 
 import java.sql.Connection;
