@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,21 +13,22 @@ import java.util.List;
 
 import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.objects.Exceptions.EmptyInputException;
-import comp3350.group6.promise.objects.FakeDB;
 import comp3350.group6.promise.objects.Project;
-import comp3350.group6.promise.persistence.stub.ProjectImpNoDB;
+import comp3350.group6.promise.util.DBConnectorUtil;
 
-public class ProjectServiceFakeDBTest {
+public class ProjectServiceIT {
 
-    private FakeDB db;
     private ProjectService projectService;
 
     @Before
-    public void setUp() throws Exception{
-        // setup the fake database and projectService class
-        db = new FakeDB();
-        projectService = new ProjectService(new ProjectImpNoDB());
-        db.initialize();
+    public void setUp() {
+        DBConnectorUtil.initialLocalDB();
+        projectService = new ProjectService();
+    }
+
+    @After
+    public void clean(){
+        DBConnectorUtil.cleanLocalDB();
     }
 
     /*
@@ -38,15 +40,13 @@ public class ProjectServiceFakeDBTest {
     public void testInsertProject() throws EmptyInputException {
 
         System.out.println("Testing insertProject method from ProjectService Class.");
-
         List<Project> projects = projectService.getProjects();
         Project p = new Project("Test Project", "This is a test.");
-        int id = p.getProjectID();
         int originalSize = projects.size();
 
         projectService.insertProject(p);
 
-        assertTrue("Inserted object should be equal to project in List.", projectService.getProjectByID(id).equals(p));
+        assertTrue("Inserted object should be equal to project in List.", (projectService.getProjects()).get(0).equals(p));
         assertEquals("List size should be different after insertion.", originalSize+1, projectService.getProjects().size());
 
         System.out.println("Passed insertProject method from ProjectService Class.");
@@ -135,4 +135,28 @@ public class ProjectServiceFakeDBTest {
         System.out.println("Passed deleteProject method from ProjectService Class.");
     }
 
+    @Test
+    public void testGetProjectById() throws EmptyInputException{
+
+        System.out.println("Testing getProjectId from ProjectService Class.");
+
+        List<Project> projects;
+
+        Project p1 = new Project("Test Project1", "This is a test 1.");
+        Project p2 = new Project("Test Project2", "This is a test 2.");
+
+        Project target; // expected project
+        Project result; // returned project
+
+        projectService.insertProject(p1);
+        projectService.insertProject(p2);
+
+        projects = projectService.getProjects();
+        target = projects.get(0);
+        result = projectService.getProjectByID(target.getProjectID());
+
+        assertEquals(target, result);
+
+        System.out.println("Passed getProjectId from ProjectService Class.");
+    }
 }
