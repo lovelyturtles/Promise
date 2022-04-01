@@ -15,8 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import comp3350.group6.promise.R;
-import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.application.Service;
+import comp3350.group6.promise.objects.Exceptions.DuplicateEmailException;
+import comp3350.group6.promise.objects.Exceptions.EmptyEmailException;
+import comp3350.group6.promise.objects.Exceptions.EmptyPasswordException;
+import comp3350.group6.promise.objects.Exceptions.LoginErrorException;
 import comp3350.group6.promise.presentation.MainActivity;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -46,57 +49,64 @@ public class RegisterActivity extends AppCompatActivity {
 
         registerButton.setOnClickListener( new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick( View view ) {
 
-                //Get the email that was submitted
-                textEmail = findViewById( R.id.email_input);
-                userEmail = textEmail.getText().toString();
+                try {
+                    //Get their email and turn it into a string
+                    textEmail = findViewById(R.id.email_input);
+                    userEmail = textEmail.getText().toString();
 
-                //Check if the email is already registered
-                if( Service.accounts.accountExists( userEmail ) )
-                    openDuplicateDialog();  //dialog message that this email is already in use
+                    //Get their name and turn it into a string
+                    textName = findViewById(R.id.name_input);
+                    userName = textName.getText().toString();
 
-                else {
-
-                    //let them create an account
-                    //get the name they submitted
-                    textName  = findViewById( R.id.name_input);
-                    userName  = textName.getText().toString();
-
-                    //get the password they want to use
-                    textPass = findViewById( R.id.password_input);
+                    //Get their password and turn it into a string
+                    textPass = findViewById(R.id.password_input);
                     userPassword = textPass.getText().toString();
 
-                    //get the introduction they submitted
+                    //Turn their into into a string
                     userIntro = textIntro.getText().toString();
 
-                    try {
-                        //create the account
-                        Service.accounts.createAccount( userEmail, userPassword, userName, userIntro );
-                        //check that the email is in our database
-                        if( Service.accounts.accountExists( userEmail ) ) {
-                            //make sure the password was set correctly
-                            if ( Service.accounts.passwordsMatch( userEmail, userPassword ) ) {
-                                //set this as the current user and go to their home page
-                                assert (Service.accounts.setCurrentAccount(userEmail, userPassword));
-                                goToUserHome();
-                            }
+                    //Send all this information to the business layer
+                    Service.accounts.register( userEmail, userName, userPassword, userIntro );
 
-                        }
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    //If we don't get any Exceptions, we can go to the user's home page
+                    goToUserHome();
 
                 }
 
+                catch( DuplicateEmailException e ){
+                    openDuplicateDialog();
+                }
+
+                catch( EmptyEmailException e ){
+                    //do a dialog or something here
+                }
+
+                catch( EmptyPasswordException e ){
+                    //ditto above
+                }
+
+                catch( LoginErrorException e ){
+                    //maybe use the one in LoginFormFragment
+                }
+
+                catch( Exception e ){
+                    e.printStackTrace();
+                }
+
             }
+
         });
+
     }
 
     private void goToUserHome(){
 
-        Intent intent = new Intent( this, DashboardActivity.class );
+        //welcome message with user's name
+        String message = "Welcome, " + userName;
+        Intent intent = new Intent( this, UserActivity.class );
+        intent.putExtra( "welcomeName", message );
         startActivity( intent );
 
     }
@@ -137,6 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    /* So I guess delete this since we're now using password/email generic error message? */
     public static class EmailErrorActivity extends AppCompatDialogFragment {
 
         @Override
@@ -179,8 +190,10 @@ public class RegisterActivity extends AppCompatActivity {
          * If user decides to give up and cancel, take them back to the home page
          */
         private void goHome(){
+            //change this back UserActivity.class
             Intent intent = new Intent( this.getActivity(), MainActivity.class );
             startActivity( intent );
+
         }
 
     }

@@ -4,6 +4,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+import comp3350.group6.promise.objects.enumClasses.AccessRole;
 import lombok.Data;
 
 /**
@@ -20,7 +21,7 @@ public class Access {
     public Access(int projectId, int userId) {
         this.projectId = projectId;
         this.userId = userId;
-        this.role = "Member";
+        this.role = AccessRole.MEMBER.name();
         this.startTime = new Timestamp(System.currentTimeMillis());
     }
 
