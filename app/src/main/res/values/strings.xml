@@ -50,6 +50,7 @@
     <string name="inviteButton">Invite</string>
     <string name="viewNotifsButton">Notifications</string>
 
+
     <!--Add Project Page-->
     <string name="projectNameHint">Project Name</string>
     <string name="projectDescHint">Project Description</string>
@@ -81,5 +82,10 @@
     <string name="taskDesInput">Task Description</string>
     <string name="taskPriorityInput">Enter number</string>
     <string name="taskEstimateInput">Enter days</string>
+
+    <!--Notification Page-->
+    <string name="personIconName">You\'ve been invited to work on a project</string>
+    <string name="acceptInvite">Accept</string>
+    <string name="rejectInvite">Reject</string>
 
 </resources>

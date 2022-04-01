@@ -44,7 +44,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">>
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -101,7 +101,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:contentDescription="@string/dashboard_add_action_description"
-        android:src="@drawable/ic_baseline_add_24" />"
+        android:src="@drawable/ic_baseline_add_24" />
+
+    <Button
+        android:id="@+id/inviteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/inviteButton" />"
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

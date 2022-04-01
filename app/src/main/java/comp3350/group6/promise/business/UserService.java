@@ -8,24 +8,20 @@ import comp3350.group6.promise.persistence.hsqldb.UserImp;
 
 public class UserService {
 
-    /* Database Implementation
-    private static final UserDao userDao = new UserImp();
-     */
-
     private static final UserDao userDao = new UserImp();
     private static UserService instance;
 
 
-    public int addUser( String name, String introduction ) throws Exception{
+    public int addUser( String name, String introduction ) {
         assert ( name!= null );
         return userDao.addUser(name, introduction);
     }
 
-    public void updateUserByUserId( int userId, String name, String introduction ) throws Exception{
+    public void updateUserByUserId( int userId, String name, String introduction ) {
         userDao.updateUserByUserId(userId, name, introduction);
     }
 
-    public User getUserByUserId( int userId ) throws Exception{
+    public User getUserByUserId( int userId ) {
         return userDao.getUserByUserId(userId);
     }
 
