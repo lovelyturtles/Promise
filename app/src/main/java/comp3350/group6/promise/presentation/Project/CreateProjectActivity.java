@@ -77,5 +77,7 @@ public class CreateProjectActivity extends AppCompatActivity{
             // Users cannot add projects with no name
             Toast.makeText(this, "You need a name for your project.", Toast.LENGTH_LONG).show();
         }
+
     }
+
 }

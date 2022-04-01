@@ -191,7 +191,7 @@ public class RegisterActivity extends AppCompatActivity {
          */
         private void goHome(){
             //change this back UserActivity.class
-            Intent intent = new Intent( this.getActivity(), MainActivity.class );
+            Intent intent = new Intent( this.getActivity(), UserActivity.class );
             startActivity( intent );
 
         }

@@ -140,26 +140,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
             }
         });
 
-//        createTaskButton = (Button) findViewById(R.id.button_create_task);
-//
-//        createTaskButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                addItem(view);
-//            }
-//        });
     }
-//    private void handleInvite(){
-//
-//        Button inviteButton = findViewById( R.id.inviteButton);
-//        inviteButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                goToRecipientDetails();
-//            }
-//        });
-//
-//    }
 
     private void goToRecipientDetails(){
         Intent intent = new Intent( this, RecipientInfoActivity.class );
