@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
+        android:id="@+id/notifItemContainer"
         android:layout_width="match_parent"
         android:layout_height="95dp"
         android:background="@color/cardview_light_background">
@@ -13,9 +14,9 @@
             android:id="@+id/notifImageView"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:cardCornerRadius="60dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp">
+            app:cardCornerRadius="60dp">
 
             <ImageView
                 android:id="@+id/notifPersonIcon2"

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.presentation.Project.Invitation.RecipientInfoActivity;
+import comp3350.group6.promise.presentation.Project.ProjectActivity;
 
 public class SentInviteActivity extends AppCompatActivity {
 
@@ -35,7 +36,7 @@ public class SentInviteActivity extends AppCompatActivity {
         goBack.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick( View view ) {
-                finish(); //what is this?? Possibly remove? idk
+                goToProjectPage();
             }
         });
 
@@ -51,6 +52,13 @@ public class SentInviteActivity extends AppCompatActivity {
     private void goToRecipientDetails(){
 
         Intent intent = new Intent( this, RecipientInfoActivity.class );
+        startActivity( intent );
+
+    }
+
+    private void goToProjectPage(){
+
+        Intent intent = new Intent( this, ProjectActivity.class);
         startActivity( intent );
 
     }

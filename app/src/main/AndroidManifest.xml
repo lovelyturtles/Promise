@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Promise">
         <activity
+            android:name=".presentation.Notification.NotificationsDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.User.UserActivity"
             android:exported="false" />
         <activity

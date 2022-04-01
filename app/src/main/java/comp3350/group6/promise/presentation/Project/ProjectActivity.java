@@ -100,13 +100,21 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project);
+        populatePage();
+    }
 
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        populatePage();
+    }
+
+    private void populatePage(){
         // Create the project detail page based on the intent passed to it.
         if (getIntent() != null && getIntent().getExtras() != null) {
             int id = getIntent().getIntExtra("projectID", -1);
             if (id != -1) {
                 project = ProjectService.getInstance().getProjectByID(id);
-                handleInvite(id);
             }
         }
 
@@ -150,25 +158,23 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
 //                addItem(view);
 //            }
 //        });
-
     }
 
-    private void handleInvite(int projectID ){
+//    private void handleInvite(){
+//
+//        Button inviteButton = findViewById( R.id.inviteButton);
+//        inviteButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                goToRecipientDetails();
+//            }
+//        });
+//
+//    }
 
-        Button inviteButton = findViewById( R.id.inviteButton);
-        inviteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToRecipientDetails( projectID );
-            }
-        });
-
-
-    }
-
-    private void goToRecipientDetails( int projectID ){
+    private void goToRecipientDetails(){
         Intent intent = new Intent( this, RecipientInfoActivity.class );
-        intent.putExtra("projectID", projectID );
+        intent.putExtra("projectID", project.getProjectID() );
         startActivity( intent );
     }
 
@@ -214,8 +220,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
                 return true;
             case R.id.action_invite:
                 // TODO: Implement action handler for project invites
-                Toast.makeText(getBaseContext(), "Pressed Invite to Project", Toast.LENGTH_SHORT).show();
-//                handleInvite();
+                goToRecipientDetails();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -17,25 +17,33 @@ import comp3350.group6.promise.objects.Notification;
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotifViewHolder> {
 
     private final ArrayList<Notification> notificationsList;
-    public NotificationAdapter( ArrayList<Notification> notificationsList ){
+    private NotificationClickListener listener;
+
+    public NotificationAdapter( ArrayList<Notification> notificationsList, NotificationClickListener listener ){
         this.notificationsList = notificationsList;
+        this.listener = listener;
     }
 
-    public static class NotifViewHolder extends RecyclerView.ViewHolder{
+    public class NotifViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView notifText;
         public NotifViewHolder( final View view ){
 
             super( view );
             notifText = view.findViewById( R.id.notifTextView );
+            view.setOnClickListener(this);
 
         }
 
+        @Override
+        public void onClick(View view) {
+            listener.onClick( view, getAbsoluteAdapterPosition() );
+        }
     }
 
     @NonNull
     @Override
-    public NotificationAdapter.NotifViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public NotifViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from( parent.getContext() ).inflate(R.layout.notif_item_design, parent, false );
         return new NotifViewHolder(itemView);
     }
@@ -49,7 +57,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         int projectID = notificationsList.get( position ).getProjectID();
         String projectName = Service.projects.getProjectByID( projectID ).getProjectName();
 
-        String notifMessage = senderName + "has invited you to work on " + projectName;
+        String notifMessage = senderName + " has invited you to work on \"" + projectName + "\"";
 
         holder.notifText.setText( notifMessage );
     }
@@ -57,5 +65,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public int getItemCount() {
         return notificationsList.size();
+    }
+
+    public interface NotificationClickListener{
+
+        void onClick( View view, int position );
+
     }
 }
