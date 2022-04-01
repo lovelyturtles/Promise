@@ -13,24 +13,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.application.Service;
-import comp3350.group6.promise.objects.Exceptions.AccountDNException;
-import comp3350.group6.promise.objects.Exceptions.DuplicateNotificationException;
 
 public class RecipientInfoActivity extends AppCompatActivity {
     private Button sendInvite;
-    EditText textEmail;
+    EditText textName;
     String recipientEmail;
-    int projectID;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_recipient_info );
-
-        //Get the projectID that was passed in
-        Intent intent = getIntent();
-        projectID = intent.getIntExtra( "projectID", -1 );
 
         /*
         * When the user enters the username of the person they want to invite,
@@ -43,23 +37,21 @@ public class RecipientInfoActivity extends AppCompatActivity {
         sendInvite.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Get the email address that was submitted
-                textEmail = findViewById( R.id.recipientEmailHint );
-                recipientEmail = textEmail.getText().toString();
+                //Get the userName that was submitted
+                textName = findViewById( R.id.recipientEmailHint );
+                recipientEmail = textName.getText().toString();
 
-                /* Invite this user to our project */
-                try{
-                    Service.notifications.invite( recipientEmail , projectID );
-                    //If the invitation was successfully sent, go to the sent page
+                /*
+                 * Check if the username is in our user database
+                 *  if it isn't, open the error message dialog
+                 *  if it is, call RecipientService and then goToSentPage()
+                 *
+                 */
+                if(Service.accounts.accountExists( recipientEmail ) ) {
                     goToSentPage();
                 }
-
-                catch( AccountDNException e ){
+                else {
                     openUserDoesNotExistDialog();
-                }
-
-                catch( DuplicateNotificationException e ){
-                    openAlreadyNotifiedDialog();
                 }
 
             }
@@ -68,10 +60,7 @@ public class RecipientInfoActivity extends AppCompatActivity {
 
     public void goToSentPage(){
         Intent intent = new Intent( this, SentInviteActivity.class );
-        Bundle extras = new Bundle();
-        extras.putInt( "projectID2", projectID );
-        extras.putString( "emailInput", recipientEmail );
-        intent.putExtras( extras );
+        intent.putExtra( "userInput", recipientEmail);
         startActivity( intent );
     }
 
@@ -93,36 +82,6 @@ public class RecipientInfoActivity extends AppCompatActivity {
                         }
                     })
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick( DialogInterface dialogInterface, int i ) {
-                            getActivity().finish();
-                        }
-                    });
-
-            return builder.create();
-        }
-
-    }
-
-    public void openAlreadyNotifiedDialog(){
-        AlreadyNotifiedDialogFragment errorDialog = new AlreadyNotifiedDialogFragment();
-        errorDialog.show( getSupportFragmentManager(), "error message" );
-    }
-
-    public static class AlreadyNotifiedDialogFragment extends AppCompatDialogFragment {
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState ) {
-            AlertDialog.Builder builder = new AlertDialog.Builder( getActivity() );
-            builder.setMessage("This user has already been invited to this project. " +
-                    "Would you like to try another user?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            //do nothing. Let them edit the email and try again
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick( DialogInterface dialogInterface, int i ) {
                             getActivity().finish();

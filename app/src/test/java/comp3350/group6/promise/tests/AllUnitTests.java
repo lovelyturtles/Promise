@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import comp3350.group6.promise.tests.business.AccountServiceTest;
+import comp3350.group6.promise.tests.business.NotifServiceTest;
 import comp3350.group6.promise.tests.business.ProjectServiceTempDBTest;
 import comp3350.group6.promise.tests.business.ProjectServiceTest;
 import comp3350.group6.promise.tests.business.TaskServiceTest;
@@ -18,6 +19,7 @@ import comp3350.group6.promise.tests.objects.UserTest;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         AccountServiceTest.class,
+        NotifServiceTest.class,
         ProjectServiceTest.class,
         TaskServiceTest.class,
         ProjectServiceTempDBTest.class,

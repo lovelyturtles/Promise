@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import comp3350.group6.promise.objects.Exceptions.EmptyInputException;
+import comp3350.group6.promise.business.EmptyInputException;
 import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.objects.FakeDB;
 import comp3350.group6.promise.objects.Project;
