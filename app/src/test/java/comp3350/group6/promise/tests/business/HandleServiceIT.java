@@ -21,7 +21,7 @@ import comp3350.group6.promise.util.DBConnectorUtil;
 
 
 // This is Integration test class for Handle
-public class HandleServiceTest {
+public class HandleServiceIT {
     private HandleService handleService;
 
     @Before

@@ -4,13 +4,14 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.persistence.TaskDao;
 
 public class TaskImpNoDB implements TaskDao {
 
     ArrayList<Task> taskList;
-    Task task1, task2, task3;
+    Task task1, task2, task3, task4,task5;
     Timestamp cTime;
     Timestamp eTime;
     Timestamp dTime;
@@ -24,11 +25,16 @@ public class TaskImpNoDB implements TaskDao {
         task1 = generateTask("Task A");
         task2 = generateTask("Task B");
         task3 = generateTask("Task C");
+        task4 = generateTask("Task D");
+        task5 = generateTask("Task E");
+
 
         taskList = new ArrayList<>();
         taskList.add(task1);
         taskList.add(task2);
         taskList.add(task3);
+        taskList.add(task4);
+        taskList.add(task5);
     }
 
     @Override
@@ -40,7 +46,10 @@ public class TaskImpNoDB implements TaskDao {
     public Task getTask(int taskId) {
         if (getIndex(taskId) >= 0)
             return taskList.get(getIndex(taskId));
-        return null;
+        else {
+            Exception e = new Exception();
+            throw new PersistenceException((Exception) e.getCause());
+        }
     }
 
     @Override

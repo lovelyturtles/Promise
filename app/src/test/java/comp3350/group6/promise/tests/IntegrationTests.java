@@ -6,7 +6,7 @@ import org.junit.runners.Suite;
 import comp3350.group6.promise.tests.business.AccessServiceTest;
 import comp3350.group6.promise.tests.business.AccountServiceTest;
 import comp3350.group6.promise.tests.business.AccountUserServiceTest;
-import comp3350.group6.promise.tests.business.HandleServiceTest;
+import comp3350.group6.promise.tests.business.HandleServiceIT;
 import comp3350.group6.promise.tests.business.NotifServiceTest;
 import comp3350.group6.promise.tests.business.ProjectServiceIT;
 import comp3350.group6.promise.tests.business.TaskServiceTest;
@@ -22,7 +22,7 @@ import comp3350.group6.promise.tests.objects.UserTest;
         TaskServiceTest.class,
         ProjectServiceIT.class,
         UserServiceTest.class,
-        HandleServiceTest.class,
+        HandleServiceIT.class,
         AccountUserServiceTest.class,
         NotifServiceTest.class,
         UserServiceIT.class
