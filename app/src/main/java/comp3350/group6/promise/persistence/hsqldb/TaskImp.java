@@ -95,7 +95,7 @@ public class TaskImp implements TaskDao {
     @Override
     public int insertTask(Task t) {
         try (final Connection con = DBConnectorUtil.getConnection()) {
-            String query = "INSERT INTO task( title, description, priority, statusNum, projectId, createdTime, estimatedEndTime, deadline) VALUES(?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO task(title, description, priority, statusNum, projectId, createdTime, estimatedEndTime, deadline) VALUES(?,?,?,?,?,?,?,?)";
             final PreparedStatement pre = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pre.setString(1, t.getTitle());
             pre.setString(2, t.getDescription());

@@ -147,10 +147,6 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
         taskListAdapter.notifyDataSetChanged();
     }
 
-//    public void onFloatingButtonClick() {
-//        // TODO: Implement handler for adding tasks
-//        Toast.makeText(getBaseContext(), "Pressed Add Button", Toast.LENGTH_SHORT).show();
-//    }
 
     private void goToAddTask() {
         Intent intent = new Intent(this, CreateTaskActivity.class);
