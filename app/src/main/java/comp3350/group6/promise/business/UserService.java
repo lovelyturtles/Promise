@@ -5,7 +5,7 @@ import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.User;
 import comp3350.group6.promise.persistence.UserDao;
 import comp3350.group6.promise.persistence.hsqldb.UserImp;
-//import comp3350.group6.promise.persistence.hsqldb.UserImpNoDB;
+//import comp3350.group6.promise.persistence.stub.UserImpNoDB;
 
 public class UserService {
 
