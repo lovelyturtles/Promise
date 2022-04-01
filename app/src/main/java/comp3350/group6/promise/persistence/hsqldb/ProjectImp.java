@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
 
+import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.persistence.ProjectDao;
 import comp3350.group6.promise.util.DBConnectorUtil;
@@ -46,7 +47,7 @@ public class ProjectImp implements ProjectDao{
     public List<Project> getProjectList() {
         final List<Project> projects = new ArrayList<Project>();
 
-        try(Connection con = DBConnectorUtil.getConnection();
+        try(final Connection con = DBConnectorUtil.getConnection();
             PreparedStatement pstmt = con.prepareStatement("select * from project");
             ResultSet rs = pstmt.executeQuery()){
             
@@ -64,14 +65,31 @@ public class ProjectImp implements ProjectDao{
 
     @Override
     public Project getProjectByID(int projectID) {
-        //[iteration 2] implement
-        return null;
+        String query = "select * from project where projectID = ?";
+        Project project = null;
+        try(final Connection con = DBConnectorUtil.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query)){
+
+            pstmt.setInt(1, projectID);
+            ResultSet rs = pstmt.executeQuery();
+
+            if(rs.next()){
+                project = createProjectObject(rs);
+            }
+
+            rs.close();
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+        return project;
     }
 
     @Override
     public Project insertProject(Project project){
         String query = "insert into project (projectName,statement,statusNum,createdTime,estimatedEndTime) values (?,?,?,?,?)";
-        try(Connection con = DBConnectorUtil.getConnection();
+        try(final Connection con = DBConnectorUtil.getConnection();
             PreparedStatement pstmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)){
 
             pstmt.setString(1, project.getProjectName());
@@ -88,7 +106,6 @@ public class ProjectImp implements ProjectDao{
 
             project.setProjectID(generatedKeys.getInt(1));
 
-            con.close();
 
         } catch (SQLException e) {
             throw new PersistenceException(e);
@@ -99,7 +116,7 @@ public class ProjectImp implements ProjectDao{
 
     @Override
     public Project updateProject(Project project){
-        try(Connection con = DBConnectorUtil.getConnection();
+        try(final Connection con = DBConnectorUtil.getConnection();
             PreparedStatement pstmt = con.prepareStatement("update project set projectName = ?, statement = ?, statusNum = ?, estimatedEndTime = ? where projectId = ?")){ 
             
             pstmt.setString(1, project.getProjectName());
@@ -119,7 +136,7 @@ public class ProjectImp implements ProjectDao{
 
     @Override
     public void deleteProject(Project project){
-        try(Connection con = DBConnectorUtil.getConnection();
+        try(final Connection con = DBConnectorUtil.getConnection();
             PreparedStatement pstmt = con.prepareStatement("delete from project where projectId = ?")){ 
             
             pstmt.setInt(1, project.getProjectID());

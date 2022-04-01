@@ -10,41 +10,48 @@ We divide our application into 3-tier architecture. There are 6 main java packag
 - Project
 - Task
 - User
+- Account
 
 ## Presentation Layer
 
-- AddProjectActivity
-- InviteSent
 - MainActivity
-  - communicate between Presentation and Logic layer
-  - responsible for connecting different elements
-- NameErrorActivity
-- NotificationsActivity
+- DashboardActivity
 - ProjectActivity
-- ProjectList
-- ProjectPage
-- RecipientInfoActivity
-- RespondNotifActivity
-- SendToUser
-- SentInviteActivity
-- UserController
+- TaskActivity
+- NotificationActivity
+- UserActivity
+- RegisterActivity
+- LoginFormFragment
+- CreateProjectActivity
+- CreateTaskActivity
+
 
 ## Business Layer
 
-- AccountService
-- NotifService
-- ProjectService
+- ProjectService 
 - TaskService
+- AccountService
 - UserService
+- AccessService
+- HandleService
+- AccountUserService
+- NotifService
 
 ## Persistence Layer
 
-- UserImp
-- AccountImp
+- HandleDao
+- AccounterUserDao
+- NotifDao
+- ProjectDao
+- TaskDao
+- AccountDao
+- UserDao
+- HandleImp
+- AccounterUserImp
 - NotifImp
-- PersistenceException
 - ProjectImp
 - TaskImp
+- AccountImp
+- UserImp
 
-
-![Architecture diagram](https://app.diagrams.net/#G1O1YgvnImUHyDjcPfwReyGTl-Sjkchb_3)
+![Architecture diagram](./images/architecture.png)

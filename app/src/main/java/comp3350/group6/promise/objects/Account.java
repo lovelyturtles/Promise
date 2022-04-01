@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class Account {
 
-    private String email;
+    private final String email;
     private String password;
-    private int userId;
+    private final int userId;
 
     public Account( String email, String password, int userId ){
 
@@ -32,6 +32,33 @@ public class Account {
     public void setPassword( String password ){
 
         this.password = password;
+
+    }
+
+    @Override
+    public boolean equals( Object other ){
+
+        boolean isEqual;
+        boolean emailMatch;
+        boolean idMatch;
+
+        if( this == other ){
+            isEqual = true;
+        }
+
+        else if( other == null || getClass() != other.getClass() )
+            isEqual = false;
+
+        else {
+
+            Account otherAccount = ( Account ) other;
+            emailMatch = email.equals( otherAccount.getEmail() );
+            idMatch    = userId == otherAccount.getUserID();
+            isEqual = emailMatch && idMatch;
+
+        }
+
+        return isEqual;
 
     }
 
