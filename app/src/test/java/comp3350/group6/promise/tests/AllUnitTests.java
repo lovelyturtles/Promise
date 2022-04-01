@@ -3,10 +3,7 @@ package comp3350.group6.promise.tests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import comp3350.group6.promise.tests.business.AccountServiceTest;
 import comp3350.group6.promise.tests.business.ProjectServiceTest;
-import comp3350.group6.promise.tests.business.TaskServiceTest;
-import comp3350.group6.promise.tests.business.UserServiceTest;
 import comp3350.group6.promise.tests.objects.AccessTest;
 import comp3350.group6.promise.tests.objects.AccountTest;
 import comp3350.group6.promise.tests.objects.NotifTest;
@@ -22,7 +19,8 @@ import comp3350.group6.promise.tests.objects.UserTest;
         NotifTest.class,
         ProjectTest.class,
         TaskTest.class,
-        UserTest.class
+        UserTest.class,
+        ProjectServiceTest.class
 })
 
 public class AllUnitTests {}
