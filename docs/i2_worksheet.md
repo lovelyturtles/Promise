@@ -18,7 +18,6 @@ Another case of technical debt being payed off in this iteration can be seen wit
 
 ## SOLID
 We couldn't find a SOLID violation for team  on March 30, 2022 10 AM, and thus didn't open any issues in group 5.
-[//]: <Find a SOLID violation in the project of group with group number n-1 in the same section of the course as you (group 1 does group 16). Open an issue in their project with the violation, clearly explaining the SOLID violation - specifying the type, provide a link to that issue. Be sure your links in the issues are to specific commits (not to main, or develop as those will be changed).Provide a link to the issue you created here.>
 
 
 ## Retrospective
@@ -61,4 +60,4 @@ We used the Adapter design pattern for our project. Since we wanted to use card 
 
 We got this feedback because we were populating the FakeDB in our presentation layer and was directly accessing it, instead of utilizing the logic layer. 
 
-We removed all FakeDB related code from our project, and any persistence code in our presentation layers.
+We removed all FakeDB related code from our project(except for the testing), and any persistence code in our presentation layers.
