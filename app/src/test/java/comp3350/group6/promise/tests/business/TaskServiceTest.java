@@ -7,13 +7,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
-import java.sql.SQLException;
 import java.util.List;
 
 import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.objects.Task;
-import comp3350.group6.promise.persistence.hsqldb.PersistenceException;
+import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.util.DBConnectorUtil;
 
 public class TaskServiceTest {

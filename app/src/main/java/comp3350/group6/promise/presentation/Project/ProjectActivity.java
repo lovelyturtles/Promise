@@ -25,10 +25,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.objects.Task;
+import comp3350.group6.promise.objects.enumClasses.NotifType;
+import comp3350.group6.promise.presentation.Project.Invitation.RecipientInfoActivity;
 import comp3350.group6.promise.presentation.Task.TaskActivity;
 import comp3350.group6.promise.util.TaskAdapter;
 
@@ -97,7 +100,6 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project);
-
         // Create the project detail page based on the intent passed to it.
         if (getIntent() != null && getIntent().getExtras() != null) {
             int id = getIntent().getIntExtra("projectID", -1);
@@ -146,7 +148,23 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
 //                addItem(view);
 //            }
 //        });
+    }
+//    private void handleInvite(){
+//
+//        Button inviteButton = findViewById( R.id.inviteButton);
+//        inviteButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                goToRecipientDetails();
+//            }
+//        });
+//
+//    }
 
+    private void goToRecipientDetails(){
+        Intent intent = new Intent( this, RecipientInfoActivity.class );
+        intent.putExtra("projectID", project.getProjectID() );
+        startActivity( intent );
     }
 
     public void onFloatingButtonClick() {
@@ -191,7 +209,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
                 return true;
             case R.id.action_invite:
                 // TODO: Implement action handler for project invites
-                Toast.makeText(getBaseContext(), "Pressed Invite to Project", Toast.LENGTH_SHORT).show();
+                goToRecipientDetails();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

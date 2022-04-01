@@ -7,6 +7,7 @@ import java.util.List;
 import comp3350.group6.promise.objects.Access;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.objects.User;
+import comp3350.group6.promise.objects.enumClasses.AccessRole;
 import comp3350.group6.promise.persistence.AccessDao;
 import comp3350.group6.promise.persistence.hsqldb.AccessImp;
 
@@ -18,7 +19,7 @@ public class AccessService {
     AccessDao accessDao;
     private static AccessService instance;
 
-    private AccessService(){
+    public AccessService(){
         accessDao = new AccessImp();
     }
 
@@ -71,6 +72,18 @@ public class AccessService {
 
     // update the role of the access
     public Access updateAccess(Access access){ return accessDao.updateAccess(access); }
+
+    public List<Integer> getRoleByProjectID( int projectID, AccessRole role ){
+
+        return accessDao.getRoleByProjectID( projectID, role );
+
+    }
+
+    public boolean hasAccess( int userID, int projectID ){
+
+        return accessDao.hasAccess( userID, projectID );
+
+    }
 
     public static AccessService getInstance() {
         if(AccessService.instance == null) {
