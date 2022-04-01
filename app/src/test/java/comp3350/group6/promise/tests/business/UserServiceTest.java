@@ -1,23 +1,33 @@
 package comp3350.group6.promise.tests.business;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import comp3350.group6.promise.business.AccessService;
+import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.business.UserService;
+import comp3350.group6.promise.objects.Access;
 import comp3350.group6.promise.objects.FakeDB;
+import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.objects.User;
+import comp3350.group6.promise.util.DBConnectorUtil;
+
 import static org.junit.Assert.*;
 
 public class UserServiceTest {
 
     private UserService userService;
 
-    /* Each time the fake DB get reinitialized */
     @Before
-    public void setup() throws Exception {
-        System.out.println("Starting test for TaskService");
-        FakeDB.initialize();
-        userService = new UserService(); // false init a fake DB
+    public void setup(){
+        DBConnectorUtil.initialLocalDB();
+        userService = UserService.getInstance();
+    }
+
+    @After
+    public void clean(){
+        DBConnectorUtil.cleanLocalDB();
     }
 
     @Test
@@ -28,11 +38,13 @@ public class UserServiceTest {
 
     @Test
     public void testUpdateUserByUserId( ) throws Exception{
-        userService.updateUserByUserId(1, "sunsiwen", "introduction");
+        int i = userService.updateUserByUserId(1, "SUNSIWEN", "introduction");
+        assertTrue(i > 0);
     }
 
     @Test
     public void testGetUserByUserId( ) throws Exception{
         User user = userService.getUserByUserId(1);
+        assertNotNull(user);
     }
 }

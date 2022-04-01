@@ -40,7 +40,7 @@ public class UserImp implements UserDao {
     public int updateUserByUserId(int userId, String name, String introduction) {
         try (final Connection cnn = DBConnectorUtil.getConnection()) {
             assert cnn != null;
-            PreparedStatement preparedStatement = cnn.prepareStatement("update User set name = ? introduction = ? where userId = ?");
+            PreparedStatement preparedStatement = cnn.prepareStatement("update User set name = ?, introduction = ? where userId = ?");
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, introduction);
             preparedStatement.setInt(3, userId);

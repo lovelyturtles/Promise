@@ -1,9 +1,12 @@
-Iteration 1 Worksheet
+Iteration 2 Worksheet
 =====================
 
 ## Paying off technical debt
 [//]: <Show two instances of your group paying off technical debt. For these two instances:Explain how your are paying off the technical debt.Show commits, links to lines in your commit where you paid off technical debt.Classify the debt, and justify why you chose that classification with 1-3 sentences.>
 
+One case of technical debt occurred as we were developing our interface. We were unaware of several important features the Android API provides to promote flexibility and enable code reuse, namely style definitions, themes and navigation layouts. As a result, we hardcoded the style attributes in our XML layouts and created our own component to act as an app bar at the top of our Project and Task pages instead of using the built-in AppBarLayout. The hardcoded styles required us to eventually comb through the all layout files and update views with the values defined in a theme we created. We also had to go back and update our layouts to use the correct app bar views. This could be classified as inadvertent/prudent debt. It was inadvertent as we were not aware that there was a better way to better way to implement the UI. It was prudent, as opposed to reckless, as we repayed the debt as soon as it was identified which prevented the problem from growing.
+
+* App Bar Refactoring Example ([Commit](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/commit/3e85274b2fac956d4dd209cc29d60ffc75d9c59b#6f5ced1d71e320e9004287a2aacbbc444612dfc5), [File](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/blob/3e85274b2fac956d4dd209cc29d60ffc75d9c59b/app/src/main/res/layout/activity_task.xml), Line 10)
 
 ## SOLID
 [//]: <Find a SOLID violation in the project of group with group number n-1 in the same section of the course as you (group 1 does group 16). Open an issue in their project with the violation, clearly explaining the SOLID violation - specifying the type, provide a link to that issue. Be sure your links in the issues are to specific commits (not to main, or develop as those will be changed).Provide a link to the issue you created here.>
