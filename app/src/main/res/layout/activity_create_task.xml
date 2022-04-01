@@ -73,6 +73,40 @@
                         android:imeOptions="actionNext|actionDone|flagNoEnterAction"
                         android:inputType="textShortMessage" />
 
+                <TextView
+                        android:text="Task Estimate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Theme.Promise.InputLabel"
+                        android:id="@+id/task_estimate_input_label" />
+
+                <EditText
+                        style="@style/Theme.Promise.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:ems="10"
+                        android:gravity="start|top"
+                        android:hint="@string/taskEstimateInput"
+                        android:imeOptions="actionNext|actionDone|flagNoEnterAction"
+                        android:id="@+id/task_estimate_input" />
+
+                <TextView
+                        style="@style/Theme.Promise.InputLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/task_priority"
+                        android:text="Task Priority" />
+
+                <EditText
+                        style="@style/Theme.Promise.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:ems="10"
+                        android:id="@+id/editTextNumber"
+                        android:hint="@string/taskPriorityInput" />
+
                 <Button
                         android:id="@+id/submit_task_button"
                         android:layout_width="match_parent"

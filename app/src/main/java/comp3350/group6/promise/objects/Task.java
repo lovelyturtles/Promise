@@ -17,6 +17,7 @@ public class Task {
     private Timestamp createdTime;
     private Timestamp estimatedEndTime;
     private Timestamp deadline;
+    private static int count =0;
 
 
     public Task(int taskId) {
@@ -29,6 +30,7 @@ public class Task {
         this.createdTime = new Timestamp(System.currentTimeMillis());
         this.estimatedEndTime = null;
         this.deadline = null;
+        count++;
     }
 
     /*
@@ -44,6 +46,7 @@ public class Task {
         this.createdTime = createdTime;
         this.estimatedEndTime = estimatedEndTime;
         this.deadline = deadline;
+        count++;
     }
 
     /*
@@ -51,6 +54,7 @@ public class Task {
      *
      */
     public Task(String title, String description, int priority, int statusNum, int projectId, Timestamp estimatedEndTime, Timestamp deadline) {
+        projectId = count;
         this.title = title;
         this.description = description;
         this.priority = priority;
@@ -59,6 +63,7 @@ public class Task {
         this.createdTime = new Timestamp(System.currentTimeMillis());
         this.estimatedEndTime = estimatedEndTime;
         this.deadline = deadline;
+        count++;
     }
 
 

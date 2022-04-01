@@ -80,5 +80,6 @@
     <string name="taskNameInput">Task Name</string>
     <string name="taskDesInput">Task Description</string>
     <string name="taskPriorityInput">Enter number</string>
+    <string name="taskEstimateInput">Enter days</string>
 
 </resources>

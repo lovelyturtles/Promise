@@ -29,8 +29,9 @@ public class HandleService {
         return handleDao.getTaskUser(userId);
     } // either return empty list or list of tasks associated with this user
 
-    public void insertHandle(Handle handle) {
+    public  Handle insertHandle(Handle handle) {
         handleDao.insertHandle(handle);
+        return handle;
     }
 
     public static HandleService getInstance() {

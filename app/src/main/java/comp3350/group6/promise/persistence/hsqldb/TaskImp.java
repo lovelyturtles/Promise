@@ -93,7 +93,7 @@ public class TaskImp implements TaskDao {
     }
 
     @Override
-    public Task insertTask(Task t) {
+    public int insertTask(Task t) {
         try (final Connection con = DBConnectorUtil.getConnection()) {
             String query = "INSERT INTO task(taskId, title, description, priority, statusNum, projectId, createdTime, estimatedEndTime, deadline) VALUES(?,?,?,?,?,?,?,?,?)";
             final PreparedStatement pre = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -113,7 +113,7 @@ public class TaskImp implements TaskDao {
             t.setTaskId(generatedKeys.getInt(1));
 
             pre.close();
-            return t;
+            return t.getTaskId();
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }

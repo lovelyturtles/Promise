@@ -1,13 +1,11 @@
 package comp3350.group6.promise.persistence.hsqldb;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import comp3350.group6.promise.objects.Handle;
@@ -63,7 +61,7 @@ public class HandleImp implements HandleDao {
     }
 
     @Override
-    public void insertHandle(Handle handle) {
+    public Handle insertHandle(Handle handle) {
         try (final Connection con = DBConnectorUtil.getConnection()) {
             assert (con != null);
             final PreparedStatement ps = con.prepareStatement("INSERT INTO HANDLE (taskId, userId, since) VALUES (?,?,?)");
@@ -75,5 +73,6 @@ public class HandleImp implements HandleDao {
         } catch (SQLException e) {
             throw new PersistenceException(e);
         }
+        return handle;
     }
 }
