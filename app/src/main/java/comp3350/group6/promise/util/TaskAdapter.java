@@ -31,13 +31,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> { 
     private OnTaskLongClickListener onTaskLongClickListener;
     private static final String TAG = "TaskAdapter";
 
-    //new
+    //test
     private ArrayList<String> mImages = new ArrayList<>();
     private ArrayList<String> mImageNames = new ArrayList<>();
 
 
-    //new
-    public TaskAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images ) {
+    //test
+    public TaskAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images) {
         mImageNames = imageNames;
         mImages = images;
         this.context = context;
@@ -59,16 +59,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> { 
     @Override
     public void onBindViewHolder(TaskAdapter.ViewHolder viewHolder, @SuppressLint("RecyclerView") int position) {
         //new
-        Glide.with(context).asBitmap().load(mImages.get(position)).into(viewHolder.image);
-        viewHolder.imageName.setText(mImageNames.get(position));
+//        Glide.with(context).asBitmap().load(mImages.get(position)).into(viewHolder.image);
+//        viewHolder.imageName.setText(mImageNames.get(position));
 
-        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "onClick: " + mImageNames.get(position));
-                Toast.makeText(context, mImageNames.get(position), Toast.LENGTH_SHORT).show();
-            }
-        });
+//        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d(TAG, "onClick: " + mImageNames.get(position));
+//                Toast.makeText(context, mImageNames.get(position), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
 
         Task task = taskList.get(position);
         viewHolder.taskTitle.setText(task.getTitle());
@@ -91,16 +92,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> { 
         private OnTaskClickListener clickListener;
         private OnTaskLongClickListener longClickListener;
 
-        // new
-        private CircleImageView image;
-        private TextView imageName;
-        private RelativeLayout parentLayout;
-
-
-        // remove
-
-        private TextView titleOfTaskToCreate;
-        private Button buttonCreateTask;
+//        // new
+//        private CircleImageView image;
+//        private TextView imageName;
+//        private RelativeLayout parentLayout;
+//
+//
+//        // remove
+//
+//        private TextView titleOfTaskToCreate;
+//        private Button buttonCreateTask;
 
 
         public ViewHolder(View itemView, OnTaskClickListener onTaskClickListener, OnTaskLongClickListener onTaskLongClickListener) { // constructor
@@ -115,6 +116,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> { 
 
             this.clickListener = onTaskClickListener;
             this.longClickListener = onTaskLongClickListener;
+
+
+            taskContainer.setOnClickListener(this);
 
 //            this.titleOfTaskToCreate = itemView.findViewById(R.id.button_create_task);
 //            this.buttonCreateTask = itemView.findViewById(R.id.button_create_task);
