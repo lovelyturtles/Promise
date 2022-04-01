@@ -1,7 +1,5 @@
 package comp3350.group6.promise.presentation.Task;
 
-import static comp3350.group6.promise.persistence.stub.TaskImpNoDB.generateTask;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -42,7 +40,7 @@ public class TaskActivity extends AppCompatActivity {
         // Obtain views
 
         toolbarLayoutView = findViewById(R.id.toolbar_layout);
-        toolbarView = findViewById(R.id.toolbar);
+        toolbarView = findViewById(R.id.task_toolBar);
 
         descriptionView = findViewById(R.id.task_page_description);
         priorityView = findViewById(R.id.task_page_priority);

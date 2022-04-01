@@ -33,11 +33,11 @@ public class CreateProjectActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_create_project);
 
-        nameInputView = findViewById(R.id.project_name_input);
-        submitButtonView = findViewById(R.id.create_project_button);
+        nameInputView = findViewById(R.id.task_name_input);
+        submitButtonView = findViewById(R.id.submit_task_button);
 
         // Keep "next" keyboard action while allowing multiline text
-        descriptionInputView = findViewById(R.id.project_description_input);
+        descriptionInputView = findViewById(R.id.task_description_input);
         descriptionInputView.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         descriptionInputView.setRawInputType(InputType.TYPE_CLASS_TEXT);
 
@@ -48,7 +48,7 @@ public class CreateProjectActivity extends AppCompatActivity{
             }
         });
 
-        toolbarView = findViewById(R.id.toolbar);
+        toolbarView = findViewById(R.id.task_toolBar);
         setSupportActionBar(toolbarView);
 
         toolbarView.setNavigationOnClickListener(new View.OnClickListener() {
