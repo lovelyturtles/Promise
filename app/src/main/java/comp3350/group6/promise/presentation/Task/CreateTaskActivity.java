@@ -16,7 +16,6 @@ import java.sql.Timestamp;
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.application.Service;
-import comp3350.group6.promise.business.EmptyInputException;
 import comp3350.group6.promise.objects.Handle;
 import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.presentation.Project.ProjectActivity;
@@ -38,6 +37,8 @@ public class CreateTaskActivity extends AppCompatActivity {
         setSupportActionBar(taskToolBar);
         taskNameText = findViewById(R.id.task_name_input);
         taskDesText = findViewById(R.id.task_description_input);
+        taskEstimateText = findViewById(R.id.task_estimate_input);
+        taskPriorityText = findViewById(R.id.task_priority_input);
 
         taskToolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,25 +64,25 @@ public class CreateTaskActivity extends AppCompatActivity {
     }
 
     private void createTask() throws Exception {
-        try {
-            String taskName = taskNameText.getText().toString();
-            String taskDes = taskDesText.getText().toString();
-            String taskEstimate = taskEstimateText.getText().toString();
-            String taskPriority = taskPriorityText.getText().toString();
-            Timestamp defaultTime = new Timestamp(System.currentTimeMillis());
-            int projectId = 0;
+//        try {
+        String taskName = taskNameText.getText().toString();
+        String taskDes = taskDesText.getText().toString();
+        String taskEstimate = taskEstimateText.getText().toString();
+        int taskPriority = Integer.parseInt(taskPriorityText.getText().toString());
+        Timestamp defaultTime = new Timestamp(System.currentTimeMillis());
+        int projectId = 0;
 
-            int taskId = Service.tasks.insertTask(new Task(taskName, taskDes, Integer.parseInt(taskPriority), 0, projectId, defaultTime, defaultTime));
-            Handle handleRet = Service.handles.insertHandle(new Handle(taskId, CurrentSession.currentUser.getUserID(), defaultTime));
-            Service.handles.insertHandle(handleRet);
+        int taskId = Service.tasks.insertTask(new Task(taskName, taskDes, taskPriority, 0, projectId, defaultTime, defaultTime));
+        Handle handleRet = Service.handles.insertHandle(new Handle(taskId, CurrentSession.currentUser.getUserID(), defaultTime));
+        Service.handles.insertHandle(handleRet);
 
-            // Return to project
-            Intent intent = new Intent(this, ProjectActivity.class);
-            startActivity(intent);
-        }catch(Exception e){
-            Toast.makeText(getBaseContext(), "Please enter all fields", Toast.LENGTH_SHORT).show();
+        // Return to project
+        Intent intent = new Intent(this, ProjectActivity.class);
+        startActivity(intent);
+//        }catch(Exception e){
+        Toast.makeText(getBaseContext(), "Please enter all fields", Toast.LENGTH_SHORT).show();
 //            throw new Exception(e.getCause());
-        }
+//        }
     }
 
     private Timestamp convertStringToTime(String str) {

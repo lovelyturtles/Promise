@@ -95,7 +95,7 @@
                         style="@style/Theme.Promise.InputLabel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/task_priority"
+                        android:id="@+id/task_priority_input_label"
                         android:text="Task Priority" />
 
                 <EditText
@@ -104,7 +104,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:ems="10"
-                        android:id="@+id/editTextNumber"
+                        android:id="@+id/task_priority_input"
                         android:hint="@string/taskPriorityInput" />
 
                 <Button
