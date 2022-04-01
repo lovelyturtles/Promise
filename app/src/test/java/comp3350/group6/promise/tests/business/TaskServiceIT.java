@@ -1,24 +1,22 @@
 package comp3350.group6.promise.tests.business;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
-import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.business.TaskService;
-import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.objects.Exceptions.PersistenceException;
-import comp3350.group6.promise.persistence.stub.TaskImpNoDB;
+import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.util.DBConnectorUtil;
 
-public class TaskServiceTest {
+public class TaskServiceIT {
+
 
     private TaskService taskService;
 
@@ -26,7 +24,8 @@ public class TaskServiceTest {
     @Before
     public void setup() {
         System.out.println("Starting test for TaskService");
-        taskService = new TaskService(new TaskImpNoDB());
+        DBConnectorUtil.initialLocalDB();
+        taskService = TaskService.getInstance();
     }
 
     @Test
@@ -51,6 +50,9 @@ public class TaskServiceTest {
         Task actual = taskService.getTask(1);
 
         assertEquals(expected, actual);
+        Exception e = assertThrows(PersistenceException.class, () -> {
+            taskService.getTask(10);
+        });
 
         System.out.println("Finished testGetTaskById");
     }
@@ -67,11 +69,12 @@ public class TaskServiceTest {
         taskService.insertTask(toInsert);
         assertEquals(newSize, taskService.getAllTask().size());
 
-        taskService.insertTask(new Task(100));
+        taskService.insertTask(new Task(100));// the db will auto increment PK
 
-        assertEquals(newSize, taskService.getAllTask().size());
+        assertEquals(newSize + 1, taskService.getAllTask().size());
 
         System.out.println("Finished testInsertTask");
+
     }
 
     @Test
@@ -128,6 +131,7 @@ public class TaskServiceTest {
     @After
     public void tearDown() {
         System.out.println("Reset database");
-        taskService = null;
+        DBConnectorUtil.cleanLocalDB(); // clean local db
+
     }
 }

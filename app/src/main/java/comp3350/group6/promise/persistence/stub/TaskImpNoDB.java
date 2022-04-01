@@ -1,16 +1,20 @@
 package comp3350.group6.promise.persistence.stub;
 
+import androidx.annotation.Nullable;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.persistence.TaskDao;
 
 public class TaskImpNoDB implements TaskDao {
 
     ArrayList<Task> taskList;
-    Task task1, task2, task3;
+    Task task1, task2, task3, task4, task5;
     Timestamp cTime;
     Timestamp eTime;
     Timestamp dTime;
@@ -21,14 +25,19 @@ public class TaskImpNoDB implements TaskDao {
     }
 
     private void initDB() {
-        task1 = generateTask("Task A");
-        task2 = generateTask("Task B");
-        task3 = generateTask("Task C");
+        task1 = new Task(1);
+        task2 = new Task(2);
+        task3 = new Task(3);
+        task4 = new Task(4);
+        task5 = new Task(5);
+
 
         taskList = new ArrayList<>();
         taskList.add(task1);
         taskList.add(task2);
         taskList.add(task3);
+        taskList.add(task4);
+        taskList.add(task5);
     }
 
     @Override
@@ -87,15 +96,5 @@ public class TaskImpNoDB implements TaskDao {
         return -1;
     }
 
-    public static Task generateTask(String name) {
-        return new Task(
-                name,
-               "default des",
-                1,
-                1,
-                0,
-                new Timestamp(System.currentTimeMillis()),
-                new Timestamp(System.currentTimeMillis())
-        );
-    }
+
 }
