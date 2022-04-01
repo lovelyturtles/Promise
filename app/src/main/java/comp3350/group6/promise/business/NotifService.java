@@ -10,6 +10,7 @@ import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Access;
 import comp3350.group6.promise.objects.Account;
 import comp3350.group6.promise.objects.Exceptions.AccountDNException;
+import comp3350.group6.promise.objects.Exceptions.DuplicateNotificationException;
 import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.objects.Notification;
 import comp3350.group6.promise.objects.enumClasses.AccessRole;
@@ -22,7 +23,7 @@ public class NotifService {
 
     private final NotifDao notification = new NotifImp();
 
-    public void invite( String theirEmail, int projectID ) throws AccountDNException {
+    public void invite( String theirEmail, int projectID ) throws AccountDNException, DuplicateNotificationException {
 
         //check if their account exists
         if( Service.accounts.accountExists( theirEmail ) ){
@@ -33,7 +34,13 @@ public class NotifService {
             Account recipient = Service.accounts.getAccountByEmail( theirEmail );
 
             //add this request to the Notification database
-            notification.addNotif(sender.getUserID(), projectID, recipient.getUserID(), NotifType.INVITE);
+            try {
+                notification.addNotif(sender.getUserID(), projectID, recipient.getUserID(), NotifType.INVITE);
+            }
+
+            catch( DuplicateNotificationException e ){
+                throw new DuplicateNotificationException( e.getMessage() );
+            }
 
         }
 
@@ -47,7 +54,7 @@ public class NotifService {
      * If the user is requesting access to this project, we have to go and find the user
      * that has the privileges necessary to grant access and send the request to them
      */
-    public void request( int projectID ){
+    public void request( int projectID ) throws DuplicateNotificationException {
 
         int senderID = CurrentSession.currentUser.getUserID();
         //find out who has the privileges to accept/deny requests (for now, that's the creator)

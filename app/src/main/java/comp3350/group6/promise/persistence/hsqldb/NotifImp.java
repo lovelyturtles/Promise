@@ -10,8 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
+import comp3350.group6.promise.objects.Exceptions.DuplicateNotificationException;
 import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.objects.Notification;
 import comp3350.group6.promise.objects.enumClasses.NotifType;
@@ -21,7 +23,7 @@ import comp3350.group6.promise.util.DBConnectorUtil;
 public class NotifImp implements NotifDao {
 
     @Override
-    public void addNotif( int senderID, int projectID, int recipientID, NotifType type){
+    public void addNotif( int senderID, int projectID, int recipientID, NotifType type) throws DuplicateNotificationException {
 
         String insertStatement = "INSERT INTO Notification VALUES(?,?,?,?)";
         System.out.println("type.toString(): " + type.toString());
@@ -35,6 +37,10 @@ public class NotifImp implements NotifDao {
             pStatement.setString(4, type.toString());
             pStatement.executeUpdate();
 
+        }
+
+        catch( SQLIntegrityConstraintViolationException e ){
+            throw new DuplicateNotificationException( e.getMessage() );
         }
 
         catch (SQLException e) {

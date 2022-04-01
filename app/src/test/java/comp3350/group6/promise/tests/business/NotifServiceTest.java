@@ -1,5 +1,6 @@
 package comp3350.group6.promise.tests.business;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.After;
@@ -15,6 +16,8 @@ import comp3350.group6.promise.business.NotifService;
 import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.objects.Account;
 import comp3350.group6.promise.objects.AccountUser;
+import comp3350.group6.promise.objects.Exceptions.DuplicateEmailException;
+import comp3350.group6.promise.objects.Exceptions.DuplicateNotificationException;
 import comp3350.group6.promise.objects.Notification;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.util.DBConnectorUtil;
@@ -245,4 +248,42 @@ public class NotifServiceTest {
                 "We removed the single notification so this list should be empty now");
     }
 
+    @Test
+    public void testInviteAgain() throws Exception {
+
+        //Register 2 accounts and have the first one invite the second
+        System.out.println("Testing project invite [NotifService]");
+        String testMessage = "Already invited so we should get a DuplicateNotificationException";
+
+        //First account
+        String firstEmail = "lazerrazor@email.com";
+        String firstName = "Louise";
+        String firstPass = "password";
+        String firstIntro = "Nothing to see here";
+
+        //Second account
+        String nextEmail = "summertime@email.com";
+        String nextName = "Summer";
+        String nextPass = "password2";
+        String nextIntro = "It's summer time!";
+
+        //Register the first account
+        accountService.register( firstEmail, firstName, firstPass, firstIntro );
+
+        //Register the second account
+        accountService.register( nextEmail, nextName, nextPass, nextIntro );
+
+        //The second account is now the current account. Have it creates a project
+        Project thisProject = projectService.insertProject(  new Project( "Winter", "Winter is the worst" ) );
+        int projectID = thisProject.getProjectID();
+
+        //Now have the second account invite the first account to this project
+        notifService.invite( firstEmail, projectID );
+
+        //Now have the second account invite the first account again
+        assertThrows( testMessage, DuplicateNotificationException.class, () -> {
+            notifService.invite( firstEmail, projectID );
+        });
+
+    }
 }

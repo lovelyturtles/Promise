@@ -100,16 +100,6 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project);
-        populatePage();
-    }
-
-    @Override
-    public void onRestart(){
-        super.onRestart();
-        populatePage();
-    }
-
-    private void populatePage(){
         // Create the project detail page based on the intent passed to it.
         if (getIntent() != null && getIntent().getExtras() != null) {
             int id = getIntent().getIntExtra("projectID", -1);
@@ -159,7 +149,6 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
 //            }
 //        });
     }
-
 //    private void handleInvite(){
 //
 //        Button inviteButton = findViewById( R.id.inviteButton);
