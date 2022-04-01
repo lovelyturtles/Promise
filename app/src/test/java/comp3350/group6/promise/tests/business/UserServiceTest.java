@@ -1,8 +1,7 @@
 package comp3350.group6.promise.tests.business;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +9,7 @@ import org.junit.Test;
 import comp3350.group6.promise.business.UserService;
 import comp3350.group6.promise.objects.User;
 import comp3350.group6.promise.persistence.UserDao;
+import comp3350.group6.promise.persistence.stub.UserImpNoDB;
 
 public class UserServiceTest {
 
@@ -18,26 +18,25 @@ public class UserServiceTest {
 
     @Before
     public void setup(){
-        userDao = mock(UserDao.class);
-        userService = new UserService(userDao);
+        userService = new UserService(new UserImpNoDB());
     }
 
 
     @Test
     public void testAddUser() throws Exception{
         int userId = userService.addUser("sunsiwen", "introduction");
-        assertFalse(userId > 0);
+        assertTrue(userId == 1);
     }
 
     @Test
     public void testUpdateUserByUserId( ) throws Exception{
-        int i = userService.updateUserByUserId(1, "SUNSIWEN", "introduction");
-        assertFalse(i > 0);
+        int i = userService.updateUserByUserId(0, "SUNSIWEN", "introduction");
+        assertTrue(i > 0);
     }
 
     @Test
     public void testGetUserByUserId( ) throws Exception{
-        User user = userService.getUserByUserId(1);
-        assertNull(user);
+        User user = userService.getUserByUserId(0);
+        assertNotNull(user);
     }
 }
