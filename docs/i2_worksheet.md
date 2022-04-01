@@ -8,19 +8,16 @@ One case of technical debt occurred as we were developing our interface. We were
 
 * App Bar Refactoring Example ([Commit](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/commit/3e85274b2fac956d4dd209cc29d60ffc75d9c59b#6f5ced1d71e320e9004287a2aacbbc444612dfc5), [File](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/blob/3e85274b2fac956d4dd209cc29d60ffc75d9c59b/app/src/main/res/layout/activity_task.xml), Line 10)
 
-Another case of technical debt being payed off in this iteration can be seen with the LoginFormFragment, RegisterActivity, and AccountService classes. 
-As you can see in the links provided, most of the logic for registering an account or logging in were originally done in their respective presentation layers. 
-AccountService was basically only used to set the current account. 
-By moving all this code to AccountService, the code in the presentation layer is able to be abstracted. 
-Instead of numerous checks to see if an account exists and passwords match and so on, we just have simple calls to accountService.login or accountService.register without 
-worrying about how AccountService is accomplishing this task. 
+Another case of technical debt being payed off in this iteration can be seen with the LoginFormFragment, RegisterActivity, and AccountService classes. As you can see in the links provided, most of the logic for registering an account or logging in were originally done in their respective presentation layers. AccountService was basically only used to set the current account. By moving all this code to AccountService, the code for registering and logging in is able to be abstracted. Instead of numerous checks to see if an account exists and passwords match and so on, we just have simple calls to accountService.login or accountService.register without worrying about how AccountService is accomplishing this task. This was definitely reckless and deliberate because I knew that I shouldn't be doing logic in the presentation layer when I was first coding this up but because it was my first introduction to android studio, a lot of time was spent figuring out how everything worked so there was little time in the end to actually get the UI working. At this point, I was just worried about getting the code to run nicely on the emulator and meant to fix up the code later if there was time, which there wasn't.
 
 * Account Refactoring Example ([Commit](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/commit/88ad326b445f2a21926a182c4dc23665593504df) )
 * [Link to removal of logic code in RegisterActivity](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/commit/88ad326b445f2a21926a182c4dc23665593504df#b427ea31be914fcebd82e2f99c6c40256182573f_49_53)
 * [Link to addition of logic into AccountService](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/commit/88ad326b445f2a21926a182c4dc23665593504df#88c7a63d9e1180ee787a45f057572059d1c899e4_60_75)
+* [Link to removal of logic code in LoginFormFragment](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/commit/88ad326b445f2a21926a182c4dc23665593504df#4f568b6662e0d9a91f9a45cf0bd9ed6d24f4dd1e_46_44)
+* [Link to addition of logic code in AccountService](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/commit/88ad326b445f2a21926a182c4dc23665593504df#88c7a63d9e1180ee787a45f057572059d1c899e4_84_106)
 
 ## SOLID
-[//]: <Find a SOLID violation in the project of group with group number n-1 in the same section of the course as you (group 1 does group 16). Open an issue in their project with the violation, clearly explaining the SOLID violation - specifying the type, provide a link to that issue. Be sure your links in the issues are to specific commits (not to main, or develop as those will be changed).Provide a link to the issue you created here.>
+We couldn't find a SOLID violation for team  on March 30, 2022 10 AM, and thus didn't open any issues in group 5.
 
 
 ## Retrospective
@@ -63,4 +60,4 @@ We used the Adapter design pattern for our project. Since we wanted to use card 
 
 We got this feedback because we were populating the FakeDB in our presentation layer and was directly accessing it, instead of utilizing the logic layer. 
 
-We removed all FakeDB related code from our project, and any persistence code in our presentation layers.
+We removed all FakeDB related code from our project(except for the testing), and any persistence code in our presentation layers.
