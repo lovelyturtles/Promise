@@ -23,4 +23,5 @@ Our group will follow a simplified version of the git-flow strategy. We will hav
 
 # Links to Documents
 * [Iteration 1 Worksheet](./docs/i1_worksheet.md)
+* [Iteration 2 Worksheet](./docs/i2_worksheet.md)
 * [Project Architecture](./docs/ARCHITECTURE.md)
