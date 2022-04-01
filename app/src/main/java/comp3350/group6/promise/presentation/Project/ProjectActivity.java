@@ -142,7 +142,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         taskListAdapter.notifyDataSetChanged();
     }
@@ -154,6 +154,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
 
     private void goToAddTask() {
         Intent intent = new Intent(this, CreateTaskActivity.class);
+        intent.putExtra("projectId", project.getProjectID());
         startActivity(intent);
     }
 

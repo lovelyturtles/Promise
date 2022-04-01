@@ -58,14 +58,14 @@
                 android:text="Project Description" />
 
             <EditText
-                android:id="@+id/task_description_input"
-                style="@style/Theme.Promise.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:gravity="start|top"
-                android:hint="@string/projectDescHint"
-                android:imeOptions="actionNext|actionDone|flagNoEnterAction"
-                android:inputType="textShortMessage"/>
+                    android:id="@+id/task_description_input"
+                    style="@style/Theme.Promise.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:gravity="start|top"
+                    android:hint="@string/projectDescHint"
+                    android:imeOptions="actionNext|actionDone|flagNoEnterAction"
+                    android:inputType="textShortMessage" />
 
             <Button
                 android:id="@+id/submit_task_button"

@@ -16,7 +16,9 @@ import java.sql.Timestamp;
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.application.Service;
+import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.objects.Handle;
+import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.presentation.Project.ProjectActivity;
 
@@ -27,11 +29,17 @@ public class CreateTaskActivity extends AppCompatActivity {
     private EditText taskEstimateText;
     private EditText taskPriorityText;
     private Button submitTaskButton;
+    private Project project;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
+
+        if(getIntent() != null && getIntent().getExtras() != null){
+            int projectId = getIntent().getIntExtra("projectId", -1);
+            project = ProjectService.getInstance().getProjectByID(projectId);
+        }
 
         taskToolBar = (Toolbar) findViewById(R.id.task_toolBar);
         setSupportActionBar(taskToolBar);
@@ -69,7 +77,8 @@ public class CreateTaskActivity extends AppCompatActivity {
         String taskEstimate = taskEstimateText.getText().toString();
         int taskPriority = Integer.parseInt(taskPriorityText.getText().toString());
         Timestamp defaultTime = new Timestamp(System.currentTimeMillis());
-        int projectId = 0;
+        int projectId = project.getProjectID();
+
 
         int taskId = Service.tasks.insertTask(new Task(taskName, taskDes, taskPriority, 0, projectId, defaultTime, defaultTime));
         Handle handleRet = Service.handles.insertHandle(new Handle(taskId, CurrentSession.currentUser.getUserID(), defaultTime));
@@ -77,6 +86,8 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         // Return to project
         Intent intent = new Intent(this, ProjectActivity.class);
+        intent.putExtra("projecID",projectId);
+
         startActivity(intent);
 //        }catch(Exception e){
         Toast.makeText(getBaseContext(), "Please enter all fields", Toast.LENGTH_SHORT).show();
