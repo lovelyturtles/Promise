@@ -94,31 +94,30 @@ public class TaskImp implements TaskDao {
     }
 
     @Override
-    public Task insertTask(Task t) {
+    public int insertTask(Task t) {
         try (final Connection con = DBConnectorUtil.getConnection()) {
-            String query = "INSERT INTO task(taskId, title, description, priority, statusNum, projectId, createdTime, estimatedEndTime, deadline) VALUES(?,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO task(title, description, priority, statusNum, projectId, createdTime, estimatedEndTime, deadline) VALUES(?,?,?,?,?,?,?,?)";
             final PreparedStatement pre = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            pre.setInt(1, t.getTaskId());
-            pre.setString(2, t.getTitle());
-            pre.setString(3, t.getDescription());
-            pre.setInt(4, t.getPriority());
-            pre.setInt(5, t.getStatusNum());
-            pre.setInt(6, t.getProjectId());
-            pre.setTimestamp(7, t.getCreatedTime());
-            pre.setTimestamp(8, t.getEstimatedEndTime());
-            pre.setTimestamp(9, t.getDeadline());
+            pre.setString(1, t.getTitle());
+            pre.setString(2, t.getDescription());
+            pre.setInt(3, t.getPriority());
+            pre.setInt(4, t.getStatusNum());
+            pre.setInt(5, t.getProjectId());
+            pre.setTimestamp(6, t.getCreatedTime());
+            pre.setTimestamp(7, t.getEstimatedEndTime());
+            pre.setTimestamp(8, t.getDeadline());
             pre.executeUpdate();
 
             ResultSet generatedKeys = pre.getGeneratedKeys();
             generatedKeys.next();
-            t.setTaskId(generatedKeys.getInt(1));
+            t.setTaskId(generatedKeys.getInt(1)); // set column taskId
 
             pre.close();
-            return t;
+            return t.getTaskId();
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }
-    }
+    }// TODO check insert since new changes
 
     @Override
     public Task updateTask(Task t) {

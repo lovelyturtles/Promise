@@ -1,11 +1,11 @@
 package comp3350.group6.promise.presentation.Project;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -32,12 +33,13 @@ import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.objects.enumClasses.NotifType;
 import comp3350.group6.promise.presentation.Project.Invitation.RecipientInfoActivity;
+import comp3350.group6.promise.presentation.Task.CreateTaskActivity;
 import comp3350.group6.promise.presentation.Task.TaskActivity;
 import comp3350.group6.promise.util.TaskAdapter;
 
 public class ProjectActivity extends AppCompatActivity implements TaskAdapter.OnTaskClickListener, TaskAdapter.OnTaskLongClickListener {
 
-    private static final String TAG = "tag" ;
+    private static final String TAG = "tag";
 
     private Project project;
     private CollapsingToolbarLayout appBarLayoutView;
@@ -46,14 +48,14 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
     private ImageView projectImageView;
     private RecyclerView taskRecyclerView;
     private List<Task> listOfTasks;
-//    private Button createTaskButton;
+    //    private Button createTaskButton;
     private TaskAdapter taskListAdapter;
-    private FloatingActionButton fab;
+    private FloatingActionButton fabCreateTask;
 
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
 
-    private void initImageBitmaps(){
+    private void initImageBitmaps() {
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
         mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
@@ -88,7 +90,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
         initRecyclerView();
     }
 
-    private void initRecyclerView(){
+    private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: init recyclerview.");
         RecyclerView recyclerView = findViewById(R.id.task_recycler);
         TaskAdapter adapter = new TaskAdapter(this, mNames, mImageUrls);
@@ -111,7 +113,7 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
         appBarLayoutView = findViewById(R.id.toolbar_layout);
         projectImageView = findViewById(R.id.toolbar_image);
 
-        toolbarView = findViewById(R.id.toolbar);
+        toolbarView = findViewById(R.id.task_toolBar);
         setSupportActionBar(toolbarView);
         getSupportActionBar().setTitle(project.getProjectName());
 
@@ -119,9 +121,9 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
         projectDescriptionView.setText(project.getStatement());
 
         listOfTasks = TaskService.getInstance().getTasksByProjectId(project.getProjectID());
-        taskListAdapter = new TaskAdapter(this,listOfTasks,this,this);
+        taskListAdapter = new TaskAdapter(this, listOfTasks, this, this);
         taskRecyclerView = findViewById(R.id.task_recycler);
-        taskRecyclerView.setLayoutManager( new LinearLayoutManager(ProjectActivity.this, LinearLayoutManager.VERTICAL,false));
+        taskRecyclerView.setLayoutManager(new LinearLayoutManager(ProjectActivity.this, LinearLayoutManager.VERTICAL, false));
         taskRecyclerView.setAdapter(taskListAdapter);
 
         toolbarView.setNavigationOnClickListener(new View.OnClickListener() {
@@ -131,30 +133,37 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
             }
         });
 
-        fab = findViewById(R.id.fab);
+        fabCreateTask = findViewById(R.id.fab_task_create);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        fabCreateTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFloatingButtonClick();
+                goToAddTask();
             }
         });
 
     }
 
-    private void goToRecipientDetails(){
-        Intent intent = new Intent( this, RecipientInfoActivity.class );
-        intent.putExtra("projectID", project.getProjectID() );
-        startActivity( intent );
+    private void goToRecipientDetails() {
+        Intent intent = new Intent(this, RecipientInfoActivity.class);
+        intent.putExtra("projectID", project.getProjectID());
+        startActivity(intent);
     }
 
-    public void onFloatingButtonClick() {
-        // TODO: Implement handler for adding tasks
-        Toast.makeText(getBaseContext(), "Pressed Add Button", Toast.LENGTH_SHORT).show();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        taskListAdapter.notifyDataSetChanged();
+    }
+
+
+    private void goToAddTask() {
+        Intent intent = new Intent(this, CreateTaskActivity.class);
+        intent.putExtra("projectId", project.getProjectID());
+        startActivity(intent);
     }
 
     // Task List Methods
-
     @Override
     public void onTaskClick(int position) {
         Task clickedTask = listOfTasks.get(position);
@@ -168,10 +177,6 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
         Task longClickedTask = listOfTasks.get(position);
         Log.d(TAG, "onLongTaskClick: ");
     }// Long click delete task
-
-    private void addItem(View view){
-
-    }
 
     // Toolbar Methods
 

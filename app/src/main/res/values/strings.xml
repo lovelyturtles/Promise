@@ -72,6 +72,16 @@
     <string name="edit_project_action_description">Edit Project</string>
     <string name="invite_to_project_action_title">Invite Users</string>
     <string name="dashboard_add_action_description">Dashboard Add Action</string>
+    <string name="title_activity_create_task">CreateTaskActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
+    <!-- New Task -->
+    <string name="taskNameInput">Task Name</string>
+    <string name="taskDesInput">Task Description</string>
+    <string name="taskPriorityInput">Enter number</string>
+    <string name="taskEstimateInput">Enter days</string>
 
     <!--Notification Page-->
     <string name="personIconName">You\'ve been invited to work on a project</string>

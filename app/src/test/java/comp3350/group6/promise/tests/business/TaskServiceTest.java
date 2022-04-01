@@ -7,6 +7,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import comp3350.group6.promise.application.Service;
@@ -19,12 +21,12 @@ public class TaskServiceTest {
 
     private TaskService taskService;
 
-    /* Each time the fake DB get reinitialized */
+    /* Each time get reinitialized */
     @Before
     public void setup() {
         System.out.println("Starting test for TaskService");
         DBConnectorUtil.initialLocalDB();
-        taskService = new TaskService(true); // false init a fake DB
+        taskService = TaskService.getInstance();
     }
 
     @Test
@@ -82,7 +84,7 @@ public class TaskServiceTest {
         System.out.println("\nStarting testUpdateTask");
 
         Task toUpdate = new Task(1, "updatedTask", "default", 0, 0, 0, null, null, null);
-        taskService.updateTask(toUpdate); // TODO check this
+        taskService.updateTask(toUpdate);
 
         String newTitle = "updatedTask";
         Task actual = taskService.getTask(1);
@@ -109,10 +111,28 @@ public class TaskServiceTest {
         System.out.println("Finished testDeleteTask");
     }
 
+
+//    @Test
+//    public void testInsert() {
+//        System.out.println("\nStarting testInsertTask");
+//
+//        List<Task> taskList = taskService.getAllTask();
+//        int oldSize = taskList.size();
+//        int newSize = oldSize + 2;
+//        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//        Task test = new Task("name", "", 0, 0, 0, timestamp, timestamp);
+//
+//        Task test2 = new Task("name", "", 0, 0, 0, timestamp, timestamp);
+//        taskService.insertTask(test);
+//        taskService.insertTask(test2);
+//        assertEquals(newSize,taskService.getAllTask().size());
+//        System.out.println("Finished testInsertTask");
+//
+//    }
+
     @After
     public void tearDown() {
-        System.out.println("Reset database");
-        Service.clean(); // clean Service implementation
-        DBConnectorUtil.cleanLocalDB(); // clean local db
+//        System.out.println("Reset database");
+//        DBConnectorUtil.cleanLocalDB(); // clean local db
     }
 }

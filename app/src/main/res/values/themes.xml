@@ -61,4 +61,15 @@
         <item name="android:textColor">@color/text_heading</item>
     </style>
 
+    <style name="Theme.Promise.Fullscreen" parent="Theme.Promise">
+        <item name="android:actionBarStyle">@style/Widget.Theme.Promise.ActionBar.Fullscreen</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+    <style name="ThemeOverlay.Promise.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
+    </style>
+
 </resources>

@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,7 +15,6 @@ import java.util.List;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.Service;
-import comp3350.group6.promise.business.AccessService;
 import comp3350.group6.promise.objects.Access;
 import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.objects.Project;
@@ -41,7 +38,7 @@ public class DashboardActivity extends AppCompatActivity implements ProjectAdapt
         setContentView(R.layout.activity_dashboard);
 
         projectRecyclerView = findViewById(R.id.projectRecyclerView);
-        fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab_task_create);
 
         accessList = Service.accesses.getUserAccess(CurrentSession.currentUser.getUserID());
         projects = Service.accesses.getProjects(CurrentSession.currentUser.getUserID());

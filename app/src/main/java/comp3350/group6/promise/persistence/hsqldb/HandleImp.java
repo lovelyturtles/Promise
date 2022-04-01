@@ -62,7 +62,7 @@ public class HandleImp implements HandleDao {
     }
 
     @Override
-    public void insertHandle(Handle handle) {
+    public Handle insertHandle(Handle handle) {
         try (final Connection con = DBConnectorUtil.getConnection()) {
             assert (con != null);
             final PreparedStatement ps = con.prepareStatement("INSERT INTO HANDLE (taskId, userId, since) VALUES (?,?,?)");
@@ -74,5 +74,6 @@ public class HandleImp implements HandleDao {
         } catch (SQLException e) {
             throw new PersistenceException(e);
         }
+        return handle;
     }
 }

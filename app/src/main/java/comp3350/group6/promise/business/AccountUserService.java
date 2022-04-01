@@ -12,34 +12,40 @@ import comp3350.group6.promise.persistence.hsqldb.AccountUserImp;
 public class AccountUserService {
 
     private final AccountUserDao accountUser = new AccountUserImp();
+    private static AccountUserService instance;
 
-    public AccountUser getUserByAccount(Account account ){
 
-        return accountUser.getUserByAccount( account );
+    public AccountUser getUserByAccount(Account account) {
 
-    }
-
-    public AccountUser getUserByAccountID( int accountID ){
-
-        Account account = Service.accounts.getAccountByID( accountID );
-        return getUserByAccount( account );
+        return accountUser.getUserByAccount(account);
 
     }
 
-    public AccountUser getUserByEmail( String email ){
+    public AccountUser getUserByAccountID(int accountID) {
 
-        Account account = Service.accounts.getAccountByEmail( email );
-        return getUserByAccount( account );
+        Account account = Service.accounts.getAccountByID(accountID);
+        return getUserByAccount(account);
 
     }
 
-    public String getNameByEmail( String email ){
+    public AccountUser getUserByEmail(String email) {
 
-        AccountUser accountUser = getUserByEmail( email );
+        Account account = Service.accounts.getAccountByEmail(email);
+        return getUserByAccount(account);
+
+    }
+
+    public String getNameByEmail(String email) {
+
+        AccountUser accountUser = getUserByEmail(email);
         return accountUser.getUserName();
 
     }
 
-
-
+    public static AccountUserService getInstance() {
+        if (AccountUserService.instance == null) {
+            AccountUserService.instance = new AccountUserService();
+        }
+        return AccountUserService.instance;
+    }
 }
