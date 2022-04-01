@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.business.AccessService;
 import comp3350.group6.promise.business.AccountService;
 import comp3350.group6.promise.business.AccountUserService;
@@ -284,6 +285,60 @@ public class NotifServiceTest {
         assertThrows( testMessage, DuplicateNotificationException.class, () -> {
             notifService.invite( firstEmail, projectID );
         });
+    }
+
+    @Test
+    public void testReject() throws Exception {
+        //Register 2 accounts and have the first one invite the second
+        System.out.println("Testing project invite [NotifService]");
+        String testMessage = "Already invited so we should get a DuplicateNotificationException";
+
+        //First account
+        String firstEmail = "lazerrazor@email.com";
+        String firstName = "Louise";
+        String firstPass = "password";
+        String firstIntro = "Nothing to see here";
+
+        //Second account
+        String nextEmail = "summertime@email.com";
+        String nextName = "Summer";
+        String nextPass = "password2";
+        String nextIntro = "It's summer time!";
+
+        //Register the first account
+        accountService.register( firstEmail, firstName, firstPass, firstIntro );
+
+        //Register the second account
+        accountService.register( nextEmail, nextName, nextPass, nextIntro );
+
+        //The second account is now the current account. Have it create a project
+        Project thisProject = projectService.insertProject(  new Project( "Winter", "Winter is the worst" ) );
+        int projectID = thisProject.getProjectID();
+
+        //Now have the second account invite the first account to this project
+        notifService.invite( firstEmail, projectID );
+
+        //Get the notification that was added
+        Account recipient = accountService.getAccountByEmail( firstEmail );
+        ArrayList<Notification> recipientNotifs = notifService.getNotifs(recipient.getUserID() );
+
+        //Make sure the Notifications list isn't empty to start
+        assertFalse( recipientNotifs.isEmpty(), "Notification was added so this shouldn't be empty" );
+        Notification rejectInvite = recipientNotifs.get( 0 );
+
+        //Now the first account rejects the project invite
+        notifService.reject( rejectInvite );
+
+        //Make sure the user doesn't have any accesses to start
+        assertTrue( accessService.getUserAccess( recipient.getUserID() ).isEmpty() );
+
+        //The Notification list should be empty now
+        assertTrue( notifService.getNotifs( recipient.getUserID() ).isEmpty(),
+                "We removed the single notification so this list should be empty now");
+
+        //Make sure the user still doesn't have accesses
+        assertTrue( accessService.getUserAccess( recipient.getUserID() ).isEmpty() );
 
     }
+
 }
