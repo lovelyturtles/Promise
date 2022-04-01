@@ -47,4 +47,4 @@ We divide our application into 3-tier architecture. There are 6 main java packag
 - TaskImp
 
 
-![Architecture diagram](https://app.diagrams.net/#G1O1YgvnImUHyDjcPfwReyGTl-Sjkchb_3)
+![Architecture diagram](./images/architecture.png)

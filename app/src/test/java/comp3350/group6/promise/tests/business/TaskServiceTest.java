@@ -70,10 +70,9 @@ public class TaskServiceTest {
         taskService.insertTask(toInsert);
         assertEquals(newSize, taskService.getAllTask().size());
 
-        Exception e = assertThrows(PersistenceException.class, () -> {
-            taskService.insertTask(new Task(100));
-        });
-        assertEquals(newSize, taskService.getAllTask().size());
+        taskService.insertTask(new Task(100));
+
+        assertEquals(newSize + 1, taskService.getAllTask().size());
 
         System.out.println("Finished testInsertTask");
 
@@ -112,27 +111,27 @@ public class TaskServiceTest {
     }
 
 
-//    @Test
-//    public void testInsert() {
-//        System.out.println("\nStarting testInsertTask");
-//
-//        List<Task> taskList = taskService.getAllTask();
-//        int oldSize = taskList.size();
-//        int newSize = oldSize + 2;
-//        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-//        Task test = new Task("name", "", 0, 0, 0, timestamp, timestamp);
-//
-//        Task test2 = new Task("name", "", 0, 0, 0, timestamp, timestamp);
-//        taskService.insertTask(test);
-//        taskService.insertTask(test2);
-//        assertEquals(newSize,taskService.getAllTask().size());
-//        System.out.println("Finished testInsertTask");
-//
-//    }
+    @Test
+    public void testInsert() {
+        System.out.println("\nStarting testInsertTask");
+
+        List<Task> taskList = taskService.getAllTask();
+        int oldSize = taskList.size();
+        int newSize = oldSize + 2;
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        Task test = new Task("name", "", 0, 0, 0, timestamp, timestamp);
+
+        Task test2 = new Task("name", "", 0, 0, 0, timestamp, timestamp);
+        taskService.insertTask(test);
+        taskService.insertTask(test2);
+        assertEquals(newSize,taskService.getAllTask().size());
+        System.out.println("Finished testInsertTask");
+
+    }
 
     @After
     public void tearDown() {
-//        System.out.println("Reset database");
-//        DBConnectorUtil.cleanLocalDB(); // clean local db
+        System.out.println("Reset database");
+        DBConnectorUtil.cleanLocalDB(); // clean local db
     }
 }
