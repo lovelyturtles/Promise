@@ -21,7 +21,6 @@ import comp3350.group6.promise.tests.objects.UserTest;
         AccountServiceTest.class,
         TaskServiceTest.class,
         ProjectServiceIT.class,
-        UserServiceTest.class,
         HandleServiceIT.class,
         AccountUserServiceTest.class,
         NotifServiceTest.class,
