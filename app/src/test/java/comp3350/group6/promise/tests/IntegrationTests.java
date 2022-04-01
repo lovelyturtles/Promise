@@ -10,10 +10,13 @@ import comp3350.group6.promise.tests.business.HandleServiceTest;
 import comp3350.group6.promise.tests.business.NotifServiceTest;
 import comp3350.group6.promise.tests.business.ProjectServiceTest;
 import comp3350.group6.promise.tests.business.TaskServiceTest;
+import comp3350.group6.promise.tests.business.UserServiceIT;
 import comp3350.group6.promise.tests.business.UserServiceTest;
+import comp3350.group6.promise.tests.objects.UserTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        UserTest.class,
         AccessServiceTest.class,
         AccountServiceTest.class,
         TaskServiceTest.class,
@@ -21,7 +24,8 @@ import comp3350.group6.promise.tests.business.UserServiceTest;
         UserServiceTest.class,
         HandleServiceTest.class,
         AccountUserServiceTest.class,
-        NotifServiceTest.class
+        NotifServiceTest.class,
+        UserServiceIT.class
 })
 
 
