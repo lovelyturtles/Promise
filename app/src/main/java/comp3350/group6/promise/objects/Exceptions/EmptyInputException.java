@@ -1,4 +1,4 @@
-package comp3350.group6.promise.business;
+package comp3350.group6.promise.objects.Exceptions;
 
 public class EmptyInputException extends Exception {
     public EmptyInputException(String fieldName){

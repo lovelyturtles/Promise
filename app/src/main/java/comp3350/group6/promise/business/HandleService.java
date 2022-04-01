@@ -17,8 +17,8 @@ public class HandleService {
     private final HandleDao handleDao;
     private static HandleService instance;
 
-    public HandleService(boolean forProduction) {
-        handleDao = Service.getHandleImp(forProduction);
+    public HandleService() {
+        handleDao = new HandleImp();
     }
 
     public List<Handle> getListOfUserTask(int taskId) {
@@ -29,13 +29,14 @@ public class HandleService {
         return handleDao.getTaskUser(userId);
     } // either return empty list or list of tasks associated with this user
 
-    public void insertHandle(Handle handle) {
+    public  Handle insertHandle(Handle handle) {
         handleDao.insertHandle(handle);
+        return handle;
     }
 
-    public HandleService getInstance(boolean forProduction) {
+    public static HandleService getInstance() {
         if(HandleService.instance == null) {
-            HandleService.instance = new HandleService(forProduction);
+            HandleService.instance = new HandleService();
         }
         return HandleService.instance;
     }

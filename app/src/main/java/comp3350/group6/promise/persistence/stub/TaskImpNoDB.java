@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import comp3350.group6.promise.objects.FakeDB;
 import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.persistence.TaskDao;
 
@@ -56,12 +55,12 @@ public class TaskImpNoDB implements TaskDao {
     }
 
     @Override
-    public Task insertTask(Task t) {
+    public int insertTask(Task t) {
         if (getIndex(t.getTaskId()) == -1) {
             taskList.add(t);
-            return t;
+            return t.getTaskId();
         }
-        return null;
+        return -1;
     }
 
     @Override

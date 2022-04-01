@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-import comp3350.group6.promise.objects.Account;
 import comp3350.group6.promise.objects.Notification;
 import comp3350.group6.promise.objects.enumClasses.NotifType;
 
@@ -17,7 +16,7 @@ public class NotifTest {
 
         final Notification notification = new Notification(1, 2, 3, NotifType.INVITE);
         assertNotNull(notification);
-        assertEquals(1, notification.getUserID());
+        assertEquals(1, notification.getSenderID());
         assertEquals(2, notification.getProjectID());
         assertEquals(3, notification.getRecipientID());
         assertEquals(NotifType.INVITE, notification.getType());

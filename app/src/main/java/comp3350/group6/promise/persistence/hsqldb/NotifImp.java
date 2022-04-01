@@ -9,102 +9,95 @@ package comp3350.group6.promise.persistence.hsqldb;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
+import comp3350.group6.promise.objects.Exceptions.DuplicateNotificationException;
+import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.objects.Notification;
 import comp3350.group6.promise.objects.enumClasses.NotifType;
+import comp3350.group6.promise.persistence.NotifDao;
 import comp3350.group6.promise.util.DBConnectorUtil;
 
-public class NotifImp {
+public class NotifImp implements NotifDao {
 
-    void addNotif(int userID, int projectID, int recipientID, int type) throws Exception {
+    @Override
+    public void addNotif( int senderID, int projectID, int recipientID, NotifType type) throws DuplicateNotificationException {
 
-        PreparedStatement preparedStatement = null;
-        try (final Connection cnn = DBConnectorUtil.getConnection()) {
-            assert cnn != null;
-            preparedStatement = cnn.prepareStatement("INSERT INTO Notification VALUES(?,?,?,?)");
+        String insertStatement = "INSERT INTO Notification VALUES(?,?,?,?)";
+        System.out.println("type.toString(): " + type.toString());
+        System.out.println("type.name():" + type.name());
+        try (final Connection cnn = DBConnectorUtil.getConnection();
+            PreparedStatement pStatement = cnn.prepareStatement(insertStatement)){
 
-            preparedStatement.setInt(1, userID);
-            preparedStatement.setInt(2, projectID);
-            preparedStatement.setInt(3, recipientID);
-            preparedStatement.setInt(4, type);
-
-            preparedStatement.executeUpdate();
-
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (Exception e) {/**/}
+            pStatement.setInt(1, senderID);
+            pStatement.setInt(2, projectID);
+            pStatement.setInt(3, recipientID);
+            pStatement.setString(4, type.toString());
+            pStatement.executeUpdate();
 
         }
-    }
 
-    void removeNotif(int userID, int projectID, int recipientID) throws Exception {
+        catch( SQLIntegrityConstraintViolationException e ){
+            throw new DuplicateNotificationException( e.getMessage() );
+        }
 
-        PreparedStatement preparedStatement = null;
-
-        try (final Connection cnn = DBConnectorUtil.getConnection()) {
-            assert cnn != null;
-            preparedStatement = cnn.prepareStatement("DELETE FROM Notification WHERE userID = ? AND projectID = ? AND recipientID = ?");
-            preparedStatement.setInt(1, userID);
-            preparedStatement.setInt(2, projectID);
-            preparedStatement.setInt(3, recipientID);
-            preparedStatement.executeUpdate();
-        } finally {
-
-            try {
-                preparedStatement.close();
-            } catch (Exception e) {/**/}
-
+        catch (SQLException e) {
+            throw new PersistenceException(e);
         }
 
     }
 
-    ArrayList<Notification> getNotifs(int recipientID) throws Exception {
+    @Override
+    public void removeNotif( Notification remove ) {
 
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+        String deleteStatement = "DELETE FROM Notification WHERE senderID = ? AND projectID = ? AND recipientID = ?";
+        try (final Connection cnn = DBConnectorUtil.getConnection();
+            PreparedStatement pStatement = cnn.prepareStatement(deleteStatement)){
+            pStatement.setInt( 1, remove.getSenderID() );
+            pStatement.setInt( 2, remove.getProjectID() );
+            pStatement.setInt( 3, remove.getRecipientID() );
+            pStatement.executeUpdate();
+        }
+
+        catch(SQLException e){
+            throw new PersistenceException(e);
+        }
+
+    }
+
+    @Override
+    public ArrayList<Notification> getNotifs(int recipientID) {
+
         ArrayList<Notification> notifs;
 
         int sender;
         int projectID;
         int reciever;
-        int checkType;
         NotifType type;
 
-        try (final Connection cnn = DBConnectorUtil.getConnection()) {
-
-            assert cnn != null;
-            preparedStatement = cnn.prepareStatement("SELECT * FROM Notification WHERE recipientID = ?");
-            preparedStatement.setInt(1, recipientID);
-            resultSet = preparedStatement.executeQuery();
+        String selectStatement = "SELECT * FROM Notification WHERE recipientID = ?";
+        try (final Connection cnn = DBConnectorUtil.getConnection();
+            PreparedStatement pStatement = cnn.prepareStatement( selectStatement ) ) {
+            pStatement.setInt(1, recipientID);
+            ResultSet resultSet = pStatement.executeQuery();
             notifs = new ArrayList<Notification>();
 
             while (resultSet.next()) {
 
-                sender = resultSet.getInt("userID");
+                sender = resultSet.getInt("senderID");
                 projectID = resultSet.getInt("projectID");
                 reciever = resultSet.getInt("recipientID");
-                checkType = resultSet.getInt("type");
-
-                if (checkType == 0)
-                    type = NotifType.INVITE;
-                else
-                    type = NotifType.REQUEST;
-
+                type = NotifType.valueOf( resultSet.getString("type") );
                 notifs.add(new Notification(sender, projectID, reciever, type));
 
             }
 
-        } finally {
+        }
 
-            try {
-                resultSet.close();
-            } catch (Exception e) {/**/}
-            try {
-                preparedStatement.close();
-            } catch (Exception e) {/**/}
-
+        catch (SQLException e){
+            throw new PersistenceException(e);
         }
 
         return notifs;

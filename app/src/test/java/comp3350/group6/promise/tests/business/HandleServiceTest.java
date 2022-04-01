@@ -28,7 +28,7 @@ public class HandleServiceTest {
     public void setUp() {
         System.out.println("Start Integration Test for HandleService");
         DBConnectorUtil.initialLocalDB();
-        handleService = new HandleService(true);
+        handleService = HandleService.getInstance();
         assertNotNull(this.handleService);
     }
 
@@ -77,7 +77,6 @@ public class HandleServiceTest {
     @After
     public void tearDown() {
         System.out.println("Reset database");
-        Service.clean(); // clean Service implementation
         DBConnectorUtil.cleanLocalDB(); // clean local db
     }
 }

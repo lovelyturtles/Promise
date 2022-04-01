@@ -79,7 +79,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             super(itemView);
 
             containerView = itemView.findViewById(R.id.project_list_item_container);
-            nameView = itemView.findViewById(R.id.project_name_input);
+            nameView = itemView.findViewById(R.id.task_name_input);
             descriptionView = itemView.findViewById(R.id.projectDescription);
             memberCountView = itemView.findViewById(R.id.memberCount);
             taskCountView = itemView.findViewById(R.id.taskCount);
