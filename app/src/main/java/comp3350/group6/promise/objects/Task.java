@@ -54,7 +54,7 @@ public class Task {
      *
      */
     public Task(String title, String description, int priority, int statusNum, int projectId, Timestamp estimatedEndTime, Timestamp deadline) {
-        projectId = count;
+        this.taskId = count;
         this.title = title;
         this.description = description;
         this.priority = priority;

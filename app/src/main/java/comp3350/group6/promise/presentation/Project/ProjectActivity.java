@@ -1,6 +1,7 @@
 package comp3350.group6.promise.presentation.Project;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -138,8 +139,12 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
                 goToAddTask();
             }
         });
+    }
 
-
+    @Override
+    protected void onResume(){
+        super.onResume();
+        taskListAdapter.notifyDataSetChanged();
     }
 
 //    public void onFloatingButtonClick() {
@@ -153,7 +158,6 @@ public class ProjectActivity extends AppCompatActivity implements TaskAdapter.On
     }
 
     // Task List Methods
-
     @Override
     public void onTaskClick(int position) {
         Task clickedTask = listOfTasks.get(position);

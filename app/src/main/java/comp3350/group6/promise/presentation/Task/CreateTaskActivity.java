@@ -58,7 +58,6 @@ public class CreateTaskActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-
         });
 
     }
