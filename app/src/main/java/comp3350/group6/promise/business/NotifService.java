@@ -22,6 +22,7 @@ import comp3350.group6.promise.persistence.hsqldb.NotifImp;
 public class NotifService {
 
     private final NotifDao notification = new NotifImp();
+    private static NotifService instance;
 
     public void invite( String theirEmail, int projectID ) throws AccountDNException, DuplicateNotificationException {
 
@@ -87,6 +88,13 @@ public class NotifService {
 
         return notification.getNotifs( recipientID );
 
+    }
+
+    public static NotifService getInstance() {
+        if (NotifService.instance == null) {
+            NotifService.instance = new NotifService();
+        }
+        return NotifService.instance;
     }
 
 }

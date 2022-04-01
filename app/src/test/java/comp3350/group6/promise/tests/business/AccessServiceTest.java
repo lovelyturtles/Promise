@@ -147,13 +147,13 @@ public class AccessServiceTest {
 
         // acc1 = uid1 & p1
         String role = acc1.getRole();
-        assertTrue(role.equals("Member"));
+        assertTrue(role.equals("MEMBER"));
 
-        acc1.setRole("Manager");
+        acc1.setRole("MANAGER");
         accessService.updateAccess(acc1);
 
         target = accessService.getAccessByIDs(uid1, p1.getProjectID());
-        assertTrue(target.getRole().equals("Manager"));
+        assertTrue(target.getRole().equals("MANAGER"));
 
         System.out.println("Passed updateAccess");
     }

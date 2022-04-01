@@ -93,11 +93,14 @@ public class AccountService {
             createAccount(email, password, name, intro);
             setCurrentAccount(email, password);
 
-        } catch (DuplicateEmailException e) {
+        }
+        catch (DuplicateEmailException e) {
             throw new DuplicateEmailException(e.getMessage());
-        } catch (LoginErrorException e) {
+        }
+        catch (LoginErrorException e) {
             throw new LoginErrorException("Wrong password/email combination");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
