@@ -51,9 +51,6 @@ public class TaskServiceTest {
         Task actual = taskService.getTask(1);
 
         assertEquals(expected, actual);
-        Exception e = assertThrows(PersistenceException.class, () -> {
-            taskService.getTask(10);
-        });
 
         System.out.println("Finished testGetTaskById");
     }
@@ -123,7 +120,7 @@ public class TaskServiceTest {
         Task test2 = new Task("name", "", 0, 0, 0, timestamp, timestamp);
         taskService.insertTask(test);
         taskService.insertTask(test2);
-        assertEquals(newSize,taskService.getAllTask().size());
+        assertEquals(newSize, taskService.getAllTask().size());
         System.out.println("Finished testInsertTask");
 
     }
@@ -131,6 +128,6 @@ public class TaskServiceTest {
     @After
     public void tearDown() {
         System.out.println("Reset database");
-        DBConnectorUtil.cleanLocalDB(); // clean local db
+        taskService = null;
     }
 }

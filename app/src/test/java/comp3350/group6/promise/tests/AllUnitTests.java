@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import comp3350.group6.promise.tests.business.ProjectServiceTest;
+import comp3350.group6.promise.tests.business.UserServiceTest;
 import comp3350.group6.promise.tests.objects.AccessTest;
 import comp3350.group6.promise.tests.objects.AccountTest;
 import comp3350.group6.promise.tests.objects.NotifTest;
@@ -20,7 +21,8 @@ import comp3350.group6.promise.tests.objects.UserTest;
         ProjectTest.class,
         TaskTest.class,
         UserTest.class,
-        ProjectServiceTest.class
+        ProjectServiceTest.class,
+        UserServiceTest.class
 })
 
 public class AllUnitTests {}
