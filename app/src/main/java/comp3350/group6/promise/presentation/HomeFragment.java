@@ -27,10 +27,11 @@ public class HomeFragment extends Fragment implements ProjectAdapter.ViewHolder.
 
     private List<Project> projects;
     private ProjectAdapter projectAdapter;
-    private NavController navController;
 
     private RecyclerView projectRecyclerView;
     private FloatingActionButton fab;
+
+    private NavController navController;
 
     public HomeFragment() {
         super(R.layout.fragment_home);
@@ -63,9 +64,10 @@ public class HomeFragment extends Fragment implements ProjectAdapter.ViewHolder.
             @Override
             public void onClick(View fab) {
                 NavDirections action = HomeFragmentDirections.createProject();
-                Navigation.findNavController(view).navigate(action);
+                navController.navigate(action);
             }
         });
+
     }
 
     @Override

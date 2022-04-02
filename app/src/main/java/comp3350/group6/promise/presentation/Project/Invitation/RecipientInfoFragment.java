@@ -2,56 +2,61 @@ package comp3350.group6.promise.presentation.Project.Invitation;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Exceptions.AccountDNException;
 import comp3350.group6.promise.objects.Exceptions.DuplicateNotificationException;
 
-public class RecipientInfoActivity extends AppCompatActivity {
-    private Button sendInvite;
-    EditText textEmail;
-    String recipientEmail;
-    int projectID;
+public class RecipientInfoFragment extends Fragment {
+
+    EditText emailInputView;
+    private Button sendButton;
+
+    public RecipientInfoFragment() {
+        super(R.layout.activity_recipient_info);
+    }
 
     @Override
-    protected void onCreate( Bundle savedInstanceState ) {
-        super.onCreate(savedInstanceState);
-        setContentView( R.layout.activity_recipient_info );
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         //Get the projectID that was passed in
-        Intent intent = getIntent();
-        projectID = intent.getIntExtra( "projectID", -1 );
+
+        int projectId = RecipientInfoFragmentArgs.fromBundle(getArguments()).getProjectId();
 
         /*
-        * When the user enters the username of the person they want to invite,
-        * see if that userName exists (is in the database).
-        * If it does, add it to the Notifications database,
-        * if it doesn't, give them an error message.
-        */
+         * When the user enters the username of the person they want to invite,
+         * see if that userName exists (is in the database).
+         * If it does, add it to the Notifications database,
+         * if it doesn't, give them an error message.
+         */
 
-        sendInvite = findViewById( R.id.sendInviteButton );
-        sendInvite.setOnClickListener( new View.OnClickListener() {
+        emailInputView = view.findViewById( R.id.recipientEmailHint );
+        sendButton = view.findViewById( R.id.sendInviteButton );
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Get the email address that was submitted
-                textEmail = findViewById( R.id.recipientEmailHint );
-                recipientEmail = textEmail.getText().toString();
+                String recipientEmail = emailInputView.getText().toString();
 
                 /* Invite this user to our project */
                 try{
-                    Service.notifications.invite( recipientEmail , projectID );
+                    Service.notifications.invite( recipientEmail , projectId );
+
                     //If the invitation was successfully sent, go to the sent page
-                    goToSentPage();
+                    NavDirections action = RecipientInfoFragmentDirections.inviteSuccess(recipientEmail);
                 }
 
                 catch( AccountDNException e ){
@@ -66,18 +71,9 @@ public class RecipientInfoActivity extends AppCompatActivity {
         });
     }
 
-    public void goToSentPage(){
-        Intent intent = new Intent( this, SentInviteActivity.class );
-        Bundle extras = new Bundle();
-        extras.putInt( "projectID2", projectID );
-        extras.putString( "emailInput", recipientEmail );
-        intent.putExtras( extras );
-        startActivity( intent );
-    }
-
     public void openUserDoesNotExistDialog(){
         UserDoesNotExistDialogFragment errorDialog = new UserDoesNotExistDialogFragment();
-        errorDialog.show( getSupportFragmentManager(), "error message" );
+        errorDialog.show( getParentFragmentManager(), "error message" );
     }
 
     public static class UserDoesNotExistDialogFragment extends AppCompatDialogFragment {
@@ -106,7 +102,7 @@ public class RecipientInfoActivity extends AppCompatActivity {
 
     public void openAlreadyNotifiedDialog(){
         AlreadyNotifiedDialogFragment errorDialog = new AlreadyNotifiedDialogFragment();
-        errorDialog.show( getSupportFragmentManager(), "error message" );
+        errorDialog.show( getParentFragmentManager(), "error message" );
     }
 
     public static class AlreadyNotifiedDialogFragment extends AppCompatDialogFragment {

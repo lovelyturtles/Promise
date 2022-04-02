@@ -1,4 +1,4 @@
-package comp3350.group6.promise.util;
+package comp3350.group6.promise.presentation.Notification;
 
 import android.view.LayoutInflater;
 import android.view.View;

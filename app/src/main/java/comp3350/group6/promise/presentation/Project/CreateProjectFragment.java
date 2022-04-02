@@ -18,9 +18,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.Service;
-import comp3350.group6.promise.business.EmptyInputException;
 import comp3350.group6.promise.objects.Access;
 import comp3350.group6.promise.application.CurrentSession;
+import comp3350.group6.promise.objects.Exceptions.EmptyInputException;
 import comp3350.group6.promise.objects.Project;
 
 public class CreateProjectFragment extends Fragment {
@@ -78,9 +78,7 @@ public class CreateProjectFragment extends Fragment {
 
     private boolean createProject(String name, String description) {
         boolean wasSuccessful = false;
-
         try {
-            // TODO: Consider refactoring service methods to deal with accesses implicitly
             Project newProject = Service.projects.insertProject(new Project(name, description));
             Access newAccess = new Access(newProject.getProjectID(), CurrentSession.currentUser.getUserID());
             Service.accesses.insertAccess(newAccess);
@@ -90,7 +88,6 @@ public class CreateProjectFragment extends Fragment {
             // Users cannot add projects with no name
             Toast.makeText(getContext(), "You need a name for your project.", Toast.LENGTH_LONG).show();
         }
-
         return wasSuccessful;
     }
 }
