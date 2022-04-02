@@ -52,7 +52,11 @@ public class CreateProjectFragment extends Fragment {
 
         submitButtonView.setOnClickListener( new View.OnClickListener() {
             @Override
-            public void onClick(View submitButtonView ) { handleSubmit(); }
+            public void onClick(View submitButtonView ) {
+                String name = nameInputView.getText().toString();
+                String description = descriptionInputView.getText().toString();
+                handleSubmit(name, description);
+            }
         });
 
         // Keep "next" keyboard action while allowing multiline text
@@ -65,29 +69,21 @@ public class CreateProjectFragment extends Fragment {
 
     }
 
-    private void handleSubmit() {
-        String name = nameInputView.getText().toString();
-        String description = descriptionInputView.getText().toString();
-
+    private void handleSubmit(String name, String description) {
         // Return to projects page if creation is successful
-        if(createProject(name, description)) {
+        try {
+            createProject(name, description);
             NavDirections action = CreateProjectFragmentDirections.createProjectSuccess();
             navController.navigate(action);
         }
-    }
-
-    private boolean createProject(String name, String description) {
-        boolean wasSuccessful = false;
-        try {
-            Project newProject = Service.projects.insertProject(new Project(name, description));
-            Access newAccess = new Access(newProject.getProjectID(), CurrentSession.currentUser.getUserID());
-            Service.accesses.insertAccess(newAccess);
-            wasSuccessful = true;
-        }
         catch (EmptyInputException e) {
-            // Users cannot add projects with no name
             Toast.makeText(getContext(), "You need a name for your project.", Toast.LENGTH_LONG).show();
         }
-        return wasSuccessful;
+    }
+
+    private void createProject(String name, String description) throws EmptyInputException {
+        Project newProject = Service.projects.insertProject(new Project(name, description));
+        Access newAccess = new Access(newProject.getProjectID(), CurrentSession.currentUser.getUserID());
+        Service.accesses.insertAccess(newAccess);
     }
 }

@@ -38,17 +38,15 @@ public class TaskFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        // Get arguments passed to fragment
+        // Get task using ID passed to fragment
 
         int id = TaskFragmentArgs.fromBundle(getArguments()).getTaskId();
-
-        // Obtain content for layout
 
         if (id != -1) {
             task = TaskService.getInstance().getTask(id);
         }
 
-        // Obtain views from layout
+        // Get views from layout
 
         navController = NavHostFragment.findNavController(this);
 
@@ -57,7 +55,7 @@ public class TaskFragment extends Fragment {
         priorityView = view.findViewById(R.id.task_page_priority);
         deadlineView = view.findViewById(R.id.task_page_deadline);
 
-        // Update layout content
+        // Update layout content with task data
 
         toolbarView.setTitle(task.getTitle());
         descriptionView.setText(task.getDescription());

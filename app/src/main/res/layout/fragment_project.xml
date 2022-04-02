@@ -94,14 +94,7 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        style="@style/Theme.Promise.FloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:contentDescription="@string/dashboard_add_action_description"
-        android:src="@drawable/ic_baseline_add_24" />"
+    "
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

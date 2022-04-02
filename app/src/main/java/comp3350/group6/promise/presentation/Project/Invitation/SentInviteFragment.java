@@ -19,7 +19,7 @@ public class SentInviteFragment extends Fragment {
     private NavController navController;
 
     public SentInviteFragment() {
-        super(R.layout.activity_sent_invite);
+        super(R.layout.fragment_sent_invite);
     }
 
     @Override

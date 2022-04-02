@@ -40,25 +40,24 @@ public class DashboardFragment extends Fragment {
 
         NavigationUI.setupWithNavController(bottomNav, navController);
 
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-                @Override
-                public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle arguments) {
-                    handleDestinationChange(arguments);
-                }
-            }
-        );
+        navController.addOnDestinationChangedListener(new NavListener());
 
     }
 
-    private void handleDestinationChange(@Nullable Bundle arguments) {
-        boolean showFloatingButton = false;
-        if (arguments != null) {
-            showFloatingButton = arguments.getBoolean("showFloatingButton", false);
-        }
-        if(showFloatingButton) {
-            fab.setVisibility(View.VISIBLE);
-        } else {
-            fab.setVisibility(View.GONE);
+    // This listener controls the visibility of the navigation elements according to what subpage is displayed
+
+    private class NavListener implements NavController.OnDestinationChangedListener {
+        @Override
+        public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle arguments) {
+            boolean showBottomNav = true;
+            boolean showFloatingButton = false;
+            if (arguments != null) {
+                showBottomNav = arguments.getBoolean("showBottomNav", true);
+                showFloatingButton = arguments.getBoolean("showFloatingButton", false);
+            }
+            bottomNav.setVisibility(showBottomNav ? View.VISIBLE : View.GONE);
+            fab.setVisibility(showFloatingButton ? View.VISIBLE : View.GONE);
+            fab.setOnClickListener(null);
         }
     }
 

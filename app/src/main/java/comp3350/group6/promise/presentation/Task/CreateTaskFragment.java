@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -28,16 +27,16 @@ import comp3350.group6.promise.objects.Task;
 public class CreateTaskFragment extends Fragment {
 
     private Toolbar toolbar;
-    private EditText taskNameText;
-    private EditText taskDesText;
-    private EditText taskEstimateText;
-    private EditText taskPriorityText;
-    private Button submitTaskButton;
+    private EditText nameInput;
+    private EditText descriptionInput;
+    private EditText estimateInput;
+    private EditText priorityInput;
+    private Button submitButton;
 
     private NavController navController;
 
     public CreateTaskFragment() {
-        super(R.layout.activity_create_task);
+        super(R.layout.fragment_create_task);
     }
 
     @Override
@@ -52,34 +51,25 @@ public class CreateTaskFragment extends Fragment {
         navController = NavHostFragment.findNavController(this);
 
         toolbar = view.findViewById(R.id.task_toolBar);
-        taskNameText = view.findViewById(R.id.task_name_input);
-        taskDesText = view.findViewById(R.id.task_description_input);
-        taskEstimateText = view.findViewById(R.id.task_estimate_input);
-        taskPriorityText = view.findViewById(R.id.task_priority_input);
-        submitTaskButton = view.findViewById(R.id.submit_task_button);
+        nameInput = view.findViewById(R.id.task_name_input);
+        descriptionInput = view.findViewById(R.id.task_description_input);
+        estimateInput = view.findViewById(R.id.task_estimate_input);
+        priorityInput = view.findViewById(R.id.task_priority_input);
+        submitButton = view.findViewById(R.id.submit_task_button);
 
         // Update layout behaviours
 
-        submitTaskButton.setOnClickListener(new View.OnClickListener() {
+        submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String name = nameInput.getText().toString();
+                String description = descriptionInput.getText().toString();
+                String estimate = estimateInput.getText().toString();
+                int priority = Integer.parseInt(priorityInput.getText().toString());
+                // TODO: Use times selected by user
+                Timestamp defaultTime = new Timestamp(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 3);
 
-                String name = taskNameText.getText().toString();
-                String description = taskDesText.getText().toString();
-                String estimate = taskEstimateText.getText().toString();
-                int priority = Integer.parseInt(taskPriorityText.getText().toString());
-
-                try {
-                    // TODO: Use times selected by user
-                    Timestamp defaultTime = new Timestamp(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 3);
-
-                    createTask(name, description, priority, defaultTime, defaultTime, id);
-
-                    NavDirections action = CreateTaskFragmentDirections.createTaskSuccess(id);
-                    navController.navigate(action);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                handleSubmit(name, description, priority, defaultTime, defaultTime, id);
             }
         });
 
@@ -89,16 +79,19 @@ public class CreateTaskFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    private boolean createTask(String name, String desc, int priority, Timestamp endTime, Timestamp deadline, int projectId) throws Exception {
-        try {
-            int taskId = Service.tasks.insertTask(new Task(name, desc, priority, 0, projectId, endTime, deadline));
-            Service.handles.insertHandle(new Handle(taskId, CurrentSession.currentUser.getUserID(), new Timestamp(System.currentTimeMillis())));
-            return true;
-        }
-        catch (Exception e) {
-            Toast.makeText(getContext(), "Please enter all fields", Toast.LENGTH_SHORT).show();
-            throw new Exception(e.getCause());
-        }
+    private void handleSubmit(String name, String desc, int priority, Timestamp endTime, Timestamp deadline, int projectId) {
+        // TODO: Handle invalid inputs
+        int taskId = createTask(name, desc, priority, endTime, deadline, projectId);
+
+        // Return to projects page if creation is successful
+        NavDirections action = CreateTaskFragmentDirections.createTaskSuccess(taskId);
+        navController.navigate(action);
+    }
+
+    private int createTask(String name, String desc, int priority, Timestamp endTime, Timestamp deadline, int projectId) {
+        int taskId = Service.tasks.insertTask(new Task(name, desc, priority, 0, projectId, endTime, deadline));
+        Service.handles.insertHandle(new Handle(taskId, CurrentSession.currentUser.getUserID(), new Timestamp(System.currentTimeMillis())));
+        return taskId;
     }
 
 }
