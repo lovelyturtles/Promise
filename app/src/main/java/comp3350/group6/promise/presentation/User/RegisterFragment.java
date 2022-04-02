@@ -11,16 +11,24 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.Service;
+import comp3350.group6.promise.objects.Exceptions.DuplicateEmailException;
+import comp3350.group6.promise.objects.Exceptions.EmptyEmailException;
+import comp3350.group6.promise.objects.Exceptions.EmptyPasswordException;
+import comp3350.group6.promise.objects.Exceptions.LoginErrorException;
 
 public class RegisterFragment extends Fragment {
 
+    private Toolbar toolbarView;
     private EditText emailInput;
     private EditText nameInput;
     private EditText passwordInput;
@@ -40,6 +48,7 @@ public class RegisterFragment extends Fragment {
 
         navController = NavHostFragment.findNavController(this);
 
+        toolbarView = view.findViewById(R.id.toolbar);
         emailInput = view.findViewById(R.id.email_input);
         nameInput = view.findViewById( R.id.name_input);
         passwordInput = view.findViewById( R.id.password_input);
@@ -51,6 +60,11 @@ public class RegisterFragment extends Fragment {
         introInput.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         introInput.setRawInputType(InputType.TYPE_CLASS_TEXT);
 
+        // Set up toolbar
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        NavigationUI.setupWithNavController(toolbarView, navController, appBarConfiguration);
+        setHasOptionsMenu(true);
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View buttonView) {
@@ -60,37 +74,40 @@ public class RegisterFragment extends Fragment {
                 String password = passwordInput.getText().toString();
                 String intro = introInput.getText().toString();
 
-                createAccount(email, name, password, intro);
+                handleRegister(email, name, password, intro);
 
             }
         });
 
     }
 
-    private void createAccount(String email, String name, String password, String intro) {
-        // Inform user if email is in use
-        if( Service.accounts.accountExists( email ) ) {
+    public void handleRegister(String email, String name, String password, String intro) {
+        try {
+            //Send all this information to the business layer
+            Service.accounts.register(email, name, password, intro);
+
+            //If we don't get any Exceptions, we can go to the user's home page
+            NavDirections action = RegisterFragmentDirections.registerSuccess();
+            navController.navigate(action);
+        }
+        catch( DuplicateEmailException e ){
             openDuplicateDialog();
         }
-        // Otherwise create the account
-        else {
-            try {
-                Service.accounts.createAccount( email, password, name, intro );
-                // Verify account was created with the provided information
-                if( Service.accounts.accountExists( email ) ) {
-                    if ( Service.accounts.passwordsMatch( email, password ) ) {
-                        // Verify session account was updated
-                        if (Service.accounts.setCurrentAccount(email, password)) {
-                            NavDirections action = RegisterFragmentDirections.registerSuccess();
-                            navController.navigate(action);
-                        }
-                    }
-
-                }
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
+        // TODO: Display messages in UI indicating what went wrong.
+        catch( EmptyEmailException e ){
+            //do a dialog or something here
+            System.out.println("No email provided.");
+        }
+        catch( EmptyPasswordException e ){
+            //ditto above
+            System.out.println("No password provided.");
+        }
+        catch( LoginErrorException e ){
+            //maybe use the one in LoginFormFragment
+            System.out.println("Credentials do match a registered user.");
+        }
+        catch( Exception e ){
+            e.printStackTrace();
         }
     }
 

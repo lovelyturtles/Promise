@@ -107,7 +107,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> { 
             this.longClickListener = onTaskLongClickListener;
 
 //            new
-            image = itemView.findViewById(R.id.image);
+            image = itemView.findViewById(R.id.project_image);
             imageName = itemView.findViewById(R.id.image_name);
             parentLayout = itemView.findViewById(R.id.parent_layout);
 

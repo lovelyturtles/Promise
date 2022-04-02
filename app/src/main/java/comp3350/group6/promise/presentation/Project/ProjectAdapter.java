@@ -79,11 +79,11 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             super(itemView);
 
             containerView = itemView.findViewById(R.id.project_list_item_container);
-            nameView = itemView.findViewById(R.id.name);
-            descriptionView = itemView.findViewById(R.id.description);
-            memberCountView = itemView.findViewById(R.id.member_count);
-            taskCountView = itemView.findViewById(R.id.task_count);
-            imageView = itemView.findViewById(R.id.image);
+            nameView = itemView.findViewById(R.id.project_name);
+            descriptionView = itemView.findViewById(R.id.project_description);
+            memberCountView = itemView.findViewById(R.id.project_member_count);
+            taskCountView = itemView.findViewById(R.id.project_task_count);
+            imageView = itemView.findViewById(R.id.project_image);
 
             this.listener = listener;
             containerView.setOnClickListener(this);

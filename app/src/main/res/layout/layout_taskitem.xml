@@ -10,14 +10,14 @@
     <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:id="@+id/image"
+            android:id="@+id/project_image"
             android:src="@mipmap/ic_launcher" />
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hello"
             android:id="@+id/image_name"
-            android:layout_toRightOf="@id/image"
+            android:layout_toRightOf="@id/project_image"
             android:textColor="#000"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"

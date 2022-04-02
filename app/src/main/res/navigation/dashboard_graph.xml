@@ -51,6 +51,9 @@
         <action
             android:id="@+id/selectTask"
             app:destination="@id/taskActivity" />
+        <action
+            android:id="@+id/action_projectFragment_to_createTaskFragment"
+            app:destination="@id/createTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskActivity"
@@ -65,7 +68,11 @@
         android:id="@+id/notifications"
         android:name="comp3350.group6.promise.presentation.Notification.NotificationsFragment"
         android:label="Notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/activity_notifications" >
+        <action
+            android:id="@+id/selectNotification"
+            app:destination="@id/notificationsDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="comp3350.group6.promise.presentation.User.UserFragment"
@@ -75,4 +82,59 @@
         android:id="@+id/settings"
         android:name="comp3350.group6.promise.presentation.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/createTaskFragment"
+        android:name="comp3350.group6.promise.presentation.Task.CreateTaskFragment"
+        android:label="CreateTaskFragment" >
+        <action
+            android:id="@+id/createTaskSuccess"
+            app:destination="@id/projectFragment" />
+        <argument
+            android:name="projectId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationsDetailFragment"
+        android:name="comp3350.group6.promise.presentation.Notification.NotificationsDetailFragment"
+        android:label="activity_notifications_detail"
+        tools:layout="@layout/activity_notifications_detail" >
+        <argument android:name="senderId"
+            app:argType="integer" />
+        <argument
+            android:name="recipientId"
+            app:argType="integer" />
+        <argument
+            android:name="projectId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipientInfoFragment"
+        android:name="comp3350.group6.promise.presentation.Project.Invitation.RecipientInfoFragment"
+        android:label="activity_recipient_info"
+        tools:layout="@layout/activity_recipient_info" >
+        <action
+            android:id="@+id/action_recipientInfoFragment_to_projectFragment"
+            app:destination="@id/projectFragment" />
+        <action
+            android:id="@+id/inviteSuccess"
+            app:destination="@id/sentInviteFragment" />
+        <argument
+            android:name="projectId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/sentInviteFragment"
+        android:name="comp3350.group6.promise.presentation.Project.Invitation.SentInviteFragment"
+        android:label="activity_sent_invite"
+        tools:layout="@layout/activity_sent_invite" >
+        <action
+            android:id="@+id/action_sentInviteFragment_to_recipientInfoFragment"
+            app:destination="@id/recipientInfoFragment" />
+        <action
+            android:id="@+id/inviteMore"
+            app:destination="@id/recipientInfoFragment" />
+        <argument
+            android:name="recipientEmail"
+            app:argType="string" />
+    </fragment>
 </navigation>

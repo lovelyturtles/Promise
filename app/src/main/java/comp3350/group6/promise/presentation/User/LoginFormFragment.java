@@ -62,9 +62,11 @@ public class LoginFormFragment extends Fragment {
 
         //Send input to the business layer
         try{
-            Service.accounts.login( userEmail, userPass );
+            Service.accounts.login(email, password);
+
             //if no Exception was thrown, we'll go back to the user's home page
-            goToUserHome();
+            NavDirections action = LoginFragmentDirections.loginSuccess();
+            NavHostFragment.findNavController(this).navigate(action);
         }
         catch( LoginErrorException e ){
             openLoginErrorDialog();
@@ -77,13 +79,10 @@ public class LoginFormFragment extends Fragment {
         catch( EmptyPasswordException e ){
             System.out.println("Empty password");
         }
-
         catch( Exception e ){
             e.printStackTrace();
         }
 
-        NavDirections action = LoginFragmentDirections.loginSuccess();
-        NavHostFragment.findNavController(this).navigate(action);
     }
 
     private void openLoginErrorDialog() {
