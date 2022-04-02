@@ -1,6 +1,9 @@
 package comp3350.group6.promise.presentation.Project;
 
 
+import static comp3350.group6.promise.R.id.action_edit;
+import static comp3350.group6.promise.R.id.action_invite;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuInflater;
@@ -36,8 +39,6 @@ import comp3350.group6.promise.presentation.Task.TaskAdapter;
 
 public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClickListener, TaskAdapter.OnTaskLongClickListener {
 
-    private static final String TAG = "tag" ;
-
     private Project project;
     private List<Task> listOfTasks;
     private ArrayList<String> mNames = new ArrayList<>();
@@ -50,49 +51,6 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
 
     private NavController navController;
 
-    /*private void initImageBitmaps(){
-        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
-
-        mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        mNames.add("Havasu Falls");
-
-        mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        mNames.add("Trondheim");
-
-        mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        mNames.add("Portugal");
-
-        mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
-        mNames.add("Rocky Mountain National Park");
-
-
-        mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        mNames.add("Mahahual");
-
-        mImageUrls.add("https://i.redd.it/k98uzl68eh501.jpg");
-        mNames.add("Frozen Lake");
-
-
-        mImageUrls.add("https://i.redd.it/glin0nwndo501.jpg");
-        mNames.add("White Sands Desert");
-
-        mImageUrls.add("https://i.redd.it/obx4zydshg601.jpg");
-        mNames.add("Austrailia");
-
-        mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
-        mNames.add("Washington");
-
-        initRecyclerView();
-    }
-
-    private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: init recyclerview.");
-        RecyclerView recyclerView = findViewById(R.id.task_recycler);
-        TaskAdapter adapter = new TaskAdapter(this, mNames, mImageUrls);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }*/
-
     public ProjectFragment() {
         super(R.layout.fragment_project);
     }
@@ -102,13 +60,13 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
 
         // Get arguments passed to fragment
 
-        int id = ProjectFragmentArgs.fromBundle(getArguments()).getProjectId();
+        int projectId = ProjectFragmentArgs.fromBundle(getArguments()).getProjectId();
 
         // Get content data
 
-        if (id != -1) {
-            project = ProjectService.getInstance().getProjectByID(id);
-            listOfTasks = TaskService.getInstance().getTasksByProjectId(id);
+        if (projectId != -1) {
+            project = ProjectService.getInstance().getProjectByID(projectId);
+            listOfTasks = TaskService.getInstance().getTasksByProjectId(projectId);
         }
 
         // Get views from layout
@@ -118,7 +76,7 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
         toolbarView = view.findViewById(R.id.toolbar);
         projectDescriptionView = view.findViewById(R.id.project_page_desc);
         taskRecyclerView = view.findViewById(R.id.task_recycler);
-        fab = view.findViewById(R.id.fab);
+        fab = getActivity().findViewById(R.id.fab);
 
         // Update layout content
 
@@ -133,7 +91,7 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFloatingButtonClick();
+                handleAddTask(projectId);
             }
         });
 
@@ -145,11 +103,9 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
 
     }
 
-    public void onFloatingButtonClick() {
-        // TODO: Implement handler for adding tasks
-        Toast.makeText(getContext(), "Pressed Add Button", Toast.LENGTH_SHORT).show();
-//        NavDirections action = CreateProjectFragmentDirections.createTask();
-//        navController.navigate(action);
+    public void handleAddTask(int projectId) {
+        NavDirections action = ProjectFragmentDirections.createTask(projectId);
+        navController.navigate(action);
     }
 
     // Task List Methods
@@ -163,8 +119,7 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
 
     @Override
     public void onLongTaskClick(int position) {
-        int taskId = listOfTasks.get(position).getTaskId();
-        Log.d(TAG, String.format("Long Pressed Task (Pos: %s, ID: %s)", position, taskId));
+        Toast.makeText(getContext(), "Long Pressed Task: " + position, Toast.LENGTH_SHORT).show();
     }
 
     // Toolbar Methods
@@ -176,18 +131,21 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_edit:
-                // TODO: Implement action handler for project editing
-                Toast.makeText(getContext(), "Pressed Edit Project", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.action_invite:
-                // TODO: Implement action handler for project invites
-                Toast.makeText(getContext(), "Pressed Invite to Project", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int option = item.getItemId();
+        NavDirections action;
+
+        if (option == R.id.action_edit) {
+            // TODO: Implement action handler for project editing
+            Toast.makeText(getContext(), "Pressed Edit Project", Toast.LENGTH_SHORT).show();
+            return true;
         }
+        if (option == R.id.action_invite) {
+            action = ProjectFragmentDirections.inviteUser(project.getProjectID());
+            navController.navigate(action);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

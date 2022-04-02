@@ -15,7 +15,6 @@ import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Notification;
 import comp3350.group6.promise.objects.enumClasses.NotifType;
-import comp3350.group6.promise.presentation.Task.CreateTaskFragmentArgs;
 
 public class NotificationsDetailFragment extends Fragment {
 
@@ -26,7 +25,7 @@ public class NotificationsDetailFragment extends Fragment {
     private NavController navController;
 
     public NotificationsDetailFragment() {
-        super(R.layout.activity_notifications_detail);
+        super(R.layout.fragment_invite_response);
     }
 
     @Override

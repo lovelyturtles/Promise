@@ -19,7 +19,7 @@ public class LoginFragment extends Fragment {
     NavController navController;
 
     public LoginFragment() {
-        super(R.layout.fragment_landing);
+        super(R.layout.fragment_login);
     }
 
     @Override

@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.RootGraphDirections;
 import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Exceptions.EmptyEmailException;
 import comp3350.group6.promise.objects.Exceptions.EmptyPasswordException;
@@ -108,9 +109,8 @@ public class LoginFormFragment extends Fragment {
                     .setNeutralButton("Create Account", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            // TODO: Refactor to use navigation controller
-                            Intent intent = new Intent( getActivity(), RegisterFragment.class );
-                            startActivity( intent );
+                            NavDirections action = RootGraphDirections.register();
+                            navController.navigate(action);
                         }
                     });
 

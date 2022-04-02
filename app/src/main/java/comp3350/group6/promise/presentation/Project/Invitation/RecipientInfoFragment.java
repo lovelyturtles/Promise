@@ -25,7 +25,7 @@ public class RecipientInfoFragment extends Fragment {
     private Button sendButton;
 
     public RecipientInfoFragment() {
-        super(R.layout.activity_recipient_info);
+        super(R.layout.fragment_recipient_info);
     }
 
     @Override

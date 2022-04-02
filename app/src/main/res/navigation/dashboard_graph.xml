@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dashboard_graph"
+    android:label="DashboardNavigation"
     app:startDestination="@id/home">
     <fragment
         android:id="@+id/home"
@@ -35,7 +36,13 @@
         tools:layout="@layout/fragment_create_project">
         <action
             android:id="@+id/createProjectSuccess"
-            app:destination="@id/home" />
+            app:destination="@id/home"
+            app:popUpTo="@id/home"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="showBottomNav"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/projectFragment"
@@ -52,8 +59,11 @@
             android:id="@+id/selectTask"
             app:destination="@id/taskActivity" />
         <action
-            android:id="@+id/action_projectFragment_to_createTaskFragment"
+            android:id="@+id/createTask"
             app:destination="@id/createTaskFragment" />
+        <action
+            android:id="@+id/inviteUser"
+            app:destination="@id/recipientInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskActivity"
@@ -68,7 +78,7 @@
         android:id="@+id/notifications"
         android:name="comp3350.group6.promise.presentation.Notification.NotificationsFragment"
         android:label="Notifications"
-        tools:layout="@layout/activity_notifications" >
+        tools:layout="@layout/fragment_notifications">
         <action
             android:id="@+id/selectNotification"
             app:destination="@id/notificationsDetailFragment" />
@@ -85,20 +95,27 @@
     <fragment
         android:id="@+id/createTaskFragment"
         android:name="comp3350.group6.promise.presentation.Task.CreateTaskFragment"
-        android:label="CreateTaskFragment" >
+        android:label="Create Task">
         <action
             android:id="@+id/createTaskSuccess"
-            app:destination="@id/projectFragment" />
+            app:destination="@id/projectFragment"
+            app:popUpTo="@id/projectFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="projectId"
             app:argType="integer" />
+        <argument
+            android:name="showBottomNav"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/notificationsDetailFragment"
         android:name="comp3350.group6.promise.presentation.Notification.NotificationsDetailFragment"
         android:label="activity_notifications_detail"
-        tools:layout="@layout/activity_notifications_detail" >
-        <argument android:name="senderId"
+        tools:layout="@layout/fragment_invite_response">
+        <argument
+            android:name="senderId"
             app:argType="integer" />
         <argument
             android:name="recipientId"
@@ -111,13 +128,11 @@
         android:id="@+id/recipientInfoFragment"
         android:name="comp3350.group6.promise.presentation.Project.Invitation.RecipientInfoFragment"
         android:label="activity_recipient_info"
-        tools:layout="@layout/activity_recipient_info" >
-        <action
-            android:id="@+id/action_recipientInfoFragment_to_projectFragment"
-            app:destination="@id/projectFragment" />
+        tools:layout="@layout/fragment_recipient_info">
         <action
             android:id="@+id/inviteSuccess"
-            app:destination="@id/sentInviteFragment" />
+            app:destination="@id/sentInviteFragment"
+            app:popUpTo="@id/projectFragment" />
         <argument
             android:name="projectId"
             app:argType="integer" />
@@ -126,13 +141,14 @@
         android:id="@+id/sentInviteFragment"
         android:name="comp3350.group6.promise.presentation.Project.Invitation.SentInviteFragment"
         android:label="activity_sent_invite"
-        tools:layout="@layout/activity_sent_invite" >
+        tools:layout="@layout/fragment_sent_invite">
         <action
             android:id="@+id/action_sentInviteFragment_to_recipientInfoFragment"
             app:destination="@id/recipientInfoFragment" />
         <action
             android:id="@+id/inviteMore"
-            app:destination="@id/recipientInfoFragment" />
+            app:destination="@id/recipientInfoFragment"
+            app:popUpTo="@id/projectFragment" />
         <argument
             android:name="recipientEmail"
             app:argType="string" />

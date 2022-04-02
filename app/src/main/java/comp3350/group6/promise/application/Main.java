@@ -1,7 +1,5 @@
 package comp3350.group6.promise.application;
 
-import comp3350.group6.promise.presentation.MainActivity;
-
 public class Main {
     private static String dbName="PROMISE";
 

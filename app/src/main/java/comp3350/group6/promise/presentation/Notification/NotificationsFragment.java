@@ -29,7 +29,7 @@ public class NotificationsFragment extends Fragment {
     private NavController navController;
 
     public NotificationsFragment() {
-        super(R.layout.activity_notifications);
+        super(R.layout.fragment_notifications);
     }
 
     @Override
