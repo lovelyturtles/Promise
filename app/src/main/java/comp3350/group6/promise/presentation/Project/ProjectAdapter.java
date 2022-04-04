@@ -46,7 +46,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
 
             try {
                 numUsers = Service.accesses.getUsers(project.getProjectID()).size();
-                numUsers = Service.tasks.getTasksByProjectId(project.getProjectID()).size();
+                numTasks = Service.tasks.getTasksByProjectId(project.getProjectID()).size();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -64,9 +64,9 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
         return projectsList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private LinearLayout containerView;
+        private LinearLayout container;
         private TextView nameView;
         private TextView descriptionView;
         private TextView memberCountView;
@@ -75,18 +75,19 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
 
         private OnProjectClickListener listener;
 
-        public ViewHolder(View itemView, OnProjectClickListener listener){
+        public ViewHolder(View itemView, OnProjectClickListener onProjectClickListener){
             super(itemView);
 
-            containerView = itemView.findViewById(R.id.project_list_item_container);
+            container = itemView.findViewById(R.id.project_container);
             nameView = itemView.findViewById(R.id.project_name);
             descriptionView = itemView.findViewById(R.id.project_description);
             memberCountView = itemView.findViewById(R.id.project_member_count);
             taskCountView = itemView.findViewById(R.id.project_task_count);
             imageView = itemView.findViewById(R.id.project_image);
 
-            this.listener = listener;
-            containerView.setOnClickListener(this);
+            listener = onProjectClickListener;
+
+            container.setOnClickListener(this);
         }
 
         @Override

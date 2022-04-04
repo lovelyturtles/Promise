@@ -1,6 +1,7 @@
 package comp3350.group6.promise.presentation.Task;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -64,14 +65,21 @@ public class TaskFragment extends Fragment {
 
         // Update layout behaviours
 
-        // Set up toolbar
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupWithNavController(toolbarView, navController, appBarConfiguration);
-        setHasOptionsMenu(true);
+        initializeToolbar();
 
     }
 
     // Toolbar Methods
+
+    private void initializeToolbar() {
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        setHasOptionsMenu(true);
+        activity.setTitle(task.getTitle());
+        activity.setSupportActionBar(toolbarView);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        NavigationUI.setupWithNavController(toolbarView, navController, appBarConfiguration);
+        NavigationUI.setupActionBarWithNavController(activity, navController, appBarConfiguration);
+    }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {

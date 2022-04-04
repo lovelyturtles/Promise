@@ -12,19 +12,23 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.NavHostFragment;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Exceptions.AccountDNException;
 import comp3350.group6.promise.objects.Exceptions.DuplicateNotificationException;
 
-public class RecipientInfoFragment extends Fragment {
+public class InviteFormFragment extends Fragment {
 
-    EditText emailInputView;
+    private EditText emailInputView;
     private Button sendButton;
 
-    public RecipientInfoFragment() {
+    private NavController navController;
+
+    public InviteFormFragment() {
         super(R.layout.fragment_recipient_info);
     }
 
@@ -33,7 +37,7 @@ public class RecipientInfoFragment extends Fragment {
 
         //Get the projectID that was passed in
 
-        int projectId = RecipientInfoFragmentArgs.fromBundle(getArguments()).getProjectId();
+        int projectId = InviteFormFragmentArgs.fromBundle(getArguments()).getProjectId();
 
         /*
          * When the user enters the username of the person they want to invite,
@@ -42,6 +46,7 @@ public class RecipientInfoFragment extends Fragment {
          * if it doesn't, give them an error message.
          */
 
+        navController = NavHostFragment.findNavController(this);
         emailInputView = view.findViewById( R.id.recipientEmailHint );
         sendButton = view.findViewById( R.id.sendInviteButton );
 
@@ -51,12 +56,13 @@ public class RecipientInfoFragment extends Fragment {
                 //Get the email address that was submitted
                 String recipientEmail = emailInputView.getText().toString();
 
-                /* Invite this user to our project */
+                // Invite this user to our project
                 try{
                     Service.notifications.invite( recipientEmail , projectId );
 
                     //If the invitation was successfully sent, go to the sent page
-                    NavDirections action = RecipientInfoFragmentDirections.inviteSuccess(recipientEmail);
+                    NavDirections action = InviteFormFragmentDirections.inviteSuccess(recipientEmail, projectId);
+                    navController.navigate(action);
                 }
 
                 catch( AccountDNException e ){
@@ -110,6 +116,7 @@ public class RecipientInfoFragment extends Fragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState ) {
             AlertDialog.Builder builder = new AlertDialog.Builder( getActivity() );
+            NavController navController = NavHostFragment.findNavController(this);
             builder.setMessage("This user has already been invited to this project. " +
                     "Would you like to try another user?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -121,7 +128,7 @@ public class RecipientInfoFragment extends Fragment {
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick( DialogInterface dialogInterface, int i ) {
-                            getActivity().finish();
+                            navController.navigateUp();
                         }
                     });
 
