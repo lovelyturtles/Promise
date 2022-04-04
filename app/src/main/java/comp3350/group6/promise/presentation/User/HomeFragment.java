@@ -1,4 +1,4 @@
-package comp3350.group6.promise.presentation;
+package comp3350.group6.promise.presentation.User;
 
 import android.os.Bundle;
 
@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment implements ProjectAdapter.ViewHolder.
         navController = Navigation.findNavController(view);
 
         projectRecyclerView = view.findViewById(R.id.projectRecyclerView);
-        FloatingActionButton fab = getActivity().findViewById(R.id.fab);
+        fab = getActivity().findViewById(R.id.fab);
 
         // Update layout content
 

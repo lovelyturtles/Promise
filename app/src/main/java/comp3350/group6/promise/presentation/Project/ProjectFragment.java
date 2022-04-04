@@ -1,8 +1,6 @@
 package comp3350.group6.promise.presentation.Project;
 
 
-import static comp3350.group6.promise.R.id.action_edit;
-import static comp3350.group6.promise.R.id.action_invite;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.fragment.app.Fragment;
@@ -26,6 +26,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -41,8 +43,6 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
 
     private Project project;
     private List<Task> listOfTasks;
-    private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<String> mImageUrls = new ArrayList<>();
 
     private Toolbar toolbarView;
     private TextView projectDescriptionView;
@@ -56,13 +56,18 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        // Get arguments passed to fragment
+        // Get project ID from navigation arguments
 
         int projectId = ProjectFragmentArgs.fromBundle(getArguments()).getProjectId();
 
-        // Get content data
+        // Get project data
 
         if (projectId != -1) {
             project = ProjectService.getInstance().getProjectByID(projectId);
@@ -95,11 +100,7 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
             }
         });
 
-        // Set up toolbar
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupWithNavController(toolbarView, navController, appBarConfiguration);
-        toolbarView.setTitle(project.getProjectName());
-        setHasOptionsMenu(true);
+        initializeToolbar();
 
     }
 
@@ -124,6 +125,16 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
 
     // Toolbar Methods
 
+    private void initializeToolbar() {
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        setHasOptionsMenu(true);
+        activity.setTitle(project.getProjectName());
+        activity.setSupportActionBar(toolbarView);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        NavigationUI.setupWithNavController(toolbarView, navController, appBarConfiguration);
+        NavigationUI.setupActionBarWithNavController(activity, navController, appBarConfiguration);
+    }
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.project_toolbar_menu, menu);
@@ -131,21 +142,14 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int option = item.getItemId();
-        NavDirections action;
-
-        if (option == R.id.action_edit) {
-            // TODO: Implement action handler for project editing
-            Toast.makeText(getContext(), "Pressed Edit Project", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (option == R.id.action_invite) {
-            action = ProjectFragmentDirections.inviteUser(project.getProjectID());
+        int id = item.getItemId();
+        if(id == R.id.action_invite_user) {
+            NavDirections action = ProjectFragmentDirections.actionInviteUser(project.getProjectID());
             navController.navigate(action);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+//        return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
     }
 
 }
