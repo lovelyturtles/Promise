@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboard_graph"
+    android:label="DashboardNavigation"
+    app:startDestination="@id/home">
+    <fragment
+        android:id="@+id/home"
+        android:name="comp3350.group6.promise.presentation.User.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <argument
+            android:name="showFloatingButton"
+            android:defaultValue="true" />
+        <action
+            android:id="@+id/createProject"
+            app:destination="@id/create_project_fragment" />
+        <action
+            android:id="@+id/selectProject"
+            app:destination="@id/project_fragment" />
+        <action
+            android:id="@+id/navigate_to_notifications"
+            app:destination="@id/notifications" />
+        <action
+            android:id="@+id/navigate_to_profile"
+            app:destination="@id/profile" />
+        <action
+            android:id="@+id/navigate_to_settings"
+            app:destination="@id/settings" />
+    </fragment>
+    <fragment
+        android:id="@+id/create_project_fragment"
+        android:name="comp3350.group6.promise.presentation.Project.CreateProjectFragment"
+        android:label="Create Project"
+        tools:layout="@layout/fragment_create_project">
+        <action
+            android:id="@+id/createProjectSuccess"
+            app:destination="@id/home"
+            app:popUpTo="@id/home"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="showBottomNav"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/project_fragment"
+        android:name="comp3350.group6.promise.presentation.Project.ProjectFragment"
+        tools:layout="@layout/fragment_project">
+        <argument
+            android:name="showFloatingButton"
+            android:defaultValue="true" />
+        <argument
+            android:name="projectId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/selectTask"
+            app:destination="@id/task_fragment" />
+        <action
+            android:id="@+id/createTask"
+            app:destination="@id/create_task_fragment" />
+        <action
+            android:id="@+id/action_invite_user"
+            app:destination="@id/invite_form_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/task_fragment"
+        android:name="comp3350.group6.promise.presentation.Task.TaskFragment"
+        tools:layout="@layout/fragment_task">
+        <argument
+            android:name="taskId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/notifications"
+        android:name="comp3350.group6.promise.presentation.Notification.NotificationsFragment"
+        android:label="Notifications"
+        tools:layout="@layout/fragment_notifications">
+        <action
+            android:id="@+id/selectNotification"
+            app:destination="@id/notification_detail_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile"
+        android:name="comp3350.group6.promise.presentation.User.UserFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/settings"
+        android:name="comp3350.group6.promise.presentation.SettingsFragment"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/create_task_fragment"
+        android:name="comp3350.group6.promise.presentation.Task.CreateTaskFragment"
+        android:label="Create Task">
+        <action
+            android:id="@+id/createTaskSuccess"
+            app:destination="@id/project_fragment"
+            app:popUpTo="@id/project_fragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="projectId"
+            app:argType="integer" />
+        <argument
+            android:name="showBottomNav"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/notification_detail_fragment"
+        android:name="comp3350.group6.promise.presentation.Notification.NotificationsDetailFragment"
+        android:label="Notification"
+        tools:layout="@layout/fragment_invite_response">
+        <argument
+            android:name="senderId"
+            app:argType="integer" />
+        <argument
+            android:name="recipientId"
+            app:argType="integer" />
+        <argument
+            android:name="projectId"
+            app:argType="integer" />
+        <argument
+            android:name="showBottomNav"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/invite_form_fragment"
+        android:name="comp3350.group6.promise.presentation.Project.Invitation.InviteFormFragment"
+        android:label="Invite User"
+        tools:layout="@layout/fragment_recipient_info">
+        <action
+            android:id="@+id/inviteSuccess"
+            app:destination="@id/invite_sent"
+            app:popUpTo="@id/project_fragment"
+            app:popUpToInclusive="false" />
+        <argument
+            android:name="projectId"
+            app:argType="integer" />
+        <argument
+            android:name="showBottomNav"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/invite_sent"
+        android:name="comp3350.group6.promise.presentation.Project.Invitation.InviteSentFragment"
+        android:label="Invite Sent"
+        tools:layout="@layout/fragment_sent_invite">
+        <action
+            android:id="@+id/action_sentInviteFragment_to_recipientInfoFragment"
+            app:destination="@id/invite_form_fragment" />
+        <action
+            android:id="@+id/inviteMore"
+            app:destination="@id/invite_form_fragment"
+            app:popUpTo="@id/project_fragment"
+            app:popUpToInclusive="false" />
+        <argument
+            android:name="recipientEmail"
+            app:argType="string" />
+        <argument
+            android:name="showBottomNav"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="projectId"
+            app:argType="integer" />
+    </fragment>
+</navigation>
