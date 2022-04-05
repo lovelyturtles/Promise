@@ -10,9 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.Service;
+import comp3350.group6.promise.objects.Exceptions.DuplicateAccessException;
 import comp3350.group6.promise.objects.Notification;
 import comp3350.group6.promise.objects.enumClasses.NotifType;
 
@@ -62,8 +64,15 @@ public class NotificationsDetailFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // TODO: Consider going to go the project itself?
-                Service.notifications.accept( notification );
-                navController.navigateUp();
+                try {
+                    Service.notifications.accept( notification );
+                    navController.navigateUp();
+                } catch (DuplicateAccessException err) {
+                    // TODO: Maybe move this code when inviting a user? -Dani
+                    Toast.makeText(getContext(), "You are already a member of this project.", Toast.LENGTH_SHORT).show();
+                    Service.notifications.reject( notification );
+                    navController.navigateUp();
+                }
             }
         });
 

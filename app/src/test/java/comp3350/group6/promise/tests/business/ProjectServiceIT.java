@@ -84,7 +84,7 @@ public class ProjectServiceIT {
         the size of the list should remain the same.
     */
     @Test
-    public void testUpdateProject() {
+    public void testUpdateProject() throws EmptyInputException {
 
         System.out.println("Testing updateProject method from ProjectService Class.");
 
