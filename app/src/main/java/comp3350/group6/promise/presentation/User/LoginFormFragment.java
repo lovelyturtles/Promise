@@ -59,7 +59,7 @@ public class LoginFormFragment extends Fragment {
 
     private void handleSubmit() {
         String email = emailInputView.getText().toString();
-        String password = emailInputView.getText().toString();
+        String password = passwordInputView.getText().toString();
 
         //Send input to the business layer
         try{
