@@ -8,6 +8,7 @@ import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Access;
 import comp3350.group6.promise.objects.Account;
 import comp3350.group6.promise.objects.Exceptions.AccountDNException;
+import comp3350.group6.promise.objects.Exceptions.DuplicateAccessException;
 import comp3350.group6.promise.objects.Exceptions.DuplicateNotificationException;
 import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.objects.Notification;
@@ -84,7 +85,7 @@ public class NotifService {
 
     }
 
-    public void accept( Notification acceptThis ){
+    public void accept( Notification acceptThis ) throws DuplicateAccessException {
 
         Service.accesses.insertAccess( new Access( acceptThis.getProjectID(), acceptThis.getRecipientID() ) );
         //now that we've updated their access, we can remove the notification
