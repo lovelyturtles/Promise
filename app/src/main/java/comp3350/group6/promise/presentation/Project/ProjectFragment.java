@@ -2,6 +2,7 @@ package comp3350.group6.promise.presentation.Project;
 
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuInflater;
@@ -13,10 +14,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -33,11 +36,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.presentation.Task.TaskAdapter;
+import comp3350.group6.promise.presentation.User.HomeFragment;
+import comp3350.group6.promise.presentation.User.HomeFragmentDirections;
 
 public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClickListener, TaskAdapter.OnTaskLongClickListener {
 
@@ -148,8 +154,47 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
             navController.navigate(action);
             return true;
         }
+        else if(id == R.id.action_delete_project) {
+            deleteDialogue();
+            return true;
+        }
+        else if(id == R.id.action_edit_project) {
+            NavDirections action = ProjectFragmentDirections.actionEditProject(project.getProjectID());
+            navController.navigate(action);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
 //        return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
+    }
+
+    private void deleteDialogue(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage("Are you sure you want to delete \"" + project.getProjectName() +"\"?");
+        builder.setCancelable(true);
+
+        builder.setPositiveButton(
+                "Delete",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // delete current project
+                        Service.projects.deleteProject(project);
+                        // go back to dashboard fragment
+                        NavDirections action = ProjectFragmentDirections.actionDeleteProject();
+                        navController.navigate(action);
+                    }
+                });
+
+        builder.setNegativeButton(
+                "Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 }

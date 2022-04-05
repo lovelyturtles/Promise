@@ -55,6 +55,13 @@
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/activity_project_page.xml" value="0.33" />
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/activity_send_to_user.xml" value="0.2125" />
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/card_item.xml" value="0.33" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_create_project.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_dashboard.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_delete_dialog.xml" value="0.5" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_edit_project.xml" value="0.35054347826086957" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_project.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_settings.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/menu/project_toolbar_menu.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/mipmap-anydpi-v26/ic_more_vert_round.xml" value="0.1815" />
         <entry key="app/src/main/res/layout/activity_create.xml" value="0.24010416666666667" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.21331521739130435" />
