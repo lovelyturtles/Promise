@@ -43,7 +43,7 @@ public class NotifService {
         if( Service.accounts.accountExists( theirEmail ) ){
 
             //set the sender of the request as currentUser
-            Account sender = CurrentSession.currentUser;
+            Account sender = CurrentSession.getAccount();
             //set the receiver of the request as the account associated to the email parameter
             Account recipient = Service.accounts.getAccountByEmail( theirEmail );
 

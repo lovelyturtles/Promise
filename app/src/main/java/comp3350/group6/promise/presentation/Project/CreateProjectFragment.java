@@ -84,7 +84,7 @@ public class CreateProjectFragment extends Fragment {
 
     private void createProject(String name, String description) throws EmptyInputException {
         Project newProject = Service.projects.insertProject(new Project(name, description));
-        Access newAccess = new Access(newProject.getProjectID(), CurrentSession.currentUser.getUserID());
+        Access newAccess = new Access(newProject.getProjectID(), CurrentSession.getAccount().getUserID());
         Service.accesses.insertAccess(newAccess);
     }
 }

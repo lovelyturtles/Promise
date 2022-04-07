@@ -38,7 +38,7 @@ public class NotificationsFragment extends Fragment {
 
         // Get user notifications
 
-        notificationsList = Service.notifications.getNotifs(CurrentSession.currentUser.getUserID());
+        notificationsList = Service.notifications.getNotifs(CurrentSession.getAccount().getUserID());
 
         // Get views from layout
 
