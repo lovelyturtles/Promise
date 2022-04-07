@@ -13,7 +13,7 @@ import androidx.navigation.Navigation;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.RootGraphDirections;
-import comp3350.group6.promise.application.CurrentSession;
+import comp3350.group6.promise.application.Service;
 
 public class SettingsFragment extends Fragment {
 
@@ -38,7 +38,7 @@ public class SettingsFragment extends Fragment {
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CurrentSession.setAccount(null);
+                Service.accounts.logout();
                 NavDirections action = RootGraphDirections.login();
                 rootNavController.navigate(action);
             }

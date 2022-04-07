@@ -123,6 +123,10 @@ public class AccountService {
 
     }
 
+    public void logout() {
+        CurrentSession.setAccount(null);
+    }
+
     public static AccountService getInstance() {
         if (AccountService.instance == null) {
             AccountService.instance = new AccountService();
