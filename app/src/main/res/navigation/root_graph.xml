@@ -39,5 +39,8 @@
     <action
         android:id="@+id/register"
         app:destination="@id/registerFragment" />
+    <action
+        android:id="@+id/login"
+        app:destination="@id/landingFragment" />
 
 </navigation>
