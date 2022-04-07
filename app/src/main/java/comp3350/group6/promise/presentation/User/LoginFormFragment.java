@@ -1,9 +1,7 @@
 package comp3350.group6.promise.presentation.User;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,7 +23,6 @@ import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Exceptions.EmptyEmailException;
 import comp3350.group6.promise.objects.Exceptions.EmptyPasswordException;
 import comp3350.group6.promise.objects.Exceptions.LoginErrorException;
-import comp3350.group6.promise.util.UserPrefsUtil;
 
 
 public class LoginFormFragment extends Fragment {
@@ -65,7 +62,6 @@ public class LoginFormFragment extends Fragment {
         //Send input to the business layer
         try{
             Service.accounts.login(email, password);
-            UserPrefsUtil.saveUserCredentials(email, password, getActivity());
 
             //if no Exception was thrown, we'll go back to the user's home page
             NavDirections action = LoginFragmentDirections.loginSuccess();
