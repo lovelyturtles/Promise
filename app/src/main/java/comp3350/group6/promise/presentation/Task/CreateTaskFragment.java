@@ -90,7 +90,7 @@ public class CreateTaskFragment extends Fragment {
 
     private int createTask(String name, String desc, int priority, Timestamp endTime, Timestamp deadline, int projectId) {
         int taskId = Service.tasks.insertTask(new Task(name, desc, priority, 0, projectId, endTime, deadline));
-        Service.handles.insertHandle(new Handle(taskId, CurrentSession.currentUser.getUserID(), new Timestamp(System.currentTimeMillis())));
+        Service.handles.insertHandle(new Handle(taskId, CurrentSession.getAccount().getUserID(), new Timestamp(System.currentTimeMillis())));
         return taskId;
     }
 

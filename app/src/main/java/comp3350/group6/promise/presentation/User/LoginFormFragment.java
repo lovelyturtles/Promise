@@ -2,7 +2,6 @@ package comp3350.group6.promise.presentation.User;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,7 +42,7 @@ public class LoginFormFragment extends Fragment {
 
         emailInputView = (EditText) view.findViewById( R.id.loginEmailInput );
         passwordInputView = (EditText) view.findViewById( R.id.loginPasswordInput );
-        submitButtonView = (Button) view.findViewById( R.id.signInButton );
+        submitButtonView = (Button) view.findViewById( R.id.signOutButton);
 
         // Update layout behaviours
 

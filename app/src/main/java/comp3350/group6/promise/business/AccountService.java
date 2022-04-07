@@ -70,7 +70,7 @@ public class AccountService {
 
         //for us to set the current user, the account has to exist and the password must match
         if (accountExists(email) && passwordsMatch(email, password))
-            CurrentSession.currentUser = accountDao.getAccountByEmail(email);
+            CurrentSession.setAccount(accountDao.getAccountByEmail(email));
 
             //whether the account doesn't exist or the passwords don't match, we send the same error
         else
