@@ -57,7 +57,7 @@
 
     <!--Recipient Info-->
     <string name="recipientEmailLabel">Email of the user you want to invite</string>
-    <string name="sendInviteButton">Send Invite</string>
+    <string name="sendInviteButton">Invite</string>
     <string name="recipientEmailHint">Enter their email here</string>
 
     <!--Invite Sent-->
@@ -104,5 +104,6 @@
     <string name="saved_email">saved_email</string>
     <string name="saved_password">saved_password</string>
     <string name="save_credentials">save_credentials</string>
+    <string name="placeholder_user_list_item_name">First Last</string>
 
 </resources>

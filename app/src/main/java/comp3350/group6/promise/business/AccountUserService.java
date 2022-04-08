@@ -1,5 +1,7 @@
 package comp3350.group6.promise.business;
 
+import java.util.List;
+
 import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Account;
 import comp3350.group6.promise.objects.AccountUser;
@@ -40,6 +42,10 @@ public class AccountUserService {
         AccountUser accountUser = getUserByEmail(email);
         return accountUser.getUserName();
 
+    }
+
+    public List<AccountUser> search(String searchTerm) {
+        return accountUser.search(searchTerm, 3);
     }
 
     public static AccountUserService getInstance() {
