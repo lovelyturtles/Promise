@@ -102,11 +102,13 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
 
         projectDescriptionView.setText(project.getStatement());
 
-        taskListAdapterIP = new TaskAdapter(getContext(), listOfTasksIP, this, this);
+        CompleteTaskClickListener completeTaskClickListener = new CompleteTaskClickListener();
+        taskListAdapterIP = new TaskAdapter(getContext(), listOfTasksIP, completeTaskClickListener, completeTaskClickListener);
         taskRecyclerViewIP.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         taskRecyclerViewIP.setAdapter(taskListAdapterIP);
 
-        taskListAdapterFinished = new TaskAdapter(getContext(), listOfTasksFinished, this, this);
+        IncompleteTaskClickListener incompleteTaskClickListener = new IncompleteTaskClickListener();
+        taskListAdapterFinished = new TaskAdapter(getContext(), listOfTasksFinished, incompleteTaskClickListener, incompleteTaskClickListener);
         taskRecyclerViewFinished.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         taskRecyclerViewFinished.setAdapter(taskListAdapterFinished);
 
@@ -127,6 +129,32 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
     public void handleAddTask(int projectId) {
         NavDirections action = ProjectFragmentDirections.createTask(projectId);
         navController.navigate(action);
+    }
+
+    private static class IncompleteTaskClickListener implements TaskAdapter.OnTaskClickListener, TaskAdapter.OnTaskLongClickListener {
+
+        @Override
+        public void onTaskClick(int position) {
+            onTaskClick(position);
+        }
+
+        @Override
+        public void onLongTaskClick(int position) {
+            // Business layer call to mark task as complete
+        }
+    }
+
+    private static class CompleteTaskClickListener implements TaskAdapter.OnTaskClickListener, TaskAdapter.OnTaskLongClickListener {
+
+        @Override
+        public void onTaskClick(int position) {
+            onTaskClick(position);
+        }
+
+        @Override
+        public void onLongTaskClick(int position) {
+            // Business layer call to mark task as incomplete
+        }
     }
 
     // Task List Methods
