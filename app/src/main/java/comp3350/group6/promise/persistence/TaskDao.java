@@ -10,7 +10,7 @@ public interface TaskDao {
 
     Task getTask(int taskId) ;
 
-    List<Task> getTasksByProjectId(int projectId) ;
+    List<Task> getTasksByProjectId(int projectId, int value) ;
 
     int insertTask(Task t) ; // or pass ID? need project ID?
 

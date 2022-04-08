@@ -4,6 +4,7 @@ package comp3350.group6.promise.business;
 import java.util.List;
 
 import comp3350.group6.promise.objects.Task;
+import comp3350.group6.promise.objects.enumClasses.TaskType;
 import comp3350.group6.promise.persistence.TaskDao;
 import comp3350.group6.promise.persistence.hsqldb.TaskImp;
 //import comp3350.group6.promise.persistence.stub.TaskImpNoDB;
@@ -29,8 +30,8 @@ public class TaskService {
         return taskDao.getTask(taskId);
     }
 
-    public List<Task> getTasksByProjectId(int projectId) {
-        return taskDao.getTasksByProjectId(projectId);
+    public List<Task> getTasksByProjectId(int projectId, int type) {
+        return taskDao.getTasksByProjectId(projectId, type);
     }
 
     public int insertTask(Task newTask) {
@@ -42,13 +43,26 @@ public class TaskService {
         return task;
     }
 
-    public void updateTask(Task task) {
+    public Task updateTask(Task task) {
         taskDao.updateTask(task);
+        return task;
     }
 
     public List<Task> getAllTask() {
         allTask = taskDao.getTaskList();
         return allTask;
+    }
+
+    public Task logTask(Task task) {
+        switch (task.getType()) {
+            case IP:
+                task.setType(TaskType.FINISHED);
+                break;
+            case FINISHED:
+                task.setType(TaskType.IP);
+                break;
+        }
+        return getTask(task.getTaskId());
     }
 
     public static TaskService getInstance() {

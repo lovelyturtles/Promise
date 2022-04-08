@@ -73,7 +73,7 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
         // Get project data
         if (projectId != -1) {
             project = ProjectService.getInstance().getProjectByID(projectId);
-            listOfTasksIP = TaskService.getInstance().getTasksByProjectId(projectId);
+            listOfTasksIP = TaskService.getInstance().getTasksByProjectId(projectId,1);
         }
 
         // Get views from layout

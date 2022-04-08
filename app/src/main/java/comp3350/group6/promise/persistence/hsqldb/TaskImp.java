@@ -17,6 +17,7 @@ import java.util.List;
 
 import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.objects.Task;
+import comp3350.group6.promise.objects.enumClasses.TaskType;
 import comp3350.group6.promise.persistence.TaskDao;
 import comp3350.group6.promise.util.DBConnectorUtil;
 
@@ -33,7 +34,8 @@ public class TaskImp implements TaskDao {
         final Timestamp createdTime = rs.getTimestamp("createdTime");
         final Timestamp estimatedEndTime = rs.getTimestamp("estimatedEndTime");
         final Timestamp deadline = rs.getTimestamp("deadline");
-        return new Task(taskId, title, description, priority, statusNum, projectId, createdTime, estimatedEndTime, deadline);
+        final TaskType type = TaskType.valueOf(rs.getString("type"));
+        return new Task(taskId, title, description, priority, statusNum, projectId, createdTime, estimatedEndTime, deadline, type);
     }
 
 
@@ -57,12 +59,23 @@ public class TaskImp implements TaskDao {
     }
 
     @Override
-    public List<Task> getTasksByProjectId(int projectId) {
+    public List<Task> getTasksByProjectId(int projectId, int value) {
         List<Task> taskList = new ArrayList<>();
         try (final Connection con = DBConnectorUtil.getConnection()) {
             assert con != null;
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM task WHERE projectId = ?");
+            String statement = null;
+            switch (value) {
+                case 1:
+                    statement = "SELECT * FROM task WHERE projectId = ? and type = IP";
+                    break;
+                case 2:
+                    statement = "SELECT * FROM task WHERE projectId = ? and type = FINISHED";
+                    break;
+            }
+            assert (statement != null);
+            PreparedStatement ps = con.prepareStatement(statement);
             ps.setInt(1, projectId);
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Task task = fromResultSet(rs);
@@ -96,7 +109,7 @@ public class TaskImp implements TaskDao {
     @Override
     public int insertTask(Task t) {
         try (final Connection con = DBConnectorUtil.getConnection()) {
-            String query = "INSERT INTO task(title, description, priority, statusNum, projectId, createdTime, estimatedEndTime, deadline) VALUES(?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO task(title, description, priority, statusNum, projectId, createdTime, estimatedEndTime, deadline, type) VALUES(?,?,?,?,?,?,?,?,?)";
             final PreparedStatement pre = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pre.setString(1, t.getTitle());
             pre.setString(2, t.getDescription());
@@ -106,6 +119,7 @@ public class TaskImp implements TaskDao {
             pre.setTimestamp(6, t.getCreatedTime());
             pre.setTimestamp(7, t.getEstimatedEndTime());
             pre.setTimestamp(8, t.getDeadline());
+            pre.setString(9, t.getType().toString());
             pre.executeUpdate();
 
             ResultSet generatedKeys = pre.getGeneratedKeys();
@@ -122,14 +136,15 @@ public class TaskImp implements TaskDao {
     @Override
     public Task updateTask(Task t) {
         try (final Connection con = DBConnectorUtil.getConnection()) {
-            final PreparedStatement pre = con.prepareStatement("UPDATE task SET title = ?, description = ?, priority = ?, statusNum = ?, estimatedEndTime = ?, deadline = ? WHERE taskId = ?");
+            final PreparedStatement pre = con.prepareStatement("UPDATE task SET title = ?, description = ?, priority = ?, statusNum = ?, estimatedEndTime = ?, deadline = ? type = ? WHERE taskId = ?");
             pre.setString(1, t.getTitle());
             pre.setString(2, t.getDescription());
             pre.setInt(3, t.getPriority());
             pre.setInt(4, t.getStatusNum());
             pre.setTimestamp(5, t.getEstimatedEndTime());
             pre.setTimestamp(6, t.getDeadline());
-            pre.setInt(7, t.getTaskId());
+            pre.setString(7, t.getType().toString());
+            pre.setInt(8, t.getTaskId());
             pre.executeUpdate();
             pre.close();
             return t;

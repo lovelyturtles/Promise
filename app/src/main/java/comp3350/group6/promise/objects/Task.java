@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
+import comp3350.group6.promise.objects.enumClasses.TaskType;
 import lombok.Data;
 
 @Data
@@ -17,6 +18,7 @@ public class Task {
     private Timestamp createdTime;
     private Timestamp estimatedEndTime;
     private Timestamp deadline;
+    private TaskType type;
     private static int count =0;
 
 
@@ -30,13 +32,14 @@ public class Task {
         this.createdTime = new Timestamp(System.currentTimeMillis());
         this.estimatedEndTime = null;
         this.deadline = null;
+        this.type = TaskType.IP;
         count++;
     }
 
     /*
      *      - used by DB that generate from database
      */
-    public Task(int taskId, String title, String description, int priority, int statusNum, int projectId, Timestamp createdTime, Timestamp estimatedEndTime, Timestamp deadline) {
+    public Task(int taskId, String title, String description, int priority, int statusNum, int projectId, Timestamp createdTime, Timestamp estimatedEndTime, Timestamp deadline, TaskType type) {
         this.taskId = taskId;
         this.title = title;
         this.description = description;
@@ -46,6 +49,7 @@ public class Task {
         this.createdTime = createdTime;
         this.estimatedEndTime = estimatedEndTime;
         this.deadline = deadline;
+        this.type = type;
         count++;
     }
 
@@ -63,6 +67,7 @@ public class Task {
         this.createdTime = new Timestamp(System.currentTimeMillis());
         this.estimatedEndTime = estimatedEndTime;
         this.deadline = deadline;
+        this.type = TaskType.IP;
         count++;
     }
 
@@ -137,6 +142,14 @@ public class Task {
 
     public void setEstimatedEndTime(Timestamp estimatedEndTime) {
         this.estimatedEndTime = estimatedEndTime;
+    }
+
+    public TaskType getType() {
+        return type;
+    }
+
+    public void setType(TaskType type) {
+        this.type = type;
     }
 
     @Override

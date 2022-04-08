@@ -49,7 +49,7 @@ public class TaskImpNoDB implements TaskDao {
     }
 
     @Override
-    public List<Task> getTasksByProjectId(int projectId) {
+    public List<Task> getTasksByProjectId(int projectId, int value) {
         List<Task> projectTasks = new ArrayList<Task>();
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
@@ -81,6 +81,7 @@ public class TaskImpNoDB implements TaskDao {
     public Task deleteTask(Task t) {
         if (getIndex(t.getTaskId()) >= 0)
             taskList.remove(getIndex(t.getTaskId()));
+        return t;
     }
 
     private int getIndex(int taskId) {

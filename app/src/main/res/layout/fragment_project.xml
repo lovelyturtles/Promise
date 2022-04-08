@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/task_in_progress_label"
                     style="@style/Theme.Promise.InputLabel"
-                    android:textSize="20" />
+                    android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/task_finished_label"
                     style="@style/Theme.Promise.InputLabel"
-                    android:textSize="20" />
+                    android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
