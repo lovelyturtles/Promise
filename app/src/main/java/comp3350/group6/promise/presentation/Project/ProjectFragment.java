@@ -85,7 +85,7 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
         }
 
         // set Access
-        access = Service.accesses.getAccessByIDs(CurrentSession.currentUser.getUserID(), projectId);
+        access = Service.accesses.getAccessByIDs(CurrentSession.getAccount().getUserID(), projectId);
 
         // Get views from layout
 
