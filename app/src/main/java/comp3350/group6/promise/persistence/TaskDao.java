@@ -16,6 +16,6 @@ public interface TaskDao {
 
     Task updateTask(Task t) ;
 
-    void deleteTask(Task t) ;
+    Task deleteTask(Task t) ;
 
 }

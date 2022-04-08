@@ -139,12 +139,13 @@ public class TaskImp implements TaskDao {
     }
 
     @Override
-    public void deleteTask(Task t) {
+    public Task deleteTask(Task t) {
         try (final Connection con = DBConnectorUtil.getConnection()) {
-            final PreparedStatement pre = con.prepareStatement("DELETE FROM task WHERE taskId = ?");
-            pre.setInt(1, t.getTaskId());
-            pre.executeUpdate();
-            pre.close();
+            final PreparedStatement pre1 = con.prepareStatement("DELETE FROM task WHERE taskId = ?");
+            pre1.setInt(1, t.getTaskId());
+            pre1.executeUpdate();
+            pre1.close();
+            return t;
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }

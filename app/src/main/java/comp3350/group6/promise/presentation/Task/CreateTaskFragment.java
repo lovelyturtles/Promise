@@ -84,7 +84,7 @@ public class CreateTaskFragment extends Fragment {
         int taskId = createTask(name, desc, priority, endTime, deadline, projectId);
 
         // Return to projects page if creation is successful
-        NavDirections action = CreateTaskFragmentDirections.createTaskSuccess(taskId);
+        NavDirections action = CreateTaskFragmentDirections.createTaskSuccess(projectId);
         navController.navigate(action);
     }
 

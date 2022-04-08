@@ -29,14 +29,17 @@ public class TaskService {
         return taskDao.getTask(taskId);
     }
 
-    public List<Task> getTasksByProjectId(int projectId) { return taskDao.getTasksByProjectId(projectId); }
+    public List<Task> getTasksByProjectId(int projectId) {
+        return taskDao.getTasksByProjectId(projectId);
+    }
 
     public int insertTask(Task newTask) {
         return taskDao.insertTask(newTask);
     }
 
-    public void deleteTask(Task task) {
+    public Task deleteTask(Task task) {
         taskDao.deleteTask(task);
+        return task;
     }
 
     public void updateTask(Task task) {
@@ -49,7 +52,7 @@ public class TaskService {
     }
 
     public static TaskService getInstance() {
-        if(TaskService.instance == null) {
+        if (TaskService.instance == null) {
             TaskService.instance = new TaskService();
         }
         return TaskService.instance;
