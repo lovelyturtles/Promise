@@ -46,6 +46,8 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
     private Project project;
     private List<Task> listOfTasksIP; // In Progress
     private List<Task> listOfTasksFinished; // Finished
+    private TaskAdapter taskListAdapterIP;
+    private TaskAdapter taskListAdapterFinished;
 
     private Toolbar toolbarView;
     private TextView projectDescriptionView;
@@ -77,7 +79,8 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
         // Get project data
         if (projectId != -1) {
             project = ProjectService.getInstance().getProjectByID(projectId);
-            listOfTasksIP = TaskService.getInstance().getTasksByProjectId(projectId,1);
+            listOfTasksIP = TaskService.getInstance().getTasksByProjectId(projectId, 1);
+            listOfTasksFinished = TaskService.getInstance().getTasksByProjectId(projectId, 0);
         }
 
         // set Access
@@ -99,11 +102,11 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
 
         projectDescriptionView.setText(project.getStatement());
 
-        TaskAdapter taskListAdapterIP = new TaskAdapter(getContext(), listOfTasksIP, this, this);
+        taskListAdapterIP = new TaskAdapter(getContext(), listOfTasksIP, this, this);
         taskRecyclerViewIP.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         taskRecyclerViewIP.setAdapter(taskListAdapterIP);
 
-        TaskAdapter taskListAdapterFinished = new TaskAdapter(getContext(), listOfTasksFinished, this, this);
+        taskListAdapterFinished = new TaskAdapter(getContext(), listOfTasksFinished, this, this);
         taskRecyclerViewFinished.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         taskRecyclerViewFinished.setAdapter(taskListAdapterFinished);
 
@@ -129,6 +132,13 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
     // Task List Methods
 
     @Override
+    public void onResume() {
+        super.onResume();
+        taskListAdapterIP.notifyDataSetChanged();
+        taskListAdapterFinished.notifyDataSetChanged();
+    }
+
+    @Override
     public void onTaskClick(int position) {
         int taskId = listOfTasksIP.get(position).getTaskId();
         NavDirections action = ProjectFragmentDirections.selectTask(taskId);
@@ -138,6 +148,12 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
     @Override
     public void onLongTaskClick(int position) {
         Toast.makeText(getContext(), "Long Pressed Task: " + position, Toast.LENGTH_SHORT).show();
+//        int taskIdIP = listOfTasksIP.get(position).getTaskId();
+//        int taskIdFinished = listOfTasksFinished.get(position).getTaskId();
+//
+//        Service.tasks.logTask(taskIdIP);
+//        taskListAdapterIP.notifyDataSetChanged();
+//        taskListAdapterFinished.notifyDataSetChanged();
     }
 
     // Toolbar Methods
@@ -159,12 +175,11 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
         MenuItem edit = menu.findItem(R.id.action_edit_project);
         MenuItem delete = menu.findItem(R.id.action_delete_project);
 
-        if(access.getRole().equals(AccessRole.MEMBER.name())) {
+        if (access.getRole().equals(AccessRole.MEMBER.name())) {
             // normal members can't edit or delete a project
             edit.setVisible(false);
             delete.setVisible(false);
-        }
-        else if(access.getRole().equals(AccessRole.ADMIN.name())) {
+        } else if (access.getRole().equals(AccessRole.ADMIN.name())) {
             // admins can't delete a project
             delete.setVisible(false);
         }

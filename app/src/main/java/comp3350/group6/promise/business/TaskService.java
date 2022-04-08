@@ -53,7 +53,8 @@ public class TaskService {
         return allTask;
     }
 
-    public Task logTask(Task task) {
+    public Task logTask(int taskId) {
+        Task task = getTask(taskId);
         switch (task.getType()) {
             case IP:
                 task.setType(TaskType.FINISHED);
@@ -62,7 +63,8 @@ public class TaskService {
                 task.setType(TaskType.IP);
                 break;
         }
-        return getTask(task.getTaskId());
+        taskDao.updateTask(task);
+        return task;
     }
 
     public static TaskService getInstance() {

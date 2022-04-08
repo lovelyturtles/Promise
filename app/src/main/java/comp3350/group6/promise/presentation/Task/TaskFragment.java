@@ -91,6 +91,7 @@ public class TaskFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_edit:
                 // TODO: Implement action handler for task editing
+
                 Toast.makeText(getContext(), "Pressed Edit Task", Toast.LENGTH_SHORT).show();
                 return true;
             default:

@@ -64,14 +64,12 @@ public class TaskImp implements TaskDao {
         try (final Connection con = DBConnectorUtil.getConnection()) {
             assert con != null;
             String statement = null;
-            switch (value) {
-                case 1:
-                    statement = "SELECT * FROM task WHERE projectId = ? and type = IP";
-                    break;
-                case 2:
-                    statement = "SELECT * FROM task WHERE projectId = ? and type = FINISHED";
-                    break;
-            }
+            if (value == 1)
+                statement = "SELECT * FROM task WHERE projectId = ? and type = 'IP'";
+
+            else
+                statement = "SELECT * FROM task WHERE projectId = ? and type = 'FINISHED'";
+
             assert (statement != null);
             PreparedStatement ps = con.prepareStatement(statement);
             ps.setInt(1, projectId);
@@ -136,13 +134,14 @@ public class TaskImp implements TaskDao {
     @Override
     public Task updateTask(Task t) {
         try (final Connection con = DBConnectorUtil.getConnection()) {
-            final PreparedStatement pre = con.prepareStatement("UPDATE task SET title = ?, description = ?, priority = ?, statusNum = ?, estimatedEndTime = ?, deadline = ? type = ? WHERE taskId = ?");
+            final PreparedStatement pre = con.prepareStatement("UPDATE task SET title = ?, description = ?, priority = ?, statusNum = ?, estimatedEndTime = ?, deadline = ?, type = ? WHERE taskId = ?");
             pre.setString(1, t.getTitle());
             pre.setString(2, t.getDescription());
             pre.setInt(3, t.getPriority());
             pre.setInt(4, t.getStatusNum());
             pre.setTimestamp(5, t.getEstimatedEndTime());
             pre.setTimestamp(6, t.getDeadline());
+            System.out.println("NEW TYPE: "+ t.getType().name());
             pre.setString(7, t.getType().toString());
             pre.setInt(8, t.getTaskId());
             pre.executeUpdate();
