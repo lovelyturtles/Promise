@@ -30,15 +30,19 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.business.ProjectService;
 import comp3350.group6.promise.business.TaskService;
+import comp3350.group6.promise.objects.Access;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.objects.Task;
+import comp3350.group6.promise.objects.enumClasses.AccessRole;
 import comp3350.group6.promise.presentation.Task.TaskAdapter;
 
 public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClickListener, TaskAdapter.OnTaskLongClickListener {
 
+    private Access access;
     private Project project;
     private List<Task> listOfTasksIP; // In Progress
     private List<Task> listOfTasksFinished; // Finished
@@ -75,6 +79,9 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
             project = ProjectService.getInstance().getProjectByID(projectId);
             listOfTasksIP = TaskService.getInstance().getTasksByProjectId(projectId,1);
         }
+
+        // set Access
+        access = Service.accesses.getAccessByIDs(CurrentSession.currentUser.getUserID(), projectId);
 
         // Get views from layout
 
@@ -148,6 +155,19 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.project_toolbar_menu, menu);
+
+        MenuItem edit = menu.findItem(R.id.action_edit_project);
+        MenuItem delete = menu.findItem(R.id.action_delete_project);
+
+        if(access.getRole().equals(AccessRole.MEMBER.name())) {
+            // normal members can't edit or delete a project
+            edit.setVisible(false);
+            delete.setVisible(false);
+        }
+        else if(access.getRole().equals(AccessRole.ADMIN.name())) {
+            // admins can't delete a project
+            delete.setVisible(false);
+        }
     }
 
     @Override
