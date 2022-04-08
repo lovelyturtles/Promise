@@ -42,5 +42,8 @@
     <action
         android:id="@+id/login"
         app:destination="@id/landingFragment" />
+    <action
+        android:id="@+id/dashboard"
+        app:destination="@id/dashboardFragment" />
 
 </navigation>
