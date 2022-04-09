@@ -19,7 +19,7 @@ public class Task {
     private Timestamp estimatedEndTime;
     private Timestamp deadline;
     private TaskType type;
-    private static int count =0;
+    private static int count = 0;
 
 
     public Task(int taskId) {
@@ -164,6 +164,7 @@ public class Task {
                 ", createdTime=" + createdTime +
                 ", estimatedEndTime=" + estimatedEndTime +
                 ", deadline=" + deadline +
+                ", type=" + type +
                 '}';
     }
 

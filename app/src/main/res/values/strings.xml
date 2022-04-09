@@ -76,11 +76,14 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
-    <!-- New Task -->
+    <!--Task -->
     <string name="taskNameInput">Task Name</string>
     <string name="taskDesInput">Task Description</string>
     <string name="taskPriorityInput">Enter number</string>
     <string name="taskEstimateInput">Enter days</string>
+    <string name="dialog_delete_task">Are you sure to delete this task?</string>
+    <string name="delete_task">Delete task</string>
+    <string name="cancel_task">Cancel</string>
 
     <!--Notification Page-->
     <string name="personIconName">You\'ve been invited to work on a project</string>

@@ -1,25 +1,29 @@
 package comp3350.group6.promise.presentation.Task;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import comp3350.group6.promise.R;
+import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.objects.Task;
+import comp3350.group6.promise.presentation.Project.ProjectFragmentDirections;
 
 public class TaskFragment extends Fragment {
 
@@ -84,19 +88,51 @@ public class TaskFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.task_toolbar_menu, menu);
+
+        MenuItem edit = menu.findItem(R.id.action_edit_task);
+        MenuItem delete = menu.findItem(R.id.action_delete_task_);
+
     }
 
     @Override
-    public boolean onOptionsItemSelected (MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_edit:
-                // TODO: Implement action handler for task editing
-
-                Toast.makeText(getContext(), "Pressed Edit Task", Toast.LENGTH_SHORT).show();
+            case R.id.action_edit_task:
+                editTask();
+                return true;
+            case R.id.action_delete_task_:
+                deleteTaskDialog();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    private void deleteTaskDialog() {
+        // Use the Builder class for convenient dialog construction
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(R.string.dialog_delete_task)
+                .setPositiveButton(R.string.delete_task, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Service.tasks.deleteTask(task);
+                        NavDirections action = TaskFragmentDirections.actionTaskFragmentToProjectFragment3();
+//                        NavDirections action = ProjectFragmentDirections.actionDeleteProject();
+                        navController.navigate(action);
+                    }
+                })
+                .setNegativeButton(R.string.cancel_task, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                        dialog.cancel();
+                    }
+                });
+        // Create the AlertDialog object and return it
+        builder.create();
+    }
+
+
+    private void editTask() {
     }
 
 }

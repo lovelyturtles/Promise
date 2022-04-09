@@ -40,7 +40,7 @@ import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.objects.enumClasses.AccessRole;
 import comp3350.group6.promise.presentation.Task.TaskAdapter;
 
-public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClickListener, TaskAdapter.OnTaskLongClickListener {
+public class ProjectFragment extends Fragment {
 
     private Access access;
     private Project project;
@@ -102,13 +102,13 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
 
         projectDescriptionView.setText(project.getStatement());
 
-        CompleteTaskClickListener completeTaskClickListener = new CompleteTaskClickListener();
-        taskListAdapterIP = new TaskAdapter(getContext(), listOfTasksIP, completeTaskClickListener, completeTaskClickListener);
+        IncompleteTaskClickListener incompleteTaskClickListener = new IncompleteTaskClickListener();
+        taskListAdapterIP = new TaskAdapter(getContext(), listOfTasksIP, incompleteTaskClickListener, incompleteTaskClickListener);
         taskRecyclerViewIP.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         taskRecyclerViewIP.setAdapter(taskListAdapterIP);
 
-        IncompleteTaskClickListener incompleteTaskClickListener = new IncompleteTaskClickListener();
-        taskListAdapterFinished = new TaskAdapter(getContext(), listOfTasksFinished, incompleteTaskClickListener, incompleteTaskClickListener);
+        CompleteTaskClickListener completeTaskClickListener = new CompleteTaskClickListener();
+        taskListAdapterFinished = new TaskAdapter(getContext(), listOfTasksFinished, completeTaskClickListener, completeTaskClickListener);
         taskRecyclerViewFinished.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         taskRecyclerViewFinished.setAdapter(taskListAdapterFinished);
 
@@ -131,29 +131,39 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
         navController.navigate(action);
     }
 
-    private static class IncompleteTaskClickListener implements TaskAdapter.OnTaskClickListener, TaskAdapter.OnTaskLongClickListener {
+    private class IncompleteTaskClickListener implements TaskAdapter.OnTaskClickListener, TaskAdapter.OnTaskLongClickListener {
 
         @Override
         public void onTaskClick(int position) {
-            onTaskClick(position);
+            int taskId = listOfTasksIP.get(position).getTaskId();
+            NavDirections action = ProjectFragmentDirections.selectTask(taskId);
+            navController.navigate(action);
         }
 
         @Override
         public void onLongTaskClick(int position) {
             // Business layer call to mark task as complete
+            Toast.makeText(getContext(), "Move task to Finished", Toast.LENGTH_SHORT).show();
+            int taskId = listOfTasksIP.get(position).getTaskId();
+            Service.tasks.logTask(taskId);
         }
     }
 
-    private static class CompleteTaskClickListener implements TaskAdapter.OnTaskClickListener, TaskAdapter.OnTaskLongClickListener {
+    private class CompleteTaskClickListener implements TaskAdapter.OnTaskClickListener, TaskAdapter.OnTaskLongClickListener {
 
         @Override
         public void onTaskClick(int position) {
-            onTaskClick(position);
+            int taskId = listOfTasksFinished.get(position).getTaskId();
+            NavDirections action = ProjectFragmentDirections.selectTask(taskId);
+            navController.navigate(action);
         }
 
         @Override
         public void onLongTaskClick(int position) {
             // Business layer call to mark task as incomplete
+            Toast.makeText(getContext(), "Move task to In Progress", Toast.LENGTH_SHORT).show();
+            int taskId = listOfTasksFinished.get(position).getTaskId();
+            Service.tasks.logTask(taskId);
         }
     }
 
@@ -164,24 +174,6 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
         super.onResume();
         taskListAdapterIP.notifyDataSetChanged();
         taskListAdapterFinished.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onTaskClick(int position) {
-        int taskId = listOfTasksIP.get(position).getTaskId();
-        NavDirections action = ProjectFragmentDirections.selectTask(taskId);
-        navController.navigate(action);
-    }
-
-    @Override
-    public void onLongTaskClick(int position) {
-        Toast.makeText(getContext(), "Long Pressed Task: " + position, Toast.LENGTH_SHORT).show();
-//        int taskIdIP = listOfTasksIP.get(position).getTaskId();
-//        int taskIdFinished = listOfTasksFinished.get(position).getTaskId();
-//
-//        Service.tasks.logTask(taskIdIP);
-//        taskListAdapterIP.notifyDataSetChanged();
-//        taskListAdapterFinished.notifyDataSetChanged();
     }
 
     // Toolbar Methods
