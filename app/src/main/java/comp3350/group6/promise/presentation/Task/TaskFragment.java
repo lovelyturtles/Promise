@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -18,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.Service;
@@ -28,6 +30,7 @@ import comp3350.group6.promise.presentation.Project.ProjectFragmentDirections;
 public class TaskFragment extends Fragment {
 
     private Task task;
+    private int taskId;
 
     private Toolbar toolbarView;
     private TextView descriptionView;
@@ -45,10 +48,10 @@ public class TaskFragment extends Fragment {
 
         // Get task using ID passed to fragment
 
-        int id = TaskFragmentArgs.fromBundle(getArguments()).getTaskId();
+        taskId = TaskFragmentArgs.fromBundle(getArguments()).getTaskId();
 
-        if (id != -1) {
-            task = TaskService.getInstance().getTask(id);
+        if (taskId != -1) {
+            task = TaskService.getInstance().getTask(taskId);
         }
 
         // Get views from layout
@@ -70,6 +73,13 @@ public class TaskFragment extends Fragment {
         // Update layout behaviours
 
         initializeToolbar();
+        toolbarView.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavDirections action = TaskFragmentDirections.actionTaskDeleteDestination(task.getProjectId());
+                navController.navigate(action);
+            }
+        });
 
     }
 
@@ -88,10 +98,6 @@ public class TaskFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.task_toolbar_menu, menu);
-
-        MenuItem edit = menu.findItem(R.id.action_edit_task);
-        MenuItem delete = menu.findItem(R.id.action_delete_task_);
-
     }
 
     @Override
@@ -100,8 +106,9 @@ public class TaskFragment extends Fragment {
             case R.id.action_edit_task:
                 editTask();
                 return true;
-            case R.id.action_delete_task_:
+            case R.id.action_delete_task:
                 deleteTaskDialog();
+                Toast.makeText(getContext(), "Click delete", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -115,9 +122,10 @@ public class TaskFragment extends Fragment {
         builder.setMessage(R.string.dialog_delete_task)
                 .setPositiveButton(R.string.delete_task, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        Toast.makeText(getContext(), "Click delete", Toast.LENGTH_SHORT).show();
+
                         Service.tasks.deleteTask(task);
-                        NavDirections action = TaskFragmentDirections.actionTaskFragmentToProjectFragment3();
-//                        NavDirections action = ProjectFragmentDirections.actionDeleteProject();
+                        NavDirections action = TaskFragmentDirections.actionTaskDeleteDestination(task.getProjectId());
                         navController.navigate(action);
                     }
                 })
@@ -128,11 +136,13 @@ public class TaskFragment extends Fragment {
                     }
                 });
         // Create the AlertDialog object and return it
-        builder.create();
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 
     private void editTask() {
+        NavDirections action = TaskFragmentDirections.actionGoEditTask(taskId);
+        navController.navigate(action);
     }
-
 }
