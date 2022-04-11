@@ -67,10 +67,13 @@
             android:id="@+id/action_edit_project"
             app:destination="@id/edit_project_fragment" />
         <action
-                android:id="@+id/action_delete_project"
-                app:destination="@id/home"
-                app:popUpTo="@id/home"
-                app:popUpToInclusive="true" />
+            android:id="@+id/action_view_members"
+            app:destination="@id/view_members_fragment" />
+        <action
+            android:id="@+id/action_delete_project"
+            app:destination="@id/home"
+            app:popUpTo="@id/home"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/task_fragment"
@@ -201,6 +204,14 @@
             app:destination="@id/project_fragment"
             app:popUpTo="@id/project_fragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/view_members_fragment"
+        android:name="comp3350.group6.promise.presentation.Project.MembersListFragment"
+        tools:layout="@layout/fragment_members_list">
+        <argument
+            android:name="projectId"
+            app:argType="integer" />
     </fragment>
     <include app:graph="@navigation/root_graph" />
     <fragment
