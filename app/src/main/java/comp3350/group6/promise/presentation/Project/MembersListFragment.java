@@ -8,22 +8,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.CurrentSession;
@@ -54,7 +43,7 @@ public class MembersListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         projectId = ProjectFragmentArgs.fromBundle(getArguments()).getProjectId();
-        access = Service.accesses.getAccessByIDs(CurrentSession.currentUser.getUserID(), projectId);
+        access = Service.accesses.getAccessByIDs(CurrentSession.getAccount().getUserID(), projectId);
         project = Service.projects.getProjectByID(projectId);
         accessList = Service.accesses.getProjectAccess(projectId);
 
