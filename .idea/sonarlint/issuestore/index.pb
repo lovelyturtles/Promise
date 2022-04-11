@@ -19,3 +19,5 @@ o
 ?app/src/main/java/comp3350/group6/promise/application/Main.java,5\c\5c1ac35141c93f42c1fa50ca38cc0b73220afde7
 š
 japp/src/main/java/comp3350/group6/promise/presentation/Project/Invitation/ProjectInviteDialogFragment.java,a\b\abd1ea1f033194bdf2fbcd95973cdc2019931ff6
+‘
+aapp/src/main/java/comp3350/group6/promise/presentation/Project/Invitation/InviteSentFragment.java,2\3\23a6c22c858302351c574bf0a5dea8a4153ddfe3

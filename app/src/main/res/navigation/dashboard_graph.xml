@@ -62,7 +62,7 @@
             app:destination="@id/create_task_fragment" />
         <action
             android:id="@+id/action_invite_user"
-            app:destination="@id/invite_form_fragment" />
+            app:destination="@id/invite_form_dialog" />
         <action
             android:id="@+id/action_edit_project"
             app:destination="@id/edit_project_fragment" />
@@ -88,6 +88,9 @@
         <action
             android:id="@+id/selectNotification"
             app:destination="@id/notification_detail_fragment" />
+        <action
+            android:id="@+id/action_notifications_to_inviteFormDialog"
+            app:destination="@id/inviteFormDialog" />
     </fragment>
     <fragment
         android:id="@+id/profile"
@@ -134,24 +137,24 @@
             app:argType="boolean"
             android:defaultValue="false" />
     </fragment>
-    <fragment
-        android:id="@+id/invite_form_fragment"
-        android:name="comp3350.group6.promise.presentation.Project.Invitation.InviteFormFragment"
-        android:label="Invite User"
-        tools:layout="@layout/fragment_recipient_info">
-        <action
-            android:id="@+id/inviteSuccess"
-            app:destination="@id/invite_sent"
-            app:popUpTo="@id/project_fragment"
-            app:popUpToInclusive="false" />
-        <argument
-            android:name="projectId"
-            app:argType="integer" />
-        <argument
-            android:name="showBottomNav"
-            app:argType="boolean"
-            android:defaultValue="false" />
-    </fragment>
+<!--    <dialog-->
+<!--        android:id="@+id/invite_form_dialog"-->
+<!--        android:name="comp3350.group6.promise.presentation.Project.Invitation.InviteFormDialog"-->
+<!--        android:label="Invite User"-->
+<!--        tools:layout="@layout/fragment_invite_form_dialog">-->
+<!--        <action-->
+<!--            android:id="@+id/inviteSuccess"-->
+<!--            app:destination="@id/invite_sent"-->
+<!--            app:popUpTo="@id/project_fragment"-->
+<!--            app:popUpToInclusive="false" />-->
+<!--        <argument-->
+<!--            android:name="projectId"-->
+<!--            app:argType="integer" />-->
+<!--        <argument-->
+<!--            android:name="showBottomNav"-->
+<!--            app:argType="boolean"-->
+<!--            android:defaultValue="false" />-->
+<!--    </dialog>-->
     <fragment
         android:id="@+id/invite_sent"
         android:name="comp3350.group6.promise.presentation.Project.Invitation.InviteSentFragment"
@@ -159,10 +162,10 @@
         tools:layout="@layout/fragment_sent_invite">
         <action
             android:id="@+id/action_sentInviteFragment_to_recipientInfoFragment"
-            app:destination="@id/invite_form_fragment" />
+            app:destination="@id/invite_form_dialog" />
         <action
             android:id="@+id/inviteMore"
-            app:destination="@id/invite_form_fragment"
+            app:destination="@id/invite_form_dialog"
             app:popUpTo="@id/project_fragment"
             app:popUpToInclusive="false" />
         <argument
@@ -194,4 +197,14 @@
             app:popUpTo="@id/project_fragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <dialog
+        android:id="@+id/invite_form_dialog"
+        android:name="comp3350.group6.promise.presentation.Project.Invitation.InviteFormDialog"
+        android:label="fragment_invite_form_dialog"
+        tools:layout="@layout/fragment_invite_form_dialog" />
+    <fragment
+        android:id="@+id/inviteFormFragment"
+        android:name="comp3350.group6.promise.presentation.Project.Invitation.InviteFormFragment"
+        android:label="fragment_recipient_info"
+        tools:layout="@layout/fragment_recipient_info" />
 </navigation>

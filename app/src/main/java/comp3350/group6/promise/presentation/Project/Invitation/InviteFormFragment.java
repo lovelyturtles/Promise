@@ -53,7 +53,7 @@ public class InviteFormFragment extends Fragment implements AccountUserAdapter.O
 
         //Get the projectID that was passed in
 
-        int projectId = InviteFormFragmentArgs.fromBundle(getArguments()).getProjectId();
+        int projectId = InviteFormDialogArgs.fromBundle(getArguments()).getProjectId();
 
         /*
          * When the user enters the username of the person they want to invite,
