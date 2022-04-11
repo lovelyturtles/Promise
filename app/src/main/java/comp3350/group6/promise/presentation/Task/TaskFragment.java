@@ -108,7 +108,6 @@ public class TaskFragment extends Fragment {
                 return true;
             case R.id.action_delete_task:
                 deleteTaskDialog();
-                Toast.makeText(getContext(), "Click delete", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
