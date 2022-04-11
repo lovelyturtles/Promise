@@ -84,7 +84,7 @@ public class ProjectFragment extends Fragment {
         }
 
         // set Access
-        access = Service.accesses.getAccessByIDs(CurrentSession.currentUser.getUserID(), projectId);
+        access = Service.accesses.getAccessByIDs(CurrentSession.getAccount().getUserID(), projectId);
 
         // Get views from layout
 

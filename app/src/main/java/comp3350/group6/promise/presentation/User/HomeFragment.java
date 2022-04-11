@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment implements ProjectAdapter.ViewHolder.
 
         // Get content data
 
-        projects = Service.accesses.getProjects(CurrentSession.currentUser.getUserID());
+        projects = Service.accesses.getProjects(CurrentSession.getAccount().getUserID());
 
         // Get views from layout
 

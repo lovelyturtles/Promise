@@ -1,8 +1,9 @@
 package comp3350.group6.promise.presentation.User;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,7 +15,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +25,7 @@ import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Exceptions.EmptyEmailException;
 import comp3350.group6.promise.objects.Exceptions.EmptyPasswordException;
 import comp3350.group6.promise.objects.Exceptions.LoginErrorException;
+import comp3350.group6.promise.util.UserPrefsUtil;
 
 
 public class LoginFormFragment extends Fragment {
@@ -44,7 +45,7 @@ public class LoginFormFragment extends Fragment {
 
         emailInputView = (EditText) view.findViewById( R.id.loginEmailInput );
         passwordInputView = (EditText) view.findViewById( R.id.loginPasswordInput );
-        submitButtonView = (Button) view.findViewById( R.id.signInButton );
+        submitButtonView = (Button) view.findViewById( R.id.signOutButton);
 
         // Update layout behaviours
 
@@ -64,6 +65,7 @@ public class LoginFormFragment extends Fragment {
         //Send input to the business layer
         try{
             Service.accounts.login(email, password);
+            UserPrefsUtil.saveUserCredentials(email, password, getActivity());
 
             //if no Exception was thrown, we'll go back to the user's home page
             NavDirections action = LoginFragmentDirections.loginSuccess();

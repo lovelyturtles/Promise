@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -38,7 +37,8 @@ public class NotificationsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Get user notifications
-        notificationsList = Service.notifications.getNotifs(CurrentSession.currentUser.getUserID());
+
+        notificationsList = Service.notifications.getNotifs(CurrentSession.getAccount().getUserID());
 
         // Get views from layout
         navController = NavHostFragment.findNavController(this);
