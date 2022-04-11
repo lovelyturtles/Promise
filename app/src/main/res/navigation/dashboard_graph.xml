@@ -96,6 +96,9 @@
         <action
             android:id="@+id/selectNotification"
             app:destination="@id/notification_detail_fragment" />
+        <action
+            android:id="@+id/navigate_to_no_notifications"
+            app:destination="@id/noNotificationsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profile"
@@ -215,4 +218,9 @@
                 android:id="@+id/action_edit_task_success"
                 app:destination="@id/task_fragment" />
     </fragment>
+    <fragment
+        android:id="@+id/noNotificationsFragment"
+        android:name="comp3350.group6.promise.presentation.Notification.NoNotificationsFragment"
+        android:label="fragment_no_notifications"
+        tools:layout="@layout/fragment_no_notifications" />
 </navigation>
