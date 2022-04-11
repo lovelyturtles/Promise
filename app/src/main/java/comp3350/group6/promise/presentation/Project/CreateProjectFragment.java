@@ -23,6 +23,7 @@ import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.objects.Exceptions.DuplicateAccessException;
 import comp3350.group6.promise.objects.Exceptions.EmptyInputException;
 import comp3350.group6.promise.objects.Project;
+import comp3350.group6.promise.objects.enumClasses.AccessRole;
 
 public class CreateProjectFragment extends Fragment {
 
@@ -85,6 +86,7 @@ public class CreateProjectFragment extends Fragment {
     private void createProject(String name, String description) throws EmptyInputException {
         Project newProject = Service.projects.insertProject(new Project(name, description));
         Access newAccess = new Access(newProject.getProjectID(), CurrentSession.currentUser.getUserID());
+        newAccess.setRole(AccessRole.CREATOR.name());
         Service.accesses.insertAccess(newAccess);
     }
 }

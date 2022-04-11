@@ -183,6 +183,11 @@ public class ProjectFragment extends Fragment implements TaskAdapter.OnTaskClick
             navController.navigate(action);
             return true;
         }
+        else if(id == R.id.action_view_members) {
+            NavDirections action = ProjectFragmentDirections.actionViewMembers(project.getProjectID());
+            navController.navigate(action);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
 //        return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);

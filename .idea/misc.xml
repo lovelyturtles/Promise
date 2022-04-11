@@ -59,8 +59,13 @@
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_dashboard.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_delete_dialog.xml" value="0.5" />
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_edit_project.xml" value="0.35054347826086957" />
-        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_project.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_login.xml" value="0.26358695652173914" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_login_form.xml" value="0.26358695652173914" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_members_list.xml" value="0.1" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_project.xml" value="0.1" />
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_settings.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/project_list_item.xml" value="0.18840579710144928" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/task_list_item.xml" value="0.18840579710144928" />
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/menu/project_toolbar_menu.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/mipmap-anydpi-v26/ic_more_vert_round.xml" value="0.1815" />
         <entry key="app/src/main/res/layout/activity_create.xml" value="0.24010416666666667" />
