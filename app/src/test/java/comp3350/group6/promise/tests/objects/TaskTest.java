@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.sql.Timestamp;
 
 import comp3350.group6.promise.objects.Task;
+import comp3350.group6.promise.objects.enumClasses.TaskType;
 
 public class TaskTest {
     Task task;
@@ -23,7 +24,7 @@ public class TaskTest {
         cTime = new Timestamp(System.currentTimeMillis());
         eTime = new Timestamp(System.currentTimeMillis());
         dTime = new Timestamp(System.currentTimeMillis());
-        task = new Task(1, "myTask", "default", 0, 0, 0, cTime, eTime, dTime);
+        task = new Task(1, "myTask", "default", 0, 0, 0, cTime, eTime, dTime, TaskType.IP);
     }
 
 
