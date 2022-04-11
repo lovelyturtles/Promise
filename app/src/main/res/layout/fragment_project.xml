@@ -59,14 +59,35 @@
                 android:layout_marginBottom="@dimen/gap_lg"
                 android:text="Project Description" />
 
+            <TextView
+                    android:text="In Progress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/task_in_progress_label"
+                    style="@style/Theme.Promise.InputLabel"
+                    android:textSize="20sp" />
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/task_recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/task_recycler_in_progress">
 
             </androidx.recyclerview.widget.RecyclerView>
 
-<!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
+            <TextView
+                    android:text="Finished"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/task_finished_label"
+                    style="@style/Theme.Promise.InputLabel"
+                    android:textSize="20sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/task_recycler_finished" />
+
+            <!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
 <!--                            android:layout_width="match_parent"-->
 <!--                            android:layout_height="171dp">-->
 

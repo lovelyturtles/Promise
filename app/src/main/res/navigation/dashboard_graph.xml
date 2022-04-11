@@ -82,6 +82,14 @@
         <argument
             android:name="taskId"
             app:argType="integer" />
+        <action
+                android:id="@+id/action_task_delete_destination"
+                app:destination="@id/project_fragment"
+                app:popUpToInclusive="true"
+                app:popUpTo="@id/project_fragment" />
+        <action
+                android:id="@+id/action_go_edit_task"
+                app:destination="@id/editTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/notifications"
@@ -204,5 +212,18 @@
         <argument
             android:name="projectId"
             app:argType="integer" />
+    </fragment>
+    <include app:graph="@navigation/root_graph" />
+    <fragment
+            android:id="@+id/editTaskFragment"
+            android:name="comp3350.group6.promise.presentation.Task.EditTaskFragment"
+            android:label="fragment_edit_task"
+            tools:layout="@layout/fragment_edit_task" >
+        <argument
+                android:name="taskId"
+                app:argType="integer" />
+        <action
+                android:id="@+id/action_edit_task_success"
+                app:destination="@id/task_fragment" />
     </fragment>
 </navigation>
