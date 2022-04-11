@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -37,23 +38,26 @@ public class NotificationsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Get user notifications
-
         notificationsList = Service.notifications.getNotifs(CurrentSession.currentUser.getUserID());
 
         // Get views from layout
-
         navController = NavHostFragment.findNavController(this);
+        if( notificationsList.isEmpty() ) {
+//            ((TextView) view.findViewById(R.id.notificationsTitle)).setText("No new messages");
+            NavDirections action = NotificationsFragmentDirections.navigateToNoNotifications();
+            navController.navigate(action);
+        }
 
-        recyclerView = view.findViewById( R.id.notifRecyclerView );
-
-        // Set up notification list
-
-        NotificationAdapter.NotificationClickListener listener = getOnClickListener();
-        NotificationAdapter adapter = new NotificationAdapter( notificationsList, listener );
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( getContext() );
-        recyclerView.setLayoutManager( layoutManager );
-        recyclerView.setItemAnimator( new DefaultItemAnimator() );
-        recyclerView.setAdapter( adapter );
+        else {
+            recyclerView = view.findViewById(R.id.notifRecyclerView);
+            // Set up notification list
+            NotificationAdapter.NotificationClickListener listener = getOnClickListener();
+            NotificationAdapter adapter = new NotificationAdapter(notificationsList, listener);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(adapter);
+        }
     }
 
     private NotificationAdapter.NotificationClickListener getOnClickListener() {

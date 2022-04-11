@@ -20,10 +20,11 @@ android:layout_height="match_parent"
         android:padding="@dimen/gap_lg">
 
         <TextView
+            android:id="@+id/notificationsTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="INVITATIONS"
+            android:text="NOTIFICATIONS"
             android:textColor="#000000"
             android:textStyle="bold" />
 
