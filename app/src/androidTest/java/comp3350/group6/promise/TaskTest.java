@@ -14,11 +14,11 @@ import org.junit.runner.RunWith;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class TaskTest {
-    @Rule
-    public ActivityTestRule
+//    @Rule
+//    public ActivityTestRule
 
     @Test
-    public void createTask(){
+    public void createTask() {
 //        onView(withId)
     }
 }
