@@ -22,9 +22,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:navigationIcon="@drawable/ic_arrow_back"
-                    app:title="Edit Task"
-                    app:titleCentered="true"
-                    android:id="@+id/edit_toolbar_task" />
+                    android:id="@+id/edit_toolbar_task"
+                    app:titleTextAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:touchscreenBlocksFocus="true"
+                    app:titleTextColor="#FFFFFF"
+                    app:subtitleTextColor="#FFFFFF" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView

@@ -30,6 +30,20 @@ public class TaskServiceIT {
     }
 
     @Test
+    public void testLogTask(){
+        System.out.println("\nStarting testLogTask");
+        taskService.logTask(1);
+        Task result = taskService.getTask(1);
+        assertEquals(TaskType.FINISHED, result.getType());
+
+        taskService.logTask(1);
+        result = taskService.getTask(1);
+        assertEquals(TaskType.IP, result.getType());
+
+        System.out.println("\nFinished testLogTask");
+    }
+
+    @Test
     public void testGetTaskList() {
         System.out.println("\nStarting testGetTaskList");
         List<Task> taskList = taskService.getAllTask();
