@@ -7,10 +7,12 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
@@ -27,6 +29,7 @@ import androidx.test.runner.AndroidJUnit4;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,6 +45,8 @@ public class ProjectTest {
 
     @Test
     public void projectTest() {
+
+        // Create a new Account: Id = 123, PW = 123
         ViewInteraction materialTextView = onView(
                 allOf(withId(R.id.registerLink), withText("Don't have an account? Tap to register."),
                         childAtPosition(
@@ -112,6 +117,7 @@ public class ProjectTest {
                         isDisplayed()));
         materialButton.perform(click());
 
+        // Add a new Project: Name = 123's project, Description = This is my project.
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.fab), withContentDescription("Dashboard Add Action"),
                         childAtPosition(
@@ -183,17 +189,20 @@ public class ProjectTest {
                         isDisplayed()));
         materialButton2.perform(click());
 
-        ViewInteraction floatingActionButton2 = onView(
-                allOf(withId(R.id.fab), withContentDescription("Dashboard Add Action"),
-                        childAtPosition(
-                                allOf(withId(R.id.coordinator_layout),
-                                        childAtPosition(
-                                                withId(R.id.main_nav_fragment),
-                                                0)),
-                                2),
+        // Check if text was correct
+        ViewInteraction editText = onView(
+                allOf(withId(R.id.project_description_input), withText("123's project"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
                         isDisplayed()));
-        floatingActionButton2.perform(click());
+        editText.check(matches(withText("123's project")));
 
+        ViewInteraction editText2 = onView(
+                allOf(withId(R.id.project_name_input), withText("This is my project."),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        editText2.check(matches(withText("This is my project.")));
+
+        // Go to Project Page
         ViewInteraction linearLayout = onView(
                 allOf(withId(R.id.project_container),
                         childAtPosition(
@@ -214,6 +223,20 @@ public class ProjectTest {
                         isDisplayed()));
         overflowMenuButton.perform(click());
 
+        // Check if text was correct
+        ViewInteraction editText3 = onView(
+                allOf(withId(R.id.project_name_input), withText("123's project"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        editText3.check(matches(withText("123's project")));
+
+        ViewInteraction editText4 = onView(
+                allOf(withId(R.id.project_description_input), withText("This is my project."),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        editText4.check(matches(withText("This is my project.")));
+
+        // Edit Project
         ViewInteraction materialTextView2 = onView(
                 allOf(withId(androidx.appcompat.R.id.title), withText("Edit Project"),
                         childAtPosition(
@@ -224,6 +247,7 @@ public class ProjectTest {
                         isDisplayed()));
         materialTextView2.perform(click());
 
+        // Change description
         ViewInteraction appCompatEditText11 = onView(
                 allOf(withId(R.id.project_description_input), withText("This is my project."),
                         childAtPosition(
@@ -254,6 +278,14 @@ public class ProjectTest {
                         isDisplayed()));
         materialButton3.perform(click());
 
+        // Check if text was correct
+        ViewInteraction editText5 = onView(
+                allOf(withId(R.id.project_description_input), withText("This is our project!"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        editText5.check(matches(withText("This is our project!")));
+
+        // Delete Project
         ViewInteraction overflowMenuButton2 = onView(
                 allOf(withContentDescription("More options"),
                         childAtPosition(
