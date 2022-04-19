@@ -68,7 +68,7 @@ public class Task {
         appCompatEditText2.perform(replaceText("123"), closeSoftKeyboard());
 
         ViewInteraction materialButton = onView(
-                allOf(withId(R.id.signInButton), withText("Sign In"),
+                allOf(withId(R.id.signOutButton), withText("Sign In"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.fragmentContainerView),
@@ -197,7 +197,7 @@ public class Task {
         recyclerView.perform(actionOnItemAtPosition(0, click()));
 
         ViewInteraction linearLayout2 = onView(
-                allOf(withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
+                allOf(withParent(withParent(IsInstanceOf.<View>instanceOf(ViewGroup.class))),
                         isDisplayed()));
         linearLayout2.check(matches(isDisplayed()));
     }
@@ -489,7 +489,7 @@ public class Task {
         appCompatEditText4.perform(replaceText("123"), closeSoftKeyboard());
 
         ViewInteraction materialButton = onView(
-                allOf(withId(R.id.signInButton), withText("Sign In"),
+                allOf(withId(R.id.signOutButton), withText("Sign In"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.fragmentContainerView),
