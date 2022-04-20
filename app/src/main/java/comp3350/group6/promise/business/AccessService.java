@@ -35,7 +35,7 @@ public class AccessService {
         return Collections.unmodifiableList(accessList);
     }
 
-    public List<User> getUsers(int projectId) throws Exception {
+    public List<User> getUsers(int projectId) {
         List<Access> accessList = getProjectAccess(projectId);
         List<User> userList = new ArrayList<>();
         UserService userService = new UserService();
