@@ -30,7 +30,7 @@ public class ProjectTest {
         // add the new course
         onView(withId(R.id.loginEmailInput)).perform(typeText("4050"));
         onView(withId(R.id.loginPasswordInput)).perform(typeText("Project Management"));
-        onView(withId(R.id.signInButton)).perform(click());
+        onView(withId(R.id.signOutButton)).perform(click());
         closeSoftKeyboard();
 
     }
