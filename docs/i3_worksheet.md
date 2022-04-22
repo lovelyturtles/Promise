@@ -24,9 +24,13 @@ This feature required a long test because it covered almost all aspects of our a
 To make the test more isolated and avoid dependency issues, we created all the objects within the test rather than using default values in the database.
 
 The flow of the test is as follows,
+
 First, it creates three accounts (123, 456, and 789) to test on.
+
 Then, it would create a project in 789's account and invite 123 and 456.
+
 123 and 456 accepts the invitation, and will verify that they are a MEMBER to that project.
+
 789 then gives 123 and ADMIN role, and 123 will verify that now it is an ADMIN of that project.
 
 Acceptance test, untestable
