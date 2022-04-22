@@ -35,6 +35,17 @@ android {
 
 dependencies {
 
+    def grpcVersion = '1.29.0'
+
+    testImplementation "io.grpc:grpc-netty:${grpcVersion}"
+    testImplementation "io.grpc:grpc-protobuf:${grpcVersion}"
+    testImplementation "io.grpc:grpc-stub:${grpcVersion}"
+    testImplementation "io.grpc:grpc-bom:${grpcVersion}"
+
+    testImplementation "com.google.truth:truth:1.0.1"
+
+    androidTestImplementation "com.google.truth:truth:1.0.1"
+
     implementation 'androidx.preference:preference:1.2.0'
     def nav_version = '2.4.1'
 
@@ -47,7 +58,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui:$nav_version"
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
-    implementation "androidx.navigation:navigation-compose:$nav_version"
+//    implementation "androidx.navigation:navigation-compose:$nav_version"
 
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.google.android.material:material:1.5.0'
@@ -78,11 +89,11 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:4.3.1'
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
-    androidTestImplementation(group: 'androidx.test.espresso', name: 'espresso-core', version: '3.1.0') {
+    androidTestImplementation(group: 'androidx.test.espresso', name: 'espresso-core', version: '3.5.0-alpha05') {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
     androidTestImplementation 'androidx.annotation:annotation:1.3.0'
-    androidTestImplementation('androidx.test:rules:1.4.0') {
+    androidTestImplementation('androidx.test:rules:1.4.1-alpha05') {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 }
