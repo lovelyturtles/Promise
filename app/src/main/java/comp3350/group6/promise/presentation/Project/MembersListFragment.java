@@ -27,7 +27,6 @@ public class MembersListFragment extends Fragment {
     private int projectId;
     private Access access;
     private List<Access> accessList;
-    private Project project;
 
     private ListView listView;
 
@@ -44,9 +43,9 @@ public class MembersListFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         projectId = ProjectFragmentArgs.fromBundle(getArguments()).getProjectId();
         access = Service.accesses.getAccessByIDs(CurrentSession.getAccount().getUserID(), projectId);
-        project = Service.projects.getProjectByID(projectId);
         accessList = Service.accesses.getProjectAccess(projectId);
 
+        // display the list of all users and their roles that have access to this project
         listView = view.findViewById(R.id.members_list);
 
         final ArrayAdapter<Access> members = new ArrayAdapter<Access>(view.getContext(), android.R.layout.simple_list_item_2, android.R.id.text1, accessList)
@@ -71,19 +70,23 @@ public class MembersListFragment extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long arg) {
+
+                // only CREATORs or ADMINs can change roles
+                // ADMINs can only change roles of MEMBERs
                 if( (access.getRole().equals(AccessRole.ADMIN.name()) && accessList.get(position).getRole().equals(AccessRole.MEMBER.name()))
                         || (access.getRole().equals(AccessRole.CREATOR.name()) && !accessList.get(position).getRole().equals(AccessRole.CREATOR.name())))
                 {
                     Access userAccess = accessList.get(position);
                     String userName = Service.users.getUserByUserId(userAccess.getUserId()).getName();
                     changeRole(userAccess, userName);
-                    // TODO: refresh the list
+                    // TODO: list is not refreshed after role update
                 }
             }
 
         });
     }
 
+    // popup dialogue for changing role of a project member
     public void changeRole(Access userAccess, String userName)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
