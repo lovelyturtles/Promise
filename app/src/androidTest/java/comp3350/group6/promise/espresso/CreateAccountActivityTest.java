@@ -63,7 +63,6 @@ public class CreateAccountActivityTest {
                                 1),
                         isDisplayed()));
         String email = UUID.randomUUID() + "@gmail.com";
-        assert.notNUll();
         appCompatEditText.perform(replaceText(email), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
