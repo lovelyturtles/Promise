@@ -33,8 +33,8 @@ import comp3350.group6.promise.objects.AccountUser;
 import comp3350.group6.promise.objects.Handle;
 import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.presentation.User.UserSelectionDialog;
-import comp3350.group6.promise.presentation.User.UserSelectorViewModel;
 import comp3350.group6.promise.presentation.User.AccountUserAdapter;
+import comp3350.group6.promise.presentation.User.UserSelectorViewModel;
 
 public class CreateTaskFragment extends Fragment {
 
@@ -74,17 +74,19 @@ public class CreateTaskFragment extends Fragment {
         priorityInput = view.findViewById(R.id.task_priority_input);
         submitButton = view.findViewById(R.id.submit_task_button);
 
-        View assigneePrompt = view.findViewById( R.id.task_assignee_add_message_container );
-        assigneeListRecycler = view.findViewById( R.id.task_assignee_recycler );
+        View assigneePrompt = view.findViewById(R.id.task_assignee_add_message_container);
+        assigneeListRecycler = view.findViewById(R.id.task_assignee_recycler);
 
         AccountUserAdapter assigneeListAdapter = new AccountUserAdapter(
                 getContext(),
                 assigneeSelectorModel.getSelectedUsers().getValue(),
-                assigneeView -> {openUserSelector();},
+                assigneeView -> {
+                    openUserSelector();
+                },
                 R.layout.user_list_section_item
         );
 
-        assigneeListRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
+        assigneeListRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         assigneeListRecycler.setAdapter(assigneeListAdapter);
 
         final Observer<List<AccountUser>> selectedListObserver = new Observer<List<AccountUser>>() {
@@ -135,16 +137,16 @@ public class CreateTaskFragment extends Fragment {
         c.setTime(new Date());
         c.add(Calendar.DATE, Integer.valueOf(deadline));
         deadlineTime = new Timestamp(c.getTimeInMillis());
+        int p = Integer.valueOf(priority);
 
         int taskId = createTask(name, description, Integer.parseInt(priority), deadlineTime, deadlineTime, projectId);
 
         // Return to projects page if creation is successful
-        if(taskId > 0) {
+        if (taskId > 0) {
             Toast.makeText(getActivity(), "Task created successfully", Toast.LENGTH_SHORT);
             NavDirections action = CreateTaskFragmentDirections.createTaskSuccess(projectId);
             navController.navigate(action);
-        }
-        else {
+        } else {
             Toast.makeText(getActivity(), "Failed to create task", Toast.LENGTH_SHORT);
         }
     }
@@ -153,13 +155,12 @@ public class CreateTaskFragment extends Fragment {
         int taskId = -1;
         try {
             taskId = Service.tasks.insertTask(new Task(name, desc, priority, 0, projectId, endTime, deadline));
-            for(AccountUser assignee : assigneeSelectorModel.getSelectedUsers().getValue()) {
+            for (AccountUser assignee : assigneeSelectorModel.getSelectedUsers().getValue()) {
                 Service.handles.insertHandle(
                         new Handle(taskId, assignee.getUserID(), new Timestamp(System.currentTimeMillis()))
                 );
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return taskId;
@@ -170,5 +171,4 @@ public class CreateTaskFragment extends Fragment {
         dialog.setViewModelOwner(this);
         dialog.show(getChildFragmentManager(), "Create Task");
     }
-
 }

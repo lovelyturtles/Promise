@@ -83,6 +83,13 @@
         <item name="android:lineSpacingMultiplier">1.15</item>
     </style>
 
+    <style name="Theme.Promise.TextAppearance.ContentSection" parent="@style/TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/gray_700</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
     <style name="Theme.Promise.TextAppearance.CardTitle" parent="@style/TextAppearance.Material3.HeadlineMedium">
         <item name="android:textSize">18dp</item>
         <item name="android:textFontWeight" tools:targetApi="p">400</item>
