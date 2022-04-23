@@ -3,7 +3,6 @@ package comp3350.group6.promise.business;
 import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Account;
 import comp3350.group6.promise.objects.AccountUser;
-import comp3350.group6.promise.objects.User;
 import comp3350.group6.promise.persistence.AccountUserDao;
 import comp3350.group6.promise.persistence.hsqldb.AccountUserImp;
 
@@ -13,7 +12,6 @@ public class AccountUserService {
 
     private final AccountUserDao accountUser = new AccountUserImp();
     private static AccountUserService instance;
-
 
     public AccountUser getUserByAccount(Account account) {
 
