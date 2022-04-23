@@ -13,6 +13,7 @@ import java.util.List;
 import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.objects.Task;
+import comp3350.group6.promise.objects.enumClasses.TaskType;
 import comp3350.group6.promise.util.DBConnectorUtil;
 
 public class TaskServiceIT {
@@ -26,6 +27,20 @@ public class TaskServiceIT {
         System.out.println("Starting test for TaskService");
         DBConnectorUtil.initialLocalDB();
         taskService = TaskService.getInstance();
+    }
+
+    @Test
+    public void testLogTask(){
+        System.out.println("\nStarting testLogTask");
+        taskService.logTask(1);
+        Task result = taskService.getTask(1);
+        assertEquals(TaskType.FINISHED, result.getType());
+
+        taskService.logTask(1);
+        result = taskService.getTask(1);
+        assertEquals(TaskType.IP, result.getType());
+
+        System.out.println("\nFinished testLogTask");
     }
 
     @Test
@@ -81,7 +96,7 @@ public class TaskServiceIT {
     public void testUpdateTask() {
         System.out.println("\nStarting testUpdateTask");
 
-        Task toUpdate = new Task(1, "updatedTask", "default", 0, 0, 0, null, null, null);
+        Task toUpdate = new Task(1, "updatedTask", "default", 0, 0, 0, null, null, null, TaskType.IP);
         taskService.updateTask(toUpdate);
 
         String newTitle = "updatedTask";

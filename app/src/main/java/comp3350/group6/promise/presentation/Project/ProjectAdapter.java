@@ -46,7 +46,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
 
             try {
                 numUsers = Service.accesses.getUsers(project.getProjectID()).size();
-                numTasks = Service.tasks.getTasksByProjectId(project.getProjectID()).size();
+                numTasks = Service.tasks.getTasksByProjectId(project.getProjectID(),1).size();
             } catch (Exception e) {
                 e.printStackTrace();
             }

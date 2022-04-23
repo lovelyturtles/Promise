@@ -11,14 +11,14 @@
     android:orientation="vertical"
     app:layout_dodgeInsetEdges="bottom"
     app:layout_insetEdge="bottom"
-    tools:context=".presentation.Project.Invitation.SendInvite.InviteFormDialog">
+    tools:context=".presentation.Project.Invitation.InviteFormDialog">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".presentation.Project.Invitation.SendInvite.InviteFormDialog">
+        tools:context=".presentation.Project.Invitation.InviteFormDialog">
 
         <LinearLayout
             android:layout_width="match_parent"

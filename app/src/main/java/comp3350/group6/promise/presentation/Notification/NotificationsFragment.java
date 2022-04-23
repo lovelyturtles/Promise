@@ -41,19 +41,23 @@ public class NotificationsFragment extends Fragment {
         notificationsList = Service.notifications.getNotifs(CurrentSession.getAccount().getUserID());
 
         // Get views from layout
-
         navController = NavHostFragment.findNavController(this);
+        if( notificationsList.isEmpty() ) {
+//            ((TextView) view.findViewById(R.id.notificationsTitle)).setText("No new messages");
+            NavDirections action = NotificationsFragmentDirections.navigateToNoNotifications();
+            navController.navigate(action);
+        }
 
-        recyclerView = view.findViewById( R.id.notifRecyclerView );
-
-        // Set up notification list
-
-        NotificationAdapter.NotificationClickListener listener = getOnClickListener();
-        NotificationAdapter adapter = new NotificationAdapter( notificationsList, listener );
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( getContext() );
-        recyclerView.setLayoutManager( layoutManager );
-        recyclerView.setItemAnimator( new DefaultItemAnimator() );
-        recyclerView.setAdapter( adapter );
+        else {
+            recyclerView = view.findViewById(R.id.notifRecyclerView);
+            // Set up notification list
+            NotificationAdapter.NotificationClickListener listener = getOnClickListener();
+            NotificationAdapter adapter = new NotificationAdapter(notificationsList, listener);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(adapter);
+        }
     }
 
     private NotificationAdapter.NotificationClickListener getOnClickListener() {

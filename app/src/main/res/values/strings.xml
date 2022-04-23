@@ -76,16 +76,21 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
-    <!-- New Task -->
+    <!--Task -->
     <string name="taskNameInput">Task Name</string>
     <string name="taskDesInput">Task Description</string>
     <string name="taskPriorityInput">Enter number</string>
     <string name="taskEstimateInput">Enter days</string>
+    <string name="dialog_delete_task">Are you sure to delete this task?</string>
+    <string name="delete_task">Delete task</string>
+    <string name="cancel_task">Cancel</string>
+    <string name="edit_task_label">Edit Task</string>
 
     <!--Notification Page-->
     <string name="personIconName">You\'ve been invited to work on a project</string>
     <string name="acceptInvite">Accept</string>
     <string name="rejectInvite">Reject</string>
+    <string name="noNotifications">No notifications</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>

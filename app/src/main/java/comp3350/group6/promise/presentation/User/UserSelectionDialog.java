@@ -1,7 +1,6 @@
-package comp3350.group6.promise.presentation.Project.Invitation.SendInvite;
+package comp3350.group6.promise.presentation.User;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -29,7 +28,6 @@ import java.util.List;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.objects.AccountUser;
-import comp3350.group6.promise.presentation.User.AccountUserAdapter;
 
 public class UserSelectionDialog extends BottomSheetDialogFragment {
 
