@@ -23,11 +23,11 @@ public class Project {
             this.statement = "project statement";
         }
         this.statement = statement;
-        this.statusNum = 0; //TODO: set to default status
+        this.statusNum = 0; //TODO: [Future iterations] create project status
         
-        Timestamp time = new Timestamp(System.currentTimeMillis()); //TODO: check estimated time
+        Timestamp time = new Timestamp(System.currentTimeMillis());
         this.createdTime = time;
-        this.estimatedEndTime = time;
+        this.estimatedEndTime = time; //TODO: [Future iterations] check estimated time
 
         count++;
     }
