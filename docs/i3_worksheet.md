@@ -39,7 +39,9 @@ They were only testable by running the app, and not with automated assertions.
 
 Velocity/teamwork
 =================
-Our estimations did not improve much through out the course. 
+Our estimations did not improve much through out the course.
+
+[Group Velocity chart](../docs/images/group-velocity.png)
 
 For the first iteration, we [underestimated](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/issues/36) the time that would take for each task. 
 There were a lot of learnings to do on Android specific elements for the presentations layer and for the database.
