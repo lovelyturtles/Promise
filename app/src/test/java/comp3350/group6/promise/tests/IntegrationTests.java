@@ -7,11 +7,10 @@ import comp3350.group6.promise.tests.business.AccessServiceTest;
 import comp3350.group6.promise.tests.business.AccountServiceTest;
 import comp3350.group6.promise.tests.business.AccountUserServiceTest;
 import comp3350.group6.promise.tests.business.HandleServiceIT;
-import comp3350.group6.promise.tests.business.NotifServiceTest;
+import comp3350.group6.promise.tests.business.NotifServiceTestIT;
 import comp3350.group6.promise.tests.business.ProjectServiceIT;
 import comp3350.group6.promise.tests.business.TaskServiceTest;
 import comp3350.group6.promise.tests.business.UserServiceIT;
-import comp3350.group6.promise.tests.business.UserServiceTest;
 import comp3350.group6.promise.tests.objects.UserTest;
 
 @RunWith(Suite.class)
@@ -23,7 +22,7 @@ import comp3350.group6.promise.tests.objects.UserTest;
         ProjectServiceIT.class,
         HandleServiceIT.class,
         AccountUserServiceTest.class,
-        NotifServiceTest.class,
+        NotifServiceTestIT.class,
         UserServiceIT.class
 })
 

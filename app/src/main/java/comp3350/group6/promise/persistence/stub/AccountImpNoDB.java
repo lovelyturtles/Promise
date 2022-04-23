@@ -1,23 +1,21 @@
 //package comp3350.group6.promise.persistence.stub;
 //
 //import comp3350.group6.promise.objects.Account;
+//import comp3350.group6.promise.objects.Exceptions.DuplicateEmailException;
 //import comp3350.group6.promise.objects.FakeDB;
 //import comp3350.group6.promise.persistence.AccountDao;
 //
 //public class AccountImpNoDB implements AccountDao {
 //
 //    @Override
-//    public int createAccount( String email, String password, int userID ){
+//    public void createAccount( String email, String password, int userID ) throws DuplicateEmailException {
 //
-//        int returnID = userID;
 //
 //        if( accountExists( email ) )
-//            returnID = -1;
+//            throw new DuplicateEmailException("This account already exists.\n");
 //
 //        else
 //            FakeDB.accounts.add( new Account( email, password, userID ) );
-//
-//        return returnID;
 //
 //    }
 //
@@ -48,7 +46,7 @@
 //    }
 //
 //    @Override
-//    public Account getAccountByEmail(String email ){
+//    public Account getAccountByEmail(String email){
 //
 //        Account returnAccount = null;
 //        int index = getIndexByEmail( email );
@@ -58,6 +56,16 @@
 //
 //        return returnAccount;
 //
+//    }
+//
+//    @Override
+//    public Account getAccountByID(int userID){
+//        Account returnAccount = null;
+//        int index = getIndexByUserID(userID);
+//
+//        if(index != -1)
+//            returnAccount = FakeDB.accounts.get(index);
+//        return returnAccount;
 //    }
 //
 //    @Override
