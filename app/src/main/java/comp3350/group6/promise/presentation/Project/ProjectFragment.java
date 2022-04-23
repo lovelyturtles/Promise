@@ -77,6 +77,7 @@ public class ProjectFragment extends Fragment {
         int projectId = ProjectFragmentArgs.fromBundle(getArguments()).getProjectId();
 
         // Get project data
+
         if (projectId != -1) {
             project = ProjectService.getInstance().getProjectByID(projectId);
             listOfTasksIP = TaskService.getInstance().getTasksByProjectId(projectId, 1);
@@ -91,12 +92,13 @@ public class ProjectFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         toolbarView = view.findViewById(R.id.toolbar);
+        fab = getActivity().findViewById(R.id.fab);
         projectDescriptionView = view.findViewById(R.id.project_page_desc);
+
         taskListIP = view.findViewById(R.id.task_in_progress_label);
         taskListFinish = view.findViewById(R.id.task_finished_label);
         taskRecyclerViewIP = view.findViewById(R.id.task_recycler_in_progress);
         taskRecyclerViewFinished = view.findViewById(R.id.task_recycler_finished);
-        fab = getActivity().findViewById(R.id.fab);
 
         // Update layout content
 
@@ -113,16 +115,8 @@ public class ProjectFragment extends Fragment {
         taskRecyclerViewFinished.setAdapter(taskListAdapterFinished);
 
 
-        // Update layout behaviours
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                handleAddTask(projectId);
-            }
-        });
-
         initializeToolbar();
+        initializeFab();
 
     }
 
@@ -167,15 +161,6 @@ public class ProjectFragment extends Fragment {
         }
     }
 
-    // Task List Methods
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        taskListAdapterIP.notifyDataSetChanged();
-        taskListAdapterFinished.notifyDataSetChanged();
-    }
-
     // Toolbar Methods
 
     private void initializeToolbar() {
@@ -186,6 +171,15 @@ public class ProjectFragment extends Fragment {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupWithNavController(toolbarView, navController, appBarConfiguration);
         NavigationUI.setupActionBarWithNavController(activity, navController, appBarConfiguration);
+    }
+
+    private void initializeFab() {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleAddTask(project.getProjectID());
+            }
+        });
     }
 
     @Override
@@ -210,7 +204,7 @@ public class ProjectFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_invite_user) {
-            NavDirections action = ProjectFragmentDirections.actionInviteUser(project.getProjectID());
+            NavDirections action = ProjectFragmentDirections.actionInviteToProject(project.getProjectID());
             navController.navigate(action);
             return true;
         } else if (id == R.id.action_delete_project) {
@@ -261,4 +255,11 @@ public class ProjectFragment extends Fragment {
         dialog.show();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initializeFab();
+        taskListAdapterIP.notifyDataSetChanged();
+        taskListAdapterFinished.notifyDataSetChanged();
+    }
 }

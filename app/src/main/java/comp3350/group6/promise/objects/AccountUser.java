@@ -26,4 +26,8 @@ public class AccountUser {
         return account.getEmail();
     }
 
+    public boolean equals(AccountUser other) {
+        return getUserID() == other.getUserID();
+    }
+
 }
