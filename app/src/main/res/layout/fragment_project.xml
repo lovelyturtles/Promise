@@ -64,32 +64,32 @@
                 android:text="Project Description" />
 
             <TextView
-                android:id="@+id/task_in_progress_label"
-                style="@style/Theme.Promise.InputLabel"
+                android:text="In Progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="IN PROGRESS"
-                android:textStyle="bold" />
+                android:id="@+id/task_in_progress_label"
+                style="@style/Theme.Promise.InputLabel"
+                android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/task_recycler_in_progress">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/task_recycler_in_progress">
 
             </androidx.recyclerview.widget.RecyclerView>
 
             <TextView
-                    android:text="Finished"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/task_finished_label"
-                    style="@style/Theme.Promise.InputLabel"
-                    android:textSize="20sp" />
+                android:text="Finished"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/task_finished_label"
+                style="@style/Theme.Promise.InputLabel"
+                android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/task_recycler_finished" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/task_recycler_finished" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -20,7 +20,7 @@ import comp3350.group6.promise.persistence.hsqldb.NotifImp;
 
 public class NotifService {
 
-    private NotifDao notifDao;
+    private final NotifDao notifDao;
     private static NotifService instance;
 
 
@@ -30,9 +30,7 @@ public class NotifService {
 
     }
 
-    public NotifService( NotifDao notifDao ){
-
-        this();
+    public NotifService(NotifDao notifDao){
         this.notifDao = notifDao;
 
     }
@@ -64,20 +62,20 @@ public class NotifService {
 
     }
 
-//    /*
-//     * If the user is requesting access to this project, we have to go and find the user
-//     * that has the privileges necessary to grant access and send the request to them
-//     */
-//    public void request( int projectID ) throws DuplicateNotificationException {
-//
-//        int senderID = CurrentSession.currentUser.getUserID();
-//        //find out who has the privileges to accept/deny requests (for now, that's the creator)
-//        List<Integer> creatorRole = Service.accesses.getRoleByProjectID( projectID, AccessRole.CREATOR );
-//        int creatorID = creatorRole.get( 0 );
-//        //add this request to the notifications database
-//        notifDao.addNotif(senderID, projectID, creatorID, NotifType.REQUEST);
-//
-//    }
+    /*
+     * If the user is requesting access to this project, we have to go and find the user
+     * that has the privileges necessary to grant access and send the request to them
+     */
+    public void request( int projectID ) throws DuplicateNotificationException {
+
+        int senderID = CurrentSession.getAccount().getUserID();
+        //find out who has the privileges to accept/deny requests (for now, that's the creator)
+        List<Integer> creatorRole = Service.accesses.getRoleByProjectID( projectID, AccessRole.CREATOR );
+        int creatorID = creatorRole.get( 0 );
+        //add this request to the notifications database
+        notifDao.addNotif(senderID, projectID, creatorID, NotifType.REQUEST);
+
+    }
 
     private void remove( Notification removeThis ){
 

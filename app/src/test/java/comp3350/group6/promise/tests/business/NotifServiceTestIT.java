@@ -23,7 +23,7 @@ import comp3350.group6.promise.objects.Notification;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.util.DBConnectorUtil;
 
-public class NotifServiceTest {
+public class NotifServiceTestIT {
 
     private NotifService notifService;
     private AccountService accountService;
@@ -33,7 +33,7 @@ public class NotifServiceTest {
 
     @Before
     public void setup() {
-        System.out.println("Starting test for NotifService");
+        System.out.println("Starting integration test for NotifService");
         DBConnectorUtil.initialLocalDB();
         notifService = new NotifService();
         accountService = new AccountService();

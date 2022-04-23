@@ -51,8 +51,6 @@ public class ProjectFragment extends Fragment {
 
     private Toolbar toolbarView;
     private TextView projectDescriptionView;
-    private TextView taskListIP;
-    private TextView taskListFinish;
     private RecyclerView taskRecyclerViewIP;
     private RecyclerView taskRecyclerViewFinished;
 
@@ -92,11 +90,10 @@ public class ProjectFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         toolbarView = view.findViewById(R.id.toolbar);
-        fab = getActivity().findViewById(R.id.fab);
         projectDescriptionView = view.findViewById(R.id.project_page_desc);
 
-        taskListIP = view.findViewById(R.id.task_in_progress_label);
-        taskListFinish = view.findViewById(R.id.task_finished_label);
+        fab = getActivity().findViewById(R.id.fab);
+
         taskRecyclerViewIP = view.findViewById(R.id.task_recycler_in_progress);
         taskRecyclerViewFinished = view.findViewById(R.id.task_recycler_finished);
 
@@ -114,6 +111,7 @@ public class ProjectFragment extends Fragment {
         taskRecyclerViewFinished.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         taskRecyclerViewFinished.setAdapter(taskListAdapterFinished);
 
+        // Update layout behaviours
 
         initializeToolbar();
         initializeFab();
@@ -124,6 +122,8 @@ public class ProjectFragment extends Fragment {
         NavDirections action = ProjectFragmentDirections.createTask(projectId);
         navController.navigate(action);
     }
+
+    // Task List Methods
 
     private class IncompleteTaskClickListener implements TaskAdapter.OnTaskClickListener, TaskAdapter.OnTaskLongClickListener {
 
@@ -174,12 +174,10 @@ public class ProjectFragment extends Fragment {
     }
 
     private void initializeFab() {
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        fab.setOnClickListener( fab -> {
                 handleAddTask(project.getProjectID());
             }
-        });
+        );
     }
 
     @Override
@@ -207,10 +205,12 @@ public class ProjectFragment extends Fragment {
             NavDirections action = ProjectFragmentDirections.actionInviteToProject(project.getProjectID());
             navController.navigate(action);
             return true;
-        } else if (id == R.id.action_delete_project) {
+        }
+        else if(id == R.id.action_delete_project) {
             deleteDialogue();
             return true;
-        } else if (id == R.id.action_edit_project) {
+        }
+        else if(id == R.id.action_edit_project) {
             NavDirections action = ProjectFragmentDirections.actionEditProject(project.getProjectID());
             navController.navigate(action);
             return true;
@@ -222,7 +222,6 @@ public class ProjectFragment extends Fragment {
         }
 
         return super.onOptionsItemSelected(item);
-//        return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
     }
 
     // popup dialogue for the project delete option

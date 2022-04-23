@@ -7,7 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -31,7 +30,6 @@ import comp3350.group6.promise.business.HandleService;
 import comp3350.group6.promise.business.TaskService;
 import comp3350.group6.promise.objects.AccountUser;
 import comp3350.group6.promise.objects.Task;
-import comp3350.group6.promise.presentation.Project.ProjectFragmentDirections;
 import comp3350.group6.promise.presentation.User.AccountUserAdapter;
 
 public class TaskFragment extends Fragment {
@@ -74,6 +72,7 @@ public class TaskFragment extends Fragment {
         descriptionView = view.findViewById(R.id.task_page_description);
         priorityView = view.findViewById(R.id.task_page_priority);
         deadlineView = view.findViewById(R.id.task_page_deadline);
+
         assigneeRecycler = view.findViewById(R.id.task_assignee_recycler);
         assigneeTextContent = view.findViewById(R.id.task_assignee_add_message);
 
@@ -108,6 +107,7 @@ public class TaskFragment extends Fragment {
         // Set up toolbar
 
         initializeToolbar();
+
         toolbarView.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

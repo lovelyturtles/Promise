@@ -202,6 +202,7 @@
                 android:defaultValue="true" />
         </dialog>
     </navigation>
+    <include app:graph="@navigation/root_graph" />
     <fragment
         android:id="@+id/view_members_fragment"
         android:name="comp3350.group6.promise.presentation.Project.MembersListFragment"
@@ -212,16 +213,16 @@
     </fragment>
     <include app:graph="@navigation/root_graph" />
     <fragment
-        android:id="@+id/editTaskFragment"
-        android:name="comp3350.group6.promise.presentation.Task.EditTaskFragment"
-        android:label="fragment_edit_task"
-        tools:layout="@layout/fragment_edit_task" >
+            android:id="@+id/editTaskFragment"
+            android:name="comp3350.group6.promise.presentation.Task.EditTaskFragment"
+            android:label="fragment_edit_task"
+            tools:layout="@layout/fragment_edit_task" >
         <argument
-            android:name="taskId"
-            app:argType="integer" />
+                android:name="taskId"
+                app:argType="integer" />
         <action
-            android:id="@+id/action_edit_task_success"
-            app:destination="@id/task_fragment" />
+                android:id="@+id/action_edit_task_success"
+                app:destination="@id/task_fragment" />
     </fragment>
     <fragment
         android:id="@+id/noNotificationsFragment"

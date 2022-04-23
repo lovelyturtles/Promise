@@ -1,7 +1,4 @@
 package comp3350.group6.promise.business;
-
-import android.widget.EditText;
-
 import comp3350.group6.promise.application.CurrentSession;
 import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Account;
@@ -11,16 +8,11 @@ import comp3350.group6.promise.objects.Exceptions.EmptyPasswordException;
 import comp3350.group6.promise.objects.Exceptions.LoginErrorException;
 import comp3350.group6.promise.persistence.AccountDao;
 import comp3350.group6.promise.persistence.hsqldb.AccountImp;
-import lombok.extern.java.Log;
 
 public class AccountService {
 
     private static final AccountDao accountDao = new AccountImp();
     private static AccountService instance;
-
-    public AccountService() {
-    }
-
 
     //changed this method to have a void return statement and just use Exception handling - ask if OK
     private void createAccount(String email, String password, String name, String introduction) throws Exception {
@@ -29,7 +21,8 @@ public class AccountService {
 
         try {
             accountDao.createAccount(email, password, userID);
-        } catch (DuplicateEmailException e) {
+        }
+        catch (DuplicateEmailException e) {
             throw new DuplicateEmailException("An account with this email already exists");
         }
 

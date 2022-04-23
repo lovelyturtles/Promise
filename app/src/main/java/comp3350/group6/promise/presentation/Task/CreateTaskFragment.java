@@ -13,14 +13,12 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -33,7 +31,6 @@ import comp3350.group6.promise.objects.AccountUser;
 import comp3350.group6.promise.objects.Handle;
 import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.presentation.User.UserSelectionDialog;
-import comp3350.group6.promise.presentation.User.UserSelectorViewModel;
 import comp3350.group6.promise.presentation.User.AccountUserAdapter;
 
 public class CreateTaskFragment extends Fragment {
@@ -130,11 +127,11 @@ public class CreateTaskFragment extends Fragment {
             deadlineInput.setError("This item cannot be empty");
             return;
         }
-
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
         c.add(Calendar.DATE, Integer.valueOf(deadline));
         deadlineTime = new Timestamp(c.getTimeInMillis());
+        int p = Integer.valueOf(priority);
 
         int taskId = createTask(name, description, Integer.parseInt(priority), deadlineTime, deadlineTime, projectId);
 
