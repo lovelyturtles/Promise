@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -44,8 +45,8 @@ public class ProjectFragment extends Fragment {
 
     private Access access;
     private Project project;
-    private List<Task> listOfTasksIP; // In Progress
-    private List<Task> listOfTasksFinished; // Finished
+    private MutableLiveData<List<Task>> taskListIP = new MutableLiveData<>();
+    private MutableLiveData<List<Task>> taskListFinished = new MutableLiveData<>();
     private TaskAdapter taskListAdapterIP;
     private TaskAdapter taskListAdapterFinished;
 
@@ -78,8 +79,8 @@ public class ProjectFragment extends Fragment {
 
         if (projectId != -1) {
             project = ProjectService.getInstance().getProjectByID(projectId);
-            listOfTasksIP = TaskService.getInstance().getTasksByProjectId(projectId, 1);
-            listOfTasksFinished = TaskService.getInstance().getTasksByProjectId(projectId, 0);
+            taskListIP.setValue(TaskService.getInstance().getTasksByProjectId(projectId, 1));
+            taskListFinished.setValue(TaskService.getInstance().getTasksByProjectId(projectId, 0));
         }
 
         // set Access
@@ -102,14 +103,22 @@ public class ProjectFragment extends Fragment {
         projectDescriptionView.setText(project.getStatement());
 
         IncompleteTaskClickListener incompleteTaskClickListener = new IncompleteTaskClickListener();
-        taskListAdapterIP = new TaskAdapter(getContext(), listOfTasksIP, incompleteTaskClickListener, incompleteTaskClickListener);
+        taskListAdapterIP = new TaskAdapter(getContext(), taskListIP.getValue(), incompleteTaskClickListener, incompleteTaskClickListener);
         taskRecyclerViewIP.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         taskRecyclerViewIP.setAdapter(taskListAdapterIP);
 
+        taskListIP.observe(getViewLifecycleOwner(), tasks -> {
+            taskListAdapterIP.notifyDataSetChanged();
+        });
+
         CompleteTaskClickListener completeTaskClickListener = new CompleteTaskClickListener();
-        taskListAdapterFinished = new TaskAdapter(getContext(), listOfTasksFinished, completeTaskClickListener, completeTaskClickListener);
+        taskListAdapterFinished = new TaskAdapter(getContext(), taskListFinished.getValue(), completeTaskClickListener, completeTaskClickListener);
         taskRecyclerViewFinished.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         taskRecyclerViewFinished.setAdapter(taskListAdapterFinished);
+
+        taskListFinished.observe(getViewLifecycleOwner(), tasks -> {
+            taskListAdapterFinished.notifyDataSetChanged();
+        });
 
         // Update layout behaviours
 
@@ -129,7 +138,7 @@ public class ProjectFragment extends Fragment {
 
         @Override
         public void onTaskClick(int position) {
-            int taskId = listOfTasksIP.get(position).getTaskId();
+            int taskId = taskListIP.getValue().get(position).getTaskId();
             NavDirections action = ProjectFragmentDirections.selectTask(taskId);
             navController.navigate(action);
         }
@@ -137,9 +146,10 @@ public class ProjectFragment extends Fragment {
         @Override
         public void onLongTaskClick(int position) {
             // Business layer call to mark task as complete
-            Toast.makeText(getContext(), "Move task to Finished", Toast.LENGTH_SHORT).show();
-            int taskId = listOfTasksIP.get(position).getTaskId();
+            Toast.makeText(getContext(), "Task has been marked complete", Toast.LENGTH_SHORT).show();
+            int taskId = taskListIP.getValue().get(position).getTaskId();
             Service.tasks.logTask(taskId);
+            refreshTaskLists();
         }
     }
 
@@ -147,7 +157,7 @@ public class ProjectFragment extends Fragment {
 
         @Override
         public void onTaskClick(int position) {
-            int taskId = listOfTasksFinished.get(position).getTaskId();
+            int taskId = taskListFinished.getValue().get(position).getTaskId();
             NavDirections action = ProjectFragmentDirections.selectTask(taskId);
             navController.navigate(action);
         }
@@ -155,9 +165,10 @@ public class ProjectFragment extends Fragment {
         @Override
         public void onLongTaskClick(int position) {
             // Business layer call to mark task as incomplete
-            Toast.makeText(getContext(), "Move task to In Progress", Toast.LENGTH_SHORT).show();
-            int taskId = listOfTasksFinished.get(position).getTaskId();
+            Toast.makeText(getContext(), "Task has been marked incomplete", Toast.LENGTH_SHORT).show();
+            int taskId = taskListFinished.getValue().get(position).getTaskId();
             Service.tasks.logTask(taskId);
+            refreshTaskLists();
         }
     }
 
@@ -254,11 +265,30 @@ public class ProjectFragment extends Fragment {
         dialog.show();
     }
 
+    private void refreshTaskLists() {
+
+        List<Task> taskListIPValue = taskListIP.getValue();
+        List<Task> taskListFinishedValue = taskListFinished.getValue();
+
+        List<Task> updatedIP = TaskService.getInstance().getTasksByProjectId(project.getProjectID(), 1);
+        List<Task> updatedFinished = TaskService.getInstance().getTasksByProjectId(project.getProjectID(), 0);
+
+        taskListIPValue.clear();
+        taskListFinishedValue.clear();
+
+        taskListIPValue.addAll(updatedIP);
+        taskListFinishedValue.addAll(updatedFinished);
+
+        taskListFinished.setValue(taskListFinishedValue);
+        taskListIP.setValue(taskListIPValue);
+
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         initializeFab();
-        taskListAdapterIP.notifyDataSetChanged();
-        taskListAdapterFinished.notifyDataSetChanged();
+        refreshTaskLists();
     }
+
 }

@@ -36,8 +36,6 @@ Qapp/src/main/java/comp3350/group6/promise/presentation/User/RegisterFragment.ja
 Yapp/src/main/java/comp3350/group6/promise/presentation/Project/CreateProjectFragment.java,3\7\376a5157908ad21ef55c59faaae9ddcb81bce152
 Ž
 ^app/src/main/java/comp3350/group6/promise/presentation/Notification/NotificationsFragment.java,7\6\768798b1466b3c362660f416d5871842ae4424f2
-ƒ
-Sapp/src/main/java/comp3350/group6/promise/presentation/Task/CreateTaskFragment.java,0\1\014bb5b7255d6070584bc10975f08fc125f93100
 ‚
 Rapp/src/main/java/comp3350/group6/promise/presentation/User/DashboardFragment.java,6\5\65c19c98ec472cf85983840db23cbc48aeb72b33
 }
