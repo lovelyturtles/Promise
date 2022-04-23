@@ -5,8 +5,6 @@ dapp/src/main/java/comp3350/group6/promise/presentation/Notification/Notificatio
 japp/src/main/java/comp3350/group6/promise/presentation/Project/Invitation/ProjectInviteDialogFragment.java,a\b\abd1ea1f033194bdf2fbcd95973cdc2019931ff6
 v
 Fapp/src/main/java/comp3350/group6/promise/business/ProjectService.java,6\c\6c8f58c8a0a137788387ce375ba406b512fe3daf
-9
-	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
