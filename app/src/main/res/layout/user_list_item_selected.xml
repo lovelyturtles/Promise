@@ -70,16 +70,15 @@
     </LinearLayout>
 
     <RadioButton
-        android:id="@+id/user_select_radio"
+        android:id="@+id/radioButton"
+        style="@android:style/Widget.DeviceDefault.Light.CompoundButton.RadioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:checked="false"
+        android:checked="true"
         android:clickable="false"
-        android:includeFontPadding="false"
+        android:focusable="false"
         android:minWidth="0dp"
         android:minHeight="0dp"
-        android:padding="0dp"
-        android:visibility="gone" />
+        android:textAlignment="viewStart" />
 
 </LinearLayout>

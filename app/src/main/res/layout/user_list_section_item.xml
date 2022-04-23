@@ -5,9 +5,10 @@
     android:id="@+id/user_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/list_item_spacing_half"
+    android:background="@drawable/rounded_corner_outline_gray"
     android:gravity="center_vertical"
-    android:paddingTop="@dimen/list_item_spacing_half"
-    android:paddingBottom="@dimen/list_item_spacing_half">
+    android:padding="@dimen/gap_lg">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -68,18 +69,5 @@
             android:textSize="14sp" />
 
     </LinearLayout>
-
-    <RadioButton
-        android:id="@+id/user_select_radio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:checked="false"
-        android:clickable="false"
-        android:includeFontPadding="false"
-        android:minWidth="0dp"
-        android:minHeight="0dp"
-        android:padding="0dp"
-        android:visibility="gone" />
 
 </LinearLayout>

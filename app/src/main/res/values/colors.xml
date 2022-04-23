@@ -4,15 +4,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="gray_50">#FAFAFA</color>
-    <color name="gray_100">#F2F2F2</color>
-    <color name="gray_200">#E8E9EB</color>
-    <color name="gray_300">#D5D7DB</color>
-    <color name="gray_400">#A9ABB0</color>
-    <color name="gray_500">#737680</color>
-    <color name="gray_600">#5C5F63</color>
-    <color name="gray_700">#444A52</color>
-    <color name="gray_800">#2F3438</color>
+    <color name="gray_50">#F7FAFC</color>
+    <color name="gray_100">#EDF2F7</color>
+    <color name="gray_200">#E2E8F0</color>
+    <color name="gray_300">#CBD5E0</color>
+    <color name="gray_400">#A0AEC0</color>
+    <color name="gray_500">#718096</color>
+    <color name="gray_600">#4A5568</color>
+    <color name="gray_700">#2D3748</color>
+    <color name="gray_800">#1A202C</color>
     <color name="gray_900">#181D26</color>
 
     <color name="text_body">@color/gray_500</color>
@@ -24,5 +24,10 @@
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
+
+    <color name="list_item_bg">@color/white</color>
+    <color name="list_item_stroke">@color/gray_400</color>
+    <color name="list_item_selected_stroke">@color/gray_400</color>
+    <color name="list_item_selected_bg">@color/gray_200</color>
 
 </resources>

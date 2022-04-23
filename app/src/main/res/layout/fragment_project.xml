@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="false">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
@@ -43,8 +43,12 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">>
+        android:layout_height="match_parent"
+        android:fadingEdge="vertical"
+        android:fillViewport="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,58 +63,37 @@
                 android:layout_marginBottom="@dimen/gap_lg"
                 android:text="Project Description" />
 
-            <TextView
-                    android:text="In Progress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/task_in_progress_label"
-                    style="@style/Theme.Promise.InputLabel"
-                    android:textSize="20sp" />
-
             <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/task_recycler_in_progress">
+                android:id="@+id/task_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             </androidx.recyclerview.widget.RecyclerView>
 
-            <TextView
-                    android:text="Finished"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/task_finished_label"
-                    style="@style/Theme.Promise.InputLabel"
-                    android:textSize="20sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/task_recycler_finished" />
-
             <!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="171dp">-->
+            <!--                            android:layout_width="match_parent"-->
+            <!--                            android:layout_height="171dp">-->
 
-<!--                            <Button-->
-<!--                                android:text="Create task"-->
-<!--                                android:layout_width="169dp"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:id="@+id/button_create_task"-->
-<!--                                android:onClick="onTaskClick"-->
-<!--                                tools:layout_editor_absoluteX="188dp"-->
-<!--                                app:layout_constraintTop_toTopOf="parent"-->
-<!--                                android:layout_marginTop="2dp" />-->
+            <!--                            <Button-->
+            <!--                                android:text="Create task"-->
+            <!--                                android:layout_width="169dp"-->
+            <!--                                android:layout_height="wrap_content"-->
+            <!--                                android:id="@+id/button_create_task"-->
+            <!--                                android:onClick="onTaskClick"-->
+            <!--                                tools:layout_editor_absoluteX="188dp"-->
+            <!--                                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                                android:layout_marginTop="2dp" />-->
 
-<!--                            <EditText-->
-<!--                                android:layout_width="189dp"-->
-<!--                                android:layout_height="53dp"-->
-<!--                                android:inputType="textPersonName"-->
-<!--                                android:text="Name"-->
-<!--                                android:ems="10"-->
-<!--                                android:id="@+id/editTextTextPersonName"-->
-<!--                                tools:layout_editor_absoluteY="3dp"-->
-<!--                                tools:layout_editor_absoluteX="-2dp" />-->
-<!--                        </androidx.constraintlayout.widget.ConstraintLayout>-->
+            <!--                            <EditText-->
+            <!--                                android:layout_width="189dp"-->
+            <!--                                android:layout_height="53dp"-->
+            <!--                                android:inputType="textPersonName"-->
+            <!--                                android:text="Name"-->
+            <!--                                android:ems="10"-->
+            <!--                                android:id="@+id/editTextTextPersonName"-->
+            <!--                                tools:layout_editor_absoluteY="3dp"-->
+            <!--                                tools:layout_editor_absoluteX="-2dp" />-->
+            <!--                        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
