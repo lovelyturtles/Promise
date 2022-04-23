@@ -11,6 +11,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -21,11 +23,16 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.Service;
+import comp3350.group6.promise.business.HandleService;
 import comp3350.group6.promise.business.TaskService;
+import comp3350.group6.promise.objects.AccountUser;
 import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.presentation.Project.ProjectFragmentDirections;
+import comp3350.group6.promise.presentation.User.AccountUserAdapter;
 
 public class TaskFragment extends Fragment {
 
@@ -36,6 +43,10 @@ public class TaskFragment extends Fragment {
     private TextView descriptionView;
     private TextView priorityView;
     private TextView deadlineView;
+
+    private List<AccountUser> assignees;
+    private TextView assigneeTextContent;
+    private RecyclerView assigneeRecycler;
 
     private NavController navController;
 
@@ -50,8 +61,9 @@ public class TaskFragment extends Fragment {
 
         taskId = TaskFragmentArgs.fromBundle(getArguments()).getTaskId();
 
-        if (taskId != -1) {
+        if(taskId != 0) {
             task = TaskService.getInstance().getTask(taskId);
+            assignees = HandleService.getInstance().getTaskAssignees(taskId);
         }
 
         // Get views from layout
@@ -62,6 +74,8 @@ public class TaskFragment extends Fragment {
         descriptionView = view.findViewById(R.id.task_page_description);
         priorityView = view.findViewById(R.id.task_page_priority);
         deadlineView = view.findViewById(R.id.task_page_deadline);
+        assigneeRecycler = view.findViewById(R.id.task_assignee_recycler);
+        assigneeTextContent = view.findViewById(R.id.task_assignee_add_message);
 
         // Update layout content with task data
 
@@ -70,7 +84,28 @@ public class TaskFragment extends Fragment {
         priorityView.setText("Priority: " + task.getPriority());
         deadlineView.setText("Deadline: " + task.getDeadline().toLocaleString());
 
-        // Update layout behaviours
+        // Set up assignee section
+
+        if(assignees.size() > 0) {
+            assigneeTextContent.setVisibility(View.GONE);
+            assigneeRecycler.setVisibility(View.VISIBLE);
+        }
+        else {
+            assigneeTextContent.setVisibility(View.VISIBLE);
+            assigneeRecycler.setVisibility(View.GONE);
+        }
+
+        AccountUserAdapter assigneeListAdapter = new AccountUserAdapter(
+                getContext(),
+                assignees,
+                assigneeView -> { handleAssigneeClick(); },
+                R.layout.user_list_section_item
+        );
+
+        assigneeRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
+        assigneeRecycler.setAdapter(assigneeListAdapter);
+
+        // Set up toolbar
 
         initializeToolbar();
         toolbarView.setNavigationOnClickListener(new View.OnClickListener() {
@@ -81,6 +116,10 @@ public class TaskFragment extends Fragment {
             }
         });
 
+    }
+
+    private void handleAssigneeClick() {
+        Toast.makeText(getActivity(), "Pressed Task Assignee", Toast.LENGTH_SHORT).show();
     }
 
     // Toolbar Methods

@@ -57,7 +57,6 @@ public class DashboardFragment extends Fragment {
             }
             bottomNav.setVisibility(showBottomNav ? View.VISIBLE : View.GONE);
             fab.setVisibility(showFloatingButton ? View.VISIBLE : View.GONE);
-            fab.setOnClickListener(null);
         }
     }
 

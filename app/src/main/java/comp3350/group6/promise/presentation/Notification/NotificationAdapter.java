@@ -44,7 +44,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @NonNull
     @Override
     public NotifViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from( parent.getContext() ).inflate(R.layout.notif_item_design, parent, false );
+        View itemView = LayoutInflater.from( parent.getContext() ).inflate(R.layout.notification_list_item, parent, false );
         return new NotifViewHolder(itemView);
     }
 

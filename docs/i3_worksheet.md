@@ -51,4 +51,4 @@ The under/overestimation here was mostly on the UI layers, where the members who
 Because we learned a lot from the first iteration and setup most of the things, we expected that the second iteration would be much smoother.
 However, adding the real database and tests took us quite some time, resulting in an overall underestimation of the expected time.
 
-For the third iteration, 
+For the third iteration, overall we [overestimated](https://code.cs.umanitoba.ca/winter-2022-a01/group-6/promise/-/milestones/4#tab-issues) the time. However, individual tasks had a much closer estimation compared to previous iterations; only having a maximum margin of 6 hours.
