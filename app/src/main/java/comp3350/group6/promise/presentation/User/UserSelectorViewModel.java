@@ -1,4 +1,4 @@
-package comp3350.group6.promise.presentation.Project.Invitation.SendInvite;
+package comp3350.group6.promise.presentation.User;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

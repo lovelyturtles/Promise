@@ -13,11 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".presentation.Project.Invitation.SendInvite.InviteFormDialog">
+        tools:context=".presentation.Project.Invitation.InviteFormDialog">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/inviteFormFragmentContainer"
-            android:name="comp3350.group6.promise.presentation.Project.Invitation.SendInvite.InviteFormDialog"
+            android:name="comp3350.group6.promise.presentation.Project.Invitation.InviteFormDialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

@@ -64,6 +64,9 @@
             android:id="@+id/action_edit_project"
             app:destination="@id/edit_project_fragment" />
         <action
+            android:id="@+id/action_view_members"
+            app:destination="@id/view_members_fragment" />
+        <action
             android:id="@+id/action_delete_project"
             app:destination="@id/home"
             app:popUpTo="@id/home"
@@ -79,6 +82,14 @@
         <argument
             android:name="taskId"
             app:argType="integer" />
+        <action
+                android:id="@+id/action_task_delete_destination"
+                app:destination="@id/project_fragment"
+                app:popUpToInclusive="true"
+                app:popUpTo="@id/project_fragment" />
+        <action
+                android:id="@+id/action_go_edit_task"
+                app:destination="@id/editTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/notifications"
@@ -88,6 +99,9 @@
         <action
             android:id="@+id/selectNotification"
             app:destination="@id/notification_detail_fragment" />
+        <action
+            android:id="@+id/navigate_to_no_notifications"
+            app:destination="@id/noNotificationsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profile"
@@ -134,24 +148,6 @@
             app:argType="boolean"
             android:defaultValue="false" />
     </fragment>
-<!--    <dialog-->
-<!--        android:id="@+id/invite_form_dialog"-->
-<!--        android:name="comp3350.group6.promise.presentation.Project.Invitation.SendInvite.InviteFormDialog"-->
-<!--        android:label="Invite User"-->
-<!--        tools:layout="@layout/fragment_invite_form_dialog">-->
-<!--        <action-->
-<!--            android:id="@+id/inviteSuccess"-->
-<!--            app:destination="@id/invite_sent"-->
-<!--            app:popUpTo="@id/project_fragment"-->
-<!--            app:popUpToInclusive="false" />-->
-<!--        <argument-->
-<!--            android:name="projectId"-->
-<!--            app:argType="integer" />-->
-<!--        <argument-->
-<!--            android:name="showBottomNav"-->
-<!--            app:argType="boolean"-->
-<!--            android:defaultValue="false" />-->
-<!--    </dialog>-->
     <fragment
         android:id="@+id/edit_project_fragment"
         android:name="comp3350.group6.promise.presentation.Project.EditProjectFragment"
@@ -182,7 +178,7 @@
             app:argType="boolean" />
         <dialog
             android:id="@+id/invite_form_dialog"
-            android:name="comp3350.group6.promise.presentation.Project.Invitation.SendInvite.InviteFormDialog"
+            android:name="comp3350.group6.promise.presentation.Project.Invitation.InviteFormDialog"
             android:label="dialog_project_invite"
             tools:layout="@layout/fragment_user_select">
             <argument
@@ -198,7 +194,7 @@
         app:startDestination="@id/userSelectionDialog">
         <dialog
             android:id="@+id/userSelectionDialog"
-            android:name="comp3350.group6.promise.presentation.Project.Invitation.SendInvite.UserSelectionDialog"
+            android:name="comp3350.group6.promise.presentation.User.UserSelectionDialog"
             android:label="UserSelectionDialog">
             <argument
                 android:name="showFloatingButton="
@@ -206,4 +202,30 @@
                 android:defaultValue="true" />
         </dialog>
     </navigation>
+    <fragment
+        android:id="@+id/view_members_fragment"
+        android:name="comp3350.group6.promise.presentation.Project.MembersListFragment"
+        tools:layout="@layout/fragment_members_list">
+        <argument
+            android:name="projectId"
+            app:argType="integer" />
+    </fragment>
+    <include app:graph="@navigation/root_graph" />
+    <fragment
+        android:id="@+id/editTaskFragment"
+        android:name="comp3350.group6.promise.presentation.Task.EditTaskFragment"
+        android:label="fragment_edit_task"
+        tools:layout="@layout/fragment_edit_task" >
+        <argument
+            android:name="taskId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_edit_task_success"
+            app:destination="@id/task_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noNotificationsFragment"
+        android:name="comp3350.group6.promise.presentation.Notification.NoNotificationsFragment"
+        android:label="fragment_no_notifications"
+        tools:layout="@layout/fragment_no_notifications" />
 </navigation>

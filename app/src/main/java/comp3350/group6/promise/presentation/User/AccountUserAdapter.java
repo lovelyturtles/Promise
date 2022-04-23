@@ -2,8 +2,6 @@ package comp3350.group6.promise.presentation.User;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,27 +9,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.recyclerview.selection.ItemDetailsLookup;
-import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.Locale;
 
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.objects.AccountUser;
-import comp3350.group6.promise.presentation.Project.Invitation.SendInvite.UserSelectionDialog;
 
 public class AccountUserAdapter extends RecyclerView.Adapter<AccountUserAdapter.ViewHolder> {
 
     private List<AccountUser> accountUserList;
     private OnUserClickListener onUserClickListener;
     private int itemLayout = R.layout.user_list_item;
-    private SelectionTracker tracker;
 
     public AccountUserAdapter(Context context, List<AccountUser> accountUserList, OnUserClickListener onUserClickListener) {
         this.accountUserList = accountUserList;

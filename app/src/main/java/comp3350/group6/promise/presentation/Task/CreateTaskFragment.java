@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +14,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
@@ -23,16 +23,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-import comp3350.group6.promise.DashboardGraphDirections;
 import comp3350.group6.promise.R;
 import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.AccountUser;
 import comp3350.group6.promise.objects.Handle;
 import comp3350.group6.promise.objects.Task;
-import comp3350.group6.promise.presentation.Project.Invitation.SendInvite.UserSelectionDialog;
-import comp3350.group6.promise.presentation.Project.Invitation.SendInvite.UserSelectorViewModel;
+import comp3350.group6.promise.presentation.User.UserSelectionDialog;
+import comp3350.group6.promise.presentation.User.UserSelectorViewModel;
 import comp3350.group6.promise.presentation.User.AccountUserAdapter;
 
 public class CreateTaskFragment extends Fragment {
@@ -40,7 +41,7 @@ public class CreateTaskFragment extends Fragment {
     private Toolbar toolbar;
     private EditText nameInput;
     private EditText descriptionInput;
-    private EditText estimateInput;
+    private EditText deadlineInput;
     private EditText priorityInput;
     private Button submitButton;
 
@@ -65,10 +66,11 @@ public class CreateTaskFragment extends Fragment {
         // Obtain views from layout
 
         navController = NavHostFragment.findNavController(this);
+
         toolbar = view.findViewById(R.id.task_toolBar);
         nameInput = view.findViewById(R.id.task_name_input);
         descriptionInput = view.findViewById(R.id.task_description_input);
-        estimateInput = view.findViewById(R.id.task_estimate_input);
+        deadlineInput = view.findViewById(R.id.task_estimate_input);
         priorityInput = view.findViewById(R.id.task_priority_input);
         submitButton = view.findViewById(R.id.submit_task_button);
 
@@ -96,9 +98,9 @@ public class CreateTaskFragment extends Fragment {
 
         assigneeSelectorModel.getSelectedUsers().observe(getViewLifecycleOwner(), selectedListObserver);
 
-        // Update layout behaviours
-
         assigneePrompt.setOnClickListener(aView -> openUserSelector());
+
+        // Update layout behaviours
 
         submitButton.setOnClickListener(button -> {
             handleSubmit(projectId);
@@ -111,14 +113,30 @@ public class CreateTaskFragment extends Fragment {
     }
 
     private void handleSubmit(int projectId) {
+
         String name = nameInput.getText().toString();
         String description = descriptionInput.getText().toString();
-        String estimate = estimateInput.getText().toString();
-        int priority = Integer.parseInt(priorityInput.getText().toString());
+        String deadline = deadlineInput.getText().toString();
+        String priority = priorityInput.getText().toString();
+        Timestamp deadlineTime;
 
-        Timestamp defaultTime = new Timestamp(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 3);
+        if (TextUtils.isEmpty(name)) {
+            nameInput.setError("This item cannot be empty");
+            return;
+        } else if (TextUtils.isEmpty(priority)) {
+            priorityInput.setError("This item cannot be empty");
+            return;
+        } else if (TextUtils.isEmpty(deadline)) {
+            deadlineInput.setError("This item cannot be empty");
+            return;
+        }
 
-        int taskId = createTask(name, description, priority, defaultTime, defaultTime, projectId);
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        c.add(Calendar.DATE, Integer.valueOf(deadline));
+        deadlineTime = new Timestamp(c.getTimeInMillis());
+
+        int taskId = createTask(name, description, Integer.parseInt(priority), deadlineTime, deadlineTime, projectId);
 
         // Return to projects page if creation is successful
         if(taskId > 0) {

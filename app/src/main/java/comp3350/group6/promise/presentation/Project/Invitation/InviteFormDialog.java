@@ -1,4 +1,4 @@
-package comp3350.group6.promise.presentation.Project.Invitation.SendInvite;
+package comp3350.group6.promise.presentation.Project.Invitation;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelStoreOwner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +17,7 @@ import comp3350.group6.promise.objects.AccountUser;
 import comp3350.group6.promise.objects.Exceptions.AccountDNException;
 import comp3350.group6.promise.objects.Exceptions.DuplicateNotificationException;
 import comp3350.group6.promise.objects.User;
+import comp3350.group6.promise.presentation.User.UserSelectionDialog;
 
 public class InviteFormDialog extends UserSelectionDialog {
 
