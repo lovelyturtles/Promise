@@ -192,6 +192,7 @@ public class ProjectFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.project_toolbar_menu, menu);
 
+        // hide certain options depending on the user's Access(role) in a project
         MenuItem edit = menu.findItem(R.id.action_edit_project);
         MenuItem delete = menu.findItem(R.id.action_delete_project);
 
@@ -230,6 +231,7 @@ public class ProjectFragment extends Fragment {
 //        return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
     }
 
+    // popup dialogue for the project delete option
     private void deleteDialogue() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage("Are you sure you want to delete \"" + project.getProjectName() + "\"?");
