@@ -26,9 +26,9 @@
 
 
     <!--User's Home Page-->
-    <string name="userHomeMessage">Promise</string>
-    <string name="goToNotifs">Notifications</string>
-    <string name="goToProjects">Projects</string>
+    <string name="profilePage">PlaceHolder</string>
+    <string name="aboutMeLabel">About Me</string>
+    <string name="aboutMe">Placeholder</string>
 
     <string name="projectPage">Project Page</string>
     <string name="inviteSent">Invite Sent</string>
