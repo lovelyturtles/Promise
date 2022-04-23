@@ -74,12 +74,46 @@
                 android:layout_marginBottom="20dp"
                 android:text="Deadline" />
 
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/gap_md"
+                android:text="ASSIGNEES"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/task_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
             </androidx.recyclerview.widget.RecyclerView>
+
+            <LinearLayout
+                android:id="@+id/task_assignee_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/task_assignee_add_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_corner_outline_gray"
+                    android:padding="@dimen/gap_lg_2x"
+                    android:text="This task has no assignees"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray_400" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/task_assignee_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
+            </LinearLayout>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -5,6 +5,7 @@ import static comp3350.group6.promise.util.FileSystemUtil.copyDatabaseToDevice;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;

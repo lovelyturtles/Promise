@@ -1,5 +1,9 @@
 package comp3350.group6.promise.persistence.hsqldb;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,8 +12,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import comp3350.group6.promise.objects.Account;
+import comp3350.group6.promise.objects.AccountUser;
 import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.objects.Handle;
+import comp3350.group6.promise.objects.User;
 import comp3350.group6.promise.persistence.HandleDao;
 import comp3350.group6.promise.util.DBConnectorUtil;
 
@@ -21,7 +28,6 @@ public class HandleImp implements HandleDao {
         final Timestamp since = rs.getTimestamp("since");
         return new Handle( taskId, userId, since);
     }
-
 
     @Override
     public List<Handle> getUserTask(int taskId) {
@@ -59,6 +65,50 @@ public class HandleImp implements HandleDao {
             throw new PersistenceException(e);
         }
         return listOfTaskUser;
+    }
+
+    public List<AccountUser> getTaskAssignees(int taskId) {
+        List<AccountUser> assignees = new ArrayList<>();
+
+        try (final Connection cnn = DBConnectorUtil.getConnection()) {
+
+            String selectStatement =
+                    "SELECT * " +
+                    "FROM Account " +
+                    "INNER JOIN User ON Account.userId = User.userId " +
+                    "WHERE Account.UserId IN (" +
+                            "SELECT UserId " +
+                            "FROM Handle " +
+                            "WHERE Handle.taskId = ?" +
+                    ")";
+
+            PreparedStatement pStatement = cnn.prepareStatement( selectStatement );
+
+            pStatement.setInt(1, taskId);
+            ResultSet resultSet = pStatement.executeQuery();
+
+            while(resultSet.next()) {
+
+                String email = resultSet.getString( "Account.Email" );
+                String password = resultSet.getString( "Account.Password" );
+                int userId = resultSet.getInt( "Account.userId" );
+                String name = resultSet.getString( "User.name" );
+                String intro = resultSet.getString( "User.introduction" );
+
+                assignees.add(new AccountUser( new Account(email, password, userId), new User(userId, name, intro)));
+
+            }
+
+            pStatement.close();
+            resultSet.close();
+
+        }
+
+        catch ( SQLException e ) {
+            throw new PersistenceException( e );
+        }
+
+        return assignees;
     }
 
     @Override

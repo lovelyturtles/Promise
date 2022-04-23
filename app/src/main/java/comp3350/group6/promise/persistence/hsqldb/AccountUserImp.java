@@ -30,7 +30,7 @@ public class AccountUserImp implements AccountUserDao {
                 "WHERE Account.userID = ?";
 
         try (final Connection cnn = DBConnectorUtil.getConnection();
-             PreparedStatement pStatement = cnn.prepareStatement( selectStatement ) ) {
+            PreparedStatement pStatement = cnn.prepareStatement( selectStatement ) ) {
             pStatement.setInt( 1, account.getUserID() );
             ResultSet resultSet = pStatement.executeQuery();
 
@@ -58,43 +58,41 @@ public class AccountUserImp implements AccountUserDao {
 
         List<AccountUser> result = new ArrayList<AccountUser>();
 
-        String email;
-        String password;
-        int userID;
-        String name;
-        String intro;
+        if(!searchTerm.isEmpty()) {
 
-        String selectStatement = String.format(
-            "SELECT TOP %d * " +
-            "FROM User LEFT JOIN Account " +
-            "ON User.userID = Account.userID " +
-            "WHERE Account.Email LIKE '%s%s%s' OR User.name LIKE '%s%s%%s'",
-            limit, "%", searchTerm, "%", "%", searchTerm, "%");
+            String selectStatement = String.format(
+                "SELECT TOP %d * " +
+                "FROM User LEFT JOIN Account " +
+                "ON User.userID = Account.userID " +
+                "WHERE Account.Email LIKE '%s%s%s' OR User.name LIKE '%s%s%%s'",
+                limit, "%", searchTerm, "%", "%", searchTerm, "%");
 
-        try (final Connection cnn = DBConnectorUtil.getConnection();
+            try (final Connection cnn = DBConnectorUtil.getConnection();
 
-            PreparedStatement pStatement = cnn.prepareStatement( selectStatement ) ) {
-            ResultSet resultSet = pStatement.executeQuery();
+                PreparedStatement pStatement = cnn.prepareStatement( selectStatement ) ) {
+                ResultSet resultSet = pStatement.executeQuery();
 
-            while(resultSet.next()){
+                while(resultSet.next()){
 
-                email = resultSet.getString( "Account.Email" );
-                password = resultSet.getString( "Account.Password" );
-                userID = resultSet.getInt( "Account.userID" );
-                name = resultSet.getString( "User.name" );
-                intro = resultSet.getString( "User.introduction" );
+                    String email = resultSet.getString( "Account.Email" );
+                    String password = resultSet.getString( "Account.Password" );
+                    int userID = resultSet.getInt( "Account.userID" );
+                    String name = resultSet.getString( "User.name" );
+                    String intro = resultSet.getString( "User.introduction" );
 
-                result.add(new AccountUser( new Account(email, password, userID), new User(userID, name, intro)));
+                    result.add(new AccountUser( new Account(email, password, userID), new User(userID, name, intro)));
+
+                }
+
+                pStatement.close();
+                resultSet.close();
 
             }
 
-            pStatement.close();
-            resultSet.close();
+            catch ( SQLException e ) {
+                throw new PersistenceException( e );
+            }
 
-        }
-
-        catch ( SQLException e ) {
-            throw new PersistenceException( e );
         }
 
         return result;

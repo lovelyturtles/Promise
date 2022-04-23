@@ -82,7 +82,7 @@ public class AccessImp implements AccessDao {
 
     @Override
     public Access getAccessByIDs(int userId, int projectId){
-        Access acc;
+        Access acc = null;
 
         try(Connection con = DBConnectorUtil.getConnection()){
 
@@ -91,8 +91,9 @@ public class AccessImp implements AccessDao {
             pstmt.setInt(2, projectId);
             ResultSet rs = pstmt.executeQuery();
 
-            rs.next();
-            acc = createAccessObject(rs);
+            if(rs.next()) {
+                acc = createAccessObject(rs);
+            }
 
             pstmt.close();
             rs.close();
