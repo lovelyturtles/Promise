@@ -46,8 +46,6 @@ r
 Bapp/src/main/java/comp3350/group6/promise/util/FileSystemUtil.java,8\f\8ffa276e1ee381faecde148b6956b7d2871652b2
 ~
 Napp/src/main/java/comp3350/group6/promise/presentation/User/LoginFragment.java,f\b\fb863b62504a1c62084d5e1f7b6f2a3a9474100b
-|
-Lapp/src/main/java/comp3350/group6/promise/presentation/SettingsFragment.java,0\5\051a802e1dd455d66222193842383f1230fc9be6
 ‚
 Rapp/src/main/java/comp3350/group6/promise/presentation/User/LoginFormFragment.java,4\f\4f568b6662e0d9a91f9a45cf0bd9ed6d24f4dd1e
 x
