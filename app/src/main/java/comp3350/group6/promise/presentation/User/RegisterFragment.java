@@ -96,15 +96,15 @@ public class RegisterFragment extends Fragment {
         // TODO: Display messages in UI indicating what went wrong.
         catch( EmptyEmailException e ){
             //do a dialog or something here
-            System.out.println("No email provided.");
+            Log.i("anchor", "No email provided.");
         }
         catch( EmptyPasswordException e ){
             //ditto above
-            System.out.println("No password provided.");
+            Log.i("anchor", "No password provided.");
         }
         catch( LoginErrorException e ){
             //maybe use the one in LoginFormFragment
-            System.out.println("Credentials do match a registered user.");
+            Log.i("anchor", "Credentials do match a registered user.");
         }
         catch( Exception e ){
             e.printStackTrace();

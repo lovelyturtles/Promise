@@ -6,6 +6,8 @@
 
 package comp3350.group6.promise.persistence.hsqldb;
 
+import android.util.Log;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -141,7 +143,7 @@ public class TaskImp implements TaskDao {
             pre.setInt(4, t.getStatusNum());
             pre.setTimestamp(5, t.getEstimatedEndTime());
             pre.setTimestamp(6, t.getDeadline());
-            System.out.println("NEW TYPE: "+ t.getType().name());
+            Log.i("anchor", "NEW TYPE: "+ t.getType().name());
             pre.setString(7, t.getType().toString());
             pre.setInt(8, t.getTaskId());
             pre.executeUpdate();

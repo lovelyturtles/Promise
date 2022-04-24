@@ -55,7 +55,7 @@ public class UserSelectorViewModel extends ViewModel {
         AccountUser selectedUser = searchListLive.getValue().get(searchListIndex);
         List<AccountUser> selectedList = selectedListLive.getValue();
         selectedList.add(selectedUser);
-        System.out.println("Adding user to selection" + selectedUser.toString() + selectedList.toString());
+        Log.i("anchor", "Adding user to selection" + selectedUser.toString() + selectedList.toString());
         selectedListLive.setValue(selectedList);
     }
 

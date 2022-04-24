@@ -31,7 +31,6 @@ public class DBConnectorUtil {
                 BufferedReader bf = new BufferedReader(new FileReader("src/main/assets/localDB/PROMISE.script"));
                 String line;
                 while ((line = bf.readLine()) != null) {
-                    System.out.println(line);
                     state.execute(line);
                 }
                 bf.close();
@@ -51,11 +50,11 @@ public class DBConnectorUtil {
         File app_db_properties = new File("src/main/java/comp3350/group6/promise/app_db.properties");
 
         if (app_db_script.exists() && app_db_script.delete()) {
-            System.out.println("clear app_db.script completed");
+            Log.i("anchor", "clear app_db.script completed");
         }
 
         if (app_db_properties.exists() && app_db_properties.delete()) {
-            System.out.println("clear app_db.properties completed");
+            Log.i("anchor", "clear app_db.properties completed");
         }
     }
 

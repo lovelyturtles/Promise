@@ -12,8 +12,6 @@ D
 docs/ARCHITECTURE.md,f\d\fd45fecaceb5ca268e8b10a085f8b6d7a2548e62
 r
 Bapp/src/main/java/comp3350/group6/promise/application/Service.java,1\a\1a4d6189094fd5ebd6cd5cd965d3355aa5c6642c
-s
-Capp/src/main/java/comp3350/group6/promise/util/DBConnectorUtil.java,6\2\62be24f5980c0efda9a73b5b480c8b17fb389a97
 7
 gradlew,5\b\5bbfa66edb4db3c7c33c5181f43510990d3307f9
 @
@@ -26,8 +24,6 @@ A
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 ?
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
-Å
-Qapp/src/main/java/comp3350/group6/promise/presentation/User/RegisterFragment.java,4\6\468e64db68bdd68f22152068ee1bcb01410db4be
 Ç
 Rapp/src/main/java/comp3350/group6/promise/presentation/User/DashboardFragment.java,6\5\65c19c98ec472cf85983840db23cbc48aeb72b33
 }
@@ -46,8 +42,6 @@ r
 Bapp/src/main/java/comp3350/group6/promise/util/FileSystemUtil.java,8\f\8ffa276e1ee381faecde148b6956b7d2871652b2
 ~
 Napp/src/main/java/comp3350/group6/promise/presentation/User/LoginFragment.java,f\b\fb863b62504a1c62084d5e1f7b6f2a3a9474100b
-Ç
-Rapp/src/main/java/comp3350/group6/promise/presentation/User/LoginFormFragment.java,4\f\4f568b6662e0d9a91f9a45cf0bd9ed6d24f4dd1e
 x
 Happ/src/main/java/comp3350/group6/promise/presentation/MainActivity.java,5\b\5b740e82b8a7b4acb6d5a88be98966a2e8264f9c
 q

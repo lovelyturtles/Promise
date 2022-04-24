@@ -26,8 +26,8 @@ public class NotifImp implements NotifDao {
     public void addNotif( int senderID, int projectID, int recipientID, NotifType type) throws DuplicateNotificationException {
 
         String insertStatement = "INSERT INTO Notification VALUES(?,?,?,?)";
-        System.out.println("type.toString(): " + type.toString());
-        System.out.println("type.name():" + type.name());
+        Log.i("anchor", "type.toString(): " + type.toString());
+        Log.i("anchor", "type.name():" + type.name());
         try (final Connection cnn = DBConnectorUtil.getConnection();
             PreparedStatement pStatement = cnn.prepareStatement(insertStatement)){
 
