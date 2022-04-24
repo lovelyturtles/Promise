@@ -12,39 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Promise">
         <activity
-            android:name=".presentation.Task.CreateTaskActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.Notification.NotificationsDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.User.UserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.User.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.Project.CreateProjectActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.User.DashboardActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.Project.ProjectActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.Notification.NotificationsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.Project.Invitation.SentInviteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.Project.Invitation.RecipientInfoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.Task.TaskActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.MainActivity"
             android:exported="true">
             <intent-filter>

@@ -48,7 +48,10 @@ public class ProjectService {
     }
 
     // replace an existing project in the list with the given project
-    public Project updateProject(Project project){
+    public Project updateProject(Project project) throws EmptyInputException {
+        if (project.getProjectName().isEmpty()){
+            throw new EmptyInputException("project name");
+        }
 		return projectDao.updateProject(project);
     }
 

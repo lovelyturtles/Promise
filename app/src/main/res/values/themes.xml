@@ -2,14 +2,36 @@
 
     <style name="Theme.Promise" parent="Theme.Material3.Light.NoActionBar">
 
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary</item>
+        <item name="android:colorBackground">@color/white</item>
+
         <item name="colorAccent">@color/primary</item>
         <item name="cornerRadius">@dimen/corner_radius</item>
 
         <item name="materialButtonStyle">@style/Theme.Promise.Button</item>
         <item name="editTextStyle">@style/Theme.Promise.EditText</item>
         <item name="android:editTextBackground">@drawable/rounded_corner_gray</item>
+
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/white</item>
+        <item name="colorOnPrimaryContainer">@color/white</item>
+        <item name="colorSecondary">@color/primary</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/primary</item>
+        <item name="colorOnSecondaryContainer">@color/white</item>
+        <item name="colorTertiary">@color/primary</item>
+        <item name="colorOnTertiary">@color/primary</item>
+        <item name="colorTertiaryContainer">@color/white</item>
+        <item name="colorOnTertiaryContainer">@color/white</item>
+        <item name="colorOnBackground">@color/gray_800</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/gray_800</item>
+        <item name="colorSurfaceVariant">@color/white</item>
+        <item name="colorOnSurfaceVariant">@color/gray_800</item>
+        <item name="colorOutline">@color/gray_800</item>
+        <item name="colorOnSurfaceInverse">@color/white</item>
+        <item name="colorSurfaceInverse">@color/gray_800</item>
+        <item name="colorPrimaryInverse">@color/white</item>
 
     </style>
 
@@ -27,6 +49,19 @@
         <item name="android:layout_marginBottom">@dimen/gap_lg</item>
     </style>
 
+    <style name="Theme.Promise.BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">#FAFAFA</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:padding">@dimen/gap_sm</item>
+        <item name="itemHorizontalTranslationEnabled">false</item>
+        <item name="itemTextColor">@color/text_body</item>
+        <item name="itemIconTint">@color/text_heading</item>
+        <item name="itemPadding">0dp</item>
+        <item name="itemIconSize">20dp</item>
+        <item name="checkedIconTint">@color/gray_600</item>
+    </style>
+
+
     <style name="Theme.Promise.InputLabel" parent="Widget.AppCompat.TextView">
         <item name="android:layout_marginBottom">@dimen/input_label_gap</item>
     </style>
@@ -38,7 +73,6 @@
 
     <style name="Theme.Promise.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="android:backgroundTint">@color/primary</item>
-        <item name="android:layout_margin">@dimen/gap_lg</item>
     </style>
 
     <!-- Typographic Styles -->
@@ -47,6 +81,13 @@
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/text_body</item>
         <item name="android:lineSpacingMultiplier">1.15</item>
+    </style>
+
+    <style name="Theme.Promise.TextAppearance.ContentSection" parent="@style/TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/gray_700</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="Theme.Promise.TextAppearance.CardTitle" parent="@style/TextAppearance.Material3.HeadlineMedium">
@@ -70,6 +111,11 @@
     <style name="ThemeOverlay.Promise.FullscreenContainer" parent="">
         <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
         <item name="fullscreenTextColor">@color/light_blue_A200</item>
+    </style>
+
+    <style name="Theme.Promise.BottomSheetDialog" parent="Widget.Material3.BottomSheet">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
     </style>
 
 </resources>

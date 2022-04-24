@@ -1,106 +1,52 @@
 package comp3350.group6.promise.presentation;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.AssetManager;
+import static comp3350.group6.promise.util.FileSystemUtil.copyDatabaseToDevice;
+
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import androidx.core.view.WindowCompat;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.NavHostFragment;
 
 import comp3350.group6.promise.R;
-import comp3350.group6.promise.application.Main;
-import comp3350.group6.promise.presentation.User.RegisterActivity;
+import comp3350.group6.promise.RootGraphDirections;
+import comp3350.group6.promise.application.Service;
+import comp3350.group6.promise.util.UserPrefsUtil;
 
 public class MainActivity extends AppCompatActivity {
+
+    NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.main_nav_fragment);
+        navController = navHostFragment.getNavController();
+
+        copyDatabaseToDevice(this);
+        restoreLogIn();
+    }
+
+    public void restoreLogIn() {
         try {
-            copyDatabaseToDevice();
-        } catch (Exception e) {
+            UserPrefsUtil.UserCredentials saved = UserPrefsUtil.getSavedUserCredentials(this);
+            String savedEmail = saved.getEmail();
+            String savedPassword = saved.getPassword();
+
+            if(savedEmail != null && savedPassword != null) {
+                Service.accounts.login(savedEmail, savedPassword);
+
+                NavDirections action = RootGraphDirections.dashboard();
+                navController.navigate(action);
+            }
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
-
-        TextView registerMessageView = findViewById(R.id.registerLink);
-
-        registerMessageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToCreate();
-            }
-        });
-
     }
-
-    private void goToCreate() {
-
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
-
-    }
-
-    private void copyDatabaseToDevice() {
-        final String DB_PATH = "db";
-
-        String[] assetNames;
-        Context context = getApplicationContext();
-        File dataDirectory = context.getDir(DB_PATH, Context.MODE_PRIVATE);
-        AssetManager assetManager = getAssets();
-
-        try {
-
-            assetNames = assetManager.list(DB_PATH);
-            for (int i = 0; i < assetNames.length; i++) {
-                assetNames[i] = DB_PATH + "/" + assetNames[i];
-            }
-
-            copyAssetsToDirectory(assetNames, dataDirectory);
-
-            Main.setDBPath(dataDirectory.toString() + "/" + Main.getDBPath());
-
-        } catch (final Exception ioe) {
-            ioe.printStackTrace();
-//            Messages.warning(this, "Unable to access application data: " + ioe.getMessage());
-        }
-    }
-
-    public void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
-        AssetManager assetManager = getAssets();
-
-        for (String asset : assets) {
-            String[] components = asset.split("/");
-            String copyPath = directory.toString() + "/" + components[components.length - 1];
-
-            char[] buffer = new char[1024];
-            int count;
-
-            File outFile = new File(copyPath);
-
-            if (!outFile.exists()) {
-                InputStreamReader in = new InputStreamReader(assetManager.open(asset));
-                FileWriter out = new FileWriter(outFile);
-
-                count = in.read(buffer);
-                while (count != -1) {
-                    out.write(buffer, 0, count);
-                    count = in.read(buffer);
-                }
-
-                out.close();
-                in.close();
-            }
-        }
-    }
-
 
 }

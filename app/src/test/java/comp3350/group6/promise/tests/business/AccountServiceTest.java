@@ -236,7 +236,7 @@ public class AccountServiceTest {
 
         //Get the account that was created and see if it's the current account
         checkAccount = accountService.getAccountByEmail( email );
-        assertEquals(testMessage, CurrentSession.currentUser, checkAccount);
+        assertEquals(testMessage, CurrentSession.getAccount(), checkAccount);
 
     }
 
@@ -266,7 +266,7 @@ public class AccountServiceTest {
 
         //The current account should be the second one registered
         checkAccount = accountService.getAccountByEmail( email2 );
-        assertEquals(testMessage, CurrentSession.currentUser, checkAccount);
+        assertEquals(testMessage, CurrentSession.getAccount(), checkAccount);
 
     }
 
@@ -299,7 +299,7 @@ public class AccountServiceTest {
 
         //Get the account with first email and see if it's the current account
         checkAccount = accountService.getAccountByEmail( email );
-        assertEquals(testMessage, CurrentSession.currentUser, checkAccount);
+        assertEquals(testMessage, CurrentSession.getAccount(), checkAccount);
 
     }
 
@@ -343,7 +343,7 @@ public class AccountServiceTest {
 
         //The current account should be the second one registered
         checkAccount = accountService.getAccountByEmail( email2 );
-        assertEquals(testMessage, CurrentSession.currentUser, checkAccount);
+        assertEquals(testMessage, CurrentSession.getAccount(), checkAccount);
 
     }
 

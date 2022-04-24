@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import comp3350.group6.promise.objects.Access;
+import comp3350.group6.promise.objects.Exceptions.DuplicateAccessException;
 import comp3350.group6.promise.objects.Project;
 import comp3350.group6.promise.objects.User;
 import comp3350.group6.promise.objects.enumClasses.AccessRole;
@@ -12,7 +13,7 @@ import comp3350.group6.promise.persistence.AccessDao;
 import comp3350.group6.promise.persistence.hsqldb.AccessImp;
 
 /*
-    Access = User "participates" Project relationship
+    Access = User has "Access" to a Project relationship
  */
 public class AccessService {
 
@@ -34,7 +35,7 @@ public class AccessService {
         return Collections.unmodifiableList(accessList);
     }
 
-    public List<User> getUsers(int projectId) throws Exception {
+    public List<User> getUsers(int projectId) {
         List<Access> accessList = getProjectAccess(projectId);
         List<User> userList = new ArrayList<>();
         UserService userService = new UserService();
@@ -68,7 +69,13 @@ public class AccessService {
     }
 
     // insert a new access to the DB
-    public Access insertAccess(Access access){ return accessDao.insertAccess(access); }
+    public Access insertAccess(Access access) throws DuplicateAccessException {
+        if (hasAccess(access.getUserId(), access.getProjectId())){
+            // user already had access to this project
+            throw new DuplicateAccessException("User already had access to this project");
+        }
+        return accessDao.insertAccess(access);
+    }
 
     // update the role of the access
     public Access updateAccess(Access access){ return accessDao.updateAccess(access); }

@@ -8,6 +8,7 @@ import comp3350.group6.promise.application.Service;
 import comp3350.group6.promise.objects.Access;
 import comp3350.group6.promise.objects.Account;
 import comp3350.group6.promise.objects.Exceptions.AccountDNException;
+import comp3350.group6.promise.objects.Exceptions.DuplicateAccessException;
 import comp3350.group6.promise.objects.Exceptions.DuplicateNotificationException;
 import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.objects.Notification;
@@ -19,7 +20,7 @@ import comp3350.group6.promise.persistence.hsqldb.NotifImp;
 
 public class NotifService {
 
-    private NotifDao notifDao;
+    private final NotifDao notifDao;
     private static NotifService instance;
 
 
@@ -29,9 +30,7 @@ public class NotifService {
 
     }
 
-    public NotifService( NotifDao notifDao ){
-
-        this();
+    public NotifService(NotifDao notifDao){
         this.notifDao = notifDao;
 
     }
@@ -42,7 +41,7 @@ public class NotifService {
         if( Service.accounts.accountExists( theirEmail ) ){
 
             //set the sender of the request as currentUser
-            Account sender = CurrentSession.currentUser;
+            Account sender = CurrentSession.getAccount();
             //set the receiver of the request as the account associated to the email parameter
             Account recipient = Service.accounts.getAccountByEmail( theirEmail );
 
@@ -63,20 +62,20 @@ public class NotifService {
 
     }
 
-//    /*
-//     * If the user is requesting access to this project, we have to go and find the user
-//     * that has the privileges necessary to grant access and send the request to them
-//     */
-//    public void request( int projectID ) throws DuplicateNotificationException {
-//
-//        int senderID = CurrentSession.currentUser.getUserID();
-//        //find out who has the privileges to accept/deny requests (for now, that's the creator)
-//        List<Integer> creatorRole = Service.accesses.getRoleByProjectID( projectID, AccessRole.CREATOR );
-//        int creatorID = creatorRole.get( 0 );
-//        //add this request to the notifications database
-//        notifDao.addNotif(senderID, projectID, creatorID, NotifType.REQUEST);
-//
-//    }
+    /*
+     * If the user is requesting access to this project, we have to go and find the user
+     * that has the privileges necessary to grant access and send the request to them
+     */
+    public void request( int projectID ) throws DuplicateNotificationException {
+
+        int senderID = CurrentSession.getAccount().getUserID();
+        //find out who has the privileges to accept/deny requests (for now, that's the creator)
+        List<Integer> creatorRole = Service.accesses.getRoleByProjectID( projectID, AccessRole.CREATOR );
+        int creatorID = creatorRole.get( 0 );
+        //add this request to the notifications database
+        notifDao.addNotif(senderID, projectID, creatorID, NotifType.REQUEST);
+
+    }
 
     private void remove( Notification removeThis ){
 
@@ -84,7 +83,7 @@ public class NotifService {
 
     }
 
-    public void accept( Notification acceptThis ){
+    public void accept( Notification acceptThis ) throws DuplicateAccessException {
 
         Service.accesses.insertAccess( new Access( acceptThis.getProjectID(), acceptThis.getRecipientID() ) );
         //now that we've updated their access, we can remove the notification

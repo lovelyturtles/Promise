@@ -8,24 +8,47 @@
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.186" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/drawable/list_item_background.xml" value="0.251" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/drawable/rounded_corner_button.xml" value="0.251" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/drawable/rounded_corner_dotted.xml" value="0.251" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/drawable/rounded_corner_gray.xml" value="0.251" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/drawable/rounded_corner_selected.xml" value="0.18857142857142858" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/drawable/rounded_corner_top_outline.xml" value="0.245" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_create_project.xml" value="0.11262014208106978" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_create_task.xml" value="0.21804189824711415" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_dashboard.xml" value="0.11005434782608696" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_login.xml" value="0.11262014208106978" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_main.xml" value="0.11262014208106978" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_notifications.xml" value="0.11262014208106978" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_notifications_detail.xml" value="0.21804189824711415" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_project.xml" value="0.11178437108232345" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_project_detail.xml" value="0.2453125" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_recipient_info.xml" value="0.17571611799914494" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_register.xml" value="0.13553943789664552" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_sent_invite.xml" value="0.28125" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_task.xml" value="0.28125" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/activity_user.xml" value="0.21804189824711415" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/card_item.xml" value="0.2453125" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/fragment_create_project.xml" value="0.21804189824711415" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/fragment_create_task.xml" value="0.21804189824711415" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/fragment_dashboard.xml" value="0.21804189824711415" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/fragment_home.xml" value="0.21804189824711415" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/fragment_invite_form_dialog.xml" value="0.19900271985494106" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/fragment_landing.xml" value="0.21804189824711415" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/fragment_login_form.xml" value="0.11178437108232345" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/fragment_notifications.xml" value="0.21804189824711415" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/fragment_project.xml" value="0.21804189824711415" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/fragment_recipient_info.xml" value="0.20036264732547598" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/fragment_register.xml" value="0.21804189824711415" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/fragment_settings.xml" value="0.18136230672795653" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/fragment_task.xml" value="0.18857142857142858" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/fragment_user_select.xml" value="0.19356300997280146" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/layout_taskitem.xml" value="0.11262014208106978" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/project_list_item.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/task_item.xml" value="0.2453125" />
         <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/task_list_item.xml" value="0.3828571428571429" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/user_list_item.xml" value="0.19900271985494106" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/user_list_item_selected.xml" value="0.2857142857142857" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/user_list_section_item.xml" value="0.5714285714285714" />
+        <entry key="..\:/Users/Luke/StudioProjects/promise/app/src/main/res/layout/user_selector_fragment.xml" value="0.18136230672795653" />
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable-anydpi/ic_add.xml" value="0.265" />
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable-anydpi/ic_back.xml" value="0.265" />
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/drawable-anydpi/ic_more_horiz.xml" value="0.265" />
@@ -41,9 +64,18 @@
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/activity_project_page.xml" value="0.33" />
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/activity_send_to_user.xml" value="0.2125" />
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/card_item.xml" value="0.33" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_create_project.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_dashboard.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_delete_dialog.xml" value="0.5" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_edit_project.xml" value="0.35054347826086957" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_project.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/layout/fragment_settings.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/menu/project_toolbar_menu.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/semi1/Documents/COMP/3350/Project/promise/app/src/main/res/mipmap-anydpi-v26/ic_more_vert_round.xml" value="0.1815" />
+        <entry key="app/src/main/res/drawable/ic_edit.xml" value="0.2075" />
+        <entry key="app/src/main/res/drawable/ic_edit_task.png.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_edit_task.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_create.xml" value="0.24010416666666667" />
-        <entry key="app/src/main/res/layout/activity_create_task.xml" value="0.23550724637681159" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.21331521739130435" />
         <entry key="app/src/main/res/layout/activity_dashboard_page.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_invite_sent.xml" value="0.18802083333333333" />
@@ -51,7 +83,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_notifications.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/activity_notifications_detail.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_project.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_project.xml" value="0.3296398891966759" />
         <entry key="app/src/main/res/layout/activity_project_page.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_recipient_info.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.27708333333333335" />
@@ -61,10 +93,28 @@
         <entry key="app/src/main/res/layout/activity_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_user_page.xml" value="0.25" />
         <entry key="app/src/main/res/layout/card_item.xml" value="0.10833333333333334" />
+        <entry key="app/src/main/res/layout/fragment_create_task.xml" value="0.18518518518518517" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/fragment_edit_task.xml" value="0.18518518518518517" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/fragment_login_form.xml" value="0.24537037037037038" />
+        <entry key="app/src/main/res/layout/fragment_no_notifications.xml" value="0.1480978260869565" />
+        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.1480978260869565" />
+        <entry key="app/src/main/res/layout/fragment_project.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.1480978260869565" />
+        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_user.xml" value="0.23641304347826086" />
         <entry key="app/src/main/res/layout/layout_taskitem.xml" value="0.21331521739130435" />
         <entry key="app/src/main/res/layout/notif_item_design.xml" value="0.335" />
         <entry key="app/src/main/res/layout/project_list_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/task_list_item.xml" value="0.11851851851851852" />
+        <entry key="app/src/main/res/layout/user_list_item_selected.xml" value="0.1480978260869565" />
+        <entry key="app/src/main/res/menu/project_toolbar_menu.xml" value="0.22560975609756098" />
+        <entry key="app/src/main/res/menu/task_toolbar_menu.xml" value="0.3179190751445087" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.21829710144927536" />
+        <entry key="app/src/main/res/menu/project_toolbar_menu.xml" value="0.22560975609756098" />
+        <entry key="app/src/main/res/menu/task_toolbar_menu.xml" value="0.3179190751445087" />
       </map>
     </option>
   </component>

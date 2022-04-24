@@ -1,13 +1,9 @@
 package comp3350.group6.promise.persistence.stub;
 
-import androidx.annotation.Nullable;
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import comp3350.group6.promise.objects.Exceptions.PersistenceException;
 import comp3350.group6.promise.objects.Task;
 import comp3350.group6.promise.persistence.TaskDao;
 
@@ -53,7 +49,7 @@ public class TaskImpNoDB implements TaskDao {
     }
 
     @Override
-    public List<Task> getTasksByProjectId(int projectId) {
+    public List<Task> getTasksByProjectId(int projectId, int value) {
         List<Task> projectTasks = new ArrayList<Task>();
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
@@ -82,9 +78,10 @@ public class TaskImpNoDB implements TaskDao {
     }
 
     @Override
-    public void deleteTask(Task t) {
+    public Task deleteTask(Task t) {
         if (getIndex(t.getTaskId()) >= 0)
             taskList.remove(getIndex(t.getTaskId()));
+        return t;
     }
 
     private int getIndex(int taskId) {
