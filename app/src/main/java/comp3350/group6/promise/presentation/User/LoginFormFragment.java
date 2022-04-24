@@ -76,11 +76,11 @@ public class LoginFormFragment extends Fragment {
         }
 
         catch( EmptyEmailException e ){
-            System.out.println("Empty email");
+            Log.i("anchor", "Empty email");
         }
 
         catch( EmptyPasswordException e ){
-            System.out.println("Empty password");
+            Log.i("anchor", "Empty password");
         }
         catch( Exception e ){
             e.printStackTrace();
