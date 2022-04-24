@@ -8,6 +8,10 @@ plugins {
 android {
     compileSdk 32
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
     defaultConfig {
         applicationId "comp3350.group6.promise"
         minSdk 21
