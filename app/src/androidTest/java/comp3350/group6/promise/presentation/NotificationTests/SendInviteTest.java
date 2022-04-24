@@ -1,18 +1,15 @@
 /*
- *
- * Acceptance test "Send Invite" user story:
- * As a user I want to send an invite to a project I created
- *
+ * Send Project Invites
+ * As a user, I want to be able to invite other users to a project that I have created.
  */
 
 package comp3350.group6.promise.presentation.NotificationTests;
 
-
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -72,73 +69,12 @@ public class SendInviteTest {
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("123"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.loginPasswordInput), withText("123"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.fragmentContainerView),
-                                        0),
-                                3),
-                        isDisplayed()));
-        appCompatEditText3.perform(pressImeActionButton());
-
-        ViewInteraction materialButton = onView(
-                allOf(withId(R.id.signOutButton), withText("Sign In"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.fragmentContainerView),
-                                        0),
-                                4),
-                        isDisplayed()));
-        materialButton.perform(click());
-
-        ViewInteraction floatingActionButton = onView(
-                allOf(withId(R.id.fab), withContentDescription("Dashboard Add Action"),
-                        childAtPosition(
-                                allOf(withId(R.id.coordinator_layout),
-                                        childAtPosition(
-                                                withId(R.id.main_nav_fragment),
-                                                0)),
-                                2),
-                        isDisplayed()));
-        floatingActionButton.perform(click());
-
-        ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.project_name_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.core.widget.NestedScrollView")),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatEditText4.perform(replaceText("My Fancy Project"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText5 = onView(
-                allOf(withId(R.id.project_description_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.core.widget.NestedScrollView")),
-                                        0),
-                                3),
-                        isDisplayed()));
-        appCompatEditText5.perform(replaceText("My fancy new project"), closeSoftKeyboard());
-
-        ViewInteraction materialButton2 = onView(
-                allOf(withId(R.id.create_project_button), withText("Create Project"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.core.widget.NestedScrollView")),
-                                        0),
-                                4),
-                        isDisplayed()));
-        materialButton2.perform(click());
-
         ViewInteraction linearLayout = onView(
                 allOf(withId(R.id.project_container),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.projectRecyclerView),
-                                        1),
+                                        0),
                                 0),
                         isDisplayed()));
         linearLayout.perform(click());
@@ -163,83 +99,35 @@ public class SendInviteTest {
                         isDisplayed()));
         materialTextView.perform(click());
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.recipientEmailLabel), withText("Email of the user you want to invite"),
-                        withParent(withParent(withId(R.id.dashboard_nav_fragment))),
-                        isDisplayed()));
-        textView.check(matches(withText("Email of the user you want to invite")));
-
-        ViewInteraction editText = onView(
-                allOf(withId(R.id.recipientEmailHint), withText("Enter their email here"),
-                        withParent(withParent(withId(R.id.dashboard_nav_fragment))),
-                        isDisplayed()));
-        editText.check(matches(withText("Enter their email here")));
-
-        ViewInteraction button = onView(
-                allOf(withId(R.id.sendInviteButton), withText("Send Invite"),
-                        withParent(withParent(withId(R.id.dashboard_nav_fragment))),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
-
-        ViewInteraction appCompatEditText6 = onView(
-                allOf(withId(R.id.recipientEmailHint),
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.user_search_input),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.dashboard_nav_fragment),
+                                        withClassName(is("android.widget.LinearLayout")),
                                         0),
+                                0)));
+        appCompatEditText3.perform(scrollTo(), replaceText("lazerrazor@app.com"), closeSoftKeyboard());
+
+        ViewInteraction materialButton = onView(
+                allOf(withId(R.id.sendInviteButton), withText("Invite Users"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        2),
+                                1)));
+        materialButton.perform(scrollTo(), click());
+
+        ViewInteraction overflowMenuButton2 = onView(
+                allOf(withContentDescription("More options"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.toolbar),
+                                        1),
                                 0),
                         isDisplayed()));
-        appCompatEditText6.perform(replaceText("lazerrazor@app.com"), closeSoftKeyboard());
+        overflowMenuButton2.perform(click());
 
-        ViewInteraction materialButton3 = onView(
-                allOf(withId(R.id.sendInviteButton), withText("Send Invite"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.dashboard_nav_fragment),
-                                        0),
-                                2),
-                        isDisplayed()));
-        materialButton3.perform(click());
-
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.successSentMessage), withText("Your invite was sent to Louise"),
-                        withParent(withParent(withId(R.id.dashboard_nav_fragment))),
-                        isDisplayed()));
-        textView2.check(matches(withText("Your invite was sent to Louise")));
-
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.goBackProject), withText("Back to project"),
-                        withParent(withParent(withId(R.id.dashboard_nav_fragment))),
-                        isDisplayed()));
-        button2.check(matches(isDisplayed()));
-
-        ViewInteraction button3 = onView(
-                allOf(withId(R.id.someoneElse), withText("Invite More"),
-                        withParent(withParent(withId(R.id.dashboard_nav_fragment))),
-                        isDisplayed()));
-        button3.check(matches(isDisplayed()));
-
-        ViewInteraction materialButton4 = onView(
-                allOf(withId(R.id.goBackProject), withText("Back to project"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.dashboard_nav_fragment),
-                                        0),
-                                1),
-                        isDisplayed()));
-        materialButton4.perform(click());
-
-        ViewInteraction bottomNavigationItemView = onView(
-                allOf(withId(R.id.settings), withContentDescription("Settings"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.bottom_nav),
-                                        0),
-                                3),
-                        isDisplayed()));
-        bottomNavigationItemView.perform(click());
-
-        ViewInteraction materialButton5 = onView(
+        ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.signOutButton), withText("Sign Out"),
                         childAtPosition(
                                 childAtPosition(
@@ -247,9 +135,9 @@ public class SendInviteTest {
                                         0),
                                 0),
                         isDisplayed()));
-        materialButton5.perform(click());
+        materialButton2.perform(click());
 
-        ViewInteraction appCompatEditText7 = onView(
+        ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.loginEmailInput),
                         childAtPosition(
                                 childAtPosition(
@@ -257,9 +145,9 @@ public class SendInviteTest {
                                         0),
                                 1),
                         isDisplayed()));
-        appCompatEditText7.perform(replaceText("lazerrazor@app.com"), closeSoftKeyboard());
+        appCompatEditText4.perform(replaceText("lazerrazor@app.com"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText8 = onView(
+        ViewInteraction appCompatEditText5 = onView(
                 allOf(withId(R.id.loginPasswordInput),
                         childAtPosition(
                                 childAtPosition(
@@ -267,17 +155,7 @@ public class SendInviteTest {
                                         0),
                                 3),
                         isDisplayed()));
-        appCompatEditText8.perform(replaceText("123"), closeSoftKeyboard());
-
-        ViewInteraction materialButton6 = onView(
-                allOf(withId(R.id.signOutButton), withText("Sign In"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.fragmentContainerView),
-                                        0),
-                                4),
-                        isDisplayed()));
-        materialButton6.perform(click());
+        appCompatEditText5.perform(replaceText("123"), closeSoftKeyboard());
 
         ViewInteraction bottomNavigationItemView2 = onView(
                 allOf(withId(R.id.notifications), withContentDescription("Notifications"),
@@ -289,18 +167,12 @@ public class SendInviteTest {
                         isDisplayed()));
         bottomNavigationItemView2.perform(click());
 
-        ViewInteraction recyclerView = onView(
-                allOf(withId(R.id.notifRecyclerView),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
-                        isDisplayed()));
-        recyclerView.check(matches(isDisplayed()));
-
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.notifTextView), withText("Tina has invited you to work on \"My Fancy Project\""),
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.notifTextView), withText("Tina has invited you to work on \"How to open a door\""),
                         withParent(allOf(withId(R.id.notifItemContainer),
                                 withParent(IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class)))),
                         isDisplayed()));
-        textView3.check(matches(withText("Tina has invited you to work on \"My Fancy Project\"")));
+        textView.check(matches(withText("Tina has invited you to work on \"How to open a door\"")));
     }
 
     private static Matcher<View> childAtPosition(
