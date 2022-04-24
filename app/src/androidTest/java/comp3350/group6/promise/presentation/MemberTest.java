@@ -414,54 +414,60 @@ public class MemberTest {
         materialTextView5.perform(click());
 
         ViewInteraction appCompatEditText18 = onView(
-                allOf(withId(R.id.recipientEmailHint),
+                allOf(withId(R.id.user_search_input),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.dashboard_nav_fragment),
+                                        withClassName(is("android.widget.LinearLayout")),
                                         0),
-                                0),
-                        isDisplayed()));
-        appCompatEditText18.perform(replaceText("123"), closeSoftKeyboard());
+                                0)));
+        appCompatEditText18.perform(scrollTo(), replaceText("123"), closeSoftKeyboard());
 
         ViewInteraction materialButton7 = onView(
-                allOf(withId(R.id.sendInviteButton), withText("Send Invite"),
+                allOf(withId(R.id.sendInviteButton), withText("Invite Users"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.dashboard_nav_fragment),
-                                        0),
-                                2),
-                        isDisplayed()));
-        materialButton7.perform(click());
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        2),
+                                1)));
+        materialButton7.perform(scrollTo(), click());
 
-        ViewInteraction materialButton8 = onView(
-                allOf(withId(R.id.someoneElse), withText("Invite More"),
+        ViewInteraction overflowMenuButton3 = onView(
+                allOf(withContentDescription("More options"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.dashboard_nav_fragment),
-                                        0),
-                                2),
+                                        withId(R.id.toolbar),
+                                        1),
+                                0),
                         isDisplayed()));
-        materialButton8.perform(click());
+        overflowMenuButton3.perform(click());
 
-        ViewInteraction appCompatEditText19 = onView(
-                allOf(withId(R.id.recipientEmailHint),
+        ViewInteraction materialTextView6 = onView(
+                allOf(withId(androidx.appcompat.R.id.title), withText("Invite Users"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.dashboard_nav_fragment),
+                                        withId(androidx.appcompat.R.id.content),
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText19.perform(replaceText("456"), closeSoftKeyboard());
+        materialTextView6.perform(click());
 
-        ViewInteraction materialButton9 = onView(
-                allOf(withId(R.id.sendInviteButton), withText("Send Invite"),
+        ViewInteraction appCompatEditText19 = onView(
+                allOf(withId(R.id.user_search_input),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.dashboard_nav_fragment),
+                                        withClassName(is("android.widget.LinearLayout")),
                                         0),
-                                2),
-                        isDisplayed()));
-        materialButton9.perform(click());
+                                0)));
+        appCompatEditText19.perform(scrollTo(), replaceText("456"), closeSoftKeyboard());
+
+        ViewInteraction materialButton8 = onView(
+                allOf(withId(R.id.sendInviteButton), withText("Invite Users"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        2),
+                                1)));
+        materialButton8.perform(scrollTo(), click());
 
         ViewInteraction materialButton10 = onView(
                 allOf(withId(R.id.goBackProject), withText("Back to project"),
@@ -674,7 +680,7 @@ public class MemberTest {
         linearLayout2.perform(click());
 
         // Check members list
-        ViewInteraction overflowMenuButton3 = onView(
+        ViewInteraction overflowMenuButton4 = onView(
                 allOf(withContentDescription("More options"),
                         childAtPosition(
                                 childAtPosition(
@@ -682,9 +688,9 @@ public class MemberTest {
                                         1),
                                 0),
                         isDisplayed()));
-        overflowMenuButton3.perform(click());
+        overflowMenuButton4.perform(click());
 
-        ViewInteraction materialTextView6 = onView(
+        ViewInteraction materialTextView7 = onView(
                 allOf(withId(androidx.appcompat.R.id.title), withText("View Members"),
                         childAtPosition(
                                 childAtPosition(
@@ -692,7 +698,7 @@ public class MemberTest {
                                         0),
                                 0),
                         isDisplayed()));
-        materialTextView6.perform(click());
+        materialTextView7.perform(click());
 
         // Check that 123 is a MEMBER
         ViewInteraction textView2 = onView(
@@ -775,7 +781,7 @@ public class MemberTest {
                         isDisplayed()));
         overflowMenuButton5.perform(click());
 
-        ViewInteraction materialTextView7 = onView(
+        ViewInteraction materialTextView8 = onView(
                 allOf(withId(androidx.appcompat.R.id.title), withText("View Members"),
                         childAtPosition(
                                 childAtPosition(
@@ -783,7 +789,7 @@ public class MemberTest {
                                         0),
                                 0),
                         isDisplayed()));
-        materialTextView7.perform(click());
+        materialTextView8.perform(click());
 
         // Give 123 an ADMIN role
         DataInteraction twoLineListItem2 = onData(anything())
@@ -903,7 +909,7 @@ public class MemberTest {
                         isDisplayed()));
         overflowMenuButton6.perform(click());
 
-        ViewInteraction materialTextView8 = onView(
+        ViewInteraction materialTextView9 = onView(
                 allOf(withId(androidx.appcompat.R.id.title), withText("View Members"),
                         childAtPosition(
                                 childAtPosition(
@@ -911,7 +917,7 @@ public class MemberTest {
                                         0),
                                 0),
                         isDisplayed()));
-        materialTextView8.perform(click());
+        materialTextView9.perform(click());
 
         // Check that 123 has an ADMIN role
         ViewInteraction textView3 = onView(
