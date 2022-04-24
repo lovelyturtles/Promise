@@ -1,13 +1,9 @@
 /*
- *
  * Acceptance test for "Respond to Project Invite" user story:
- * As a user I want to be able to accept or reject invites that
- * have been sent to me
- *
+ * As a user, I want to be able to accept/deny project invites that have been sent to me.
  */
 
 package comp3350.group6.promise.presentation.NotificationTests;
-
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -36,7 +32,6 @@ import androidx.test.runner.AndroidJUnit4;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -85,22 +80,10 @@ public class AcceptInviteTest {
 
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.notifRecyclerView),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
-                        isDisplayed()));
-        recyclerView.check(matches(isDisplayed()));
-
-        ViewInteraction relativeLayout = onView(
-                allOf(withId(R.id.notifItemContainer),
-                        withParent(withParent(withId(R.id.notifRecyclerView))),
-                        isDisplayed()));
-        relativeLayout.check(matches(isDisplayed()));
-
-        ViewInteraction recyclerView2 = onView(
-                allOf(withId(R.id.notifRecyclerView),
                         childAtPosition(
                                 withClassName(is("android.widget.LinearLayout")),
                                 0)));
-        recyclerView2.perform(actionOnItemAtPosition(1, click()));
+        recyclerView.perform(actionOnItemAtPosition(1, click()));
 
         ViewInteraction button = onView(
                 allOf(withId(R.id.acceptInviteButton), withText("Accept"),
@@ -146,9 +129,8 @@ public class AcceptInviteTest {
     }
 
     /*
-     * Ideally you would want to confirm that the project information matches
-     * that on the invite you accepted but the Espresso Recorder is not responding
-     * to my clicks on the project title or content
+     * Ideally, this is where you'd check that the project title and description
+     * matches that on the invitation but Espresso is not responding to clicks on them
      */
 
     private static Matcher<View> childAtPosition(
