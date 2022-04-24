@@ -15,7 +15,7 @@ body {
   /* Carousel base class */
   .carousel {
     margin-bottom: 4rem;
-    background-image: url(/website/images/pawel-czerwinski-tMbQpdguDVQ-unsplash.jpg);
+    background-image: url(./images/pawel-czerwinski-tMbQpdguDVQ-unsplash.jpg);
     background-size: cover;
   }
   /* Since positioning the image, we need to help out the caption */
