@@ -70,7 +70,7 @@ public class LoginActivityTest {
         appCompatEditText3.perform(pressImeActionButton());
 
         ViewInteraction materialButton = onView(
-                allOf(withId(R.id.signInButton), withText("Sign In"),
+                allOf(withId(R.id.signOutButton), withText("Sign In"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.fragmentContainerView),
